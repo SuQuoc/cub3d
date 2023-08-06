@@ -4,17 +4,27 @@ Small 3D game using raycastig.
 
 
 
-WOLFENSTEIN
+WOLFENSTEIN:
 ![image](https://github.com/SuQuoc/cub3d/assets/116435885/550abaa6-026d-4bd1-bc2e-e87188c6b089)
 
 
 
 
 
+##Instructions
+1. Clone the repository
+2. Make sure you a have the c-compiler cc and run the make command
+3. Execute the programm: "./cubed your_map_file"
+4. Have fun and good luck
+
+
+GIT BRANCHING:
+
 
 ![image](https://github.com/SuQuoc/cub3d/assets/116435885/dd7b1e16-1a38-46cd-bb16-ba7cc509d45a)
 
-GIT Branch:
+
+
 Standard cmds like add, commit pull will only affect the bracnh u are in!
 
 git checkout -b "branchname"  = creates a branch and checksout (switches) into it
