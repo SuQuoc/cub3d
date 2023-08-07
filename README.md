@@ -18,6 +18,14 @@ WOLFENSTEIN:
 4. Have fun and good luck
 
 
+
+##Controls
+- W, A, S, D
+- left and right arrow key to rotate view
+- ESC and "X-button" on top right window corner to end the game
+
+
+
 GIT BRANCHING:
 
 

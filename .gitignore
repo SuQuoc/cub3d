@@ -1,3 +1,12 @@
+
+# No permission files
+np_north
+np_south
+np_west
+np_east
+no_permissions.cub
+
+
 # Prerequisites
 *.d
 
