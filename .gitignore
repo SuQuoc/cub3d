@@ -15,6 +15,7 @@ no_permissions.cub
 *.ko
 *.obj
 *.elf
+objects_and_dependencies/
 
 # Linker output
 *.ilk
@@ -59,3 +60,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+cubed
