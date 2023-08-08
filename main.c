@@ -1,13 +1,89 @@
 
 #include "cubed.h"
 
+t_data *init_data(void)
+{
+	t_data *data;
+	
+	data = malloc(sizeof(t_data));
+	if (!data)
+	{
+		error_msg();
+		exit(1);
+	}
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+	data->map = NULL;
+	data->N_texture = NULL;
+	data->E_texture = NULL;
+	data->S_texture = NULL;
+	data->W_texture = NULL;
+	return (data);
+}
+
+
+
+int	make_window(t_data *data)
+{
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
+		free_data(data, 1);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WINDOW_W, WINDOW_H, WINDOW_NAME);
+	if (data->win_ptr == NULL)
+		free_data(data, 1);
+	return (0);
+}
+
+int	print_x(t_data *data)
+{
+	(void)data;
+	//ft_printf("x\n");
+	return (0);
+}
+
+int	x_window(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	data->win_ptr = NULL;
+	free_data(data, 0);
+	return (0);
+}
+
+int	key_input(int keysym, t_data *data)
+{
+
+	if (keysym == XK_Escape)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		data->win_ptr = NULL;
+		free_data(data, 0);
+	}
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
-    if (argc != 2)
-        return (1);
-    if (check_extension(argv[1]) == 0)
-        return (1);
-    
-    mlx_init();
-    return (0);
+	t_data *data;
+	
+	data = init_data();
+	if (argc != 2)
+		return (1);
+	//if (check_extension(argv[1]) == 0)
+	//	return (1);
+	(void)argv;
+	make_window(data);
+	mlx_loop_hook(data->mlx_ptr, &print_x, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
+	mlx_hook(data->win_ptr, 17, 0, x_window, data);
+	
+	
+	
+	
+	mlx_loop(data->mlx_ptr);
+
+
+
+
+	free_data(data, 0);
+	return (0);
 }

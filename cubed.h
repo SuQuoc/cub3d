@@ -19,10 +19,44 @@
 
 #define EXTENSION ".cub"
 
+#define WINDOW_W 1920
+#define WINDOW_H 1080
+#define WINDOW_NAME "FORKBOMBERS"
 
-#define WINDOW_W 1080
-#define WINDOW_H 420
+
+typedef struct s_rgb
+{
+	int color;
+	int	r;
+	int g;
+	int b;
+}	t_rgb;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+
+	char	**map;
+	void	*N_texture;
+	void	*E_texture;
+	void	*S_texture;
+	void	*W_texture;
+} t_data;
 
 
+//check_extension.c
+int check_extension(char *str);
+
+//error_msg.c
+int error_msg(void);
+
+//free_utils.c
+void	free_2d_array(char **map);
+void 	free_data(t_data *data, int exit_code);
+
+
+
+int	x_window(t_data *data);
 
 # endif

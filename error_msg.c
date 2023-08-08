@@ -3,6 +3,6 @@
 
 int error_msg(void)
 {
-    ft_putstr_fd("Error\n", 2);
-    return (1);
+	ft_putstr_fd("Error\n", 2);
+	return (1);
 }
