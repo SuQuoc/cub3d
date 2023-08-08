@@ -14,5 +14,15 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
+#include "libft/libft.h"
+
+
+#define EXTENSION ".cub"
+
+
+#define WINDOW_W 1080
+#define WINDOW_H 420
+
+
 
 # endif

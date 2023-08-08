@@ -22,7 +22,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJDIR) $(OBJ)
-	$(C) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(C) $(CFLAGS) $(OBJ) -o $(NAME) -lmlx -lXext -lX11 -lm
 
 clean:
 	@rm -rf $(OBJDIR)
