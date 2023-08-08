@@ -76,14 +76,6 @@ int main(int argc, char **argv)
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
 	mlx_hook(data->win_ptr, 17, 0, x_window, data);
 	
-	
-	
-	
 	mlx_loop(data->mlx_ptr);
-
-
-
-
-	free_data(data, 0);
 	return (0);
 }

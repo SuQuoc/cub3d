@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:52:06 by aplank            #+#    #+#             */
-/*   Updated: 2022/11/15 15:11:56 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/08 17:37:41 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //bonus:
-void				ft_lstadd_back(t_list **lst, t_list *new);
+/* void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
@@ -78,7 +78,7 @@ t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
-int					ft_lstsize(t_list *lst);
+int					ft_lstsize(t_list *lst); */
 
 //printf:
 int					ft_char(char c);

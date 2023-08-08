@@ -15,7 +15,7 @@
 #include <X11/keysym.h>
 
 #include "libft/libft.h"
-
+//BONUS IN LIBFT AUSKLAMMMERN!!!!!!!!!!!!
 
 #define EXTENSION ".cub"
 
