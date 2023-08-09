@@ -70,8 +70,25 @@ int main(int argc, char **argv)
 		return (1);
 	//if (check_extension(argv[1]) == 0)
 	//	return (1);
+	
+	/*
+	int fd = open(argv[1], O_RDONLY);
+	char *gnl = "";
+
+	while (gnl)
+	{
+		gnl = get_next_line(fd);
+		printf("%s", gnl);
+	}
+	exit(1);
+	*/
+
 	(void)argv;
 	make_window(data);
+	
+
+	
+	
 	mlx_loop_hook(data->mlx_ptr, &print_x, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
 	mlx_hook(data->win_ptr, 17, 0, x_window, data);

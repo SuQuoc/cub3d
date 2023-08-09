@@ -17,6 +17,23 @@
 #include "libft/libft.h"
 //BONUS IN LIBFT AUSKLAMMMERN!!!!!!!!!!!!
 
+#define TRUE 1
+#define FALSE 0
+
+//Error codes for input/file handling
+#define ERR_TEXTURE 2
+#define ERR_IDF 3
+#define ERR_MAP 4
+
+//Identifiers
+#define NORTH 		"NO"
+#define EAST 		"EA"
+#define SOUTH 		"SO"
+#define WEST 		"WE"
+#define Floor 		"F"
+#define Ceiling 	"C"
+
+
 #define EXTENSION ".cub"
 
 #define WINDOW_W 1920
@@ -42,6 +59,8 @@ typedef struct s_data
 	void	*E_texture;
 	void	*S_texture;
 	void	*W_texture;
+
+	int		err;
 } t_data;
 
 

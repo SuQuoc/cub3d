@@ -1,0 +1,28 @@
+
+1. GNL rant
+
+GNL is shit weil es bei eof UND bei malloc/read fail NULL returned
+Dh wenn malloc/read failed;
+    1. wird das Programm denken das file zu Ende
+    2. und nicht "malloc/read fail" printen\
+    3. wenn es im map content passiert wird es wrsl map-error ausgeben
+    4. Im falle das danach keine c funktion failed 
+        und map doppelt geschlossen ist,
+        wird eine map anders der im file zum spielen weiter gegeben
+
+Ist ein potentiales Risiko das wir in Kauf nehmen, da extra gnl zu aendern zu aufwaendig ist
+und ich faul bin
+
+ich denke es ist wichtig sich dem Bewusst zu sein. Obs nun ein fail ist, ja theoretisch schon
+aber in allen Programmen sind bugs (90 - 95% fehlerfrei), aber 100% wird kein komplexes Programm sein
+Soll jz nicht unbedgingt heissen das cubed zu komplex ist
+
+
+2. Second option (instead of gnl) read til eof so u have giant string 
+
+
+
+3. Not sure how subject is meant
+    - not quite sure if its allowed that more than 1 idf is on 1 line
+
+

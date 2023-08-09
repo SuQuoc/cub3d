@@ -3,8 +3,7 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-SRC =	check_extension.c \
-		error_msg.c \
+SRC =	error_msg.c \
 		free_utils.c \
 		main.c
 
