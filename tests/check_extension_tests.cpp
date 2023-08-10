@@ -1,8 +1,5 @@
 #include "tests.hpp"
 #include "../cubed.h"
-/* extern "C" {
-	#include "../cubed.h"
-} */
 
 void	check_extension_tests()
 {
@@ -16,5 +13,5 @@ void	check_extension_tests()
 void	check_extension_error_tests()
 {
 	error_tests_framework(&check_extension_tests, "my_output/check_extension.txt", \
-									"right_output/check_extension.txt", "messages:");
+									"right_output/check_extension.txt", "error-messages:");
 }

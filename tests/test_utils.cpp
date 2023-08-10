@@ -41,7 +41,7 @@ void	error_tests_framework(void (*error_tests)(/* std::streambuf*, std::streambu
 	int				cerrbuf;
 	int				filebuf;
 	
-	filebuf = open(my_outfile_name, O_RDONLY | O_CREAT);
+	filebuf = open(my_outfile_name, O_WRONLY | O_CREAT);
 	if (!filebuf)
 	{
 		std::cerr << "Error: could not open file '" << my_outfile_name << \
@@ -57,6 +57,7 @@ void	error_tests_framework(void (*error_tests)(/* std::streambuf*, std::streambu
 	
 	close(2);
 	dup2(2, cerrbuf);
+	close(cerrbuf); //should be closed by dup2
 
 	right_output = get_file_content(right_outfile_name);
 	my_output = get_file_content(my_outfile_name);
