@@ -44,36 +44,27 @@ void loop_idf(int fd, t_data *data)
 	{
 		free(gnl);
 		gnl = get_next_line(fd);
-		if (!gnl)
-			break;  
-		loop_idf_line(gnl);
+		if (loop_idf_line(gnl) == 1)
 	}
 	free(gnl);
 }
 
-void loop_idf_line(char *str)
+void loop_idf_line(char *str, t_data *data)
 {
-	int i;
 	int err;
-	i = 0;
 
-	if (str && str[0] == '\n')
+	if (!str)
 		return ;
-
-	while (str[i] && (is_blank(str[i]) || str[i] == '\n'))
-		i++;
-	if (str[i])
-	{
-		err = search_idf(&str[i]);
-		free(str); //here or 1 scope out
-		if (err)
-			return (free_data());
-		
-	}
+	if (str[0] == '\n')
+		return ;
+	err = search_idf(str, data);
+	free(str); //here or 1 scope out
+	if (err)
+		return (free_data());		
 }
 
 
-void loop_map(int fd)
+void loop_map(int fd, t_data *data)
 {
 	int error;
 	char *gnl;
@@ -95,9 +86,13 @@ void loop_map(int fd)
 
 }
 
-void loop_map_line()
+void loop_map_line(char *str, t_data *data)
 {
-
+	if (!str)
+		return ;
+	if (str[0] == '\n')
+		return ;
+	
 }
 
 

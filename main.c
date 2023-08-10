@@ -68,8 +68,8 @@ int main(int argc, char **argv)
 	data = init_data();
 	if (argc != 2)
 		return (1);
-	//if (check_extension(argv[1]) == 1)
-	//	return (1);
+	if (check_extension(argv[1]) == 1)
+		return (1);
 	
 	/*
 	int fd = open(argv[1], O_RDONLY);

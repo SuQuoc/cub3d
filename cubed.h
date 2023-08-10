@@ -26,12 +26,14 @@
 #define ERR_MAP 4
 
 //Identifiers
-#define NORTH 		"NO"
-#define EAST 		"EA"
-#define SOUTH 		"SO"
-#define WEST 		"WE"
-#define Floor 		"F"
-#define Ceiling 	"C"
+#define TXT_W		60
+#define TXT_H		60
+#define NORTH 		"NO "
+#define EAST 		"EA "
+#define SOUTH 		"SO "
+#define WEST 		"WE "
+#define Floor 		"F "
+#define Ceiling 	"C "
 
 
 #define EXTENSION ".cub"
