@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:25:20 by aplank            #+#    #+#             */
-/*   Updated: 2022/10/24 12:26:05 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 16:59:24 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const char	*z;
 
-	z = s;
+	z = (char*)s;
 	if (c == 0 && n == 0)
 		return (0);
 	while (n > 0)

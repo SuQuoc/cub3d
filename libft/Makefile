@@ -6,7 +6,7 @@
 #    By: aplank <aplank@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 12:24:01 by aplank            #+#    #+#              #
-#    Updated: 2023/08/08 13:04:08 by aplank           ###   ########.fr        #
+#    Updated: 2023/08/10 17:28:55 by aplank           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,14 @@ MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 CFLAGS += -Wall -Werror -Wextra
 
-CC = @cc
+CC = g++
 
 .PHONY: clean fclean all bonus
 
 all: $(NAME)
 
 $(NAME): $(MY_OBJECTS)
-	@ar rcs $(MY_OBJECTS) -o $(NAME)
+	@ar rcs $(NAME) $(MY_OBJECTS)
 	@echo making mandatory .o files
 
 bonus: $(MY_OBJECTS) $(MY_BONUS_OBJECTS)
@@ -55,7 +55,3 @@ fclean: clean
 	@echo ...and the libft.a too
 
 re: fclean all
-
-so:
-	cc -nostartfiles -fPIC $(CFLAGS) $(MY_SOURCES) $(MY_BONUS_SOURCES)
-	gcc -nostartfiles -shared -o libft.so $(MY_OBJECTS) $(MY_BONUS_OBJECTS)

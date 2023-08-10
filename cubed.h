@@ -65,7 +65,7 @@ typedef struct s_data
 
 
 //check_extension.c
-int check_extension(char *str);
+int check_extension(char const *str);
 
 //error_msg.c
 int error_msg(void);

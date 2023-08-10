@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 12:07:38 by aplank            #+#    #+#             */
-/*   Updated: 2022/10/24 12:27:47 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 17:00:58 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (!s)
 		return (0);
 	x = 0;
-	str = malloc(ft_strlen(s) + 1 * sizeof(char));
+	str = (char*)malloc(ft_strlen(s) + 1 * sizeof(char));
 	if (!str)
 		return (0);
 	while (s[x])

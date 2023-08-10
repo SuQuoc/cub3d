@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 10:40:36 by aplank            #+#    #+#             */
-/*   Updated: 2022/10/24 12:26:23 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 16:59:39 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char		*d;
 	const char	*s;
 
-	d = dest;
-	s = src;
+	d = (char*)dest;
+	s = (char*)src;
 	x = 0;
 	if (dest == 0 && src == 0)
 	{

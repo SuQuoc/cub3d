@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:25:16 by aplank            #+#    #+#             */
-/*   Updated: 2022/11/18 17:38:34 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 17:02:14 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_subfree(char *s, unsigned int start, size_t len)
 		len = 0;
 	else if (ft_gnl_strlen(s + start) < len)
 		len = ft_gnl_strlen(s + start);
-	substr = malloc((len + 1) * sizeof(char));
+	substr = (char*)malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (0);
 	while (len > 0 && s[start])
@@ -52,7 +52,7 @@ char	*ft_subline(char *s, unsigned int start, size_t len)
 		len = 0;
 	else if (ft_gnl_strlen(s + start) < len)
 		len = ft_gnl_strlen(s + start);
-	substr = malloc((len + 1) * sizeof(char));
+	substr = (char*)malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (0);
 	while (len > 0 && s[start])
@@ -72,12 +72,12 @@ char	*ft_strmerge(char *s1, char const *s2)
 
 	if (!s1)
 	{
-		(s1 = malloc(1));
+		(s1 = (char*)malloc(1));
 		s1[0] = '\0';
 	}
 	x = 0;
 	y = 0;
-	str = malloc((ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1) * sizeof(char));
+	str = (char*)malloc((ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	while (s1[x])
@@ -97,7 +97,7 @@ char	*read_file(int fd, char *file)
 	char	*buf;
 	int		check;
 
-	buf = malloc(BUFFER_SIZE + 1);
+	buf = (char*)malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
 	while (ft_check(file) == 0)

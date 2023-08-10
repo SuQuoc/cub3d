@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 10:48:48 by aplank            #+#    #+#             */
-/*   Updated: 2022/10/24 12:26:40 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 16:59:57 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memset(void *s, int i, size_t n)
 	char	c;
 	char	*str;
 
-	str = s;
+	str = (char*)s;
 	c = i;
 	x = 0;
 	while (n > 0)

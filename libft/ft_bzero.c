@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 13:35:04 by aplank            #+#    #+#             */
-/*   Updated: 2022/10/24 12:24:10 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 16:58:14 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_bzero(void *s, size_t n)
 	int		x;
 	char	*str;
 
-	str = s;
+	str = (char*)s;
 	x = 0;
 	while (n > 0)
 	{

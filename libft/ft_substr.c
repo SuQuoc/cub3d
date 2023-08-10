@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 18:01:28 by aplank            #+#    #+#             */
-/*   Updated: 2022/10/24 12:28:17 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 17:01:04 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = 0;
 	else if (ft_strlen(s + start) < len)
 		len = ft_strlen(s + start);
-	substr = malloc((len + 1) * sizeof(char));
+	substr = (char*)malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (0);
 	while (len > 0 && s[start])

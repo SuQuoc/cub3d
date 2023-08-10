@@ -6,7 +6,7 @@
 /*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:35:31 by aplank            #+#    #+#             */
-/*   Updated: 2023/02/06 18:36:49 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/10 17:00:35 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_split(char const *s, char c)
 			y++;
 		x++;
 	}
-	arrarr = malloc((y + 1) * sizeof(char *));
+	arrarr = (char**)malloc((y + 1) * sizeof(char *));
 	if (!arrarr)
 		return (0);
 	x = 0;
