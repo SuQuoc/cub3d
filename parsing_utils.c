@@ -16,9 +16,9 @@ int skip_is_blank(char *str, int i)
 }
 
 
-int skip_spaces(char *str, int i)
+int skip_spaces(char *str, int start)
 {
-    while (str[i] && str[i] == ' ')
-        i++;
-    return (i);
+    while (str[start] && str[start] == ' ')
+        start++;
+    return (start);
 }
