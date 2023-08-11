@@ -61,5 +61,3 @@ Module.symvers
 Mkfile.old
 dkms.conf
 cub3D
-
-tests/
