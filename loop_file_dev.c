@@ -9,10 +9,9 @@ void loop_idf(t_data *data)
 		return ;
 	while (data->map[i])
 	{
-		if (data->map[i] && data->map[i][0] == '\n')
-			i++;
-		else if (loop_idf_line(data->map[i], data) == 1)
-			i++;
+		if (loop_idf_line(data->map[i], data) == 1)
+            break ;
+		i++;
 	}
 }
 

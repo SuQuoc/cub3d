@@ -2,19 +2,6 @@
 #include "cubed.h"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 int search_floor_ceiling(t_data *data)
 {
 
