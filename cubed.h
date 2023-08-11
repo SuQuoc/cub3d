@@ -41,6 +41,18 @@
 #define WINDOW_NAME "FORKBOMBERS"
 
 
+typedef struct s_point
+{
+	char	fast_axis;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		x_diff;
+	int		y_diff;
+	int		fault;
+}	t_point;
+
 typedef struct s_rgb
 {
 	int color;

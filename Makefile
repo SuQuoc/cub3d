@@ -24,7 +24,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJDIR) $(OBJ)
-	@$(MAKE) bonus -C libft
+	@$(MAKE) -C libft
 	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 
 clean:
