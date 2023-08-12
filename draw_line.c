@@ -6,7 +6,12 @@ void	calculate_other_values(t_point *point)
 	point->x_diff = (point->end_x - point->start_x);
 	point->y_diff = (point->end_y - point->start_y);
 	if (point->y_diff < 0)
+	{
 		point->y_diff *= -1;
+		point->pos_or_neg = 'n';
+	}
+	else
+		point->pos_or_neg = 'p';
 	if (point->x_diff > point->y_diff)
 	{
 		point->fault = point->x_diff / 2;
@@ -56,6 +61,14 @@ int	draw_line(int point_one_x, int point_one_y, int point_two_x, int point_two_y
 	if (!point)
 		return (1);
 
+	if (point->fast_axis == 'x' && point->pos_or_neg == 'p')
+		fast_x_positive_y(point);
+	else if (point->fast_axis == 'x' && point->pos_or_neg == 'n')
+		fast_x_negative_y(point);
+	else if (point->fast_axis == 'y' && point->pos_or_neg == 'p')
+		fast_y_positive_y(point);
+	else if (point->fast_axis == 'y' && point->pos_or_neg == 'n')
+		fast_y_negative_y(point);
 
 	free(point);
 	return (0);

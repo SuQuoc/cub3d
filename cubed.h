@@ -43,6 +43,7 @@
 
 typedef struct s_point
 {
+	char	pos_or_neg;
 	char	fast_axis;
 	int		start_x;
 	int		start_y;
