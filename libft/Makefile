@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aplank <aplank@student.42.fr>              +#+  +:+       +#+         #
+#    By: qtran <qtran@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/09 12:24:01 by aplank            #+#    #+#              #
-#    Updated: 2023/08/10 17:28:55 by aplank           ###   ########.fr        #
+#    Updated: 2023/08/11 16:18:13 by qtran            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 CFLAGS += -Wall -Werror -Wextra
 
-CC = g++
+CC = cc
 
 .PHONY: clean fclean all bonus
 

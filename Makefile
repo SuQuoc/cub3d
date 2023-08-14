@@ -3,9 +3,12 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-SRC =	error_msg.c \
+SRC =	check_extension.c \
+		error_msg.c \
 		free_utils.c \
-		main.c
+		loop_file.c \
+		main.c \
+		printing_utils.c
 
 OBJDIR = ./objects_and_dependencies/
 OBJFILES = $(SRC:.c=.o)

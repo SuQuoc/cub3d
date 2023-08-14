@@ -64,13 +64,20 @@ int	key_input(int keysym, t_data *data)
 int main(int argc, char **argv)
 {
 	t_data *data;
-	
+	int fd;
 	data = init_data();
 	if (argc != 2)
 		return (1);
-	//if (check_extension(argv[1]) == 1)
-	//	return (1);
+	if (check_extension(argv[1]) == 1)
+		return (1);
 	
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (1);
+	loop_file(fd, data);
+
+
 	/*
 	int fd = open(argv[1], O_RDONLY);
 	char *gnl = "";
@@ -84,15 +91,15 @@ int main(int argc, char **argv)
 	*/
 
 	(void)argv;
-	make_window(data);
-	
-
-	
-	
-	mlx_loop_hook(data->mlx_ptr, &print_x, data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
-	mlx_hook(data->win_ptr, 17, 0, x_window, data);
-	
-	mlx_loop(data->mlx_ptr);
+	//make_window(data);
+	//
+//
+	//
+	//
+	//mlx_loop_hook(data->mlx_ptr, &print_x, data);
+	//mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
+	//mlx_hook(data->win_ptr, 17, 0, x_window, data);
+	//
+	//mlx_loop(data->mlx_ptr);
 	return (0);
 }

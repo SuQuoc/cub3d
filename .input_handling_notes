@@ -17,12 +17,25 @@ ich denke es ist wichtig sich dem Bewusst zu sein. Obs nun ein fail ist, ja theo
 aber in allen Programmen sind bugs (90 - 95% fehlerfrei), aber 100% wird kein komplexes Programm sein
 Soll jz nicht unbedgingt heissen das cubed zu komplex ist
 
+Auserdem muss ich immer bis zum ende loopen damit keine leaks entstehen
+
 
 2. Second option (instead of gnl) read til eof so u have giant string 
 
-
+	vorteil
+		1. ft split fuer instant 2d array which can be used like the gnl implementation now
+		2. just have to check for idfs if last index before 0 is not a whitespace
+		3. check all the idfs 
+		4. if all correct than use giga str to check newlines in map content
+			a.keep track of idfs if anzahl = 6 dann weis ich ok map
+			b. danach keine newline nach newline  
+		 
+		
+	nachteil
+		1. i will lose newlines in map content
+			a. but i can look in giga string
 
 3. Not sure how subject is meant
-    - not quite sure if its allowed that more than 1 idf is on 1 line
 
+    - not quite sure if its allowed that more than 1 idf is on 1 line
 

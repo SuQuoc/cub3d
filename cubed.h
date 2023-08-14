@@ -26,12 +26,14 @@
 #define ERR_MAP 4
 
 //Identifiers
-#define NORTH 		"NO"
-#define EAST 		"EA"
-#define SOUTH 		"SO"
-#define WEST 		"WE"
-#define Floor 		"F"
-#define Ceiling 	"C"
+#define TXT_W		60
+#define TXT_H		60
+#define NORTH 		"NO "
+#define EAST 		"EA "
+#define SOUTH 		"SO "
+#define WEST 		"WE "
+#define Floor 		"F "
+#define Ceiling 	"C "
 
 
 #define EXTENSION ".cub"
@@ -80,6 +82,10 @@ typedef struct s_data
 //check_extension.c
 int check_extension(char const *str);
 
+
+//loop_file.c
+int loop_file(int fd, t_data *data);
+
 //error_msg.c
 int error_msg(void);
 
@@ -87,6 +93,8 @@ int error_msg(void);
 void	free_2d_array(char **map);
 void 	free_data(t_data *data, int exit_code);
 
+//printing_utils.c
+void	print_str_arr(char **arr);
 
 
 int	x_window(t_data *data);
