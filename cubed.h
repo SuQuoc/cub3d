@@ -38,10 +38,23 @@
 
 #define EXTENSION ".cub"
 
-#define WINDOW_W 1920
-#define WINDOW_H 1080
+#define WINDOW_W 1000
+#define WINDOW_H 600
 #define WINDOW_NAME "FORKBOMBERS"
 
+
+typedef struct s_point
+{
+	char	pos_or_neg;
+	char	fast_axis;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		x_diff;
+	int		y_diff;
+	int		fault;
+}	t_point;
 
 typedef struct s_rgb
 {
@@ -69,12 +82,19 @@ typedef struct s_data
 //check_extension.c
 int check_extension(char const *str);
 
+//draw_line.c
+int	draw_line(t_data *data, t_point *point);
+
+//init_structs.c
+t_data	*init_data(void);
+t_point	*init_point(int point_one_x, int point_one_y, \
+						int point_two_x, int point_two_y);
 
 //loop_file.c
-int loop_file(int fd, t_data *data);
+int 	loop_file(int fd, t_data *data);
 
 //error_msg.c
-int error_msg(void);
+int	 error_msg(void);
 
 //free_utils.c
 void	free_2d_array(char **map);
@@ -84,6 +104,6 @@ void 	free_data(t_data *data, int exit_code);
 void	print_str_arr(char **arr);
 
 
-int	x_window(t_data *data);
+int		x_window(t_data *data);
 
 # endif
