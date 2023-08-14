@@ -4,8 +4,10 @@ C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
 SRC =	check_extension.c \
+		draw_line.c \
 		error_msg.c \
 		free_utils.c \
+		init_structs.c \
 		loop_file.c \
 		main.c \
 		printing_utils.c
@@ -41,3 +43,6 @@ fclean: clean
 	@echo ...and the $(NAME) too
 
 re: fclean all
+
+run: $(NAME)
+	valgrind ./$(NAME) maps/subject_map.cub
