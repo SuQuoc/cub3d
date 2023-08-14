@@ -29,20 +29,6 @@ char *read_map_into_str(int fd)
 	return (free(buf), file);
 }
 
-
-//void avoid_gnl_leaks(int fd)
-//{
-//	char *gnl;
-//
-//	gnl = get_next_line(fd);
-//
-//	while (gnl)
-//	{
-//		free(gnl);
-//		gnl = get_next_line(fd);
-//	}
-//}
-
 int loop_file(int fd, t_data *data)
 {
 	char *map_str;
@@ -54,11 +40,11 @@ int loop_file(int fd, t_data *data)
 	data->map = ft_split(map_str, '\n');
 	if (!data->map)
 		return (1);
+	loop_idf(data);
 	printf("giga str:\n%s", map_str);
 	free(map_str);
 	print_str_arr(data->map);
 	return (0);
-	//loop_idf();
 	//if (data->err != 0)
 	//	return (free_data(data, 1));
 	//loop_map();

@@ -5,9 +5,13 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 SRC =	check_extension.c \
 		error_msg.c \
+		ft_strcmp.c \
 		free_utils.c \
 		loop_file.c \
+		loop_idf.c \
+		identifiers.c \
 		main.c \
+		parsing_utils.c \
 		printing_utils.c
 
 OBJDIR = ./objects_and_dependencies/

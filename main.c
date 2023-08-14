@@ -18,6 +18,8 @@ t_data *init_data(void)
 	data->E_texture = NULL;
 	data->S_texture = NULL;
 	data->W_texture = NULL;
+	data->txt_w = NULL;
+	data->txt_h = NULL;
 	return (data);
 }
 
@@ -65,41 +67,34 @@ int main(int argc, char **argv)
 {
 	t_data *data;
 	int fd;
+
 	data = init_data();
 	if (argc != 2)
 		return (1);
 	if (check_extension(argv[1]) == 1)
 		return (1);
 	
-
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (1);
+	
+	make_window(data);
+	
+	data->txt_h = malloc(sizeof(int));
+	data->txt_w = malloc(sizeof(int));
+	*(data->txt_h) = 50;
+	*(data->txt_w) = 50;
 	loop_file(fd, data);
 
 
-	/*
-	int fd = open(argv[1], O_RDONLY);
-	char *gnl = "";
 
-	while (gnl)
-	{
-		gnl = get_next_line(fd);
-		printf("%s", gnl);
-	}
-	exit(1);
-	*/
+	mlx_loop_hook(data->mlx_ptr, &print_x, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
+	mlx_hook(data->win_ptr, 17, 0, x_window, data);
 
-	(void)argv;
-	//make_window(data);
-	//
-//
-	//
-	//
-	//mlx_loop_hook(data->mlx_ptr, &print_x, data);
-	//mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
-	//mlx_hook(data->win_ptr, 17, 0, x_window, data);
-	//
-	//mlx_loop(data->mlx_ptr);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->N_texture, 0, 0);
+	sleep(1);
+	
+	mlx_loop(data->mlx_ptr);
 	return (0);
 }
