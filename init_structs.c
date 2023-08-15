@@ -18,8 +18,9 @@ t_data *init_data(void)
 	data->E_texture = NULL;
 	data->S_texture = NULL;
 	data->W_texture = NULL;
-
 	data->err = 0;
+	data->txt_h = 50;
+	data->txt_w = 50;
 	return (data);
 }
 
