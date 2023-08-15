@@ -8,11 +8,17 @@ SRC =	_player.c \
 		draw_line_utils.c \
 		draw_line.c \
 		error_msg.c \
+		ft_strcmp.c \
 		free_utils.c \
 		init_structs.c \
 		loop_file.c \
+		loop_idf.c \
+		textures.c \
+		colors.c \
 		main.c \
-		printing_utils.c
+		parsing_utils.c \
+		printing_utils.c \
+		2d_array_utils.c
 
 OBJDIR = ./objects_and_dependencies/
 OBJFILES = $(SRC:.c=.o)
@@ -47,4 +53,7 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	valgrind ./$(NAME) maps/subject_map.cub
+	valgrind \
+	--leak-check=full \
+	--show-leak-kinds=all \
+	./$(NAME) maps/testmap.cub

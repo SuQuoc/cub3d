@@ -21,9 +21,15 @@
 #define FALSE 0
 
 //Error codes for input/file handling
-#define ERR_TEXTURE 2
-#define ERR_IDF 3
-#define ERR_MAP 4
+#define ERR_SYSTEM			1
+#define ERR_TEXTURE 		2
+#define ERR_IDF 			3
+#define ERR_IDF_NORM 		4
+#define ERR_MAP 			5
+#define ERR_RGB_AMOUNT 		6
+#define ERR_RGB_RANGE 		7
+
+
 
 //Identifiers
 #define TXT_W		60
@@ -32,8 +38,8 @@
 #define EAST 		"EA "
 #define SOUTH 		"SO "
 #define WEST 		"WE "
-#define Floor 		"F "
-#define Ceiling 	"C "
+#define FLOOR 		"F "
+#define CEILING 	"C "
 
 
 #define EXTENSION ".cub"
@@ -86,7 +92,10 @@ typedef struct s_data
 	void	*E_texture;
 	void	*S_texture;
 	void	*W_texture;
-
+	int 	txt_w;
+	int 	txt_h;
+	int		floor_color;
+	int 	ceil_color;
 	int		err;
 } t_data;
 
@@ -111,19 +120,48 @@ t_data	*init_data(void);
 t_point	*init_point(int start_x, int start_y, int end_x, int end_y);
 
 //loop_file.c
-int		loop_file(int fd, t_data *data);
+void loop_file(int fd, t_data *data);
+
+//loop_idf.c
+void loop_idf(t_data *data);
+int loop_idf_line(char *str, t_data *data);
+int compare_idf(char *str, char *idf);
+
+
+//textures.c
+int search_texture(char *str, t_data *data);
+void *set_texture(char *str, char *idf, t_data *data);
+
+//colors.c
+int search_floor_ceiling(char *str, t_data *data);
+
 
 //error_msg.c
-int		error_msg(void);
+void file_error(int err_code);
+
+
+//ft_strcmp.c
+int		ft_strcmp(char *s1, char *s2);
+
 
 //free_utils.c
 void	free_2d_array(char **map);
-void	free_data(t_data *data, int exit_code);
+void 	free_data(t_data *data);
+
+
+//parsing_utils.c
+int 	skip_spaces(char *str, int start);
+
+
 
 //printing_utils.c
 void	print_str_arr(char **arr);
 
 
 int		x_window(t_data *data);
+
+//2d_array_utils.c
+int 	get_arr_len(char **arr);
+
 
 # endif
