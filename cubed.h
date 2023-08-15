@@ -42,6 +42,17 @@
 #define WINDOW_H 600
 #define WINDOW_NAME "FORKBOMBERS"
 
+//colors
+#define WHITE 0xFFFFFF
+#define GREEN 0x00FF00
+#define BLUE 0x0000FF
+#define RED 0xFF0000
+
+typedef struct s_player
+{
+	int		x_pos;
+	int		y_pos;
+}	t_player;
 
 typedef struct s_point
 {
@@ -79,6 +90,9 @@ typedef struct s_data
 	int		err;
 } t_data;
 
+//_player.c
+t_player	*init_player(int x_position, int y_position);
+void	draw_player(t_data *data, t_player *player);
 
 //check_extension.c
 int		check_extension(char const *str);

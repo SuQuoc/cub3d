@@ -34,18 +34,18 @@ int	key_input(int keysym, t_data *data)
 
 int	print_x(t_data *data)
 {
-	t_point *point;
+	t_player *player;
 
-	point = init_point(10, 10, 10, 10);
-	if (!point)
+	player = init_player(100, 100);
+	if (!player)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
 		free_data(data, 1);
 	}
-	draw_line(data, point);
+	draw_player(data, player);
 
-	free(point);
+	free(player);
 	return (0);
 }
 

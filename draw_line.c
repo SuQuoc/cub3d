@@ -8,7 +8,7 @@ static void	fast_x_xpos_ypos(t_data *data, t_point *point)//8
 	while (point->start_x <= point->end_x)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, 0xFF0000);
+						point->start_y, WHITE);
 		point->fault -= point->y_diff;
 		if (point->fault <= 0)
 		{
@@ -24,7 +24,7 @@ static void	fast_x_xpos_yneg(t_data *data, t_point *point)//1
 	while (point->start_x <= point->end_x)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, 0xFF0000);
+						point->start_y, WHITE);
 		point->fault -= point->y_diff;
 		if (point->fault < 0)
 		{
@@ -40,7 +40,7 @@ static void	fast_y_xpos_ypos(t_data *data, t_point *point)//7
 	while (point->start_y <= point->end_y)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, 0xFF0000);
+						point->start_y, WHITE);
 		point->fault -= point->x_diff;
 		if (point->fault < 0)
 		{
@@ -56,7 +56,7 @@ static void	fast_y_xpos_yneg(t_data *data, t_point *point)//2
 	while (point->start_y >= point->end_y)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, 0xFF0000);
+						point->start_y, WHITE);
 		point->fault -= point->x_diff;
 		if (point->fault < 0)
 		{
