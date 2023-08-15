@@ -1,7 +1,9 @@
 
 #include "cubed.h"
 
-static void	fast_x_positive_y(t_data *data, t_point *point)
+//fast_x means that x is the fast direction, xpos that x_diff is positive and xneg that x_diff is negative.
+//the same goes for fast_y, ypos and yneg, just with y.
+static void	fast_x_xpos_ypos(t_data *data, t_point *point)//8
 {
 	while (point->start_x <= point->end_x)
 	{
@@ -17,7 +19,7 @@ static void	fast_x_positive_y(t_data *data, t_point *point)
 	}
 }
 
-static void	fast_x_negative_y(t_data *data, t_point *point)
+static void	fast_x_xpos_yneg(t_data *data, t_point *point)//1
 {
 	while (point->start_x <= point->end_x)
 	{
@@ -33,7 +35,7 @@ static void	fast_x_negative_y(t_data *data, t_point *point)
 	}
 }
 
-static void	fast_y_positive_y(t_data *data, t_point *point)
+static void	fast_y_xpos_ypos(t_data *data, t_point *point)//7
 {
 	while (point->start_y <= point->end_y)
 	{
@@ -49,7 +51,7 @@ static void	fast_y_positive_y(t_data *data, t_point *point)
 	}
 }
 
-static void	fast_y_negative_y(t_data *data, t_point *point)
+static void	fast_y_xpos_yneg(t_data *data, t_point *point)//2
 {
 	while (point->start_y >= point->end_y)
 	{
@@ -67,13 +69,27 @@ static void	fast_y_negative_y(t_data *data, t_point *point)
 
 int	draw_line(t_data *data, t_point *point)
 {
-	if (point->fast_axis == 'x' && point->pos_or_neg == 'p')
-		fast_x_positive_y(data, point);
-	else if (point->fast_axis == 'x' && point->pos_or_neg == 'n')
-		fast_x_negative_y(data, point);
-	else if (point->fast_axis == 'y' && point->pos_or_neg == 'p')
-		fast_y_positive_y(data, point);
-	else if (point->fast_axis == 'y' && point->pos_or_neg == 'n')
-		fast_y_negative_y(data, point);
+	if (point->x_pos_or_neg == 'p')
+	{
+		if (point->fast_axis == 'x' && point->y_pos_or_neg == 'p')
+			fast_x_xpos_ypos(data, point);
+		else if (point->fast_axis == 'x' && point->y_pos_or_neg == 'n')
+			fast_x_xpos_yneg(data, point);
+		else if (point->fast_axis == 'y' && point->y_pos_or_neg == 'p')
+			fast_y_xpos_ypos(data, point);
+		else if (point->fast_axis == 'y' && point->y_pos_or_neg == 'n')
+			fast_y_xpos_yneg(data, point);
+	}
+	else
+	{
+		if (point->fast_axis == 'y' && point->y_pos_or_neg == 'n')
+			fast_y_xneg_yneg(data, point);
+		else if (point->fast_axis == 'x' && point->y_pos_or_neg == 'n')
+			fast_x_xneg_yneg(data, point);
+		else if (point->fast_axis == 'x' && point->y_pos_or_neg == 'p')
+			fast_x_xneg_ypos(data, point);
+		else if (point->fast_axis == 'y' && point->y_pos_or_neg == 'p')
+			fast_y_xneg_ypos(data, point);
+	}
 	return (0);
 }
