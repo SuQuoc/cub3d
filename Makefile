@@ -4,6 +4,7 @@ C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
 SRC =	check_extension.c \
+		draw_line_utils.c \
 		draw_line.c \
 		error_msg.c \
 		ft_strcmp.c \
