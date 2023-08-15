@@ -15,17 +15,43 @@ void	free_2d_array(char **map)
 	}
 	free(map);
 }
-
-
-
-void free_data(t_data *data, int exit_code)
+//mlx_destroy_image(mlx, NULL)
+//mlx_destroy_image(NULL, texture)
+//both lead to errors so we have to check before if they are not null
+void destroy_textures(t_data *data)
 {
-	if (!data)
-		exit(exit_code);
+	//overly protection? bad? unneccessary!
+	if (!data || !data->mlx_ptr)
+		return ;
+	if (data->N_texture)
+		mlx_destroy_image(data->mlx_ptr, data->N_texture);
+	if (data->E_texture)
+		mlx_destroy_image(data->mlx_ptr, data->E_texture);
+	if (data->S_texture)
+		mlx_destroy_image(data->mlx_ptr, data->S_texture);
+	if (data->W_texture)
+		mlx_destroy_image(data->mlx_ptr, data->W_texture);
+}
+
+
+void free_data(t_data *data)
+{
+	int exit_code;
+
+	exit_code = 0;
+	if (data->err != 0)
+	{
+		exit_code = 1;
+		file_error(data->err);
+	}
 	if (data->mlx_ptr)
+	{
+		destroy_textures(data);
 		mlx_destroy_display(data->mlx_ptr);
+	}
 	free(data->mlx_ptr);
-	free(data->map);
+	free_2d_array(data->map);
+	
 	free(data);
 	data = NULL;
 	exit(exit_code);

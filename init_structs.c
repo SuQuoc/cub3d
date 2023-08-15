@@ -8,7 +8,7 @@ t_data *init_data(void)
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
-		error_msg();
+		perror(NULL);
 		exit(1);
 	}
 	data->mlx_ptr = NULL;
@@ -18,6 +18,8 @@ t_data *init_data(void)
 	data->E_texture = NULL;
 	data->S_texture = NULL;
 	data->W_texture = NULL;
+
+	data->err = 0;
 	return (data);
 }
 

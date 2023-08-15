@@ -1,7 +1,6 @@
 
 #include "cubed.h"
 
-
 int get_arr_len(char **arr)
 {
     int i;
