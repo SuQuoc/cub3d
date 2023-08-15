@@ -3,7 +3,7 @@ SO maps/map_textures/south.xpm
 WE maps/map_textures/west.xpm
 EA maps/map_textures/east.xpm
 F 255,0,0
-C 0,0,2550
+C 0,0,255
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
