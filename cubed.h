@@ -109,7 +109,7 @@ void	_player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
 void	_player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 
 //_player.c
-void		_draw_player(t_data *data, t_player *player);
+void	_draw_player(t_data *data, t_player *player);
 
 //check_extension.c
 int		check_extension(char const *str);
@@ -128,22 +128,22 @@ t_data	*init_data(void);
 t_point	*init_point(int start_x, int start_y, int end_x, int end_y);
 
 //loop_file.c
-void loop_file(int fd, t_data *data);
+void	loop_file(int fd, t_data *data);
 
 //loop_idf.c
-void loop_idf(t_data *data);
-int loop_idf_line(char *str, t_data *data);
-int compare_idf(char *str, char *idf);
+void	loop_idf(t_data *data);
+int		loop_idf_line(char *str, t_data *data);
+int		compare_idf(char *str, char *idf);
 
 //textures.c
-int search_texture(char *str, t_data *data);
-void *set_texture(char *str, char *idf, t_data *data);
+int		search_texture(char *str, t_data *data);
+void	*set_texture(char *str, char *idf, t_data *data);
 
 //colors.c
-int search_floor_ceiling(char *str, t_data *data);
+int		search_floor_ceiling(char *str, t_data *data);
 
 //error_msg.c
-void file_error(int err_code);
+void	file_error(int err_code);
 
 //free_utils.c
 void	free_2d_array(char **map);
