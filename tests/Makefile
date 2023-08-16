@@ -3,11 +3,31 @@ NAME = tests
 DEP = tests.hpp ../cubed.h
 
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -Wno-write-strings
 CC = g++
 CFLAGS = -Wall -Werror -Wextra
 
-C_SRC =		../check_extension.c
+C_SRC =	../2d_array_utils.c \
+		../check_extension.c \
+		../colors.c \
+		../draw_line_utils.c \
+		../draw_line.c \
+		../error_msg.c \
+		../free_utils.c \
+		../ft_strcmp.c \
+		../hooks.c \
+		../identifier_utils.c \
+		../init_structs.c \
+		../loop_file.c \
+		../loop_idf.c \
+		../loop_map.c \
+		../main.c \
+		../parsing_utils.c \
+		../printing_utils.c \
+		../render.c \
+		../textures.c \
+
+
 C_OBJFILES = $(C_SRC:.c=.o)
 C_OBJ = $(addprefix $(OBJDIR), $(C_OBJFILES))
 

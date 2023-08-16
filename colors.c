@@ -70,14 +70,14 @@ int set_floor_ceiling(char *str, char *idf, t_data *data)
 
 int search_floor_ceiling(char *str, t_data *data)
 {
-    if (compare_idf(str, FLOOR) == 0)
+    if (ft_strncmp(str, FLOOR, 2) == 0)
     {
-        data->floor_color = set_floor_ceiling(str, FLOOR, data);
+        data->floor_color = set_floor_ceiling(str, (char *)FLOOR, data);
         return (TRUE);
     }
-    else if (compare_idf(str, CEILING) == 0)
+    else if (ft_strncmp(str, CEILING, 2) == 0)
     {
-        data->ceil_color = set_floor_ceiling(str, CEILING, data);
+        data->ceil_color = set_floor_ceiling(str, (char *)CEILING, data);
         return (TRUE);
     }
     return (FALSE); //couldnt set

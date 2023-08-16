@@ -29,36 +29,6 @@ char *read_map_into_str(int fd)
 	return (free(buf), file);
 }
 
-int no_nl_in_map(char *str)
-{
-	int i;
-	int idf_count;
-
-	idf_count = 0;
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] == '\n')
-			i++;
-		if (idf_count == 6)
-		{
-			while (str[i] != '\0' && str[i] != '\n')
-				i++;
-			if (str[i] != '\0' && str[i] == '\n' && str[i + 1] == '\n')
-				return (FALSE);
-		}
-		else if (ft_strncmp(&str[i], NORTH, 3) == 0
-			|| ft_strncmp(&str[i], EAST, 3) == 0
-			|| ft_strncmp(&str[i], SOUTH, 3) == 0
-			|| ft_strncmp(&str[i], WEST, 3) == 0
-			|| ft_strncmp(&str[i], FLOOR, 2) == 0 
-			|| ft_strncmp(&str[i], CEILING, 2) == 0)
-			idf_count++;
-		while (str[i] != '\0' && str[i] != '\n')
-			i++;
-	}
-	return (TRUE);
-}
 
 //i think i can put file_error in free_data
 void loop_file(int fd, t_data *data)
@@ -69,9 +39,8 @@ void loop_file(int fd, t_data *data)
 	close(fd);
 	if (!map_str)
 		return (data->err = ERR_SYSTEM, free_data(data));
-	if (no_nl_in_map(map_str) == FALSE)
-		return (data->err = ERR_MAP, free_data(data));
-	//und hier freen wurde free calls spater sparen und der check ist denke ich nicht so aufwandig 
+	if (double_idf_or_nl_map(map_str, data))
+		return (free(map_str), free_data(data));
 	data->map = ft_split(map_str, '\n');
 	free(map_str);
 	if (!data->map)

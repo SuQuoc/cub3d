@@ -39,12 +39,3 @@ int loop_idf_line(char *str, t_data *data)
     ft_putstr_fd("color set!\n", 2);
 	return (0);
 }
-
-int compare_idf(char *str, char *idf)
-{
-    if (!str)
-        return (-1);
-    if (ft_strncmp(str, idf, ft_strlen(idf)) == 0)
-        return (0);
-    return (1);
-}

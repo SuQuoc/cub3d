@@ -57,6 +57,7 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "files.associations": {
     "iosfwd": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "cubed.h": "c"
   }
 }
