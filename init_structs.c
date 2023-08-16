@@ -1,16 +1,28 @@
 
 #include "cubed.h"
 
+static void	_init_player(t_player *player, int x_position, int y_position)
+{
+/* 	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (NULL); */
+	player->x_pos = x_position;
+	player->y_pos = y_position;
+}
+
 t_data *init_data(void)
 {
 	t_data *data;
-	
+
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
 		perror(NULL);
 		exit(1);
 	}
+	_init_player(&data->player, WINDOW_W / 2, WINDOW_H / 2);
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;

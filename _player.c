@@ -1,19 +1,7 @@
 
 #include "cubed.h"
 
-t_player	*init_player(int x_position, int y_position)
-{
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	player->x_pos = x_position;
-	player->y_pos = y_position;
-	return (player);
-}
-
-void	draw_player(t_data *data, t_player *player)
+void	_draw_player(t_data *data, t_player *player)
 {
 	int	x;
 	int	y;

@@ -22,6 +22,14 @@ int	x_window(t_data *data)
 
 int	key_input(int keysym, t_data *data)
 {
+	if (keysym == XK_Right)
+		_player_move_right(&data->player, data->mlx_ptr, data->win_ptr);
+	if (keysym == XK_Left)
+		_player_move_left(&data->player, data->mlx_ptr, data->win_ptr);
+	if (keysym == XK_Down)
+		_player_move_down(&data->player, data->mlx_ptr, data->win_ptr);
+	if (keysym == XK_Up)
+		_player_move_up(&data->player, data->mlx_ptr, data->win_ptr);
 
 	if (keysym == XK_Escape)
 	{
@@ -34,18 +42,7 @@ int	key_input(int keysym, t_data *data)
 
 int	print_x(t_data *data)
 {
-	t_player *player;
-
-	player = init_player(100, 100);
-	if (!player)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		data->win_ptr = NULL;
-		free_data(data);
-	}
-	draw_player(data, player);
-
-	free(player);
+	(void)data;
 	return (0);
 }
 

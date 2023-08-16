@@ -51,6 +51,7 @@
 //colors
 #define WHITE 0xFFFFFF
 #define GREEN 0x00FF00
+#define BLACK 0x000000
 #define BLUE 0x0000FF
 #define RED 0xFF0000
 
@@ -84,6 +85,7 @@ typedef struct s_rgb
 
 typedef struct s_data
 {
+	t_player	player;
 	void	*mlx_ptr;
 	void	*win_ptr;
 
@@ -99,9 +101,15 @@ typedef struct s_data
 	int		err;
 } t_data;
 
+
+//_player_movement.c
+void	_player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
+void	_player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+void	_player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
+void	_player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
+
 //_player.c
-t_player	*init_player(int x_position, int y_position);
-void	draw_player(t_data *data, t_player *player);
+void		_draw_player(t_data *data, t_player *player);
 
 //check_extension.c
 int		check_extension(char const *str);
@@ -147,6 +155,7 @@ int		ft_strcmp(char *s1, char *s2);
 //free_utils.c
 void	free_2d_array(char **map);
 void 	free_data(t_data *data);
+void	free_data_err(t_data *data, char *error_message, int exit_code);
 
 
 //parsing_utils.c
