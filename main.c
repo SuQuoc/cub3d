@@ -23,13 +23,13 @@ int	x_window(t_data *data)
 int	key_input(int keysym, t_data *data)
 {
 	if (keysym == XK_Right)
-		_player_move_right(&data->player, data->mlx_ptr, data->win_ptr);
+		player_move_right(&data->player, data->mlx_ptr, data->win_ptr);
 	if (keysym == XK_Left)
-		_player_move_left(&data->player, data->mlx_ptr, data->win_ptr);
+		player_move_left(&data->player, data->mlx_ptr, data->win_ptr);
 	if (keysym == XK_Down)
-		_player_move_down(&data->player, data->mlx_ptr, data->win_ptr);
+		player_move_down(&data->player, data->mlx_ptr, data->win_ptr);
 	if (keysym == XK_Up)
-		_player_move_up(&data->player, data->mlx_ptr, data->win_ptr);
+		player_move_up(&data->player, data->mlx_ptr, data->win_ptr);
 
 	if (keysym == XK_Escape)
 	{
@@ -42,7 +42,10 @@ int	key_input(int keysym, t_data *data)
 
 int	print_x(t_data *data)
 {
-	(void)data;
+	t_point	point;
+
+	init_point(&point, data->player.pos.x, data->player.pos.y, data->player.direction.x, data->player.direction.y);
+	draw_line(data, &point);
 	return (0);
 }
 

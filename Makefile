@@ -3,9 +3,7 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-SRC =	_player_movement.c \
-		_player.c \
-		check_extension.c \
+SRC =	check_extension.c \
 		draw_line_utils.c \
 		draw_line.c \
 		error_msg.c \
@@ -18,6 +16,8 @@ SRC =	_player_movement.c \
 		colors.c \
 		main.c \
 		parsing_utils.c \
+		player_movement.c \
+		player.c \
 		printing_utils.c \
 		2d_array_utils.c
 

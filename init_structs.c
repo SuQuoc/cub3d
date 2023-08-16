@@ -1,15 +1,16 @@
 
 #include "cubed.h"
 
-static void	_init_player(t_player *player, int x_position, int y_position)
+static void	init_vector(t_vector *vector, int x_position, int y_position)
 {
-/* 	t_player	*player;
+	vector->x = x_position;
+	vector->y = y_position;
+}
 
-	player = malloc(sizeof(t_player));
-	if (!player)
-		return (NULL); */
-	player->x_pos = x_position;
-	player->y_pos = y_position;
+static void	init_player(t_player *player)
+{
+	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
+	init_vector(&player->direction, player->pos.x, player->pos.y - 100);
 }
 
 t_data *init_data(void)
@@ -22,7 +23,7 @@ t_data *init_data(void)
 		perror(NULL);
 		exit(1);
 	}
-	_init_player(&data->player, WINDOW_W / 2, WINDOW_H / 2);
+	init_player(&data->player);
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;
@@ -63,16 +64,16 @@ static void	point_calculate_values(t_point *point)
 	}
 }
 
-t_point	*init_point(int start_x, int start_y, int end_x, int end_y)
+void	init_point(t_point *point, int start_x, int start_y, int end_x, int end_y)
 {
-	t_point *point;
+/* 	t_point *point;
 
 	point = malloc(sizeof(t_point));
 	if (!point)
 	{
 		ft_putstr_fd((char*)"Error: malloc failed in function 'init_point'\n", 2);
 		return (NULL);
-	}
+	} */
 	point->start_x = start_x;
 	point->start_y = start_y;
 	point->end_x = end_x;
@@ -80,5 +81,5 @@ t_point	*init_point(int start_x, int start_y, int end_x, int end_y)
 	point->x_diff = (point->end_x - point->start_x);
 	point->y_diff = (point->end_y - point->start_y);
 	point_calculate_values(point);
-	return (point);
+	//return (point);
 }

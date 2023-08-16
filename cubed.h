@@ -55,10 +55,22 @@
 #define BLUE 0x0000FF
 #define RED 0xFF0000
 
+//for raycasting
+#define ROTATE_X_5 15251127 //0.909038
+#define ROTATE_Y_5 18175597 //1.083350
+#define POINT_SHIFTER 16777216
+
+typedef struct s_vector
+{
+	int		x;
+	int		y;
+}	t_vector;
+
 typedef struct s_player
 {
-	int		x_pos;
-	int		y_pos;
+	t_vector	pos;
+
+	t_vector	direction;
 }	t_player;
 
 typedef struct s_point
@@ -103,13 +115,13 @@ typedef struct s_data
 
 
 //_player_movement.c
-void	_player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
-void	_player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
-void	_player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
-void	_player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 
 //_player.c
-void	_draw_player(t_data *data, t_player *player);
+void	draw_player(t_data *data, t_player *player);
 
 //check_extension.c
 int		check_extension(char const *str);
@@ -125,7 +137,7 @@ int		draw_line(t_data *data, t_point *point);
 
 //init_structs.c
 t_data	*init_data(void);
-t_point	*init_point(int start_x, int start_y, int end_x, int end_y);
+void	init_point(t_point *point, int start_x, int start_y, int end_x, int end_y);
 
 //loop_file.c
 void	loop_file(int fd, t_data *data);
