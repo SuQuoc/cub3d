@@ -135,7 +135,6 @@ void loop_idf(t_data *data);
 int loop_idf_line(char *str, t_data *data);
 int compare_idf(char *str, char *idf);
 
-
 //textures.c
 int search_texture(char *str, t_data *data);
 void *set_texture(char *str, char *idf, t_data *data);
@@ -143,29 +142,22 @@ void *set_texture(char *str, char *idf, t_data *data);
 //colors.c
 int search_floor_ceiling(char *str, t_data *data);
 
-
 //error_msg.c
 void file_error(int err_code);
-
-
-//ft_strcmp.c
-int		ft_strcmp(char *s1, char *s2);
-
 
 //free_utils.c
 void	free_2d_array(char **map);
 void 	free_data(t_data *data);
-void	free_data_err(t_data *data, char *error_message, int exit_code);
+void	free_data_err(t_data *data, char *error_message);
 
+//ft_strcmp.c
+int		ft_strcmp(char *s1, char *s2);
 
 //parsing_utils.c
 int 	skip_spaces(char *str, int start);
 
-
-
 //printing_utils.c
 void	print_str_arr(char **arr);
-
 
 int		x_window(t_data *data);
 
