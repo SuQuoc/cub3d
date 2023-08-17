@@ -3,93 +3,96 @@
 
 //fast_x means that x is the fast direction, xpos that x_diff is positive and xneg that x_diff is negative.
 //the same goes for fast_y, ypos and yneg, just with y.
-static void	fast_x_xpos_ypos(t_data *data, t_point *point)//8
+static void	fast_x_xpos_ypos(const t_data *data, t_line *line, const int color)//8
 {
-	while (point->start_x <= point->end_x)
+	while (line->start_x <= line->end_x)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, WHITE);
-		point->fault -= point->y_diff;
-		if (point->fault <= 0)
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
+						line->start_y, color);
+		line->fault -= line->y_diff;
+		if (line->fault <= 0)
 		{
-			point->fault += point->x_diff;
-			point->start_y++;
+			line->fault += line->x_diff;
+			line->start_y++;
 		}
-		point->start_x++;
+		line->start_x++;
 	}
 }
 
-static void	fast_x_xpos_yneg(t_data *data, t_point *point)//1
+static void	fast_x_xpos_yneg(const t_data *data, t_line *line, const int color)//1
 {
-	while (point->start_x <= point->end_x)
+	while (line->start_x <= line->end_x)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, WHITE);
-		point->fault -= point->y_diff;
-		if (point->fault < 0)
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
+						line->start_y, color);
+		line->fault -= line->y_diff;
+		if (line->fault < 0)
 		{
-			point->fault += point->x_diff;
-			point->start_y--;
+			line->fault += line->x_diff;
+			line->start_y--;
 		}
-		point->start_x++;
+		line->start_x++;
 	}
 }
 
-static void	fast_y_xpos_ypos(t_data *data, t_point *point)//7
+static void	fast_y_xpos_ypos(const t_data *data, t_line *line, const int color)//7
 {
-	while (point->start_y <= point->end_y)
+	while (line->start_y <= line->end_y)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, WHITE);
-		point->fault -= point->x_diff;
-		if (point->fault < 0)
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
+						line->start_y, color);
+		line->fault -= line->x_diff;
+		if (line->fault < 0)
 		{
-			point->fault += point->y_diff;
-			point->start_x++;
+			line->fault += line->y_diff;
+			line->start_x++;
 		}
-		point->start_y++;
+		line->start_y++;
 	}
 }
 
-static void	fast_y_xpos_yneg(t_data *data, t_point *point)//2
+static void	fast_y_xpos_yneg(const t_data *data, t_line *line, const int color)//2
 {
-	while (point->start_y >= point->end_y)
+	while (line->start_y >= line->end_y)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, point->start_x, \
-						point->start_y, WHITE);
-		point->fault -= point->x_diff;
-		if (point->fault < 0)
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
+						line->start_y, color);
+		line->fault -= line->x_diff;
+		if (line->fault < 0)
 		{
-			point->fault += point->y_diff;
-			point->start_x++;
+			line->fault += line->y_diff;
+			line->start_x++;
 		}
-		point->start_y--;
+		line->start_y--;
 	}
 }
 
-int	draw_line(t_data *data, t_point *point)
+void	draw_line(const t_data *data, const t_vector *start, \
+					const t_vector *end, const int color)
 {
-	if (point->x_pos_or_neg == 'p')
+	t_line	line;
+
+	init_line(&line, start, end);
+	if (line.x_pos_or_neg == 'p')
 	{
-		if (point->fast_axis == 'x' && point->y_pos_or_neg == 'p')
-			fast_x_xpos_ypos(data, point);
-		else if (point->fast_axis == 'x' && point->y_pos_or_neg == 'n')
-			fast_x_xpos_yneg(data, point);
-		else if (point->fast_axis == 'y' && point->y_pos_or_neg == 'p')
-			fast_y_xpos_ypos(data, point);
-		else if (point->fast_axis == 'y' && point->y_pos_or_neg == 'n')
-			fast_y_xpos_yneg(data, point);
+		if (line.fast_axis == 'x' && line.y_pos_or_neg == 'p')
+			fast_x_xpos_ypos(data, &line, color);
+		else if (line.fast_axis == 'x' && line.y_pos_or_neg == 'n')
+			fast_x_xpos_yneg(data, &line, color);
+		else if (line.fast_axis == 'y' && line.y_pos_or_neg == 'p')
+			fast_y_xpos_ypos(data, &line, color);
+		else if (line.fast_axis == 'y' && line.y_pos_or_neg == 'n')
+			fast_y_xpos_yneg(data, &line, color);
 	}
 	else
 	{
-		if (point->fast_axis == 'y' && point->y_pos_or_neg == 'n')
-			fast_y_xneg_yneg(data, point);
-		else if (point->fast_axis == 'x' && point->y_pos_or_neg == 'n')
-			fast_x_xneg_yneg(data, point);
-		else if (point->fast_axis == 'x' && point->y_pos_or_neg == 'p')
-			fast_x_xneg_ypos(data, point);
-		else if (point->fast_axis == 'y' && point->y_pos_or_neg == 'p')
-			fast_y_xneg_ypos(data, point);
+		if (line.fast_axis == 'y' && line.y_pos_or_neg == 'n')
+			fast_y_xneg_yneg(data, &line, color);
+		else if (line.fast_axis == 'x' && line.y_pos_or_neg == 'n')
+			fast_x_xneg_yneg(data, &line, color);
+		else if (line.fast_axis == 'x' && line.y_pos_or_neg == 'p')
+			fast_x_xneg_ypos(data, &line, color);
+		else if (line.fast_axis == 'y' && line.y_pos_or_neg == 'p')
+			fast_y_xneg_ypos(data, &line, color);
 	}
-	return (0);
 }

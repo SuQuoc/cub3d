@@ -56,8 +56,11 @@
 #define RED 0xFF0000
 
 //for raycasting
-#define ROTATE_X_5 15251127 //0.909038
-#define ROTATE_Y_5 18175597 //1.083350
+#define ROTATE_X_1 16481858 //0.982395289
+#define ROTATE_Y_1 17067463 //1.017300102
+#define COS_1 16774660 //0.999847695
+#define SIN_1 292802 //0.017452406
+
 #define POINT_SHIFTER 16777216
 
 typedef struct s_vector
@@ -71,9 +74,10 @@ typedef struct s_player
 	t_vector	pos;
 
 	t_vector	direction;
+	t_vector	fixed_point_direction;
 }	t_player;
 
-typedef struct s_point
+typedef struct s_line
 {
 	char	x_pos_or_neg;
 	char	y_pos_or_neg;
@@ -85,7 +89,7 @@ typedef struct s_point
 	int		x_diff;
 	int		y_diff;
 	int		fault;
-}	t_point;
+}	t_line;
 
 typedef struct s_rgb
 {
@@ -97,7 +101,7 @@ typedef struct s_rgb
 
 typedef struct s_data
 {
-	t_player	player;
+	t_player	*player;
 	void	*mlx_ptr;
 	void	*win_ptr;
 
@@ -114,30 +118,21 @@ typedef struct s_data
 } t_data;
 
 
-//_player_movement.c
-void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
-
-//_player.c
-void	draw_player(t_data *data, t_player *player);
-
 //check_extension.c
 int		check_extension(char const *str);
 
 //draw_line_utils.c
-void	fast_y_xneg_yneg(t_data *data, t_point *point);
-void	fast_x_xneg_yneg(t_data *data, t_point *point);
-void	fast_x_xneg_ypos(t_data *data, t_point *point);
-void	fast_y_xneg_ypos(t_data *data, t_point *point);
+void	fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
+void	fast_x_xneg_yneg(const t_data *data, t_line *line, const int color);
+void	fast_x_xneg_ypos(const t_data *data, t_line *line, const int color);
+void	fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
 
 //draw_line.c
-int		draw_line(t_data *data, t_point *point);
+void	draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
 
 //init_structs.c
 t_data	*init_data(void);
-void	init_point(t_point *point, int start_x, int start_y, int end_x, int end_y);
+void	init_line(t_line *line, const t_vector *start, const t_vector *end);
 
 //loop_file.c
 void	loop_file(int fd, t_data *data);
@@ -167,6 +162,17 @@ int		ft_strcmp(char *s1, char *s2);
 
 //parsing_utils.c
 int 	skip_spaces(char *str, int start);
+
+//_player_movement.c
+void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
+
+//_player.c
+void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
+void	rotate_player_direction_clockwise(t_player *player);
+void	rotate_player_direction_counter_clockwise(t_player *player);
 
 //printing_utils.c
 void	print_str_arr(char **arr);

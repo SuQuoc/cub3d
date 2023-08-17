@@ -22,14 +22,32 @@ int	x_window(t_data *data)
 
 int	key_input(int keysym, t_data *data)
 {
-	if (keysym == XK_Right)
-		player_move_right(&data->player, data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_Left)
-		player_move_left(&data->player, data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_Down)
-		player_move_down(&data->player, data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_Up)
-		player_move_up(&data->player, data->mlx_ptr, data->win_ptr);
+	if (keysym == XK_Right || keysym == XK_Left || keysym == XK_Down || keysym == XK_Up)
+	{
+		draw_line(data, &data->player->pos, &data->player->direction, BLACK);
+		if (keysym == XK_Right)
+			player_move_right(data->player, data->mlx_ptr, data->win_ptr);
+		if (keysym == XK_Left)
+			player_move_left(data->player, data->mlx_ptr, data->win_ptr);
+		if (keysym == XK_Down)
+			player_move_down(data->player, data->mlx_ptr, data->win_ptr);
+		if (keysym == XK_Up)
+			player_move_up(data->player, data->mlx_ptr, data->win_ptr);
+		draw_line(data, &data->player->pos, &data->player->direction, WHITE);
+	}
+
+
+	if (keysym == XK_d || keysym == XK_D || keysym == XK_a || keysym == XK_A)
+	{
+		draw_line(data, &data->player->pos, &data->player->direction, BLACK);
+		if (keysym == XK_d || keysym == XK_D)
+			rotate_player_direction_clockwise(data->player);
+		if (keysym == XK_a || keysym == XK_A)
+			rotate_player_direction_counter_clockwise(data->player);
+		draw_player(data->player, data->mlx_ptr, data->win_ptr);
+		draw_line(data, &data->player->pos, &data->player->direction, WHITE);
+	}
+
 
 	if (keysym == XK_Escape)
 	{
@@ -42,10 +60,8 @@ int	key_input(int keysym, t_data *data)
 
 int	print_x(t_data *data)
 {
-	t_point	point;
-
-	init_point(&point, data->player.pos.x, data->player.pos.y, data->player.direction.x, data->player.direction.y);
-	draw_line(data, &point);
+	(void)data;
+	//draw_line(data, &data->player->pos, &data->player->direction, WHITE);
 	return (0);
 }
 

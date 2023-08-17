@@ -7,10 +7,17 @@ static void	init_vector(t_vector *vector, int x_position, int y_position)
 	vector->y = y_position;
 }
 
-static void	init_player(t_player *player)
+static t_player	*init_player(void)
 {
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (NULL);
 	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
-	init_vector(&player->direction, player->pos.x, player->pos.y - 100);
+	init_vector(&player->direction, player->pos.x + 100, player->pos.y + 20);
+	init_vector(&player->fixed_point_direction, 100 *POINT_SHIFTER, 20 * POINT_SHIFTER);
+	return (player);
 }
 
 t_data *init_data(void)
@@ -23,7 +30,13 @@ t_data *init_data(void)
 		perror(NULL);
 		exit(1);
 	}
-	init_player(&data->player);
+	data->player = init_player();
+	if (!data->player)
+	{
+		perror(NULL);
+		free(data);
+		exit(1);
+	}
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;
@@ -36,50 +49,41 @@ t_data *init_data(void)
 	return (data);
 }
 
-static void	point_calculate_values(t_point *point)
+static void	line_calculate_values(t_line *line)
 {
-	if (point->x_diff < 0)
+	if (line->x_diff < 0)
 	{
-		point->x_diff *= -1;
-		point->x_pos_or_neg = 'n';
+		line->x_diff *= -1;
+		line->x_pos_or_neg = 'n';
 	}
 	else
-		point->x_pos_or_neg = 'p';
-	if (point->y_diff < 0)
+		line->x_pos_or_neg = 'p';
+	if (line->y_diff < 0)
 	{
-		point->y_diff *= -1;
-		point->y_pos_or_neg = 'n';
+		line->y_diff *= -1;
+		line->y_pos_or_neg = 'n';
 	}
 	else
-		point->y_pos_or_neg = 'p';
-	if (point->x_diff > point->y_diff)
+		line->y_pos_or_neg = 'p';
+	if (line->x_diff > line->y_diff)
 	{
-		point->fault = point->x_diff / 2;
-		point->fast_axis = 'x';
+		line->fault = line->x_diff / 2;
+		line->fast_axis = 'x';
 	}
 	else
 	{
-		point->fault = point->y_diff / 2;
-		point->fast_axis = 'y';
+		line->fault = line->y_diff / 2;
+		line->fast_axis = 'y';
 	}
 }
 
-void	init_point(t_point *point, int start_x, int start_y, int end_x, int end_y)
+void	init_line(t_line *line, const t_vector *start, const t_vector *end)
 {
-/* 	t_point *point;
-
-	point = malloc(sizeof(t_point));
-	if (!point)
-	{
-		ft_putstr_fd((char*)"Error: malloc failed in function 'init_point'\n", 2);
-		return (NULL);
-	} */
-	point->start_x = start_x;
-	point->start_y = start_y;
-	point->end_x = end_x;
-	point->end_y = end_y;
-	point->x_diff = (point->end_x - point->start_x);
-	point->y_diff = (point->end_y - point->start_y);
-	point_calculate_values(point);
-	//return (point);
+	line->start_x = start->x;
+	line->start_y = start->y;
+	line->end_x = end->x;
+	line->end_y = end->y;
+	line->x_diff = (line->end_x - line->start_x);
+	line->y_diff = (line->end_y - line->start_y);
+	line_calculate_values(line);
 }

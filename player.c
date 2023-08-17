@@ -1,7 +1,7 @@
 
 #include "cubed.h"
 
-void	draw_player(t_data *data, t_player *player)
+void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr)
 {
 	int	x;
 	int	y;
@@ -12,7 +12,7 @@ void	draw_player(t_data *data, t_player *player)
 	{
 		while (x <= player->pos.x + 4)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, RED);
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, RED);
 			x++;
 		}
 		x -= 9;
@@ -20,18 +20,38 @@ void	draw_player(t_data *data, t_player *player)
 	}
 }
 
-void	rotate_player_direction(t_player *player)
+void	rotate_player_direction_clockwise(t_player *player)
 {
 	long int	new_x;
 	long int	new_y;
 	long int	old_x;
 	long int	old_y;
 
-	old_x = player->direction.x;
-	old_y = player->direction.y;
-	new_x = ROTATE_X_5 * old_x;
-	new_y = ROTATE_Y_5 * old_y;
-	player->direction.x = old_x / POINT_SHIFTER;
-	player->direction.y = old_y / POINT_SHIFTER;
-	
+	old_x = player->fixed_point_direction.x;
+	old_y = player->fixed_point_direction.y;
+	new_x = ((COS_1 * old_x) - (SIN_1 * old_y)) / POINT_SHIFTER;
+	new_y = ((SIN_1 * old_x) + (COS_1 * old_y)) / POINT_SHIFTER;
+	player->fixed_point_direction.x = new_x;
+	player->fixed_point_direction.y = new_y;
+
+	player->direction.x = (new_x / POINT_SHIFTER) + player->pos.x;
+	player->direction.y = (new_y / POINT_SHIFTER) + player->pos.y;
+}
+
+void	rotate_player_direction_counter_clockwise(t_player *player)
+{
+	long int	new_x;
+	long int	new_y;
+	long int	old_x;
+	long int	old_y;
+
+	old_x = player->fixed_point_direction.x;
+	old_y = player->fixed_point_direction.y;
+	new_x = ((COS_1 * old_x) + (SIN_1 * old_y)) / POINT_SHIFTER;
+	new_y = ((-SIN_1 * old_x) + (COS_1 * old_y)) / POINT_SHIFTER;
+	player->fixed_point_direction.x = new_x;
+	player->fixed_point_direction.y = new_y;
+
+	player->direction.x = (new_x / POINT_SHIFTER) + player->pos.x;
+	player->direction.y = (new_y / POINT_SHIFTER) + player->pos.y;
 }

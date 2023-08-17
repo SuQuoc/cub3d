@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils_two.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 18:05:12 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/06/30 15:15:02 by qtran            ###   ########.fr       */
+/*   Updated: 2023/08/17 12:50:43 by aplank           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_list(t_node *head)
 	ft_printf("----End-----\n");
 }
 
-//it is not doing anything, pointers are lost, node gets deleted
+//it is not doing anything, lineers are lost, node gets deleted
 void	delete_node(t_node *delete, t_node **head)
 {
 	if (!delete || delete == NULL || *head == NULL)
