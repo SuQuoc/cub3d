@@ -56,8 +56,6 @@
 #define RED 0xFF0000
 
 //for raycasting
-#define ROTATE_X_1 16481858 //0.982395289
-#define ROTATE_Y_1 17067463 //1.017300102
 #define COS_1 16774660 //0.999847695
 #define SIN_1 292802 //0.017452406
 
@@ -73,8 +71,10 @@ typedef struct s_player
 {
 	t_vector	pos;
 
-	t_vector	direction;
 	t_vector	fixed_point_direction;
+	t_vector	direction;
+	t_vector	camera_right;
+	t_vector	camera_left;
 }	t_player;
 
 typedef struct s_line
@@ -131,8 +131,12 @@ void	fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
 void	draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
 
 //init_structs.c
+void	init_vector(t_vector *vector, int x_position, int y_position);
 t_data	*init_data(void);
 void	init_line(t_line *line, const t_vector *start, const t_vector *end);
+
+//key_input.c
+int	key_input(int keysym, t_data *data);
 
 //loop_file.c
 void	loop_file(int fd, t_data *data);
@@ -171,16 +175,22 @@ void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 
 //_player.c
 void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
+void	draw_player_camera(t_data *data, t_player *player, int color);
 void	rotate_player_direction_clockwise(t_player *player);
 void	rotate_player_direction_counter_clockwise(t_player *player);
 
 //printing_utils.c
 void	print_str_arr(char **arr);
 
-int		x_window(t_data *data);
+//vector_operations.c
+t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
+t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
 
 //2d_array_utils.c
 int 	get_arr_len(char **arr);
 
+
+
+int		x_window(t_data *data);
 
 # endif

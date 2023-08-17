@@ -10,6 +10,7 @@ SRC =	check_extension.c \
 		ft_strcmp.c \
 		free_utils.c \
 		init_structs.c \
+		key_input.c \
 		loop_file.c \
 		loop_idf.c \
 		textures.c \
@@ -19,6 +20,7 @@ SRC =	check_extension.c \
 		player_movement.c \
 		player.c \
 		printing_utils.c \
+		vector_operations.c \
 		2d_array_utils.c
 
 OBJDIR = ./objects_and_dependencies/

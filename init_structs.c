@@ -1,7 +1,7 @@
 
 #include "cubed.h"
 
-static void	init_vector(t_vector *vector, int x_position, int y_position)
+void	init_vector(t_vector *vector, int x_position, int y_position)
 {
 	vector->x = x_position;
 	vector->y = y_position;
@@ -15,8 +15,11 @@ static t_player	*init_player(void)
 	if (!player)
 		return (NULL);
 	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
-	init_vector(&player->direction, player->pos.x + 100, player->pos.y + 20);
-	init_vector(&player->fixed_point_direction, 100 *POINT_SHIFTER, 20 * POINT_SHIFTER);
+	init_vector(&player->fixed_point_direction, \
+					0 * POINT_SHIFTER, -100 * POINT_SHIFTER);
+	init_vector(&player->direction, player->pos.x + 0, player->pos.y - 100);
+	init_vector(&player->camera_right,60, 0);
+	init_vector(&player->camera_left,-60, 0);
 	return (player);
 }
 
