@@ -17,9 +17,13 @@ static t_player	*init_player(void)
 	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
 	init_vector(&player->fixed_point_direction, \
 					0 * POINT_SHIFTER, -100 * POINT_SHIFTER);
+	init_vector(&player->fixed_point_camera_right, \
+					60 * POINT_SHIFTER, 0 * POINT_SHIFTER);				
+	init_vector(&player->fixed_point_camera_left, \
+					-60 * POINT_SHIFTER, 0 * POINT_SHIFTER);
 	init_vector(&player->direction, player->pos.x + 0, player->pos.y - 100);
-	init_vector(&player->camera_right,60, 0);
-	init_vector(&player->camera_left,-60, 0);
+	init_vector(&player->camera_right, 60, 0);
+	init_vector(&player->camera_left, -60, 0);
 	return (player);
 }
 

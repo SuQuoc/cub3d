@@ -56,6 +56,7 @@
 #define RED 0xFF0000
 
 //for raycasting
+//cos and sin are already point-shifted
 #define COS_1 16774660 //0.999847695
 #define SIN_1 292802 //0.017452406
 
@@ -67,14 +68,19 @@ typedef struct s_vector
 	int		y;
 }	t_vector;
 
+//Direction is the direction vector plus the player position (pos).
+//The other vectors are just the respective vectors, except for the
+//fixed point ones, they are the vector * POINT_SHIFTER.
 typedef struct s_player
 {
 	t_vector	pos;
 
+	t_vector	fixed_point_camera_right;
+	t_vector	fixed_point_camera_left;
 	t_vector	fixed_point_direction;
-	t_vector	direction;
 	t_vector	camera_right;
 	t_vector	camera_left;
+	t_vector	direction;
 }	t_player;
 
 typedef struct s_line
@@ -176,8 +182,8 @@ void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 //_player.c
 void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
 void	draw_player_camera(t_data *data, t_player *player, int color);
-void	rotate_player_direction_clockwise(t_player *player);
-void	rotate_player_direction_counter_clockwise(t_player *player);
+void	rotate_vector_clockwise(t_vector *fixed_point_vector, t_vector *vector);
+void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vector);
 
 //printing_utils.c
 void	print_str_arr(char **arr);

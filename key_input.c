@@ -22,9 +22,19 @@ static void	rotate_player_direction(int keysym, t_data *data)
 	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
 	draw_player_camera(data, data->player, BLACK);
 	if (keysym == XK_d || keysym == XK_D)
-		rotate_player_direction_clockwise(data->player);
+	{
+		rotate_vector_clockwise(&data->player->fixed_point_direction, &data->player->direction);
+		data->player->direction = vector_addition(data->player->direction, data->player->pos);
+		rotate_vector_clockwise(&data->player->fixed_point_camera_left, &data->player->camera_left);
+		rotate_vector_clockwise(&data->player->fixed_point_camera_right, &data->player->camera_right);
+	}
 	if (keysym == XK_a || keysym == XK_A)
-		rotate_player_direction_counter_clockwise(data->player);
+	{
+		rotate_vector_counter_clockwise(&data->player->fixed_point_direction, &data->player->direction);
+		data->player->direction = vector_addition(data->player->direction, data->player->pos);
+		rotate_vector_counter_clockwise(&data->player->fixed_point_camera_left, &data->player->camera_left);
+		rotate_vector_counter_clockwise(&data->player->fixed_point_camera_right, &data->player->camera_right);
+	}
 	draw_player(data->player, data->mlx_ptr, data->win_ptr);
 	draw_line(data, &data->player->pos, &data->player->direction, WHITE);
 	draw_player_camera(data, data->player, BLUE);
