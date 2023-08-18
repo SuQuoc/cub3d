@@ -143,6 +143,10 @@ int			get_arr_len(char **arr);
 // check_extension.c
 int			check_extension(char const *str);
 
+// colors.c
+int search_floor_ceiling(char *str, t_data *data);
+
+
 //draw_line_utils.c
 void	fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
 void	fast_x_xneg_yneg(const t_data *data, t_line *line, const int color);
@@ -180,7 +184,7 @@ int			is_color_idf(char *str);
 
 // init_structs.c
 t_data		*init_data(void);
-t_point		*init_point(int start_x, int start_y, int end_x, int end_y);
+void	init_line(t_line *line, const t_vector *start, const t_vector *end);
 
 // loop_file.c
 int			double_idf_or_nl_map(char *str, t_data *data);

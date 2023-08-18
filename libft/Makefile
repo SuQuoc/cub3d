@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: qtran <qtran@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/09 12:24:01 by aplank            #+#    #+#              #
-#    Updated: 2023/08/18 15:21:24 by qtran            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = libft.a
 
@@ -20,7 +9,7 @@ MY_SOURCES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpa.c ft_isasci
 	ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 	ft_char.c ft_decimal_integer.c ft_hexa_itoa.c ft_lower_hexa.c ft_pointer.c \
 	ft_printf.c ft_redirecting.c ft_string.c ft_unsigned_decimal.c ft_upper_hexa.c \
-	get_next_line_bonus.c get_next_line_utils_bonus.c
+    get_next_line_bonus.c get_next_line_utils_bonus.c
 
 MY_BONUS_SOURCES = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 	ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
@@ -31,7 +20,7 @@ MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 CFLAGS += -Wall -Werror -Wextra
 
-CC = g++
+CC = cc
 
 .PHONY: clean fclean all bonus
 

@@ -87,22 +87,6 @@ static void	line_calculate_values(t_line *line)
 
 void	init_line(t_line *line, const t_vector *start, const t_vector *end)
 {
-	t_point *point;
-
-	point = (t_point *)malloc(sizeof(t_point));
-	if (!point)
-	{
-		ft_putstr_fd((char*)"Error: malloc failed in function 'init_point'\n", 2);
-		return (NULL);
-	}
-	point->start_x = start_x;
-	point->start_y = start_y;
-	point->end_x = end_x;
-	point->end_y = end_y;
-	point->x_diff = (point->end_x - point->start_x);
-	point->y_diff = (point->end_y - point->start_y);
-	point_calculate_values(point);
-	return (point);
 	line->start_x = start->x;
 	line->start_y = start->y;
 	line->end_x = end->x;

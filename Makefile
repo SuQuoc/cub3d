@@ -26,7 +26,6 @@ SRC =	2d_array_utils.c \
 		player.c \
 		printing_utils.c \
 		vector_operations.c \
-		render.c \
 		textures.c \
 
 OBJDIR = ./objects_and_dependencies/
