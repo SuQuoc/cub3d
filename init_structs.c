@@ -1,6 +1,32 @@
 
 #include "cubed.h"
 
+void	init_vector(t_vector *vector, int x_position, int y_position)
+{
+	vector->x = x_position;
+	vector->y = y_position;
+}
+
+static t_player	*init_player(void)
+{
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (NULL);
+	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
+	init_vector(&player->fixed_point_direction, \
+					0 * POINT_SHIFTER, -100 * POINT_SHIFTER);
+	init_vector(&player->fixed_point_camera_right, \
+					60 * POINT_SHIFTER, 0 * POINT_SHIFTER);				
+	init_vector(&player->fixed_point_camera_left, \
+					-60 * POINT_SHIFTER, 0 * POINT_SHIFTER);
+	init_vector(&player->direction, player->pos.x + 0, player->pos.y - 100);
+	init_vector(&player->camera_right, 60, 0);
+	init_vector(&player->camera_left, -60, 0);
+	return (player);
+}
+
 t_data *init_data(void)
 {
 	t_data *data;
@@ -9,6 +35,13 @@ t_data *init_data(void)
 	if (!data)
 	{
 		perror(NULL);
+		exit(1);
+	}
+	data->player = init_player();
+	if (!data->player)
+	{
+		perror(NULL);
+		free(data);
 		exit(1);
 	}
 	data->mlx_ptr = NULL;
@@ -24,35 +57,35 @@ t_data *init_data(void)
 	return (data);
 }
 
-static void	point_calculate_values(t_point *point)
+static void	line_calculate_values(t_line *line)
 {
-	if (point->x_diff < 0)
+	if (line->x_diff < 0)
 	{
-		point->x_diff *= -1;
-		point->x_pos_or_neg = 'n';
+		line->x_diff *= -1;
+		line->x_pos_or_neg = 'n';
 	}
 	else
-		point->x_pos_or_neg = 'p';
-	if (point->y_diff < 0)
+		line->x_pos_or_neg = 'p';
+	if (line->y_diff < 0)
 	{
-		point->y_diff *= -1;
-		point->y_pos_or_neg = 'n';
+		line->y_diff *= -1;
+		line->y_pos_or_neg = 'n';
 	}
 	else
-		point->y_pos_or_neg = 'p';
-	if (point->x_diff > point->y_diff)
+		line->y_pos_or_neg = 'p';
+	if (line->x_diff > line->y_diff)
 	{
-		point->fault = point->x_diff / 2;
-		point->fast_axis = 'x';
+		line->fault = line->x_diff / 2;
+		line->fast_axis = 'x';
 	}
 	else
 	{
-		point->fault = point->y_diff / 2;
-		point->fast_axis = 'y';
+		line->fault = line->y_diff / 2;
+		line->fast_axis = 'y';
 	}
 }
 
-t_point	*init_point(int start_x, int start_y, int end_x, int end_y)
+void	init_line(t_line *line, const t_vector *start, const t_vector *end)
 {
 	t_point *point;
 
@@ -70,4 +103,11 @@ t_point	*init_point(int start_x, int start_y, int end_x, int end_y)
 	point->y_diff = (point->end_y - point->start_y);
 	point_calculate_values(point);
 	return (point);
+	line->start_x = start->x;
+	line->start_y = start->y;
+	line->end_x = end->x;
+	line->end_y = end->y;
+	line->x_diff = (line->end_x - line->start_x);
+	line->y_diff = (line->end_y - line->start_y);
+	line_calculate_values(line);
 }

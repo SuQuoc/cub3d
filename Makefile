@@ -15,13 +15,17 @@ SRC =	2d_array_utils.c \
 		hooks.c \
 		identifier_utils.c \
 		init_structs.c \
+		key_input.c \
 		loop_file.c \
 		loop_idf.c \
 		loop_map.c \
 		main.c \
 		newline_map_check.c \
 		parsing_utils.c \
+		player_movement.c \
+		player.c \
 		printing_utils.c \
+		vector_operations.c \
 		render.c \
 		textures.c \
 

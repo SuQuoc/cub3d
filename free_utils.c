@@ -49,9 +49,34 @@ void free_data(t_data *data)
 		destroy_textures(data);
 		mlx_destroy_display(data->mlx_ptr);
 	}
+	free(data->player);
 	free(data->mlx_ptr);
 	free_2d_array(data->map);
 	free(data);
 	data = NULL;
 	exit(exit_code);
+}
+
+//if error_message is NULL it exits with 0, else with 1
+void free_data_err(t_data *data, char *error_message)
+{
+	if (data->mlx_ptr)
+	{
+		destroy_textures(data);
+		mlx_destroy_display(data->mlx_ptr);
+	}
+	free(data->player);
+	free(data->mlx_ptr);
+	free_2d_array(data->map);
+	
+	free(data);
+	data = NULL;
+	if (error_message)
+	{
+		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd(error_message, 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
+	exit(0);
 }

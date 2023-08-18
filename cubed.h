@@ -45,11 +45,67 @@
 
 # define EXTENSION ".cub"
 
-# define WINDOW_W 1000
-# define WINDOW_H 600
-# define WINDOW_NAME "FORKBOMBERS"
+//Identifiers
+#define TXT_W		60
+#define TXT_H		60
+#define NORTH 		"NO "
+#define EAST 		"EA "
+#define SOUTH 		"SO "
+#define WEST 		"WE "
+#define FLOOR 		"F "
+#define CEILING 	"C "
 
-typedef struct s_point
+
+#define EXTENSION ".cub"
+
+#define WINDOW_W 1000
+#define WINDOW_H 600
+#define WINDOW_NAME "FORKBOMBERS"
+
+//colors
+#define WHITE 0xFFFFFF
+#define GREEN 0x00FF00
+#define BLACK 0x000000
+#define BLUE 0x0000FF
+#define RED 0xFF0000
+
+//for raycasting
+//cos and sin are already point-shifted
+#define COS_1 16774660 //0.999847695
+#define SIN_1 292802 //0.017452406
+
+#define POINT_SHIFTER 16777216
+
+
+typedef struct s_ray
+{
+	int		length;
+	int		x;
+	int		y;
+}	t_ray;
+
+typedef struct s_vector
+{
+	int		x;
+	int		y;
+}	t_vector;
+
+//Direction is the direction vector plus the player position (pos).
+//The other vectors are just the respective vectors, except for the
+//fixed point ones, they are the vector * POINT_SHIFTER.
+typedef struct s_player
+{
+	t_vector	pos;
+
+	t_vector	fixed_point_camera_right;
+	t_vector	fixed_point_camera_left;
+	t_vector	fixed_point_direction;
+	t_vector	camera_right;
+	t_vector	camera_left;
+	t_vector	direction;
+}	t_player;
+
+typedef struct s_line
 {
 	char	x_pos_or_neg;
 	char	y_pos_or_neg;
@@ -61,18 +117,11 @@ typedef struct s_point
 	int		x_diff;
 	int		y_diff;
 	int		fault;
-}			t_point;
-
-typedef struct s_rgb
-{
-	int		color;
-	int		r;
-	int		g;
-	int		b;
-}			t_rgb;
+}	t_line;
 
 typedef struct s_data
 {
+	t_player	*player;
 	void	*mlx_ptr;
 	void	*win_ptr;
 
@@ -94,17 +143,22 @@ int			get_arr_len(char **arr);
 // check_extension.c
 int			check_extension(char const *str);
 
-// colors.c
-int			search_floor_ceiling(char *str, t_data *data);
+//draw_line_utils.c
+void	fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
+void	fast_x_xneg_yneg(const t_data *data, t_line *line, const int color);
+void	fast_x_xneg_ypos(const t_data *data, t_line *line, const int color);
+void	fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
 
-// draw_line_utils.c
-void		fast_y_xneg_yneg(t_data *data, t_point *point);
-void		fast_x_xneg_yneg(t_data *data, t_point *point);
-void		fast_x_xneg_ypos(t_data *data, t_point *point);
-void		fast_y_xneg_ypos(t_data *data, t_point *point);
+//draw_line.c
+void	draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
 
-// draw_line.c
-int			draw_line(t_data *data, t_point *point);
+//init_structs.c
+void	init_vector(t_vector *vector, int x_position, int y_position);
+t_data	*init_data(void);
+void	init_line(t_line *line, const t_vector *start, const t_vector *end);
+
+//key_input.c
+int	key_input(int keysym, t_data *data);
 
 // error_msg.c
 void		file_error(int err_code);
@@ -145,6 +199,7 @@ int			print_x(t_data *data);
 // textures.c
 int			search_texture(char *str, t_data *data);
 void		*set_texture(char *str, char *idf, t_data *data);
+void	free_data_err(t_data *data, char *error_message);
 
 // MLX RELATED_______________________________________
 // render.c
@@ -153,8 +208,33 @@ int			print_x(t_data *data);
 // parsing_utils.c
 int			skip_spaces(char *str, int start);
 
+//_player_movement.c
+void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 // printing_utils.c
 void		print_str_arr(char **arr);
 void		print_int_arr(int *arr, int size);
 
-#endif
+//_player.c
+void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
+void	draw_player_camera(t_data *data, t_player *player, int color);
+void	rotate_vector_clockwise(t_vector *fixed_point_vector, t_vector *vector);
+void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vector);
+
+//printing_utils.c
+void	print_str_arr(char **arr);
+
+//vector_operations.c
+t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
+t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
+
+//2d_array_utils.c
+int 	get_arr_len(char **arr);
+
+
+
+int		x_window(t_data *data);
+
+# endif
