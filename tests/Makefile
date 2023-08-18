@@ -3,9 +3,9 @@ NAME = tests
 DEP = tests.hpp ../cubed.h
 
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -Wno-write-strings
+CXXFLAGS = -std=c++98 -fpermissive
 CC = g++
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -fpermissive
 
 C_SRC =	../2d_array_utils.c \
 		../check_extension.c \
@@ -15,13 +15,11 @@ C_SRC =	../2d_array_utils.c \
 		../error_msg.c \
 		../free_utils.c \
 		../ft_strcmp.c \
-		../hooks.c \
 		../identifier_utils.c \
 		../init_structs.c \
 		../loop_file.c \
 		../loop_idf.c \
 		../loop_map.c \
-		../main.c \
 		../parsing_utils.c \
 		../printing_utils.c \
 		../render.c \
@@ -56,7 +54,7 @@ $(OBJDIR):
 
 $(NAME): $(OBJDIR) $(C_OBJ) $(CPP_OBJ)
 	@$(MAKE) -C ../libft
-	$(CXX) $(CXXFLAGS) $(C_OBJ) $(CPP_OBJ) ../libft/libft.a -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(C_OBJ) $(CPP_OBJ) ../libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 
 clean:
 	@$(MAKE) -C ../libft fclean

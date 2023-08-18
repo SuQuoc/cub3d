@@ -4,6 +4,8 @@
 # include <fstream>
 # include <cstdlib>
 # include <string>
+# include <mlx.h>
+
 
 
 ///////testfiles///////////////////////////////////////////

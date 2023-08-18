@@ -5,7 +5,7 @@ t_data *init_data(void)
 {
 	t_data *data;
 	
-	data = malloc(sizeof(t_data));
+	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 	{
 		perror(NULL);
@@ -56,7 +56,7 @@ t_point	*init_point(int start_x, int start_y, int end_x, int end_y)
 {
 	t_point *point;
 
-	point = malloc(sizeof(t_point));
+	point = (t_point *)malloc(sizeof(t_point));
 	if (!point)
 	{
 		ft_putstr_fd((char*)"Error: malloc failed in function 'init_point'\n", 2);

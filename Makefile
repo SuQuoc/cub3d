@@ -19,6 +19,7 @@ SRC =	2d_array_utils.c \
 		loop_idf.c \
 		loop_map.c \
 		main.c \
+		newline_map_check.c \
 		parsing_utils.c \
 		printing_utils.c \
 		render.c \

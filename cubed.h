@@ -40,6 +40,9 @@
 # define FLOOR "F "
 # define CEILING "C "
 
+// MAP
+# define PLAYER "NESW"
+
 # define EXTENSION ".cub"
 
 # define WINDOW_W 1000
@@ -85,8 +88,6 @@ typedef struct s_data
 	int		err;
 }			t_data;
 
-
-
 // 2d_array_utils.c
 int			get_arr_len(char **arr);
 
@@ -95,7 +96,6 @@ int			check_extension(char const *str);
 
 // colors.c
 int			search_floor_ceiling(char *str, t_data *data);
-
 
 // draw_line_utils.c
 void		fast_y_xneg_yneg(t_data *data, t_point *point);
@@ -106,78 +106,55 @@ void		fast_y_xneg_ypos(t_data *data, t_point *point);
 // draw_line.c
 int			draw_line(t_data *data, t_point *point);
 
-
 // error_msg.c
 void		file_error(int err_code);
-
 
 // free_utils.c
 void		free_2d_array(char **map);
 void		free_data(t_data *data);
 
-
-
 // ft_strcmp.c
-int ft_strcmp(char *s1, char *s2);
-
+int			ft_strcmp(char *s1, char *s2);
 
 // hooks.c
 int			x_window(t_data *data);
 int			key_input(int keysym, t_data *data);
 
 // identifier_utils.c
-int is_txt_idf(char *str);
-int is_color_idf(char *str);
-
+int			is_txt_idf(char *str);
+int			is_color_idf(char *str);
 
 // init_structs.c
 t_data		*init_data(void);
 t_point		*init_point(int start_x, int start_y, int end_x, int end_y);
 
 // loop_file.c
-int double_idf_or_nl_map(char *str, t_data *data);
+int			double_idf_or_nl_map(char *str, t_data *data);
 
 // loop_idf.c
-void 		loop_file(int fd, t_data *data);
+void		loop_file(int fd, t_data *data);
 void		loop_idf(t_data *data);
 int			loop_idf_line(char *str, t_data *data);
 
 // loop_map.c
-int nl_in_map(char *str, t_data *data);
-
+int			nl_in_map(char *str, t_data *data);
 
 // render.c
-int	print_x(t_data *data);
-
+int			print_x(t_data *data);
 
 // textures.c
 int			search_texture(char *str, t_data *data);
 void		*set_texture(char *str, char *idf, t_data *data);
 
-
-
-
-
-
-
 // MLX RELATED_______________________________________
 // render.c
-int	print_x(t_data *data);
-
-
-
-
-
-
-
-
-
+int			print_x(t_data *data);
 
 // parsing_utils.c
 int			skip_spaces(char *str, int start);
 
 // printing_utils.c
 void		print_str_arr(char **arr);
-
+void		print_int_arr(int *arr, int size);
 
 #endif
