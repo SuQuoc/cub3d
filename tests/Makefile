@@ -37,6 +37,7 @@ $(OBJDIR):
 $(NAME): $(OBJDIR) $(C_OBJ) $(CPP_OBJ)
 	@$(MAKE) -C ../libft
 	$(CXX) $(CXXFLAGS) $(C_OBJ) $(CPP_OBJ) ../libft/libft.a -o $(NAME)
+	./$(NAME)
 
 clean:
 	@$(MAKE) -C ../libft fclean

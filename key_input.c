@@ -5,13 +5,13 @@ static void	movement(int keysym, t_data *data)
 {
 	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
 	draw_player_camera(data, data->player, BLACK);
-	if (keysym == XK_Right)
+	if (keysym == XK_d || keysym == XK_D)
 		player_move_right(data->player, data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_Left)
+	else if (keysym == XK_a || keysym == XK_A)
 		player_move_left(data->player, data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_Down)
+	else if (keysym == XK_s || keysym == XK_S)
 		player_move_down(data->player, data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_Up)
+	else if (keysym == XK_w || keysym == XK_W)
 		player_move_up(data->player, data->mlx_ptr, data->win_ptr);
 	draw_line(data, &data->player->pos, &data->player->direction, WHITE);
 	draw_player_camera(data, data->player, BLUE);
@@ -21,14 +21,14 @@ static void	rotate_player_direction(int keysym, t_data *data)
 {
 	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
 	draw_player_camera(data, data->player, BLACK);
-	if (keysym == XK_d || keysym == XK_D)
+	if (keysym == XK_Right)
 	{
 		rotate_vector_clockwise(&data->player->fixed_point_direction, &data->player->direction);
 		data->player->direction = vector_addition(data->player->direction, data->player->pos);
 		rotate_vector_clockwise(&data->player->fixed_point_camera_left, &data->player->camera_left);
 		rotate_vector_clockwise(&data->player->fixed_point_camera_right, &data->player->camera_right);
 	}
-	if (keysym == XK_a || keysym == XK_A)
+	else if (keysym == XK_Left)
 	{
 		rotate_vector_counter_clockwise(&data->player->fixed_point_direction, &data->player->direction);
 		data->player->direction = vector_addition(data->player->direction, data->player->pos);
@@ -42,13 +42,14 @@ static void	rotate_player_direction(int keysym, t_data *data)
 
 int	key_input(int keysym, t_data *data)
 {
-	if (keysym == XK_Right || keysym == XK_Left || keysym == XK_Down || keysym == XK_Up)
+	if (keysym == XK_s || keysym == XK_S || keysym == XK_w || keysym == XK_W \
+		|| keysym == XK_d || keysym == XK_D || keysym == XK_a || keysym == XK_A)
 		movement(keysym, data);
 
-	if (keysym == XK_d || keysym == XK_D || keysym == XK_a || keysym == XK_A)
+	else if (keysym == XK_Right || keysym == XK_Left || keysym == XK_Down || keysym == XK_Up)
 		rotate_player_direction(keysym, data);
 
-	if (keysym == XK_Escape)
+	else if (keysym == XK_Escape)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;

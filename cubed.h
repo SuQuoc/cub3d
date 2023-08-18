@@ -62,6 +62,14 @@
 
 #define POINT_SHIFTER 16777216
 
+
+typedef struct s_ray
+{
+	int		length;
+	int		x;
+	int		y;
+}	t_ray;
+
 typedef struct s_vector
 {
 	int		x;
@@ -96,14 +104,6 @@ typedef struct s_line
 	int		y_diff;
 	int		fault;
 }	t_line;
-
-typedef struct s_rgb
-{
-	int color;
-	int	r;
-	int g;
-	int b;
-}	t_rgb;
 
 typedef struct s_data
 {
