@@ -30,6 +30,20 @@ void	draw_player_camera(t_data *data, t_player *player, int color)
 	draw_line(data, &left, &right, color);
 }
 
+void	draw_rays(t_data *data, t_player *player, int color)
+{
+	t_vector	ray;
+	int	x;
+
+	x = 0;
+	while (x < 21)
+	{
+		ray = vector_addition(player->ray[x], player->pos);
+		draw_line(data, &player->pos, &ray, color);
+		x++;
+	}
+}
+
 void	rotate_vector_clockwise(t_vector *fixed_point_vector, t_vector *vector)
 {
 	long int	new_x;
@@ -65,39 +79,3 @@ void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vec
 	vector->x = new_x / POINT_SHIFTER;
 	vector->y = new_y / POINT_SHIFTER;
 }
-
-/* void	rotate_player_direction_clockwise(t_player *player)
-{
-	long int	new_x;
-	long int	new_y;
-	long int	old_x;
-	long int	old_y;
-
-	old_x = player->fixed_point_direction.x;
-	old_y = player->fixed_point_direction.y;
-	new_x = ((COS_1 * old_x) - (SIN_1 * old_y)) / POINT_SHIFTER;
-	new_y = ((SIN_1 * old_x) + (COS_1 * old_y)) / POINT_SHIFTER;
-	player->fixed_point_direction.x = new_x;
-	player->fixed_point_direction.y = new_y;
-
-	player->direction.x = (new_x / POINT_SHIFTER) + player->pos.x;
-	player->direction.y = (new_y / POINT_SHIFTER) + player->pos.y;
-} */
-
-/* void	rotate_player_direction_counter_clockwise(t_player *player)
-{
-	long int	new_x;
-	long int	new_y;
-	long int	old_x;
-	long int	old_y;
-
-	old_x = player->fixed_point_direction.x;
-	old_y = player->fixed_point_direction.y;
-	new_x = ((COS_1 * old_x) + (SIN_1 * old_y)) / POINT_SHIFTER;
-	new_y = ((-SIN_1 * old_x) + (COS_1 * old_y)) / POINT_SHIFTER;
-	player->fixed_point_direction.x = new_x;
-	player->fixed_point_direction.y = new_y;
-
-	player->direction.x = (new_x / POINT_SHIFTER) + player->pos.x;
-	player->direction.y = (new_y / POINT_SHIFTER) + player->pos.y;
-} */

@@ -44,6 +44,7 @@ t_data *init_data(void)
 		free(data);
 		exit(1);
 	}
+	calculate_rays(data->player);
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;

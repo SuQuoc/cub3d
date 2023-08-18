@@ -49,7 +49,6 @@ int main(int argc, char **argv)
 	loop_file(fd, data);
 	ft_putstr_fd("finished check!\n", 2);
 
-
 	mlx_loop_hook(data->mlx_ptr, &print_x, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
 	mlx_hook(data->win_ptr, 17, 0, x_window, data);
