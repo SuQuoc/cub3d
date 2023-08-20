@@ -21,6 +21,6 @@ void file_error(int err_code)
 	else if (err_code == ERR_MAP)
 		ft_putstr_fd("Invalid map_content!\n", 2);
 	else if (err_code == ERR_NL_MAP)
-		ft_putstr_fd("Consecutive newline in map content!\n", 2);
+		ft_putstr_fd("Consecutive nl in map content! Map content begins when every IDF was found!\n", 2);
 	return ;
 }

@@ -1,39 +1,62 @@
 
 # include "unit_tests.h"
 
-int compare(char *output, char *expected)
+void ft_mlx_init(t_data *data)
 {
-    if (ft_strncmp(output, expected, ft_strlen(expected)) == 0)
-        return (printf ("OK\n"), 1);
-    else if (ft_strncmp("Valid", expected, ft_strlen(expected)) == 0) 
-        return (printf ("OK\n"), 1);
-    else  
-        return (printf ("FAIL\n"), 0);
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
+		free_data(data);
 }
 
-void test_framework(char *testsuite, char ***testcases, t_data *g_data)
+
+int compare(char *output, char *expected)
+{
+    if (ft_strncmp(&output[6], expected, ft_strlen(expected)) == 0)
+        return (printf ("\033[0;92m OK\033[0m\n"), 1);
+    else 
+    {
+        printf ("\033[0;91m FAIL\033[0m\n"),
+        printf("Output: %s\n", &output[6]);
+        printf("Expect: %s\n", expected);
+        return (0);
+    }
+}
+
+void test_framework(char *testsuite, char testcases[][2][1000])
 {
     int pid = fork();
     if (pid == 0)
     {
-        char output[2000];
-        int tmp_fd = open("TEMP_FILE", O_CREAT | O_WRONLY | O_RDONLY, 0664);
-        dup2(tmp_fd, STDERR_FILENO);
-        printf("Testite (folder_path): %s\n", testsuite);
-
+        printf("\n");
+        printf("\033[1;34mTestsuite (folder_path): %s\033[0m\n", testsuite);
         int j = 0;
-        while (testcases[j] != NULL)
+        while (strcmp("", testcases[j][0]) != 0)
         {   
-            printf("Test nbr\n");
+            char *output = (char*)malloc(BUF_SIZE + 1);;
             int fd = open(ft_strjoin(testsuite, testcases[j][0]), O_RDONLY);
-            if (fork() == 0)
+            int cpid = fork();
+            int tmp_fd = open("TEMP_FILE", O_CREAT | O_TRUNC | O_WRONLY, 0664);
+            if (cpid == 0)
+            {
+                t_data *g_data = init_data();
+                ft_mlx_init(g_data);
+                dup2(tmp_fd, STDERR_FILENO);
                 loop_file(fd, g_data);
-            read(tmp_fd, output, 2000);
-            printf("Testname: %s\n", testcases[j][0]);
-            compare(output, ft_strjoin("Error\n", testcases[j][1]));
+                exit(0);
+            }
+            waitpid(cpid, NULL, WUNTRACED);
+            close(fd);
+            tmp_fd = open("TEMP_FILE", O_RDONLY);
+            read(tmp_fd, output, BUF_SIZE);
+            //printf("OUTPUT: %s\n", output);
+            printf("\033[1mTestname: %s\033[0m    ", testcases[j][0]);
+            compare(output, testcases[j][1]);
+            close(tmp_fd);
+            close(fd);
+            free(output);
             j++;
         }
-        close(tmp_fd);
         exit(0);
     }
+    waitpid(pid, NULL, WUNTRACED);
 }

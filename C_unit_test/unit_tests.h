@@ -12,9 +12,10 @@
 #include "../cubed.h"
 
 int compare(char *output, char *expected);
-void test_framework(char *testsuite, char ***testcases, t_data *g_data);
+void test_framework(char *testsuite, char testcases[][2][1000]);
 
 #define TMPFILE "tmpfile"
+#define BUF_SIZE 2000
 
 
 # endif

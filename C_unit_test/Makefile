@@ -3,7 +3,7 @@ NAME = tester
 DEP = unit_tests.h ../cubed.h
 
 CC = cc
-CFLAGS = -Wall
+CFLAGS = -Wall -Werror -Wextra -g
 
 C_SRC =	framework.c \
 		test_main.c \

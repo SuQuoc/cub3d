@@ -39,3 +39,16 @@ Auserdem muss ich immer bis zum ende loopen damit keine leaks entstehen
 
     - not quite sure if its allowed that more than 1 idf is on 1 line
 
+
+
+
+
+
+MAP CONTENT
+
+1. Flood fill
+	a. to check if there are connected spaces from the top to bottom (y = 0 til map_height)
+		and from left to right (x = 0 til map_width)
+		> yes this also means if there are entire lines of spaces left,rigth,above or under the map
+		> use flood fill ONLY on SPACES WHICH ARE (y = 0 or x = 0), no need to check every space
+	
