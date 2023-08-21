@@ -73,10 +73,10 @@
 
 //for raycasting
 //cos and sin are already point-shifted
-#define COS_1 16774660 //0.999847695
-#define SIN_1 292802 //0.017452406
+#define COS_1 65526 //0.999847695 <-cos(1)
+#define SIN_1 1144 //0.017452406 <-sin(1)
 
-#define POINT_SHIFTER 16777216
+#define POINT_SHIFTER 65536
 
 
 typedef struct s_ray
@@ -105,6 +105,8 @@ typedef struct s_player
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
+	t_vector	ray[21];
+	int			ray_length[21];
 }	t_player;
 
 typedef struct s_line
@@ -225,6 +227,7 @@ void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 //_player.c
 void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
 void	draw_player_camera(t_data *data, t_player *player, int color);
+void	draw_rays(t_data *data, t_player *player, int color);
 void	rotate_vector_clockwise(t_vector *fixed_point_vector, t_vector *vector);
 void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vector);
 
@@ -238,5 +241,6 @@ void		print_int_arr(int *arr, int size);
 //vector_operations.c
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
+void		calculate_rays(t_player	*player);
 
 # endif
