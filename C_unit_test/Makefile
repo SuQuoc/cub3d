@@ -8,6 +8,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 C_SRC =	framework.c \
 		test_main.c \
 		../2d_array_utils.c \
+		../array_utils.c \
 		../check_extension.c \
 		../colors.c \
 		../draw_line_utils.c \
@@ -15,14 +16,20 @@ C_SRC =	framework.c \
 		../error_msg.c \
 		../free_utils.c \
 		../ft_strcmp.c \
+		../hooks.c \
 		../identifier_utils.c \
 		../init_structs.c \
+		../key_input.c \
 		../loop_file.c \
 		../loop_idf.c \
-		../newline_map_check.c \
+		../loop_map.c \
 		../parsing_utils.c \
+		../player_movement.c \
+		../player.c \
+		../prelim_checks.c \
 		../printing_utils.c \
 		../textures.c \
+		../vector_operations.c \
 
 C_OBJFILES = $(C_SRC:.c=.o)
 C_OBJ = $(addprefix $(OBJDIR), $(C_OBJFILES))

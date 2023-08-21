@@ -30,7 +30,6 @@ char *read_map_into_str(int fd)
 }
 
 
-//i think i can put file_error in free_data
 void loop_file(int fd, t_data *data)
 {
 	char *map_str;
@@ -39,7 +38,7 @@ void loop_file(int fd, t_data *data)
 	close(fd);
 	if (!map_str)
 		return (data->err = ERR_SYSTEM, free_data(data));
-	if (double_idf_or_nl_map(map_str, data))
+	if (prelim_checks_passed(map_str, data) == FALSE)
 		return (free(map_str), free_data(data));
 	data->map = ft_split(map_str, '\n');
 	free(map_str);

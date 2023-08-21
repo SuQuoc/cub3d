@@ -29,6 +29,7 @@
 # define ERR_RGB_RANGE 7
 # define ERR_MAP 5
 # define ERR_NL_MAP 8
+# define ERR_PL_COUNT 10
 
 // Identifiers
 # define TXT_W 60
@@ -42,6 +43,7 @@
 
 // MAP
 # define PLAYER "NESW"
+# define MAP "10 "
 
 # define EXTENSION ".cub"
 
@@ -140,6 +142,9 @@ typedef struct s_data
 // 2d_array_utils.c
 int			get_arr_len(char **arr);
 
+// array_utils.c
+void	ft_set_zero(int *arr, int size);
+
 // check_extension.c
 int			check_extension(char const *str);
 
@@ -187,10 +192,9 @@ t_data		*init_data(void);
 void	init_line(t_line *line, const t_vector *start, const t_vector *end);
 
 // loop_file.c
-int			double_idf_or_nl_map(char *str, t_data *data);
+void		loop_file(int fd, t_data *data);
 
 // loop_idf.c
-void		loop_file(int fd, t_data *data);
 void		loop_idf(t_data *data);
 int			loop_idf_line(char *str, t_data *data);
 
@@ -217,9 +221,6 @@ void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
 void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
 void	player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
 void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
-// printing_utils.c
-void		print_str_arr(char **arr);
-void		print_int_arr(int *arr, int size);
 
 //_player.c
 void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
@@ -227,18 +228,15 @@ void	draw_player_camera(t_data *data, t_player *player, int color);
 void	rotate_vector_clockwise(t_vector *fixed_point_vector, t_vector *vector);
 void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vector);
 
-//printing_utils.c
-void	print_str_arr(char **arr);
+//prelim_checks.c
+int	prelim_checks_passed(char *str, t_data *data);
+
+// printing_utils.c
+void		print_str_arr(char **arr);
+void		print_int_arr(int *arr, int size);
 
 //vector_operations.c
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
-
-//2d_array_utils.c
-int 	get_arr_len(char **arr);
-
-
-
-int		x_window(t_data *data);
 
 # endif

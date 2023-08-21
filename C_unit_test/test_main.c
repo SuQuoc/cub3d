@@ -66,7 +66,7 @@ int main()
         {"double_identifier.cub"                    , "Each identifier only allowed once!\n"},
         {"three_floors.cub"                         , "Each identifier only allowed once!\n"},
         {"invalid_texture.cub"                      , "Invalid texture path or no rights!\n"},
-        {"last_is_double_with_nl.cub"               , "Consecutive nl in map content! Map content begins when every IDF was found!\n"},
+        {"last_is_double_with_nl.cub"               , "Invalid map_content!\n"},
         {"", ""}
     };
     test_framework("../maps/identifier_tests/", identifier_tests);

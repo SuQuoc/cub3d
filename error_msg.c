@@ -22,5 +22,7 @@ void file_error(int err_code)
 		ft_putstr_fd("Invalid map_content!\n", 2);
 	else if (err_code == ERR_NL_MAP)
 		ft_putstr_fd("Consecutive nl in map content! Map content begins when every IDF was found!\n", 2);
+	else if (err_code == ERR_PL_COUNT)
+		ft_putstr_fd("Invalid number of players!\n", 2);
 	return ;
 }

@@ -5,6 +5,7 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 		
 SRC =	2d_array_utils.c \
+		array_utils.c \
 		check_extension.c \
 		colors.c \
 		draw_line_utils.c \
@@ -20,13 +21,13 @@ SRC =	2d_array_utils.c \
 		loop_idf.c \
 		loop_map.c \
 		main.c \
-		newline_map_check.c \
 		parsing_utils.c \
 		player_movement.c \
 		player.c \
+		prelim_checks.c \
 		printing_utils.c \
-		vector_operations.c \
 		textures.c \
+		vector_operations.c \
 
 OBJDIR = ./objects_and_dependencies/
 OBJFILES = $(SRC:.c=.o)
