@@ -1,0 +1,8 @@
+
+
+
+Create a branch and switch into it:
+    git switch -c "branchname"
+
+if local and remote branch doesnt exist anymore but git branch -a shows the path 
+    git remote prune origin
