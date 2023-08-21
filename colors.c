@@ -25,22 +25,22 @@ int invalid_rgb_input(char *str)
     int len;
 
     if (!str)
-        return (FALSE);
+        return (TRUE);
     len = 0;
     i = 0;
-    while (str[i])
+    while (str[i] && str[i] != '\n')
     {
-        if (ft_isdigit(str[i]) == 0 && str[i] != ',')
-            return (FALSE);
+        if (ft_isdigit(str[i]) == 0 && str[i] != ',' && str[i] != ' ')
+            return (TRUE);
         if (ft_isdigit(str[i]) == 2048)
             len++;
         if (str[i] == ',')
             len = 0;
-        if (len > 3 || len == 0)
-            return (FALSE);
+        if (len > 3)
+            return (TRUE);
         i++;
     }
-    return (TRUE);
+    return (FALSE);
 }
 
 int set_floor_ceiling(char *str, char *idf, t_data *data)
@@ -54,7 +54,7 @@ int set_floor_ceiling(char *str, char *idf, t_data *data)
     i = ft_strlen(idf);
     i = skip_spaces(str, i);
     if (invalid_rgb_input(&str[i]))
-        return (data->err = ERR_IDF_NORM, -1);
+        return (data->err = ERR_RGB_FORMAT, -1);
     rgb = ft_split(&str[i], ',');
     if (!rgb)
         return (data->err = ERR_SYSTEM, -1); //malloc

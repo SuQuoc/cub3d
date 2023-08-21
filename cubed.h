@@ -22,9 +22,9 @@
 // Error codes for input/file handling
 # define ERR_SYSTEM 1
 # define ERR_IDF 3
-# define ERR_IDF_NORM 4
 # define ERR_IDF_COUNT 22
 # define ERR_TEXTURE 2
+# define ERR_RGB_FORMAT 4
 # define ERR_RGB_AMOUNT 6
 # define ERR_RGB_RANGE 7
 # define ERR_MAP 5

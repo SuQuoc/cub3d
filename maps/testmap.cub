@@ -1,14 +1,12 @@
 NO map_textures/north.xpm
-WE     map_textures/west.xpm
+WE map_textures/west.xpm
 SO map_textures/south.xpm
 EA map_textures/east.xpm
-C   0,0,255
-F      255,0,0
+C  0,0,255
+F  255,0,0
 
-111 
-101 
-111 
-	       11111111111111111111111111
+
+        11111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001

@@ -8,12 +8,12 @@ void file_error(int err_code)
 		perror(NULL);
 	else if (err_code == ERR_IDF)
 		ft_putstr_fd("Invalid identifier!\n", 2);
-	else if (err_code == ERR_IDF_NORM)
-		ft_putstr_fd("Identifier not according to norm!\n", 2);	
 	else if (err_code == ERR_IDF_COUNT)
 		ft_putstr_fd("Each identifier only allowed once!\n", 2);
 	else if (err_code == ERR_TEXTURE)
 		ft_putstr_fd("Invalid texture path or no rights!\n", 2);
+	else if (err_code == ERR_RGB_FORMAT)
+		ft_putstr_fd("Invalid rgb format! Example: C 10,20,30\n", 2);
 	else if (err_code == ERR_RGB_AMOUNT)
 		ft_putstr_fd("Invalid amount of rgb values!\n", 2);
 	else if (err_code == ERR_RGB_RANGE)

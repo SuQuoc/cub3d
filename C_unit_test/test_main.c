@@ -79,6 +79,9 @@ int main()
         {"invalid_rgb_range.cub"        , "Invalid rgb range!\n"},
         {"negative_rgb_range.cub"       , "Invalid rgb range!\n"},
         {"valid_rgb_range.cub"          , ""},
+        {"iv_rgb_input.cub"             , "Invalid rgb format! Example: C 10,20,30"},
+        {"rgb_format.cub"               , "Invalid rgb format! Example: C 10,20,30"},
+        {"rgb_format2.cub"              , "Invalid rgb format! Example: C 10,20,30"},
         {"", ""},
     };
     test_framework("../maps/rgb_tests/", rgb);
