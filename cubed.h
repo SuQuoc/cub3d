@@ -239,6 +239,7 @@ void		print_str_arr(char **arr);
 void		print_int_arr(int *arr, int size);
 
 //vector_operations.c
+t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
 void		calculate_rays(t_player	*player);
