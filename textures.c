@@ -30,8 +30,8 @@ void *set_texture(char *str, char *idf, t_data *data)
         return (NULL);
     len = ft_strlen(idf);
     i = skip_spaces(str, len);
-    //printf("path of texture: %s\n", &str[i]);
     //width und height scheint keinen effekt zu haben sondern nur die file groese selbst
+    printf("path of texture: %s\n", &str[i]);
     save_in = mlx_xpm_file_to_image(data->mlx_ptr, &str[i], &data->txt_w, &data->txt_h);
     if (!save_in)
     {
