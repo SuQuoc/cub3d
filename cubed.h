@@ -192,6 +192,7 @@ void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vec
 void	print_str_arr(char **arr);
 
 //vector_operations.c
+t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
 void		calculate_rays(t_player	*player);

@@ -3,7 +3,6 @@
 
 static void	movement(int keysym, t_data *data)
 {
-	ft_printf("movement\n");
 	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
 	draw_player_camera(data, data->player, BLACK);
 	draw_rays(data, data->player, BLACK);
@@ -19,16 +18,13 @@ static void	movement(int keysym, t_data *data)
 	draw_player_camera(data, data->player, BLUE);
 	calculate_rays(data->player);
 	draw_rays(data, data->player, GREEN);
-	ft_printf("m\n");
 }
 
 static void	rotate_player_direction(int keysym, t_data *data)
 {
-	ft_printf("direction\n");
 	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
 	draw_player_camera(data, data->player, BLACK);
 	draw_rays(data, data->player, BLACK);
-	ft_printf("x\n");
 	if (keysym == XK_Right)
 	{
 		rotate_vector_clockwise(&data->player->fixed_point_direction, &data->player->direction);
@@ -48,7 +44,6 @@ static void	rotate_player_direction(int keysym, t_data *data)
 	draw_player_camera(data, data->player, BLUE);
 	calculate_rays(data->player);
 	draw_rays(data, data->player, GREEN);
-	ft_printf("d\n");
 }
 
 int	key_input(int keysym, t_data *data)
