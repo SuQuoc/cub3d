@@ -18,6 +18,7 @@ SRC =	check_extension.c \
 		main.c \
 		parsing_utils.c \
 		player_movement.c \
+		player_rotation.c \
 		player.c \
 		printing_utils.c \
 		vector_operations.c \

@@ -76,6 +76,8 @@ typedef struct s_vector
 	int		y;
 }	t_vector;
 
+//fp stands for fixed point
+
 //Direction is the direction vector plus the player position (pos).
 //The other vectors are just the respective vectors, except for the
 //fixed point ones, they are the vector * POINT_SHIFTER.
@@ -83,14 +85,18 @@ typedef struct s_player
 {
 	t_vector	pos;
 
-	t_vector	fixed_point_camera_right;
-	t_vector	fixed_point_camera_left;
-	t_vector	fixed_point_direction;
+	t_vector	fp_camera_right;
+	t_vector	fp_camera_left;
+	t_vector	fp_direction;
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
 	t_vector	ray[21];
 	int			ray_length[21];
+	char		fast_axis;
+	int			fast_diff;
+	int			slow_diff;
+	int			fault;
 }	t_player;
 
 typedef struct s_line
@@ -175,18 +181,21 @@ int		ft_strcmp(char *s1, char *s2);
 //parsing_utils.c
 int 	skip_spaces(char *str, int start);
 
-//_player_movement.c
+//player_movement.c
+void	player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
+void	player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
 void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
 void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_down(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_up(t_player *player, void *mlx_ptr, void *win_ptr);
 
-//_player.c
-void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr);
+//player_rotations.c
+void	calculate_move_values(t_player *player, int x, int y);
+void	rotate_vector_clockwise(t_vector *fp_vector, t_vector *vector);
+void	rotate_vector_counter_clockwise(t_vector *fp_vector, t_vector *vector);
+
+//player.c
+void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);
 void	draw_player_camera(t_data *data, t_player *player, int color);
 void	draw_rays(t_data *data, t_player *player, int color);
-void	rotate_vector_clockwise(t_vector *fixed_point_vector, t_vector *vector);
-void	rotate_vector_counter_clockwise(t_vector *fixed_point_vector, t_vector *vector);
 
 //printing_utils.c
 void	print_str_arr(char **arr);

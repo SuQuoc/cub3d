@@ -15,15 +15,19 @@ static t_player	*init_player(void)
 	if (!player)
 		return (NULL);
 	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
-	init_vector(&player->fixed_point_direction, \
+	init_vector(&player->fp_direction, \
 					0 * POINT_SHIFTER, -100 * POINT_SHIFTER);
-	init_vector(&player->fixed_point_camera_right, \
+	init_vector(&player->fp_camera_right, \
 					60 * POINT_SHIFTER, 0 * POINT_SHIFTER);				
-	init_vector(&player->fixed_point_camera_left, \
+	init_vector(&player->fp_camera_left, \
 					-60 * POINT_SHIFTER, 0 * POINT_SHIFTER);
 	init_vector(&player->direction, player->pos.x + 0, player->pos.y - 100);
 	init_vector(&player->camera_right, 60, 0);
 	init_vector(&player->camera_left, -60, 0);
+	player->fast_axis = 'y';
+	player->fast_diff = 100;
+	player->slow_diff = 0;
+	player->fault = 50;
 	return (player);
 }
 
