@@ -78,6 +78,7 @@
 
 #define POINT_SHIFTER 65536
 
+#define UNIT 50
 
 typedef struct s_ray
 {
@@ -151,31 +152,31 @@ typedef struct s_data
 int			get_arr_len(char **arr);
 
 // array_utils.c
-void	ft_set_zero(int *arr, int size);
+void		ft_set_zero(int *arr, int size);
 
 // check_extension.c
 int			check_extension(char const *str);
 
 // colors.c
-int search_floor_ceiling(char *str, t_data *data);
+int 		search_floor_ceiling(char *str, t_data *data);
 
 
-//draw_line_utils.c
-void	fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
-void	fast_x_xneg_yneg(const t_data *data, t_line *line, const int color);
-void	fast_x_xneg_ypos(const t_data *data, t_line *line, const int color);
-void	fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
+// draw_line_utils.c
+void		fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
+void		fast_x_xneg_yneg(const t_data *data, t_line *line, const int color);
+void		fast_x_xneg_ypos(const t_data *data, t_line *line, const int color);
+void		fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
 
-//draw_line.c
-void	draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
+// draw_line.c
+void		draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
 
-//init_structs.c
-void	init_vector(t_vector *vector, int x_position, int y_position);
-t_data	*init_data(void);
-void	init_line(t_line *line, const t_vector *start, const t_vector *end);
+// init_structs.c
+void		init_vector(t_vector *vector, int x_position, int y_position);
+t_data		*init_data(void);
+void		init_line(t_line *line, const t_vector *start, const t_vector *end);
 
-//key_input.c
-int	key_input(int keysym, t_data *data);
+// key_input.c
+int			key_input(int keysym, t_data *data);
 
 // error_msg.c
 void		file_error(int err_code);
@@ -197,7 +198,7 @@ int			is_color_idf(char *str);
 
 // init_structs.c
 t_data		*init_data(void);
-void	init_line(t_line *line, const t_vector *start, const t_vector *end);
+void		init_line(t_line *line, const t_vector *start, const t_vector *end);
 
 // loop_file.c
 void		loop_file(int fd, t_data *data);
@@ -209,13 +210,16 @@ int			loop_idf_line(char *str, t_data *data);
 // loop_map.c
 int			nl_in_map(char *str, t_data *data);
 
+// map.c
+void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
+
 // render.c
 int			print_x(t_data *data);
 
 // textures.c
 int			search_texture(char *str, t_data *data);
 void		*set_texture(char *str, char *idf, t_data *data);
-void	free_data_err(t_data *data, char *error_message);
+void		free_data_err(t_data *data, char *error_message);
 
 // MLX RELATED_______________________________________
 // render.c
@@ -224,30 +228,30 @@ int			print_x(t_data *data);
 // parsing_utils.c
 int			skip_spaces(char *str, int start);
 
-//player_movement.c
-void	player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+// player_movement.c
+void		player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
 
-//player_rotations.c
-void	calculate_move_values(t_player *player, int x, int y);
-void	rotate_vector_clockwise(t_vector *fp_vector, t_vector *vector);
-void	rotate_vector_counter_clockwise(t_vector *fp_vector, t_vector *vector);
+// player_rotations.c
+void		calculate_move_values(t_player *player, int x, int y);
+void		rotate_vector_clockwise(t_vector *fp_vector, t_vector *vector);
+void		rotate_vector_counter_clockwise(t_vector *fp_vector, t_vector *vector);
 
-//player.c
-void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);
-void	draw_player_camera(t_data *data, t_player *player, int color);
-void	draw_rays(t_data *data, t_player *player, int color);
+// player.c
+void		draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);
+void		draw_player_camera(t_data *data, t_player *player, int color);
+void		draw_rays(t_data *data, t_player *player, int color);
 
-//prelim_checks.c
-int	prelim_checks_passed(char *str, t_data *data);
+// prelim_checks.c
+int			prelim_checks_passed(char *str, t_data *data);
 
 // printing_utils.c
 void		print_str_arr(char **arr);
 void		print_int_arr(int *arr, int size);
 
-//vector_operations.c
+// vector_operations.c
 t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
