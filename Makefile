@@ -66,4 +66,4 @@ run: $(NAME)
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \
-	./$(NAME) maps/testmap.cub
+	./$(NAME) maps/subject_map.cub
