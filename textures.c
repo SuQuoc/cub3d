@@ -30,12 +30,11 @@ void *set_texture(char *str, char *idf, t_data *data)
         return (NULL);
     len = ft_strlen(idf);
     i = skip_spaces(str, len);
-    //printf("path of texture: %s\n", &str[i]);
     //width und height scheint keinen effekt zu haben sondern nur die file groese selbst
+    printf("path of texture: %s\n", &str[i]);
     save_in = mlx_xpm_file_to_image(data->mlx_ptr, &str[i], &data->txt_w, &data->txt_h);
     if (!save_in)
     {
-		ft_putstr_fd("Invalid texture path!\n", 2);
         data->err = ERR_TEXTURE;
         return (NULL);
     }
@@ -48,22 +47,22 @@ int search_texture(char *str, t_data *data)
     int found;
 
     found = FALSE;
-    if (compare_idf(str, NORTH) == 0)
+    if (ft_strncmp(str, NORTH, 3) == 0)
     {
         data->N_texture = set_texture(str, NORTH, data);
         found = TRUE;
     }    
-    else if (compare_idf(str, EAST) == 0)
+    else if (ft_strncmp(str, EAST, 3) == 0)
     {
         data->E_texture = set_texture(str, EAST, data);
         found = TRUE;
     }
-    else if (compare_idf(str, SOUTH) == 0)
+    else if (ft_strncmp(str, SOUTH, 3) == 0)
     {
         data->S_texture =  set_texture(str, SOUTH, data);
         found = TRUE;
     }
-    else if (compare_idf(str, WEST) == 0)
+    else if (ft_strncmp(str, WEST, 3) == 0)
     {
         data->W_texture = set_texture(str, WEST, data);        
         found = TRUE;

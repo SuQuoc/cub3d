@@ -1,35 +1,51 @@
 
-# ifndef CUBED_H
+#ifndef CUBED_H
 # define CUBED_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <math.h>
-#include <mlx.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
+# include "libft/libft.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <math.h>
+# include <mlx.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
+// BONUS IN LIBFT AUSKLAMMMERN!!!!!!!!!!!!
 
-#include "libft/libft.h"
-//BONUS IN LIBFT AUSKLAMMMERN!!!!!!!!!!!!
+# define TRUE 1
+# define FALSE 0
 
-#define TRUE 1
-#define FALSE 0
+// Error codes for input/file handling
+# define ERR_SYSTEM 1
+# define ERR_IDF 3
+# define ERR_IDF_COUNT 22
+# define ERR_TEXTURE 2
+# define ERR_RGB_FORMAT 4
+# define ERR_RGB_AMOUNT 6
+# define ERR_RGB_RANGE 7
+# define ERR_MAP 5
+# define ERR_NL_MAP 8
+# define ERR_PL_COUNT 10
 
-//Error codes for input/file handling
-#define ERR_SYSTEM			1
-#define ERR_TEXTURE 		2
-#define ERR_IDF 			3
-#define ERR_IDF_NORM 		4
-#define ERR_MAP 			5
-#define ERR_RGB_AMOUNT 		6
-#define ERR_RGB_RANGE 		7
+// Identifiers
+# define TXT_W 60
+# define TXT_H 60
+# define NORTH "NO "
+# define EAST "EA "
+# define SOUTH "SO "
+# define WEST "WE "
+# define FLOOR "F "
+# define CEILING "C "
 
+// MAP
+# define PLAYER "NESW"
+# define MAP "10 "
 
+# define EXTENSION ".cub"
 
 //Identifiers
 #define TXT_W		60
@@ -124,16 +140,25 @@ typedef struct s_data
 	void	*E_texture;
 	void	*S_texture;
 	void	*W_texture;
-	int 	txt_w;
-	int 	txt_h;
+	int		txt_w;
+	int		txt_h;
 	int		floor_color;
-	int 	ceil_color;
+	int		ceil_color;
 	int		err;
-} t_data;
+}			t_data;
 
+// 2d_array_utils.c
+int			get_arr_len(char **arr);
 
-//check_extension.c
-int		check_extension(char const *str);
+// array_utils.c
+void	ft_set_zero(int *arr, int size);
+
+// check_extension.c
+int			check_extension(char const *str);
+
+// colors.c
+int search_floor_ceiling(char *str, t_data *data);
+
 
 //draw_line_utils.c
 void	fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
@@ -152,34 +177,52 @@ void	init_line(t_line *line, const t_vector *start, const t_vector *end);
 //key_input.c
 int	key_input(int keysym, t_data *data);
 
-//loop_file.c
-void	loop_file(int fd, t_data *data);
+// error_msg.c
+void		file_error(int err_code);
 
-//loop_idf.c
-void	loop_idf(t_data *data);
-int		loop_idf_line(char *str, t_data *data);
-int		compare_idf(char *str, char *idf);
+// free_utils.c
+void		free_2d_array(char **map);
+void		free_data(t_data *data);
 
-//textures.c
-int		search_texture(char *str, t_data *data);
-void	*set_texture(char *str, char *idf, t_data *data);
+// ft_strcmp.c
+int			ft_strcmp(char *s1, char *s2);
 
-//colors.c
-int		search_floor_ceiling(char *str, t_data *data);
+// hooks.c
+int			x_window(t_data *data);
+int			key_input(int keysym, t_data *data);
 
-//error_msg.c
-void	file_error(int err_code);
+// identifier_utils.c
+int			is_txt_idf(char *str);
+int			is_color_idf(char *str);
 
-//free_utils.c
-void	free_2d_array(char **map);
-void 	free_data(t_data *data);
+// init_structs.c
+t_data		*init_data(void);
+void	init_line(t_line *line, const t_vector *start, const t_vector *end);
+
+// loop_file.c
+void		loop_file(int fd, t_data *data);
+
+// loop_idf.c
+void		loop_idf(t_data *data);
+int			loop_idf_line(char *str, t_data *data);
+
+// loop_map.c
+int			nl_in_map(char *str, t_data *data);
+
+// render.c
+int			print_x(t_data *data);
+
+// textures.c
+int			search_texture(char *str, t_data *data);
+void		*set_texture(char *str, char *idf, t_data *data);
 void	free_data_err(t_data *data, char *error_message);
 
-//ft_strcmp.c
-int		ft_strcmp(char *s1, char *s2);
+// MLX RELATED_______________________________________
+// render.c
+int			print_x(t_data *data);
 
-//parsing_utils.c
-int 	skip_spaces(char *str, int start);
+// parsing_utils.c
+int			skip_spaces(char *str, int start);
 
 //player_movement.c
 void	player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
@@ -197,20 +240,17 @@ void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);
 void	draw_player_camera(t_data *data, t_player *player, int color);
 void	draw_rays(t_data *data, t_player *player, int color);
 
-//printing_utils.c
-void	print_str_arr(char **arr);
+//prelim_checks.c
+int	prelim_checks_passed(char *str, t_data *data);
+
+// printing_utils.c
+void		print_str_arr(char **arr);
+void		print_int_arr(int *arr, int size);
 
 //vector_operations.c
 t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
 void		calculate_rays(t_player	*player);
-
-//2d_array_utils.c
-int 	get_arr_len(char **arr);
-
-
-
-int		x_window(t_data *data);
 
 # endif

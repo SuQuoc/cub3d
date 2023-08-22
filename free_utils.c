@@ -52,7 +52,6 @@ void free_data(t_data *data)
 	free(data->player);
 	free(data->mlx_ptr);
 	free_2d_array(data->map);
-	
 	free(data);
 	data = NULL;
 	exit(exit_code);

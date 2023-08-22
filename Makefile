@@ -3,26 +3,32 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-SRC =	check_extension.c \
+		
+SRC =	2d_array_utils.c \
+		array_utils.c \
+		check_extension.c \
+		colors.c \
 		draw_line_utils.c \
 		draw_line.c \
 		error_msg.c \
-		ft_strcmp.c \
 		free_utils.c \
+		ft_strcmp.c \
+		hooks.c \
+		identifier_utils.c \
 		init_structs.c \
 		key_input.c \
 		loop_file.c \
 		loop_idf.c \
-		textures.c \
-		colors.c \
+		loop_map.c \
 		main.c \
 		parsing_utils.c \
 		player_movement.c \
 		player_rotation.c \
 		player.c \
+		prelim_checks.c \
 		printing_utils.c \
+		textures.c \
 		vector_operations.c \
-		2d_array_utils.c
 
 OBJDIR = ./objects_and_dependencies/
 OBJFILES = $(SRC:.c=.o)

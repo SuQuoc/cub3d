@@ -47,3 +47,11 @@ Merging:
 You have to be in the main branch for merging branches into main!
 
 git merge "branchname"
+
+
+LOCAL AND REMOTE BRANCH
+When you use git branch -d branchname to delete a branch, it deletes the local branch, but the remote tracking branch (if it exists) will still be visible when you use git branch -a.
+The reason is that git branch -a shows both local and remote branches. Even though you've deleted the local branch using -d, the remote tracking branch still exists in your local repository until you explicitly remove it.
+
+To remove the remote tracking branch, you can use the following command:
+git push origin --delete branchname

@@ -64,3 +64,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 cub3D
+.vscode
+mlx.h

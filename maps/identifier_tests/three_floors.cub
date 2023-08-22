@@ -1,12 +1,12 @@
-NO map_textures/north_texture
-SO map_textures/south_texture
 WE map_textures/west_texture
 EA map_textures/east_texture
-EA map_textures/east_texture
+F 220,100,0
+NO map_textures/north_texture
+SO map_textures/south_texture
 
 F 220,100,0
+F 220,100,0
 C 225,30,0
-
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001

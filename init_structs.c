@@ -34,8 +34,8 @@ static t_player	*init_player(void)
 t_data *init_data(void)
 {
 	t_data *data;
-
-	data = malloc(sizeof(t_data));
+	
+	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 	{
 		perror(NULL);
@@ -56,8 +56,9 @@ t_data *init_data(void)
 	data->E_texture = NULL;
 	data->S_texture = NULL;
 	data->W_texture = NULL;
-
 	data->err = 0;
+	data->txt_h = 50;
+	data->txt_w = 50;
 	return (data);
 }
 

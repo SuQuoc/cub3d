@@ -29,7 +29,7 @@ char *read_map_into_str(int fd)
 	return (free(buf), file);
 }
 
-//i think i can put file_error in free_data
+
 void loop_file(int fd, t_data *data)
 {
 	char *map_str;
@@ -38,83 +38,17 @@ void loop_file(int fd, t_data *data)
 	close(fd);
 	if (!map_str)
 		return (data->err = ERR_SYSTEM, free_data(data));
-	//no_nl_in_map()
-	//und hier freen wurde free calls spater sparen und der check ist denke ich nicht so aufwandig 
+	if (prelim_checks_passed(map_str, data) == FALSE)
+		return (free(map_str), free_data(data));
 	data->map = ft_split(map_str, '\n');
+	free(map_str);
 	if (!data->map)
-		return (free(map_str), data->err = ERR_SYSTEM, free_data(data));
+		return (data->err = ERR_SYSTEM, free_data(data));
 	loop_idf(data);
 	if (data->err != 0)
-		return (free(map_str), free_data(data));
+		return (free_data(data));
 	
-	free(map_str);
 	//loop_map();
 	//if (data->err != 0)
 	//	return (file_error(data->err), free_data(data, 1));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

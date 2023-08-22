@@ -1,13 +1,14 @@
-NAME = tests
+NAME = tester
 
-DEP = tests.hpp ../cubed.h
+DEP = unit_tests.h ../cubed.h
 
-CXX = g++
-CXXFLAGS = -std=c++98 -fpermissive
-CC = g++
-CFLAGS = -fpermissive
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -g
 
-C_SRC =	../2d_array_utils.c \
+C_SRC =	framework.c \
+		test_main.c \
+		../2d_array_utils.c \
+		../array_utils.c \
 		../check_extension.c \
 		../colors.c \
 		../draw_line_utils.c \
@@ -15,29 +16,25 @@ C_SRC =	../2d_array_utils.c \
 		../error_msg.c \
 		../free_utils.c \
 		../ft_strcmp.c \
+		../hooks.c \
 		../identifier_utils.c \
 		../init_structs.c \
+		../key_input.c \
 		../loop_file.c \
 		../loop_idf.c \
 		../loop_map.c \
 		../parsing_utils.c \
+		../player_movement.c \
+		../player.c \
+		../prelim_checks.c \
 		../printing_utils.c \
-		../render.c \
 		../textures.c \
-
+		../vector_operations.c \
 
 C_OBJFILES = $(C_SRC:.c=.o)
 C_OBJ = $(addprefix $(OBJDIR), $(C_OBJFILES))
 
-CPP_SRC =	compare_functions.cpp \
-			test_utils.cpp \
-			tests.cpp \
-			check_extension_tests.cpp
-
-CPP_OBJFILES = $(CPP_SRC:.cpp=.o)
-CPP_OBJ = $(addprefix $(OBJDIR), $(CPP_OBJFILES))
-
-OBJDIR = ./objects_and_dependencies/
+OBJDIR = ./obj_and_dep/
 
 .PHONY: clean fclean all tests
 
@@ -46,15 +43,12 @@ all: $(NAME)
 $(OBJDIR)%.o: ./%.c $(DEP)
 	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
-$(OBJDIR)%.o: ./%.cpp $(DEP)
-	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
-
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(NAME): $(OBJDIR) $(C_OBJ) $(CPP_OBJ)
+$(NAME): $(OBJDIR) $(C_OBJ)
 	@$(MAKE) -C ../libft
-	$(CXX) $(CXXFLAGS) $(C_OBJ) $(CPP_OBJ) ../libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
+	$(CC) $(CFLAGS) $(C_OBJ) ../libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 	./$(NAME)
 
 clean:

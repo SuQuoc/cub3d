@@ -1,7 +1,7 @@
-NO map_textures/north.xpm
-WE map_textures/west.xpm
-SO map_textures/south.xpm
-EA map_textures/east.xpm
+NO map_textures/nor
+WE map_textures/wes
+SO map_textures/sou
+EA map_textures/eas
 C  0,0,255
 F  255,0,0
 
