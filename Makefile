@@ -10,6 +10,7 @@ SRC =	2d_array_utils.c \
 		colors.c \
 		draw_line_utils.c \
 		draw_line.c \
+		draw_main.c \
 		error_msg.c \
 		free_utils.c \
 		ft_strcmp.c \
@@ -20,7 +21,6 @@ SRC =	2d_array_utils.c \
 		loop_file.c \
 		loop_idf.c \
 		loop_map.c \
-		main.c \
 		map.c \
 		parsing_utils.c \
 		player_movement.c \

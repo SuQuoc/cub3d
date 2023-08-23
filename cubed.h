@@ -170,6 +170,10 @@ void		fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
 // draw_line.c
 void		draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
 
+// draw_map.c
+void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
+void		draw_map_walls(t_data *data, char **map, int color);
+
 // init_structs.c
 void		init_vector(t_vector *vector, int x_position, int y_position);
 t_data		*init_data(void);
@@ -210,9 +214,6 @@ int			loop_idf_line(char *str, t_data *data);
 // loop_map.c
 int			nl_in_map(char *str, t_data *data);
 
-// map.c
-void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
-
 // render.c
 int			print_x(t_data *data);
 
@@ -221,7 +222,6 @@ int			search_texture(char *str, t_data *data);
 void		*set_texture(char *str, char *idf, t_data *data);
 void		free_data_err(t_data *data, char *error_message);
 
-// MLX RELATED_______________________________________
 // render.c
 int			print_x(t_data *data);
 
