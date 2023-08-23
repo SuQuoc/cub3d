@@ -80,3 +80,22 @@ void free_data_err(t_data *data, char *error_message)
 	}
 	exit(0);
 }
+void free_data_code(t_data *data, int err_code)
+{
+	if (err_code != 0)
+	{
+		err_code = 1;
+		file_error(err_code);
+	}
+	if (data->mlx_ptr)
+	{
+		destroy_textures(data);
+		mlx_destroy_display(data->mlx_ptr);
+	}
+	free(data->player);
+	free(data->mlx_ptr);
+	free_2d_array(data->map);
+	free(data);
+	data = NULL;
+	exit(err_code);
+}

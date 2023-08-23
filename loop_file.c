@@ -37,17 +37,18 @@ void loop_file(int fd, t_data *data)
 	map_str = read_map_into_str(fd);
 	close(fd);
 	if (!map_str)
-		return (data->err = ERR_SYSTEM, free_data(data));
+		return (free_data_err(data, "malloc fail in loop_file() map_str"));
 	if (prelim_checks_passed(map_str, data) == FALSE)
 		return (free(map_str), free_data(data));
 	data->map = ft_split(map_str, '\n');
 	free(map_str);
 	if (!data->map)
-		return (data->err = ERR_SYSTEM, free_data(data));
+		return (free_data_err(data, "malloc fail in loop_file() data->map"));
 	loop_idf(data);
 	if (data->err != 0)
 		return (free_data(data));
-	
+	cut_idfs_from_map(data);
+	print_str_arr(data->map);
 	//loop_map();
 	//if (data->err != 0)
 	//	return (file_error(data->err), free_data(data, 1));

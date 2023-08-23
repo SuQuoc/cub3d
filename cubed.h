@@ -150,6 +150,8 @@ typedef struct s_data
 
 // 2d_array_utils.c
 int			get_arr_len(char **arr);
+char 		**copy_2d_array(char **old, size_t start);
+
 
 // array_utils.c
 void		ft_set_zero(int *arr, int size);
@@ -212,7 +214,8 @@ void		loop_idf(t_data *data);
 int			loop_idf_line(char *str, t_data *data);
 
 // loop_map.c
-int			nl_in_map(char *str, t_data *data);
+void cut_idfs_from_map(t_data *data);
+
 
 // render.c
 int			print_x(t_data *data);
