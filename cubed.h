@@ -78,7 +78,9 @@
 
 #define POINT_SHIFTER 65536
 
-#define UNIT 50
+#define UNIT 20
+#define RAY_NB 21 //needs to be uneven (i think)
+#define RAY_LENGTH 100
 
 typedef struct s_ray
 {
@@ -108,8 +110,8 @@ typedef struct s_player
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
-	t_vector	ray[21];
-	int			ray_length[21];
+	t_vector	ray[RAY_NB];
+	int			ray_length[RAY_NB];
 	char		fast_axis;
 	int			fast_diff;
 	int			slow_diff;

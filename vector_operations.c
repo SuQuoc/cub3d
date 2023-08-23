@@ -48,9 +48,9 @@ void	calculate_rays(t_player	*player)
 	int	x;
 
 	x = 0;
-	numerator = 10;
+	numerator = (RAY_NB / 2);
 	direction = vector_subtraction(player->direction, player->pos);
-	while (x < 10)
+	while (x < (RAY_NB / 2))
 	{
 		player->ray[x] = vector_addition(direction, \
 					calculate_camera_vector(player->fp_camera_left, numerator));
@@ -58,7 +58,7 @@ void	calculate_rays(t_player	*player)
 		numerator--;
 		x++;
 	}
-	while (x < 21)
+	while (x < RAY_NB)
 	{
 		player->ray[x] = vector_addition(direction, \
 					calculate_camera_vector(player->fp_camera_right, numerator));

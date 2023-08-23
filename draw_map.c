@@ -60,10 +60,11 @@ void	draw_map_walls(t_data *data, char **map, int color)
 	y = 0;
 	while (map[y])
 	{
+		
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 1)
+			if (map[y][x] == '1')
 				draw_unit_rectangle(data, x * UNIT, y * UNIT, color);
 			x++;
 		}
