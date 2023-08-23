@@ -15,6 +15,7 @@ void	free_2d_array(char **map)
 	}
 	free(map);
 }
+
 //mlx_destroy_image(mlx, NULL)
 //mlx_destroy_image(NULL, texture)
 //both lead to errors so we have to check before if they are not null
@@ -95,6 +96,8 @@ void free_data_code(t_data *data, int err_code)
 	free(data->player);
 	free(data->mlx_ptr);
 	free_2d_array(data->map);
+	if (data->map_copy)
+		free_2d_array(data->map_copy);
 	free(data);
 	data = NULL;
 	exit(err_code);

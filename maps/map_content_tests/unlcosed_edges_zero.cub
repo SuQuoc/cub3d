@@ -1,0 +1,27 @@
+NO map_textures/north_texture
+SO map_textures/south_texture
+WE map_textures/west_texture
+EA map_textures/east_texture
+
+F 220,100,0
+C 225,30,0
+
+
+0111111110
+1000000001
+1000000001
+1000000001
+0111111110 
+
+
+
+
+
+
+
+
+
+
+
+
+

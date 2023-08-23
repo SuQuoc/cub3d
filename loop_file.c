@@ -33,7 +33,6 @@ char *read_map_into_str(int fd)
 void loop_file(int fd, t_data *data)
 {
 	char *map_str;
-	char **testing_map;
 
 	map_str = read_map_into_str(fd);
 	close(fd);
@@ -49,11 +48,12 @@ void loop_file(int fd, t_data *data)
 	if (data->err != 0)
 		return (free_data(data));
 	cut_idfs_from_map(data);
-	testing_map = copy_2d_array(data->map, 0);
-	if (!testing_map)
+	data->map_copy = copy_2d_array(data->map, 0);
+	if (!data->map_copy)
 		return (free_data_err(data, "malloc fail in loop_file() data->map"));
 	print_str_arr(data->map);
-	free_2d_array(testing_map);
+	free_2d_array(data->map_copy);
+	data->map_copy = NULL;
 	//loop_map();
 	//if (data->err != 0)
 	//	return (file_error(data->err), free_data(data, 1));

@@ -87,8 +87,58 @@ int main()
     test_framework("../maps/rgb_tests/", rgb);
 
 
+    //map_test
+    char map_test [][2][1000] = 
+    {
+		{"diagonals.cub"                            	, "Error"},
+		{"inner_circle_with_space_and_pillar.cub"		, "Error"},
+		{"inner_circle_with_zero_and_pillar.cub"		, "Error"},
+		{"inner_unlcosed_edges_spaces.cub"				, "Error"},
+		{"inner_unlcosed_edges_zero.cub"				, "Error"},
+		{"inner_walls_disconnected_from_outer.cub"		, "Error"},
+		{"nl_in_map_content.cub"						, "Error"},
+		{"no_map_content.cub"							, "Error"},
+		{"no_newline_between_identifier_and_map.cub"	, "Error"},
+		{"only_space_line.cub"							, "Error"},
+		{"separated_map_vertically.cub"					, "Error"},
+		{"spaces_left_from_map.cub"						, "Error"},
+		{"text_after_map_content_wi_nl.cub"				, "Error"},	
+		{"text_after_map_content_wout_nl.cub"			, "Error"},	
+		{"unclosed_wall2.cub"							, "Error"},
+		{"unclosed_wall.cub"							, "Error"},
+		{"unknown_char_x_in_map_content.cub"			, "Error"},		
+		{"unlcosed_edges_space.cub"						, "Error"},
+		{"unlcosed_edges_zero.cub"						, "Error"},	
+		{"wall_outside_map.cub"							, "Error"},
+		{"zero_in_bot_line.cub"							, "Error"},
+		{"zero_in_tot_line.cub"							, "Error"},
+		{"zero_left_side.cub"							, "Error"},
+        {"zero_right_of_outer_wall.cub"					, "Error"},
+        {"zero_right_side.cub"							, "Error"},
 
+        {"", ""},
+    };
+    test_framework("../maps/map_content_tests/", rgb);
     
     
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

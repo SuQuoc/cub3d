@@ -130,6 +130,9 @@ typedef struct s_data
 	void	*win_ptr;
 
 	char	**map;
+	char 	**map_copy;
+	int		map_width;
+	int 	map_height;
 	void	*N_texture;
 	void	*E_texture;
 	void	*S_texture;
