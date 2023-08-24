@@ -44,6 +44,10 @@
 // MAP
 # define PLAYER "NESW"
 # define MAP "10 "
+# define WALL_SUB '+'
+# define FLOOR_SUB 'o'
+
+
 
 # define EXTENSION ".cub"
 
@@ -157,6 +161,10 @@ int			check_extension(char const *str);
 
 // colors.c
 int search_floor_ceiling(char *str, t_data *data);
+
+//dfs.c
+int flood_fill_floor(t_data *data);
+int flood_fill_wall(t_data *data);
 
 
 //draw_line_utils.c

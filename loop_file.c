@@ -51,7 +51,14 @@ void loop_file(int fd, t_data *data)
 	data->map_copy = copy_2d_array(data->map, 0);
 	if (!data->map_copy)
 		return (free_data_err(data, "malloc fail in loop_file() data->map"));
-	print_str_arr(data->map);
+	data->map_height = get_arr_len(data->map);
+	print_str_arr(data->map_copy);
+	flood_fill_floor(data);
+	flood_fill_wall(data);
+	print_str_arr(data->map_copy);
+	
+
+
 	free_2d_array(data->map_copy);
 	data->map_copy = NULL;
 	//loop_map();

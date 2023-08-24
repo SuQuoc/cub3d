@@ -8,6 +8,7 @@ SRC =	2d_array_utils.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \
+		dfs.c \
 		draw_line_utils.c \
 		draw_line.c \
 		error_msg.c \

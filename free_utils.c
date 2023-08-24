@@ -69,7 +69,7 @@ void free_data_err(t_data *data, char *error_message)
 	free(data->player);
 	free(data->mlx_ptr);
 	free_2d_array(data->map);
-	
+	free_2d_array(data->map_copy);
 	free(data);
 	data = NULL;
 	if (error_message)
