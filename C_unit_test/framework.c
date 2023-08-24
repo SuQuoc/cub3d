@@ -11,12 +11,12 @@ void ft_mlx_init(t_data *data)
 
 int compare(char *output, char *expected)
 {
-    if (ft_strncmp(&output[6], expected, ft_strlen(expected)) == 0)
+    if (ft_strncmp(&output[7], expected, ft_strlen(expected)) == 0)
         return (printf ("\033[0;92m OK\033[0m\n"), 1);
     else 
     {
         printf ("\033[0;91m FAIL\033[0m\n"),
-        printf("Output: %s\n", &output[6]);
+        printf("Output: %s\n", &output[7]);
         printf("Expect: %s\n", expected);
         return (0);
     }

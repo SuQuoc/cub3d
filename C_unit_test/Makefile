@@ -11,6 +11,7 @@ C_SRC =	framework.c \
 		../array_utils.c \
 		../check_extension.c \
 		../colors.c \
+		../dfs.c \
 		../draw_line_utils.c \
 		../draw_line.c \
 		../error_msg.c \

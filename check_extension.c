@@ -19,7 +19,7 @@ int check_extension(char const *str)
 		&& str[0] != '.')
 		return (0);
 	//error_msg();
-	ft_putstr_fd((char*)"Error\nWrong file type/extension!\n", 2);
+	ft_putstr_fd((char*)"Error: Wrong file type/extension!\n", 2);
 	//free_data(data, 1); //musste dann data weiter passen ka ob das beim tester probleme macht 
 	return (1);
 }

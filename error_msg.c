@@ -3,7 +3,7 @@
 
 void file_error(int err_code)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error: ", 2);
 	if (err_code == 1) //malloc read open etc
 		perror(NULL);
 	else if (err_code == ERR_IDF)

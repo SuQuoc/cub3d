@@ -30,7 +30,7 @@ int invalid_rgb_input(char *str)
     i = 0;
     while (str[i] && str[i] != '\n')
     {
-        if (ft_isdigit(str[i]) == 0 && str[i] != ',' && str[i] != ' ')
+        if (ft_isdigit(str[i]) == 0 && str[i] != ',') //&& str[i] != ' ')
             return (TRUE);
         if (ft_isdigit(str[i]) == 2048)
             len++;
