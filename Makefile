@@ -3,11 +3,11 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-		
 SRC =	2d_array_utils.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \
+		dda_algorithm.c \
 		draw_line_utils.c \
 		draw_line.c \
 		draw_map.c \
@@ -49,7 +49,7 @@ $(OBJDIR):
 
 $(NAME): $(OBJDIR) $(OBJ)
 	@$(MAKE) -C libft
-	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
+	$(C) $(CFLAGS) $(OBJ) libft/libft.a libmlx_Linux.a -o $(NAME) -lXext -lX11 -lm
 
 clean:
 	@$(MAKE) -C libft fclean
@@ -67,4 +67,4 @@ run: $(NAME)
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \
-	./$(NAME) maps/subject_map.cub
+	./$(NAME) maps/fiona_raycasting_test_map.cub

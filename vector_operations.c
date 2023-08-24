@@ -41,7 +41,7 @@ static t_vector	calculate_camera_vector(const t_vector fp_camera, int numerator)
 	return (result);
 }
 
-void	calculate_rays(t_player	*player)
+void	calculate_rays(t_player	*player, const char **map)
 {
 	t_vector	direction;
 	int	numerator;
@@ -55,6 +55,8 @@ void	calculate_rays(t_player	*player)
 		player->ray[x] = vector_addition(direction, \
 					calculate_camera_vector(player->fp_camera_left, numerator));
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
+		printf("max_ray: y: %i	x: %i\n", player->ray[x].y, player->ray[x].x);
+	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
 		numerator--;
 		x++;
 	}
@@ -63,7 +65,10 @@ void	calculate_rays(t_player	*player)
 		player->ray[x] = vector_addition(direction, \
 					calculate_camera_vector(player->fp_camera_right, numerator));
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
+		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
 		numerator++;
 		x++;
 	}
+	map++;
+	map--;
 }

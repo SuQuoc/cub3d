@@ -8,7 +8,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -78,16 +78,20 @@
 
 #define POINT_SHIFTER 65536
 
-#define UNIT 20
+#define UNIT 30
 #define RAY_NB 21 //needs to be uneven (i think)
-#define RAY_LENGTH 100
+#define MAX_RAY_LENGTH 100
 
-typedef struct s_ray
+//hl = hypotenuse_length
+//fp = fixed point
+typedef struct s_fp_ray
 {
-	int		length;
-	int		x;
-	int		y;
-}	t_ray;
+	long int	length;
+	long int	hl;
+	long int	s;
+	long int	x;
+	long int	y;
+}	t_fp_ray;
 
 typedef struct s_vector
 {
@@ -111,7 +115,7 @@ typedef struct s_player
 	t_vector	camera_left;
 	t_vector	direction;
 	t_vector	ray[RAY_NB];
-	int			ray_length[RAY_NB];
+	int			fp_ray_length[RAY_NB];
 	char		fast_axis;
 	int			fast_diff;
 	int			slow_diff;
@@ -154,7 +158,6 @@ typedef struct s_data
 int			get_arr_len(char **arr);
 char 		**copy_2d_array(char **old, size_t start);
 
-
 // array_utils.c
 void		ft_set_zero(int *arr, int size);
 
@@ -164,6 +167,8 @@ int			check_extension(char const *str);
 // colors.c
 int 		search_floor_ceiling(char *str, t_data *data);
 
+// dda_algorithm.c
+void	dda_algorithm(t_player *player, t_vector *max_ray, const char **map, long int *fp_length);
 
 // draw_line_utils.c
 void		fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
@@ -260,6 +265,6 @@ void		print_int_arr(int *arr, int size);
 t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
-void		calculate_rays(t_player	*player);
+void		calculate_rays(t_player	*player, const char **map);
 
 # endif

@@ -16,7 +16,7 @@ static void	movement(int keysym, t_data *data)
 		player_move_left(data->player, data->mlx_ptr, data->win_ptr);
 	draw_line(data, &data->player->pos, &data->player->direction, WHITE);
 	draw_player_camera(data, data->player, BLUE);
-	calculate_rays(data->player);
+	calculate_rays(data->player, (const char **)data->map);
 	draw_rays(data, data->player, GREEN);
 }
 
@@ -42,7 +42,7 @@ static void	rotate_player_direction(int keysym, t_data *data)
 	draw_player(data->player, data->mlx_ptr, data->win_ptr, RED);
 	draw_line(data, &data->player->pos, &data->player->direction, WHITE);
 	draw_player_camera(data, data->player, BLUE);
-	calculate_rays(data->player);
+	calculate_rays(data->player, (const char **)data->map);
 	draw_rays(data, data->player, GREEN);
 	calculate_move_values(data->player, data->player->fp_direction.x / POINT_SHIFTER, \
 								data->player->fp_direction.y / POINT_SHIFTER);

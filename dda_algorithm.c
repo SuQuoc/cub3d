@@ -1,19 +1,19 @@
 
 #include "cubed.h"
 
-int	get_segment_length(int a, int b)
+int	get_fp_segment_length(int a, int b)
 {
-	double		ps_length;
+	double		fp_length;
 	long int	m;
 
 	m = (a * POINT_SHIFTER) / b;
 	m = (m * m) / POINT_SHIFTER;
 
-	ps_length = m;
-	ps_length = 1 + (ps_length / POINT_SHIFTER);
-	ps_length = sqrt(ps_length);
-	ps_length *= POINT_SHIFTER;
-	return ((int)ps_length);
+	fp_length = m;
+	fp_length = 1 + (fp_length / POINT_SHIFTER);
+	fp_length = sqrt(fp_length);
+	fp_length *= POINT_SHIFTER;
+	return ((int)fp_length);
 }
 
 int	get_multiplicator(int pos)
@@ -23,22 +23,124 @@ int	get_multiplicator(int pos)
 	return (pos);
 }
 
-int	dda_algorithm(t_player *player, t_vector *ray)
+void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 {
-	int	length;
-	int	s_x;
-	int	s_y;
-	int	x;
-
-	x = 0;
-	length = 0;
-	s_y = ray->x / ray->y * UNIT;
-	s_x = ray->y / ray->x * UNIT;
-	while (length < RAY_LENGTH * POINT_SHIFTER)
+	map++;
+	map--;
+	fp_ray->x += get_multiplicator(fp_ray->x + pos->x);
+	fp_ray->y += fp_ray->s * get_multiplicator(fp_ray->y + pos->y);
+	fp_ray->length += fp_ray->hl;
+	if (map[(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT]\
+				[(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x / UNIT] == '1')
+		return ;
+	printf("get_x_ray_length: map: y: %li	x: %li\n", \
+				(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT, \
+				(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x / UNIT);
+	fp_ray->hl *= UNIT;
+	fp_ray->s *= UNIT;
+	printf("get_x_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+				fp_ray->length / POINT_SHIFTER , fp_ray->hl / POINT_SHIFTER, \
+				fp_ray->s / POINT_SHIFTER, fp_ray->x / POINT_SHIFTER, fp_ray->y / POINT_SHIFTER);
+	printf("get_x_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+				fp_ray->length , fp_ray->hl, fp_ray->s , fp_ray->x , fp_ray->y );
+	while (fp_ray->length / POINT_SHIFTER <= MAX_RAY_LENGTH)
 	{
+		fp_ray->x += UNIT * POINT_SHIFTER;
+		fp_ray->y += fp_ray->s;
+		fp_ray->length += fp_ray->hl;
+		if (map[(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y][(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x] == '1')
+			return ;
+		printf("get_x_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+				fp_ray->length / POINT_SHIFTER , fp_ray->hl / POINT_SHIFTER, \
+				fp_ray->s / POINT_SHIFTER, fp_ray->x / POINT_SHIFTER, fp_ray->y / POINT_SHIFTER);
+		printf("get_x_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+				fp_ray->length , fp_ray->hl, fp_ray->s , fp_ray->x , fp_ray->y );
+	}
+}
 
+void	get_y_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
+{
+	map++;
+	map--;
+	fp_ray->x += fp_ray->s * get_multiplicator(fp_ray->x + pos->x);
+	fp_ray->y += get_multiplicator(fp_ray->y + pos->y);
+	fp_ray->length += fp_ray->hl;
+	if (map[(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT]\
+				[(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x / UNIT] == '1')
+		return ;
+	fp_ray->hl *= UNIT;
+	fp_ray->s *= UNIT;
+	printf("get_y_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+			fp_ray->length / POINT_SHIFTER , fp_ray->hl / POINT_SHIFTER, \
+			fp_ray->s / POINT_SHIFTER, fp_ray->x / POINT_SHIFTER, fp_ray->y / POINT_SHIFTER);
+	printf("get_y_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+				fp_ray->length , fp_ray->hl, fp_ray->s , fp_ray->x , fp_ray->y );
+	while (fp_ray->length / POINT_SHIFTER <= MAX_RAY_LENGTH)
+	{
+		fp_ray->x += fp_ray->s;
+		fp_ray->y += UNIT * POINT_SHIFTER;
+		fp_ray->length += fp_ray->hl;
+		if (map[(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT]\
+				[(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x / UNIT] == '1')
+			return ;
+		printf("get_y_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+			fp_ray->length / POINT_SHIFTER , fp_ray->hl / POINT_SHIFTER, \
+			fp_ray->s / POINT_SHIFTER, fp_ray->x / POINT_SHIFTER, fp_ray->y / POINT_SHIFTER);
+		printf("get_y_ray_length: length: %li	hl: %li	s: %li	x: %li	y: %li\n", \
+				fp_ray->length , fp_ray->hl, fp_ray->s , fp_ray->x , fp_ray->y );
+	}
+}
 
-		x++;
+void	init_fp_ray(t_fp_ray *fp_ray, long int a, long int b)
+{
+	if (a == 0)
+	{
+		fp_ray->hl = 0;
+		fp_ray->s = 0;
+	}
+	else if (b == 0)
+	{
+		fp_ray->hl = 1;
+		fp_ray->s = 1;
+	}
+	else
+	{
+		fp_ray->hl = get_fp_segment_length(a, b);
+		fp_ray->s = (a * POINT_SHIFTER) / b;
+	}
+	fp_ray->length = 0;
+	fp_ray->x = 0;
+	fp_ray->y = 0;
+}
+
+//hl = hypotenuse_length
+void	dda_algorithm(t_player *player, t_vector *max_ray, const char **map, long int *fp_length)
+{
+	t_fp_ray	fp_x_ray;
+	t_fp_ray	fp_y_ray;
+	
+	if (!map)
+		return ;
+	init_fp_ray(&fp_y_ray, max_ray->x, max_ray->y);
+	init_fp_ray(&fp_x_ray, max_ray->y, max_ray->x);
+	get_x_ray_length(&fp_x_ray, &player->pos, map);
+	get_y_ray_length(&fp_y_ray, &player->pos, map);
+	if (fp_x_ray.length > MAX_RAY_LENGTH && fp_y_ray.length > MAX_RAY_LENGTH)
+	{
+		*fp_length = MAX_RAY_LENGTH;
+		return ;
+	}
+	if (fp_x_ray.length < fp_y_ray.length)
+	{
+		max_ray->x = fp_x_ray.x / POINT_SHIFTER;
+		max_ray->y = fp_x_ray.y / POINT_SHIFTER;
+		*fp_length = fp_x_ray.length;
+	}
+	else
+	{
+		max_ray->x = fp_y_ray.x / POINT_SHIFTER;
+		max_ray->y = fp_y_ray.y / POINT_SHIFTER;
+		*fp_length = fp_y_ray.length;
 	}
 }
 
