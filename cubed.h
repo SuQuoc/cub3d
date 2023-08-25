@@ -8,7 +8,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include "mlx.h"
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -79,7 +79,7 @@
 #define POINT_SHIFTER 65536
 
 #define UNIT 30
-#define RAY_NB 21 //needs to be uneven (i think)
+#define RAY_NB 1 //needs to be uneven
 #define MAX_RAY_LENGTH 100
 
 //hl = hypotenuse_length
@@ -101,7 +101,8 @@ typedef struct s_vector
 
 //fp stands for fixed point
 
-//Direction is the direction vector plus the player position (pos).
+//Direction is the direction vector plus the player position (pos),
+//The rays in ray are the ray-vectors plus the direction (whithout pos)
 //The other vectors are just the respective vectors, except for the
 //fixed point ones, they are the vector * POINT_SHIFTER.
 typedef struct s_player

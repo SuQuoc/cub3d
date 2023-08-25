@@ -36,7 +36,7 @@ void	draw_rays(t_data *data, t_player *player, int color)
 	int	x;
 
 	x = 0;
-	while (x < 21)
+	while (x < RAY_NB)
 	{
 		ray = vector_addition(player->ray[x], player->pos);
 		draw_line(data, &player->pos, &ray, color);
