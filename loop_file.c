@@ -29,7 +29,6 @@ char *read_map_into_str(int fd)
 	return (free(buf), file);
 }
 
-
 void loop_file(int fd, t_data *data)
 {
 	char *map_str;
@@ -47,18 +46,5 @@ void loop_file(int fd, t_data *data)
 	loop_idf(data);
 	if (data->err != 0)
 		return (free_data(data));
-	cut_idfs_from_map(data);
-	data->map_copy = copy_2d_array(data->map, 0);
-	if (!data->map_copy)
-		return (free_data_err(data, "malloc fail in loop_file() data->map"));
-	data->map_height = get_arr_len(data->map);
-	flood_fill_floor(data);
-	flood_fill_wall(data);
-	//print_str_arr(data->map_copy);
-	//loop_map();
-	//if (data->err != 0)
-	//	return (file_error(data->err), free_data(data, 1));
-
-	free_2d_array(data->map_copy);
-	data->map_copy = NULL;
+	loop_map(data);
 }

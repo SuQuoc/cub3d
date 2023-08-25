@@ -30,6 +30,8 @@
 # define ERR_MAP 5
 # define ERR_NL_MAP 8
 # define ERR_PL_COUNT 10
+# define ERR_NO_WALLS 11
+
 
 // Identifiers
 # define TXT_W 60
@@ -151,6 +153,11 @@ typedef struct s_data
 // 2d_array_utils.c
 int			get_arr_len(char **arr);
 char 		**copy_2d_array(char **old, size_t start);
+t_vector find_chars(char **arr, char *find);
+int max_row_len(char **arr);
+int last_row(char **arr);
+int surroundings_out_of_map(char **arr, int x, int y, char c);
+
 
 
 // array_utils.c
@@ -215,6 +222,8 @@ int			loop_idf_line(char *str, t_data *data);
 
 // loop_map.c
 void cut_idfs_from_map(t_data *data);
+void loop_map(t_data *data);
+
 
 
 // render.c

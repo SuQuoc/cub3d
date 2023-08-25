@@ -3,19 +3,17 @@
 
 int dfs_floor(t_data *data, t_vector pos, char search, char replace)
 {
-    //int width;
-
-    //width = (int)ft_strlen(data->map_copy[pos.y]);
     if (ft_strchr("1oNESW", data->map_copy[pos.y][pos.x]))
         return (0);
-    else if (pos.x <= 0 
-        //|| pos.x >= width - 1 
-        || pos.y <= 0 || pos.y >= data->map_height - 1 
-        || data->map_copy[pos.y][pos.x] == ' '
-        || data->map_copy[pos.y][pos.x] == '\n'
-        || pos.x >= (int)ft_strlen(data->map_copy[pos.y - 1]) - 1
-        || pos.x >= (int)ft_strlen(data->map_copy[pos.y + 1]) - 1)
-        return (ft_printf("int y: %d, int x = %d\n", pos.y, pos.x), free_data_err(data, "map not closed by walls!"), 0);
+    //else if (pos.x <= 0
+    //    || pos.y <= 0 || pos.y >= data->map_height - 1 
+    //    || data->map_copy[pos.y][pos.x] == ' '
+    //    || data->map_copy[pos.y][pos.x] == '\0'
+    //    || pos.x >= (int)ft_strlen(data->map_copy[pos.y - 1]) - 1
+    //    || pos.x >= (int)ft_strlen(data->map_copy[pos.y + 1]) - 1)
+    //    return (/* ft_printf("int y: %d, int x = %d\n", pos.y, pos.x), */free_data_err(data, "map not closed by walls!"), 0);
+    else if (surroundings_out_of_map(data->map_copy, pos.x, pos.y, ' '))
+        return (free_data_err(data, "map not closed by walls!"), 0);
     data->map_copy[pos.y][pos.x] = replace;
     dfs_floor(data, (t_vector){pos.x + 1, pos.y}, search, replace);
     dfs_floor(data, (t_vector){pos.x + 1, pos.y - 1}, search, replace);
@@ -68,6 +66,36 @@ int dfs_wall(t_data *data, t_vector pos, char search, char replace)
 }
 
 
+
+int flood_fill_wall(t_data *data)
+{
+    t_vector pos;
+    int wall_found;
+
+    wall_found = FALSE;
+    pos.y = 0;
+    while (data->map_copy[pos.y])
+    {
+        pos.x = 0;
+        while (data->map_copy[pos.y][pos.x])
+        {
+            if (data->map_copy[pos.y][pos.x] == '1')
+            {
+                if (!wall_found)
+                {
+                    dfs_wall(data, pos, '1' , '+');
+                    wall_found = TRUE;
+                }
+                else if (valid_wall(data->map_copy, pos) == FALSE)
+                    free_data_err(data, "Make sure theres only 1 map and no 'flying' walls!");
+            }
+            pos.x++;
+        }
+        pos.y++;
+    }
+    return (0);
+}
+
 int found_left_from_pos(char *str, int pos, char search)
 {
     pos--;
@@ -98,36 +126,4 @@ int valid_wall(char **map, t_vector pos)
             return (TRUE);
     return (FALSE);
 
-}
-
-int flood_fill_wall(t_data *data)
-{
-    t_vector pos;
-    int wall_found;
-
-    wall_found = FALSE;
-    pos.y = 0;
-    while (data->map_copy[pos.y])
-    {
-        pos.x = 0;
-        while (data->map_copy[pos.y][pos.x])
-        {
-            if (data->map_copy[pos.y][pos.x] == '1')
-            {
-                if (!wall_found)
-                {
-                    dfs_wall(data, pos, '1' , '+');
-                    wall_found = TRUE;
-                }
-                else if (valid_wall(data->map_copy, pos) == FALSE)
-                {
-                    //ft_printf("int y: %d, int x = %d\n", pos.y, pos.x);
-                    free_data_err(data, "Make sure theres only 1 map and no 'flying' walls!");
-                }
-            }
-            pos.x++;
-        }
-        pos.y++;
-    }
-    return (0);
 }
