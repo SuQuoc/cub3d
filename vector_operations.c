@@ -31,12 +31,18 @@ t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend)
 //fp stands for fixed point
 static t_vector	calculate_camera_vector(const t_vector fp_camera, const t_vector fp_direction, int numerator)
 {
-	t_vector	result;
+	t_vector		result;
 	long long int	x;
 	long long int	y;
+	int				rn;
 
-	x = fp_camera.x * numerator / RAY_NB / 2 / POINT_SHIFTER;
-	y = fp_camera.y * numerator / RAY_NB / 2 / POINT_SHIFTER;	
+	if (RAY_NB <= 1)
+		rn = 1;
+	else
+		rn = RAY_NB / 2;
+
+	x = fp_camera.x * numerator / rn / POINT_SHIFTER;
+	y = fp_camera.y * numerator / rn / POINT_SHIFTER;	
 
 	x += fp_direction.x / POINT_SHIFTER;
 	y += fp_direction.y / POINT_SHIFTER;	
@@ -46,18 +52,16 @@ static t_vector	calculate_camera_vector(const t_vector fp_camera, const t_vector
 
 void	calculate_rays(t_player	*player, const char **map)
 {
-	t_vector	direction;
 	int	numerator;
 	int	x;
 
 	x = 0;
 	numerator = (RAY_NB / 2);
-	direction = vector_subtraction(player->direction, player->pos);
 	while (x < (RAY_NB / 2))
 	{
-		player->ray[x] = calculate_camera_vector(player->fp_camera_left, player->direction, numerator);
+		player->ray[x] = calculate_camera_vector(player->fp_camera_left, player->fp_direction, numerator);
 		printf("max_ray: y: %i	x: %i\n", player->ray[x].y, player->ray[x].x);
-		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
+	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
 
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
 		numerator--;
@@ -65,9 +69,9 @@ void	calculate_rays(t_player	*player, const char **map)
 	}
 	while (x < RAY_NB)
 	{
-		player->ray[x] = calculate_camera_vector(player->fp_camera_right, player->direction, numerator);
+		player->ray[x] = calculate_camera_vector(player->fp_camera_right, player->fp_direction, numerator);
 		printf("max_ray: y: %i	x: %i\n", player->ray[x].y, player->ray[x].x);
-		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
+	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
 
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
 		numerator++;
