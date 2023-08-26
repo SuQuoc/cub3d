@@ -79,7 +79,7 @@
 #define POINT_SHIFTER 65536
 
 #define UNIT 30
-#define RAY_NB 21 //needs to be uneven
+#define RAY_NB 1 //needs to be uneven
 #define MAX_RAY_LENGTH 200
 
 //hl = hypotenuse_length

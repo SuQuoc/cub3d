@@ -60,20 +60,18 @@ void	calculate_rays(t_player	*player, const char **map)
 	while (x < (RAY_NB / 2))
 	{
 		player->ray[x] = calculate_camera_vector(player->fp_camera_left, player->fp_direction, numerator);
-		printf("max_ray: y: %i	x: %i\n", player->ray[x].y, player->ray[x].x);
-	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
-
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
+		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
+
 		numerator--;
 		x++;
 	}
 	while (x < RAY_NB)
 	{
 		player->ray[x] = calculate_camera_vector(player->fp_camera_right, player->fp_direction, numerator);
-		printf("max_ray: y: %i	x: %i\n", player->ray[x].y, player->ray[x].x);
-	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
-
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
+		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
+
 		numerator++;
 		x++;
 	}
