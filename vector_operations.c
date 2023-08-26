@@ -75,6 +75,4 @@ void	calculate_rays(t_player	*player, const char **map)
 		numerator++;
 		x++;
 	}
-	map++;
-	map--;
 }

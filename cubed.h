@@ -79,16 +79,17 @@
 #define POINT_SHIFTER 65536
 
 #define UNIT 30
-#define RAY_NB 1 //needs to be uneven
+#define RAY_NB 21 //needs to be uneven
 #define MAX_RAY_LENGTH 200
 
 //hl = hypotenuse_length
 //fp = fixed point
 typedef struct s_fp_ray
 {
+	long int	variable_side;
+	long int	fixed_side;
 	long int	length;
 	long int	hl;
-	long int	s;
 	long int	x;
 	long int	y;
 }	t_fp_ray;

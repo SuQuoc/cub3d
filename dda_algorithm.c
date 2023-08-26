@@ -25,12 +25,10 @@ int	get_multiplicator(int pos)
 
 void	get_y_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 {
-	map++;
-	map--;
 	if (fp_ray->hl == 0)
 		return ;
-	fp_ray->x += (UNIT - get_multiplicator(pos->y)) * fp_ray->s;
-	fp_ray->y += (UNIT - get_multiplicator(pos->y)) * POINT_SHIFTER;
+	fp_ray->x += (UNIT - get_multiplicator(pos->y)) * fp_ray->variable_side;
+	fp_ray->y += (UNIT - get_multiplicator(pos->y)) * fp_ray->fixed_side;
 	fp_ray->length += (UNIT - get_multiplicator(pos->y)) * fp_ray->hl;
 	if ((fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT < 0 || \
 		(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT > 15 || \
@@ -40,12 +38,13 @@ void	get_y_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 	if (map[(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT]\
 				[(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x / UNIT] == '1')
 		return ;
+	fp_ray->variable_side *= UNIT;
+	fp_ray->fixed_side *= UNIT;
 	fp_ray->hl *= UNIT;
-	fp_ray->s *= UNIT;
 	while (1/* fp_ray->length / POINT_SHIFTER <= MAX_RAY_LENGTH */)
 	{
-		fp_ray->x += fp_ray->s;
-		fp_ray->y += UNIT * POINT_SHIFTER;
+		fp_ray->x += fp_ray->variable_side;
+		fp_ray->y += fp_ray->fixed_side;
 		fp_ray->length += fp_ray->hl;
 		if ((fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT < 0 || \
 			(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT > 15 || \
@@ -64,8 +63,8 @@ void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 {
 	if (fp_ray->hl == 0)
 		return ;
-	fp_ray->x += (UNIT - get_multiplicator(pos->x)) * POINT_SHIFTER;
-	fp_ray->y += (UNIT - get_multiplicator(pos->x)) * fp_ray->s;
+	fp_ray->y += (UNIT - get_multiplicator(pos->x)) * fp_ray->variable_side;
+	fp_ray->x += (UNIT - get_multiplicator(pos->x)) * fp_ray->fixed_side;
 	fp_ray->length += (UNIT - get_multiplicator(pos->x)) * fp_ray->hl;
 
 	if ((fp_ray->y / POINT_SHIFTER / UNIT) + (pos->y / UNIT) < 0 || \
@@ -76,12 +75,13 @@ void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 	if (map[(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT]\
 				[(fp_ray->x / POINT_SHIFTER / UNIT) + pos->x / UNIT] == '1')		
 		return ;
+	fp_ray->variable_side *= UNIT;
+	fp_ray->fixed_side *= UNIT;
 	fp_ray->hl *= UNIT;
-	fp_ray->s *= UNIT;
 	while (1/* fp_ray->length / POINT_SHIFTER <= MAX_RAY_LENGTH */)
 	{
-		fp_ray->x += UNIT * POINT_SHIFTER;
-		fp_ray->y += fp_ray->s;
+		fp_ray->y += fp_ray->variable_side;
+		fp_ray->x += fp_ray->fixed_side;
 		fp_ray->length += fp_ray->hl;
 		if ((fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT < 0 || \
 				(fp_ray->y / POINT_SHIFTER / UNIT) + pos->y / UNIT > 15 || \
@@ -100,24 +100,33 @@ void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 
 void	init_fp_ray(t_fp_ray *fp_ray, long int a, long int b)
 {
-	if (a == 0)
-	{
-		fp_ray->hl = 0;
-		fp_ray->s = 0;
-	}
-	else if (b == 0)
-	{
-		fp_ray->hl = POINT_SHIFTER;
-		fp_ray->s = POINT_SHIFTER;
-	}
-	else
-	{
-		fp_ray->hl = get_fp_segment_length(a, b);
-		fp_ray->s = (a * POINT_SHIFTER) / b;
-	}
+	fp_ray->fixed_side = POINT_SHIFTER;
 	fp_ray->length = 0;
 	fp_ray->x = 0;
 	fp_ray->y = 0;
+	if (a == 0)
+	{
+		fp_ray->variable_side = 0;
+		fp_ray->hl = 0;
+	}
+	else if (b == 0)
+	{
+		fp_ray->variable_side = POINT_SHIFTER;
+		fp_ray->hl = POINT_SHIFTER;
+		fp_ray->fixed_side = 0;
+		if (a < 0 && b == 0)
+			fp_ray->variable_side *= -1;
+	}
+	else
+	{
+		fp_ray->variable_side = (a * POINT_SHIFTER) / b;
+		fp_ray->hl = get_fp_segment_length(a, b);
+	}
+	if (b < 0)
+	{
+		fp_ray->variable_side *= -1;
+		fp_ray->fixed_side *= -1;
+	}
 }
 
 //hl = hypotenuse_length
@@ -128,16 +137,10 @@ void	dda_algorithm(t_player *player, t_vector *max_ray, const char **map, long i
 	
 	if (!map)
 		return ;
-	init_fp_ray(&fp_y_ray, max_ray->x, max_ray->y);
 	init_fp_ray(&fp_x_ray, max_ray->y, max_ray->x);
+	init_fp_ray(&fp_y_ray, max_ray->x, max_ray->y);
 	get_x_ray_length(&fp_x_ray, &player->pos, map);
 	get_y_ray_length(&fp_y_ray, &player->pos, map);
-/* 	if (fp_x_ray.length / POINT_SHIFTER > MAX_RAY_LENGTH && \
-		fp_y_ray.length / POINT_SHIFTER > MAX_RAY_LENGTH)
-	{
-		*fp_length = MAX_RAY_LENGTH;
-		return ;
-	} */
 	if (fp_x_ray.length < fp_y_ray.length)
 	{
 		max_ray->x = (fp_x_ray.x) / POINT_SHIFTER;

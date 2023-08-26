@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	make_window(data);
 
 	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
-//	draw_map_walls(data, data->map, WHITE);
+	draw_map_walls(data, data->map, WHITE);
 	calculate_rays(data->player, (const char **)data->map);
 
 	//mlx_loop_hook(data->mlx_ptr, &print_x, data);
