@@ -1,8 +1,6 @@
 
 #include "cubed.h"
 
-
-//open ./maps/.hidden_map.cub funktioniert noch nicht ich sag einfach ohne ./ bitte
 int check_extension(char const *str)
 {
 	size_t len;
@@ -18,8 +16,6 @@ int check_extension(char const *str)
 	if (ft_strncmp(&str[len - ext_len], EXTENSION, ext_len + 1) == 0 
 		&& str[0] != '.')
 		return (0);
-	//error_msg();
 	ft_putstr_fd((char*)"Error: Wrong file type/extension!\n", 2);
-	//free_data(data, 1); //musste dann data weiter passen ka ob das beim tester probleme macht 
 	return (1);
 }

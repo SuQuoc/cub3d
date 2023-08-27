@@ -21,9 +21,6 @@ void	free_2d_array(char **map)
 //both lead to errors so we have to check before if they are not null
 void destroy_textures(t_data *data)
 {
-	//overly protection? bad? unneccessary!
-	if (!data || !data->mlx_ptr)
-		return ;
 	if (data->N_texture)
 		mlx_destroy_image(data->mlx_ptr, data->N_texture);
 	if (data->E_texture)
@@ -33,7 +30,6 @@ void destroy_textures(t_data *data)
 	if (data->W_texture)
 		mlx_destroy_image(data->mlx_ptr, data->W_texture);
 }
-
 
 void free_data(t_data *data)
 {
@@ -81,6 +77,8 @@ void free_data_err(t_data *data, char *error_message)
 	}
 	exit(0);
 }
+
+//WIRD wrsl nicht gebraucht!!!
 void free_data_code(t_data *data, int err_code)
 {
 	if (err_code != 0)

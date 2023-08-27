@@ -139,14 +139,18 @@ typedef struct s_data
 // 2d_array_utils.c
 int				get_arr_len(char **arr);
 char			**copy_2d_array(char **old, size_t start);
-t_vector		find_chars(char **arr, char *find);
 int				get_max_row_len(char **arr);
 int				last_row(char **arr);
 int				surroundings_out_of_map(char **arr, int x, int y, char c);
+
+// 2d_array_utils2.c
+t_vector		find_chars(char **arr, char *find);
 char			**fill_arr_out(char **arr, char c, size_t max_len);
 
 // array_utils.c
 void			ft_set_zero(int *arr, int size);
+void			fill_str(char *str, char c, size_t len);
+int				found_left_from_pos(char *str, int pos, char search);
 
 // check_extension.c
 int				check_extension(char const *str);
@@ -206,7 +210,6 @@ void			init_line(t_line *line, const t_vector *start,
 
 // loop_file.c
 void			loop_file(int fd, t_data *data);
-int				found_left_from_pos(char *str, int pos, char search);
 
 // loop_idf.c
 void			loop_idf(t_data *data);

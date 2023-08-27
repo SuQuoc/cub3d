@@ -5,6 +5,7 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 		
 SRC =	2d_array_utils.c \
+		2d_array_utils2.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \

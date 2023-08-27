@@ -28,7 +28,6 @@ int loop_idf_line(char *str, t_data *data)
         return (1);
 	if (search_floor_ceiling(str, data) == FALSE)
     {
-		//ft_putstr_fd("Couldnt find idf for color!\n", 1);
         data->err = ERR_IDF;
         return (1);
     }

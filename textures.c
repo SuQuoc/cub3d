@@ -20,6 +20,10 @@
         //make sure that the path is only separated by spaces with its identifier
         //yes we know that a file can also have spaces at the beginning of the name
         //but subject says so and we dont think it should be handled
+
+
+//width und height scheint keinen effekt auf mlx_to_image zu haben sondern nur die file groese selbst
+//printf("path of texture: %s\n", &str[i]);
 void *set_texture(char *str, char *idf, t_data *data)
 {
     int i;
@@ -30,8 +34,6 @@ void *set_texture(char *str, char *idf, t_data *data)
         return (NULL);
     len = ft_strlen(idf);
     i = skip_spaces(str, len);
-    //width und height scheint keinen effekt zu haben sondern nur die file groese selbst
-    //printf("path of texture: %s\n", &str[i]);
     save_in = mlx_xpm_file_to_image(data->mlx_ptr, &str[i], &data->txt_w, &data->txt_h);
     if (!save_in)
     {

@@ -2,7 +2,7 @@
 
 int rgb_to_int(int r, int g, int b)
 {
-    return (r * 256*256) + (g * 256) + b;
+    return (r * 256 * 256) + (g * 256) + b;
 }
 
 int in_rgb_range(int n)
