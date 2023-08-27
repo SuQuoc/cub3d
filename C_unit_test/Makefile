@@ -24,6 +24,7 @@ C_SRC =	framework.c \
 		../loop_file.c \
 		../loop_idf.c \
 		../loop_map.c \
+		../map_check_utils.c \
 		../parsing_utils.c \
 		../player_movement.c \
 		../player.c \
@@ -63,3 +64,9 @@ fclean: clean
 	@echo ...and the $(NAME) and the my_output-files too
 
 re: fclean all
+
+run: $(NAME)
+	valgrind \
+	--leak-check=full \
+	--show-leak-kinds=all \
+	./$(NAME)

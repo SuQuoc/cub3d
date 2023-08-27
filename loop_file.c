@@ -48,3 +48,16 @@ void loop_file(int fd, t_data *data)
 		return (free_data(data));
 	loop_map(data);
 }
+
+
+int found_left_from_pos(char *str, int pos, char search)
+{
+    pos--;
+    while (pos >= 0)
+    {
+        if (str[pos] == search)
+            return (TRUE);
+        pos--;
+    }
+    return (FALSE);
+}

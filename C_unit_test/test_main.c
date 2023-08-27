@@ -92,8 +92,10 @@ int main()
     {
 		{"diagonals.cub"                            	, ""},
 		{"inner_circle_with_space_and_pillar.cub"		, "Make sure theres only 1 map and no 'flying' walls!\n"},
-		{"inner_circle_with_zero_and_pillar.cub"		, ""},
-		{"inner_unlcosed_edges_spaces.cub"				, "map not closed by walls!\n"},
+        {"inner_circle_with_zero_and_pillar.cub"		, ""},	
+        {"inner_pillar_axis_connected.cub"		        , ""},
+		{"inner_pillar_diagonal_connected.cub"		    , ""},
+        {"inner_unlcosed_edges_spaces.cub"				, "map not closed by walls!\n"},
 		{"inner_unlcosed_edges_zero.cub"				, ""},
 		{"inner_walls_disconnected_from_outer.cub"		, ""},
 		{"nl_in_map_content.cub"						, "Consecutive nl in map content! Map content begins when every IDF was found!\n"},

@@ -57,7 +57,7 @@ int	prelim_map_content_passed(char *str, t_data *data)
 
 	pl_count = 0;
 	i = 0;
-	if (ft_strchr(str, '1') == NULL)
+	if (ft_strchr(str, WALL) == NULL)
 		return (data->err = ERR_MAP, FALSE); //no wall
 	while (str[i])
 	{

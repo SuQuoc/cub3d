@@ -22,6 +22,7 @@ SRC =	2d_array_utils.c \
 		loop_idf.c \
 		loop_map.c \
 		main.c \
+		map_check_utils.c \
 		parsing_utils.c \
 		player_movement.c \
 		player.c \
