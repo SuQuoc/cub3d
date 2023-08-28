@@ -11,6 +11,8 @@ void ft_mlx_init(t_data *data)
 
 int compare(char *output, char *expected)
 {
+    if (strncmp(expected, "Valid", 6) == 0 && output[0] == '\0')
+        return (printf ("\033[0;92m OK\033[0m\n"), 1);
     if (ft_strncmp(&output[7], expected, ft_strlen(expected)) == 0)
         return (printf ("\033[0;92m OK\033[0m\n"), 1);
     else 
@@ -47,8 +49,9 @@ void test_framework(char *testsuite, char testcases[][2][1000])
             waitpid(cpid, NULL, WUNTRACED);
             close(fd);
             tmp_fd = open("TEMP_FILE", O_RDONLY);
-            read(tmp_fd, output, BUF_SIZE);
-            //printf("OUTPUT: %s\n", output);
+            int bytes = read(tmp_fd, output, BUF_SIZE);
+            output[bytes] = '\0';
+            //printf("read bytes: %d\n", bytes);
             printf("\033[1mTestname: %s\033[0m    ", testcases[j][0]);
             compare(output, testcases[j][1]);
             close(tmp_fd);

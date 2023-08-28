@@ -8,12 +8,15 @@ CFLAGS = -Wall -Werror -Wextra -g
 C_SRC =	framework.c \
 		test_main.c \
 		../2d_array_utils.c \
+		../2d_array_utils2.c \
 		../array_utils.c \
 		../check_extension.c \
 		../colors.c \
+		../dda_algorithm.c \
 		../dfs.c \
 		../draw_line_utils.c \
 		../draw_line.c \
+		../draw_map.c \
 		../error_msg.c \
 		../free_utils.c \
 		../ft_strcmp.c \
@@ -27,6 +30,7 @@ C_SRC =	framework.c \
 		../map_check_utils.c \
 		../parsing_utils.c \
 		../player_movement.c \
+		../player_rotation.c \
 		../player.c \
 		../prelim_checks.c \
 		../printing_utils.c \

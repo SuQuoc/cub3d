@@ -63,6 +63,7 @@ void	dfs_all_except(t_data *data, t_pos pos, char exception, char replace)
 {
 	if (pos.x < 0 || pos.x == data->map_width 
 		|| pos.y < 0 || pos.y == data->map_height
+		|| data->map_copy[pos.y][pos.x] == replace
 		|| data->map_copy[pos.y][pos.x] == exception)
 		return ;
 	data->map_copy[pos.y][pos.x] = replace;
@@ -89,13 +90,14 @@ int	flood_fill_wall(t_data *data, char wall, char replace)
 			{
 				if (!wall_found)
 				{
-					dfs_wall(data, pos, wall, replace); //wozu noch? dfs_all_reverse fixed alles?
+					//dfs_wall(data, pos, wall, replace); //wozu noch? dfs_all_reverse fixed alles?
+					dfs_all_except(data, pos, VOID, replace);
 					wall_found = TRUE;
 				}
-				//else
-				//	free_data_err(data, "Make sure theres only 1 map and no 'flying' walls!");
-				else if (valid_wall(data->map_copy, pos) == FALSE)
+				else
 					free_data_err(data, "Make sure theres only 1 map and no 'flying' walls!");
+				//else if (valid_wall(data->map_copy, pos) == FALSE)
+				//	free_data_err(data, "Make sure theres only 1 map and no 'flying' walls!");
 			}
 			pos.x++;
 		}

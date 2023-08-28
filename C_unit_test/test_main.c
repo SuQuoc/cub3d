@@ -18,7 +18,8 @@ void test_extension(char *testsuite, char testcases[][2][1000])
             check_extension(ft_strjoin(testsuite, testcases[j][0]));
             close(tmp_fd);
             tmp_fd = open("TEMP_FILE", O_RDONLY);
-            read(tmp_fd, output, BUF_SIZE);
+            int bytes = read(tmp_fd, output, BUF_SIZE);
+            output[bytes] = '\0';
             printf("\033[1mTestname: %s\033[0m    ", testcases[j][0]);
             compare(output, testcases[j][1]);
             close(tmp_fd);
@@ -36,25 +37,27 @@ int main()
     //extension_tests
     char extension [][2][1000] = 
     {
-        {"double_extension.cub.cub"     , ""},
-        {"./double_extension.cub.cub"   , ""},
-        {"doesnt_exist.cub"             , "Wrong file type/extension!\n"},
+        {"cub.cub"                      , "Valid"},
+        {".cub"                         , "No hidden files or 'rel-rel-paths'\n"},
+        {"cu"                           , "Wrong file type/extension!\n"},
+        {"valid.cub"                    , "Valid"},
+        {"double_extension.cub.cub"     , "Valid"},
+        {"./double_extension.cub.cub"   , "No hidden files or 'rel-rel-paths'\n"},
+        {"doesnt_exist.cub"             , "U have to CHECK OPEN ALSO! Tomorrow\n"},
         {"file_cub"                     , "Wrong file type/extension!\n"},
         {"invalid_extension_cub"        , "Wrong file type/extension!\n"},
         {"'dumb space.cub'"             , "Wrong file type/extension!\n"},
         {"invalid_extension.cu"         , "Wrong file type/extension!\n"},
         {"", ""}
     };
-    test_extension("../maps/extension_tests/", extension);
-
-
+    test_extension("", extension);
 
     //identifier_tests
     char identifier_tests [][2][1000] = 
     {
-        {"different_identifier_order.cub"           , ""},
-        {"no_newline_between_identifiers.cub"       , ""},
-        {"spaces_and_tabs_after_identifier.cub"     , ""},
+        {"different_identifier_order.cub"           , "Valid"},
+        {"no_newline_between_identifiers.cub"       , "Valid"},
+        {"spaces_before_identifier.cub"             , "Invalid identifier!\n"},
         {"identifier_after_map_content.cub"         , "Invalid identifier!\n"},
         {"invalid_floor_identifier.cub"             , "Invalid identifier!\n"},
         {"invalid_orientation_identifier.cub"       , "Invalid identifier!\n"},
@@ -74,7 +77,7 @@ int main()
     //rgb_tests
     char rgb [][2][1000] = 
     {
-        {"valid_rgb_range.cub"          , ""},
+        {"valid_rgb_range.cub"          , "Valid"},
         {"incomplete_rgb.cub"           , "Invalid amount of rgb values!\n"},
         {"invalid_256_rgb_range.cub"    , "Invalid rgb range!\n"},
         {"overflow_rgb_range.cub"       , "Invalid rgb range!\n"},
@@ -90,32 +93,34 @@ int main()
     //map_test
     char map_test [][2][1000] = 
     {
-		{"diagonals.cub"                            	, ""},
+		{"diagonals.cub"                            	, "Valid"},
 		{"inner_circle_with_space_and_pillar.cub"		, "Make sure theres only 1 map and no 'flying' walls!\n"},
-        {"inner_circle_with_zero_and_pillar.cub"		, ""},	
-        {"inner_pillar_axis_connected.cub"		        , ""},
-		{"inner_pillar_diagonal_connected.cub"		    , ""},
+        {"inner_circle_with_space_and_pillar2.cub"		, "Make sure theres only 1 map and no 'flying' walls!\n"},	
+        {"inner_circle_with_space_and_pillar3.cub"		, "Make sure theres only 1 map and no 'flying' walls!\n"},
+        {"inner_circle_with_zero_and_pillar.cub"		, "Valid"},	
+        {"inner_pillar_axis_connected.cub"		        , "Valid"},
+		{"inner_pillar_diagonal_connected.cub"		    , "Make sure theres only 1 map and no 'flying' walls!\n"},
         {"inner_unlcosed_edges_spaces.cub"				, "map not closed by walls!\n"},
-		{"inner_unlcosed_edges_zero.cub"				, ""},
-		{"inner_walls_disconnected_from_outer.cub"		, ""},
-		{"nl_in_map_content.cub"						, "Consecutive nl in map content! Map content begins when every IDF was found!\n"},
+		{"inner_unlcosed_edges_zero.cub"				, "Valid"},
+		{"inner_walls_disconnected_from_outer.cub"		, "Valid"},
+		{"nl_in_map_content.cub"						, "Consecutive nl in map! Map begins when all IDF were found!\n"},
 		{"no_map_content_except_player.cub"             , "Invalid map_content!\n"},
         {"no_map_content.cub"							, "Invalid map_content!\n"},
-		{"no_newline_between_identifier_and_map.cub"	, ""},
+		{"no_newline_between_identifier_and_map.cub"	, "Valid"},
 		{"only_space_line.cub"							, "Make sure theres only 1 map and no 'flying' walls!\n"},
         {"player_in_corner_wout_edge.cub"				, "Invalid player position!\n"},
         {"player_in_corner_wout_edge2.cub"				, "Invalid player position!\n"},
         {"player_in_outer_wall.cub" 					, "Invalid player position!\n"},
         {"player_touches_space.cub" 					, "Invalid player position!\n"},
         {"separated_map_vertically.cub"					, "Make sure theres only 1 map and no 'flying' walls!\n"},
-		{"spaces_left_from_map.cub"						, ""},
-		{"text_after_map_content_wi_nl.cub"				, "Consecutive nl in map content! Map content begins when every IDF was found!\n"},	
+		{"spaces_left_from_map.cub"						, "Valid"},
+		{"text_after_map_content_wi_nl.cub"				, "Consecutive nl in map! Map begins when all IDF were found!\n"},	
 		{"text_after_map_content_wout_nl.cub"			, "Invalid map_content!\n"},	
 		{"unclosed_wall2.cub"							, "map not closed by walls!\n"},
 		{"unclosed_wall.cub"							, "map not closed by walls!\n"},
 		{"unknown_char_x_in_map_content.cub"			, "Invalid map_content!\n"},		
 		{"unlcosed_edges_space.cub"						, "map not closed by walls!\n"},
-		{"unlcosed_edges_zero.cub"						, ""},	
+		{"unlcosed_edges_zero.cub"						, "map not closed by walls!"},	
 		{"wall_outside_map.cub"							, "Make sure theres only 1 map and no 'flying' walls!\n"},
 		{"zero_in_bot_line.cub"							, "map not closed by walls!\n"},
 		{"zero_in_top_line.cub"							, "map not closed by walls!\n"},
