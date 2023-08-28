@@ -28,7 +28,6 @@ t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend)
 	return (difference);
 }
 
-//fp stands for fixed point
 static t_vector	calculate_camera_vector(const t_vector camera, const t_vector direction, int numerator)
 {
 	t_vector	result;
@@ -50,7 +49,7 @@ static t_vector	calculate_camera_vector(const t_vector camera, const t_vector di
 	return (result);
 }
 
-void	calculate_rays(t_player	*player, const char **map)
+void	calculate_rays(t_data *data, t_player *player)
 {
 	int	numerator;
 	int	x;
@@ -61,7 +60,7 @@ void	calculate_rays(t_player	*player, const char **map)
 	{
 		player->ray[x] = calculate_camera_vector(player->camera_left, player->direction, numerator);
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
-	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->ray_length[x]);
+		dda_algorithm(data, &player->ray[x], (double *)&player->ray_length[x]);
 
 		numerator--;
 		x++;
@@ -70,11 +69,9 @@ void	calculate_rays(t_player	*player, const char **map)
 	{
 		player->ray[x] = calculate_camera_vector(player->camera_right, player->direction, numerator);
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
-	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->ray_length[x]);
+		dda_algorithm(data, &player->ray[x], (double *)&player->ray_length[x]);
 
 		numerator++;
 		x++;
 	}
-	map++;
-	map--;
 }

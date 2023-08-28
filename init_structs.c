@@ -39,7 +39,6 @@ t_data *init_data(void)
 		free(data);
 		exit(1);
 	}
-	calculate_rays(data->player, NULL);
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;
@@ -50,6 +49,7 @@ t_data *init_data(void)
 	data->err = 0;
 	data->txt_h = 50;
 	data->txt_w = 50;
+	calculate_rays(data, data->player);
 	return (data);
 }
 

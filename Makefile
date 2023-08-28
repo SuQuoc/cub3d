@@ -3,13 +3,12 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-#SRC =	dda_algorithm.c
-
 SRC =	2d_array_utils.c \
 		2d_array_utils2.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \
+		dda_algorithm_utils.c \
 		dda_algorithm.c \
 		dfs.c \
 		draw_line_utils.c \
@@ -54,7 +53,7 @@ $(OBJDIR):
 
 $(NAME): $(OBJDIR) $(OBJ)
 	@$(MAKE) -C libft
-	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext
+	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 
 clean:
 	@$(MAKE) -C libft fclean
