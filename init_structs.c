@@ -1,13 +1,13 @@
 
 #include "cubed.h"
 
-void	init_vector(t_vector *vector, int x_position, int y_position)
+void	init_vector(t_vector *vector, double x_position, double y_position)
 {
 	vector->x = x_position;
 	vector->y = y_position;
 }
 
-static t_player	*init_player(void)
+/* static t_player	*init_player(void)
 {
 	t_player	*player;
 
@@ -29,7 +29,26 @@ static t_player	*init_player(void)
 	player->slow_diff = 0;
 	player->fault = 50;
 	return (player);
+} */
+
+static t_player	*init_player(void)
+{
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (NULL);
+	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
+	init_vector(&player->direction, 100, 0);
+	init_vector(&player->camera_right, 0, 60);				
+	init_vector(&player->camera_left, 0, -60);
+	player->fast_axis = 'x';
+	player->fast_diff = 100;
+	player->slow_diff = 0;
+	player->fault = 50;
+	return (player);
 }
+
 
 t_data *init_data(void)
 {
@@ -48,7 +67,7 @@ t_data *init_data(void)
 		free(data);
 		exit(1);
 	}
-	calculate_rays(data->player);
+	calculate_rays(data->player, NULL);
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;
@@ -90,12 +109,12 @@ static void	line_calculate_values(t_line *line)
 	}
 }
 
-void	init_line(t_line *line, const t_vector *start, const t_vector *end)
+void	init_line(t_line *line, const t_vector start, const t_vector end)
 {
-	line->start_x = start->x;
-	line->start_y = start->y;
-	line->end_x = end->x;
-	line->end_y = end->y;
+	line->start_x = start.x;
+	line->start_y = start.y;
+	line->end_x = end.x;
+	line->end_y = end.y;
 	line->x_diff = (line->end_x - line->start_x);
 	line->y_diff = (line->end_y - line->start_y);
 	line_calculate_values(line);

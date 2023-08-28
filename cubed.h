@@ -57,53 +57,60 @@
 # define WINDOW_H 600
 # define WINDOW_NAME "FORKBOMBERS"
 
-// colors
-# define WHITE 0xFFFFFF
-# define GREEN 0x00FF00
-# define BLACK 0x000000
-# define BLUE 0x0000FF
-# define RED 0xFF0000
+//colors
+#define WHITE 0xFFFFFF
+#define GREEN 0x00FF00
+#define BLACK 0x000000
+#define BLUE 0x0000FF
+#define RED 0xFF0000
 
-// for raycasting
-// cos and sin are already point-shifted
-# define COS_1 65526 // 0.999847695 <-cos(1)
-# define SIN_1 1144  // 0.017452406 <-sin(1)
+//for raycasting
+//cos and sin are already point-shifted
+#define COS_1 0.999847695 //<-cos(1)
+#define SIN_1 0.017452406 //<-sin(1)
 
-# define POINT_SHIFTER 65536
+#define POINT_SHIFTER 65536
 
-typedef struct s_ray
-{
-	int			length;
-	int			x;
-	int			y;
-}				t_ray;
+#define UNIT 30
+#define RAY_NB 21 //needs to be uneven
+#define MAX_RAY_LENGTH 200
+
 
 typedef struct s_pos
 {
-	int			x;
-	int			y;
-}				t_pos;
+	int	x;
+	int	y;
+}	t_pos;
+
+//hl = hypotenuse_length
+typedef struct s_ray
+{
+	double	variable_side;
+	double	fixed_side;
+	double	length;
+	double	hl;
+	double	x;
+	double	y;
+}	t_ray;
 
 typedef struct s_vector
 {
-	int			x;
-	int			y;
-}				t_vector;
-// Direction is the direction vector plus the player position (pos).
-// The other vectors are just the respective vectors, except for the
-// fixed point ones, they are the vector * POINT_SHIFTER.
+	double	x;
+	double	y;
+}	t_vector;
+
+
+//The rays in ray are the ray-vectors(fraction of camera) plus the direction
+//The other vectors are just the respective vectors.
 typedef struct s_player
 {
-	t_pos		pos;
-	char 		orientation;
-	t_vector	fixed_point_camera_right;
-	t_vector	fixed_point_camera_left;
-	t_vector	fixed_point_direction;
+	t_vector	pos;
+
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
-	t_vector	ray[21];
-	int			ray_length[21];
+	t_vector	ray[RAY_NB];
+	double		ray_length[RAY_NB];
 	char		fast_axis;
 	int			fast_diff;
 	int			slow_diff;
@@ -165,34 +172,30 @@ int				found_left_from_pos(char *str, int pos, char search);
 int				check_extension(char const *str);
 
 // colors.c
-int				search_floor_ceiling(char *str, t_data *data);
+int 		search_floor_ceiling(char *str, t_data *data);
+
+// dda_algorithm.c
+void	dda_algorithm(t_player *player, t_vector *max_ray, const char **map, long int *fp_length);
+
+// draw_line_utils.c
+void		fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
+void		fast_x_xneg_yneg(const t_data *data, t_line *line, const int color);
+void		fast_x_xneg_ypos(const t_data *data, t_line *line, const int color);
+void		fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
+
+// draw_line.c
+void		draw_line(const t_data *data, const t_vector start, const t_vector end, const int color);
+
+// draw_map.c
+void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
+void		draw_map_walls(t_data *data, char **map, int color);
 
 // dfs.c
 int				flood_fill_floor(t_data *data, char floor, char replace);
 int				flood_fill_wall(t_data *data, char wall, char replace);
 
-// draw_line_utils.c
-void			fast_y_xneg_yneg(const t_data *data, t_line *line,
-					const int color);
-void			fast_x_xneg_yneg(const t_data *data, t_line *line,
-					const int color);
-void			fast_x_xneg_ypos(const t_data *data, t_line *line,
-					const int color);
-void			fast_y_xneg_ypos(const t_data *data, t_line *line,
-					const int color);
-
-// draw_line.c
-void			draw_line(const t_data *data, const t_vector *start,
-					const t_vector *end, const int color);
-
-// init_structs.c
-void			init_vector(t_vector *vector, int x_position, int y_position);
-t_data			*init_data(void);
-void			init_line(t_line *line, const t_vector *start,
-					const t_vector *end);
-
 // key_input.c
-int				key_input(int keysym, t_data *data);
+int			key_input(int keysym, t_data *data);
 
 // error_msg.c
 void			file_error(int err_code);
@@ -213,9 +216,9 @@ int				is_txt_idf(char *str);
 int				is_color_idf(char *str);
 
 // init_structs.c
-t_data			*init_data(void);
-void			init_line(t_line *line, const t_vector *start,
-					const t_vector *end);
+void		init_vector(t_vector *vector, double x_position, double y_position);
+t_data		*init_data(void);
+void		init_line(t_line *line, const t_vector start, const t_vector end);
 
 // loop_file.c
 void			loop_file(int fd, t_data *data);
@@ -237,40 +240,39 @@ int				search_texture(char *str, t_data *data);
 void			*set_texture(char *str, char *idf, t_data *data);
 void			free_data_err(t_data *data, char *error_message);
 
-// MLX RELATED_______________________________________
 // render.c
 int				print_x(t_data *data);
 
 // parsing_utils.c
 int				skip_spaces(char *str, int start);
 
-//player_movement.c
-void	player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
-void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+// player_movement.c
+void		player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
 
-//player_rotations.c
-void	calculate_move_values(t_player *player, int x, int y);
-void	rotate_vector_clockwise(t_vector *fp_vector, t_vector *vector);
-void	rotate_vector_counter_clockwise(t_vector *fp_vector, t_vector *vector);
+// player_rotations.c
+void		calculate_move_values(t_player *player, int x, int y);
+void		rotate_vector_clockwise(t_vector *vector);
+void		rotate_vector_counter_clockwise(t_vector *vector);
 
-//player.c
-void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);
-void	draw_player_camera(t_data *data, t_player *player, int color);
-void	draw_rays(t_data *data, t_player *player, int color);
+// player.c
+void		draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);
+void		draw_player_camera(t_data *data, t_player *player, int color);
+void		draw_rays(t_data *data, t_player *player, int color);
 
 // prelim_checks.c
-int				prelim_checks_passed(char *str, t_data *data);
+int			prelim_checks_passed(char *str, t_data *data);
 
 // printing_utils.c
 void			print_str_arr(char **arr);
 void			print_int_arr(int *arr, int size);
 
 // vector_operations.c
-t_vector		vector_multiplication(t_vector vector, int multiplier);
-t_vector		vector_addition(t_vector first_addend, t_vector second_addend);
-t_vector		vector_subtraction(t_vector minuend, t_vector subtrahend);
-void			calculate_rays(t_player *player);
+t_vector	vector_multiplication(t_vector vector, int multiplier);
+t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
+t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
+void		calculate_rays(t_player	*player, const char **map);
 
 #endif

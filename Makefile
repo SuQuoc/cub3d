@@ -3,15 +3,18 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-		
+#SRC =	dda_algorithm.c
+
 SRC =	2d_array_utils.c \
 		2d_array_utils2.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \
+		dda_algorithm.c \
 		dfs.c \
 		draw_line_utils.c \
 		draw_line.c \
+		draw_map.c \
 		error_msg.c \
 		free_utils.c \
 		ft_strcmp.c \
@@ -69,4 +72,4 @@ run: $(NAME)
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \
-	./$(NAME) maps/subject_map.cub
+	./$(NAME) maps/fiona_raycasting_test_map.cub

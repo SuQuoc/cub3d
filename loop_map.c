@@ -32,6 +32,22 @@ int valid_wall(char **map, t_pos pos)
     return (FALSE);
 }
 
+void calc(t_player *player)
+{
+	t_vector tmp;
+
+	tmp.x = player->direction.x / 100;
+	tmp.y = player->direction.y / 100;
+	player->camera_left.x = tmp.y * -1;
+	player->camera_left.y = tmp.x;
+
+	player->camera_right.x = tmp.y;
+	player->camera_right.y = tmp.x * -1;
+
+	player->camera_left = vector_multiplication(player->camera_left, 60);
+	player->camera_right = vector_multiplication(player->camera_right, 60);
+}
+
 
 //checks if the position of the player is valid
 //since im already checking if theres a player i wont check again
@@ -42,14 +58,16 @@ int valid_player_pos(t_data *data)
 	if (surroundings_out_of_map(data->map, pos.x, pos.y, VOID))
 		return (FALSE);
 	if (data->map[pos.y][pos.x] == 'N')
-		init_vector(&data->player->direction, pos.x, pos.y - 100);
-	if (data->map[pos.y][pos.x] == 'E')
-		init_vector(&data->player->direction, pos.x + 100, pos.y);
-	if (data->map[pos.y][pos.x] == 'S')
-		init_vector(&data->player->direction, pos.x, pos.y + 100);
-	if (data->map[pos.y][pos.x] == 'W')
-		init_vector(&data->player->direction, pos.x - 100, pos.y);
-	data->player->pos = pos;
+		init_vector(&data->player->direction, 0, -100);
+	else if (data->map[pos.y][pos.x] == 'E')
+		init_vector(&data->player->direction, 100, 0);
+	else if (data->map[pos.y][pos.x] == 'S')
+		init_vector(&data->player->direction, 0, 100);
+	else if (data->map[pos.y][pos.x] == 'W')
+		init_vector(&data->player->direction, -100, 0);
+	calc(data->player);
+	data->player->pos.x = pos.x * UNIT + UNIT / 2;
+	data->player->pos.y = pos.y * UNIT + UNIT / 2;
 	return (TRUE);
 }
 

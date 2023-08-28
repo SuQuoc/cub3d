@@ -3,7 +3,7 @@
 
 static void	movement(int keysym, t_data *data)
 {
-	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
+	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
 	draw_player_camera(data, data->player, BLACK);
 	draw_rays(data, data->player, BLACK);
 	if (keysym == XK_w || keysym == XK_W)
@@ -14,38 +14,35 @@ static void	movement(int keysym, t_data *data)
 		player_move_right(data->player, data->mlx_ptr, data->win_ptr);
 	else if (keysym == XK_a || keysym == XK_A)
 		player_move_left(data->player, data->mlx_ptr, data->win_ptr);
-	draw_line(data, &data->player->pos, &data->player->direction, WHITE);
+	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
 	draw_player_camera(data, data->player, BLUE);
-	calculate_rays(data->player);
+	calculate_rays(data->player, (const char **)data->map);
 	draw_rays(data, data->player, GREEN);
 }
 
 static void	rotate_player_direction(int keysym, t_data *data)
 {
-	draw_line(data, &data->player->pos, &data->player->direction, BLACK);
+	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
 	draw_player_camera(data, data->player, BLACK);
 	draw_rays(data, data->player, BLACK);
 	if (keysym == XK_Right)
 	{
-		rotate_vector_clockwise(&data->player->fp_direction, &data->player->direction);
-		data->player->direction = vector_addition(data->player->direction, data->player->pos);
-		rotate_vector_clockwise(&data->player->fp_camera_left, &data->player->camera_left);
-		rotate_vector_clockwise(&data->player->fp_camera_right, &data->player->camera_right);
+		rotate_vector_clockwise(&data->player->direction);
+		rotate_vector_clockwise(&data->player->camera_left);
+		rotate_vector_clockwise(&data->player->camera_right);
 	}
 	else if (keysym == XK_Left)
 	{
-		rotate_vector_counter_clockwise(&data->player->fp_direction, &data->player->direction);
-		data->player->direction = vector_addition(data->player->direction, data->player->pos);
-		rotate_vector_counter_clockwise(&data->player->fp_camera_left, &data->player->camera_left);
-		rotate_vector_counter_clockwise(&data->player->fp_camera_right, &data->player->camera_right);
+		rotate_vector_counter_clockwise(&data->player->direction);
+		rotate_vector_counter_clockwise(&data->player->camera_left);
+		rotate_vector_counter_clockwise(&data->player->camera_right);
 	}
 	draw_player(data->player, data->mlx_ptr, data->win_ptr, RED);
-	draw_line(data, &data->player->pos, &data->player->direction, WHITE);
+	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
 	draw_player_camera(data, data->player, BLUE);
-	calculate_rays(data->player);
+	calculate_rays(data->player, (const char **)data->map);
 	draw_rays(data, data->player, GREEN);
-	calculate_move_values(data->player, data->player->fp_direction.x / POINT_SHIFTER, \
-								data->player->fp_direction.y / POINT_SHIFTER);
+	calculate_move_values(data->player, data->player->direction.x, data->player->direction.y);
 }
 
 int	key_input(int keysym, t_data *data)
