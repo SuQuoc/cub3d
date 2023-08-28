@@ -58,6 +58,10 @@
   "files.associations": {
     "iosfwd": "cpp",
     "fstream": "cpp",
-    "cubed.h": "c"
+    "cubed.h": "c",
+    "stat.h": "c",
+    "stdlib.h": "c",
+    "stdio.h": "c",
+    "mlx.h": "c"
   }
 }

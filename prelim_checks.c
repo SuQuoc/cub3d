@@ -49,6 +49,7 @@ int	idf_doubles(int *arr, int len)
 // -there are consecutive nl in map
 // -invalid map character
 // -player count valid
+// -map contains wall
 int	prelim_map_content_passed(char *str, t_data *data)
 {
 	int	i;
@@ -56,6 +57,8 @@ int	prelim_map_content_passed(char *str, t_data *data)
 
 	pl_count = 0;
 	i = 0;
+	if (ft_strchr(str, WALL) == NULL)
+		return (data->err = ERR_MAP, FALSE);
 	while (str[i])
 	{
 		while (str[i] && str[i] != '\n')
@@ -81,6 +84,7 @@ int	prelim_map_content_passed(char *str, t_data *data)
 // -consecutive nl in map
 // -invalid map character
 // -player count
+// -map contains wall
 int	prelim_checks_passed(char *str, t_data *data)
 {
 	int	i;
@@ -103,5 +107,7 @@ int	prelim_checks_passed(char *str, t_data *data)
 		while (str[i] && str[i] != '\n')
 			i++;
 	}
+	if (str[i] == '\0')
+        return (data->err = ERR_MAP, FALSE);
 	return (prelim_map_content_passed(&str[i], data));
 }

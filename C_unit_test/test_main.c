@@ -74,11 +74,11 @@ int main()
     //rgb_tests
     char rgb [][2][1000] = 
     {
+        {"valid_rgb_range.cub"          , ""},
         {"incomplete_rgb.cub"           , "Invalid amount of rgb values!\n"},
         {"invalid_256_rgb_range.cub"    , "Invalid rgb range!\n"},
-        {"invalid_rgb_range.cub"        , "Invalid rgb range!\n"},
-        {"negative_rgb_range.cub"       , "Invalid rgb range!\n"},
-        {"valid_rgb_range.cub"          , ""},
+        {"overflow_rgb_range.cub"       , "Invalid rgb range!\n"},
+        {"negative_rgb_range.cub"       , "Invalid rgb format! Example: C 10,20,30"},
         {"iv_rgb_input.cub"             , "Invalid rgb format! Example: C 10,20,30"},
         {"rgb_format.cub"               , "Invalid rgb format! Example: C 10,20,30"},
         {"rgb_format2.cub"              , "Invalid rgb format! Example: C 10,20,30"},
@@ -87,8 +87,64 @@ int main()
     test_framework("../maps/rgb_tests/", rgb);
 
 
-
+    //map_test
+    char map_test [][2][1000] = 
+    {
+		{"diagonals.cub"                            	, ""},
+		{"inner_circle_with_space_and_pillar.cub"		, "Make sure theres only 1 map and no 'flying' walls!\n"},
+        {"inner_circle_with_zero_and_pillar.cub"		, ""},	
+        {"inner_pillar_axis_connected.cub"		        , ""},
+		{"inner_pillar_diagonal_connected.cub"		    , ""},
+        {"inner_unlcosed_edges_spaces.cub"				, "map not closed by walls!\n"},
+		{"inner_unlcosed_edges_zero.cub"				, ""},
+		{"inner_walls_disconnected_from_outer.cub"		, ""},
+		{"nl_in_map_content.cub"						, "Consecutive nl in map content! Map content begins when every IDF was found!\n"},
+		{"no_map_content_except_player.cub"             , "Invalid map_content!\n"},
+        {"no_map_content.cub"							, "Invalid map_content!\n"},
+		{"no_newline_between_identifier_and_map.cub"	, ""},
+		{"only_space_line.cub"							, "Make sure theres only 1 map and no 'flying' walls!\n"},
+        {"player_in_corner_wout_edge.cub"				, "Invalid player position!\n"},
+        {"player_in_corner_wout_edge2.cub"				, "Invalid player position!\n"},
+        {"player_in_outer_wall.cub" 					, "Invalid player position!\n"},
+        {"player_touches_space.cub" 					, "Invalid player position!\n"},
+        {"separated_map_vertically.cub"					, "Make sure theres only 1 map and no 'flying' walls!\n"},
+		{"spaces_left_from_map.cub"						, ""},
+		{"text_after_map_content_wi_nl.cub"				, "Consecutive nl in map content! Map content begins when every IDF was found!\n"},	
+		{"text_after_map_content_wout_nl.cub"			, "Invalid map_content!\n"},	
+		{"unclosed_wall2.cub"							, "map not closed by walls!\n"},
+		{"unclosed_wall.cub"							, "map not closed by walls!\n"},
+		{"unknown_char_x_in_map_content.cub"			, "Invalid map_content!\n"},		
+		{"unlcosed_edges_space.cub"						, "map not closed by walls!\n"},
+		{"unlcosed_edges_zero.cub"						, ""},	
+		{"wall_outside_map.cub"							, "Make sure theres only 1 map and no 'flying' walls!\n"},
+		{"zero_in_bot_line.cub"							, "map not closed by walls!\n"},
+		{"zero_in_top_line.cub"							, "map not closed by walls!\n"},
+		{"zero_left_side.cub"							, "map not closed by walls!\n"},
+        {"zero_right_of_outer_wall.cub"					, "map not closed by walls!\n"},
+        {"zero_right_side.cub"							, "map not closed by walls!\n"},
+        {"", ""},
+    };
+    test_framework("../maps/map_content_tests/", map_test);
     
     
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

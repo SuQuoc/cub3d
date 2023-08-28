@@ -2,7 +2,7 @@
 
 int rgb_to_int(int r, int g, int b)
 {
-    return (r * 256*256) + (g * 256) + b;
+    return (r * 256 * 256) + (g * 256) + b;
 }
 
 int in_rgb_range(int n)
@@ -30,7 +30,7 @@ int invalid_rgb_input(char *str)
     i = 0;
     while (str[i] && str[i] != '\n')
     {
-        if (ft_isdigit(str[i]) == 0 && str[i] != ',' && str[i] != ' ')
+        if (ft_isdigit(str[i]) == 0 && str[i] != ',') //&& str[i] != ' ')
             return (TRUE);
         if (ft_isdigit(str[i]) == 2048)
             len++;

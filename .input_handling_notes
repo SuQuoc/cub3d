@@ -44,9 +44,35 @@ Auserdem muss ich immer bis zum ende loopen damit keine leaks entstehen
 
 
 
-MAP CONTENT
+CHECKING MAP CONTENT
 
-1. Flood fill
+EMPTY_CONTENT = spaces, null char, end of 2d arr meaning e.g. a WALL (1) at the first row after DPS
+
+
+USE 1. DPS and 2.DPS Flood fill spaces
+1. Fionas algo, Depth first search
+	1. look for a WALL (1) which is adjacent to a FLOOR (0) -> mark it as START (A)
+	2. DPS search clockwise (right, top, down, left)
+	3. if one WALL, from DPS, hits the START (A) from the left or bottom its VALID
+		a. if INVALID break and return Error
+		b. if VALID let flood fill continue and 
+		c. check if there are stil WALLS (1) adjacent (ALSO DIAGONALS) by EMPTY_CONTENT(), which havent been marked by DPS
+
+
+2. DPS flood fill spaces
+	1. t
+
+
+3. Walls outside problem: loop and look for WALL (1)
+	1. if it finds a WALL then check if its out of map 
+	(check if it hits a a COLORED Wall in every direction, amount of steps dont matter)
+
+4. Wall surrounded by spaces surrounded by walls inside problem: 
+
+
+
+
+1. Flood fill (OLD)
 	a. to check if there are connected spaces from the top to bottom (y = 0 til map_height)
 		and from left to right (x = 0 til map_width)
 		> yes this also means if there are entire lines of spaces left,rigth,above or under the map

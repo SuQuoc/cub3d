@@ -5,9 +5,11 @@ CFLAGS = -g -Wall -Werror -Wextra
 
 		
 SRC =	2d_array_utils.c \
+		2d_array_utils2.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \
+		dfs.c \
 		draw_line_utils.c \
 		draw_line.c \
 		error_msg.c \
@@ -21,6 +23,7 @@ SRC =	2d_array_utils.c \
 		loop_idf.c \
 		loop_map.c \
 		main.c \
+		map_check_utils.c \
 		parsing_utils.c \
 		player_movement.c \
 		player_rotation.c \
@@ -48,7 +51,7 @@ $(OBJDIR):
 
 $(NAME): $(OBJDIR) $(OBJ)
 	@$(MAKE) -C libft
-	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
+	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext
 
 clean:
 	@$(MAKE) -C libft fclean
