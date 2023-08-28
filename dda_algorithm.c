@@ -107,7 +107,7 @@ void	init_fp_ray(t_fp_ray *fp_ray, long int a, long int b)
 	if (a == 0)
 	{
 		fp_ray->variable_side = 0;
-		fp_ray->hl = 0;
+		fp_ray->hl = POINT_SHIFTER;
 	}
 	else if (b == 0)
 	{

@@ -8,7 +8,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include "mlx.h"
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>

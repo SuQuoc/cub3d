@@ -51,7 +51,7 @@ $(OBJDIR):
 
 $(NAME): $(OBJDIR) $(OBJ)
 	@$(MAKE) -C libft
-	$(C) $(CFLAGS) $(OBJ) libft/libft.a libmlx_Linux.a -o $(NAME) -lXext -lX11 -lm
+	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 
 clean:
 	@$(MAKE) -C libft fclean
