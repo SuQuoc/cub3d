@@ -7,30 +7,6 @@ void	init_vector(t_vector *vector, double x_position, double y_position)
 	vector->y = y_position;
 }
 
-/* static t_player	*init_player(void)
-{
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
-	init_vector(&player->fp_direction, \
-					0 * POINT_SHIFTER, -100 * POINT_SHIFTER);
-	init_vector(&player->fp_camera_right, \
-					60 * POINT_SHIFTER, 0 * POINT_SHIFTER);				
-	init_vector(&player->fp_camera_left, \
-					-60 * POINT_SHIFTER, 0 * POINT_SHIFTER);
-	init_vector(&player->direction, player->pos.x + 0, player->pos.y - 100);
-	init_vector(&player->camera_right, 60, 0);
-	init_vector(&player->camera_left, -60, 0);
-	player->fast_axis = 'y';
-	player->fast_diff = 100;
-	player->slow_diff = 0;
-	player->fault = 50;
-	return (player);
-} */
-
 static t_player	*init_player(void)
 {
 	t_player	*player;
@@ -38,10 +14,6 @@ static t_player	*init_player(void)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
-	init_vector(&player->direction, 100, 0);
-	init_vector(&player->camera_right, 0, 60);				
-	init_vector(&player->camera_left, 0, -60);
 	player->fast_axis = 'x';
 	player->fast_diff = 100;
 	player->slow_diff = 0;
