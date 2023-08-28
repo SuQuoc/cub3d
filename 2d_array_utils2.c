@@ -30,9 +30,9 @@ char	**fill_arr_out(char **arr, char c, size_t max_len)
 }
 
 // unused yet
-t_vector	find_char(char **arr, char c)
+t_pos	find_char(char **arr, char c)
 {
-	t_vector	pos;
+	t_pos	pos;
 
 	pos.y = 0;
 	while (arr[pos.y])
@@ -51,9 +51,9 @@ t_vector	find_char(char **arr, char c)
 }
 
 // returns the position in then arr if any character in find was found
-t_vector	find_chars(char **arr, char *find)
+t_pos	find_chars(char **arr, char *find)
 {
-	t_vector	pos;
+	t_pos	pos;
 	int			i;
 
 	pos.y = 0;

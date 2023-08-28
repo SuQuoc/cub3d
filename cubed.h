@@ -78,19 +78,24 @@ typedef struct s_ray
 	int			y;
 }				t_ray;
 
+typedef struct s_pos
+{
+	int			x;
+	int			y;
+}				t_pos;
+
 typedef struct s_vector
 {
 	int			x;
 	int			y;
 }				t_vector;
-
 // Direction is the direction vector plus the player position (pos).
 // The other vectors are just the respective vectors, except for the
 // fixed point ones, they are the vector * POINT_SHIFTER.
 typedef struct s_player
 {
-	t_vector	pos;
-
+	t_pos		pos;
+	char 		orientation;
 	t_vector	fixed_point_camera_right;
 	t_vector	fixed_point_camera_left;
 	t_vector	fixed_point_direction;
@@ -144,7 +149,7 @@ int				last_row(char **arr);
 int				surroundings_out_of_map(char **arr, int x, int y, char c);
 
 // 2d_array_utils2.c
-t_vector		find_chars(char **arr, char *find);
+t_pos		find_chars(char **arr, char *find);
 char			**fill_arr_out(char **arr, char c, size_t max_len);
 
 // array_utils.c
@@ -216,7 +221,7 @@ void			loop_idf(t_data *data);
 int				loop_idf_line(char *str, t_data *data);
 
 // loop_map.c
-int				valid_wall(char **map, t_vector pos);
+int				valid_wall(char **map, t_pos pos);
 void			cut_idfs_from_map(t_data *data);
 void			loop_map(t_data *data);
 

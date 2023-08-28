@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:35:31 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 17:00:35 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/28 15:38:43 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	free_2d_arrarr(char **arr, int y)
+{
+	if (!arr)
+		return ;
+	y--;
+	while (y >= 0)
+	{
+		free(arr[y]);
+		y--;
+	}
+	free(arr);
+}
 
 static char	**is_there_a_nullbyte(char **arrarr, const char *s, int y)
 {
@@ -35,6 +48,8 @@ static char	**seperating(const char *s, char c, char **arrarr, int x)
 			while (s[x + len] != c && s[x + len])
 				len++;
 			arrarr[y] = ft_substr(s, x, len);
+			if (arrarr[y] == NULL)
+				return (free_2d_arrarr(arrarr, y), NULL);
 			x += len;
 			len = 0;
 			y++;

@@ -2,7 +2,7 @@
 #include "cubed.h"
 
 //checks if "remaing" walls are valid
-int valid_wall(char **map, t_vector pos)
+int valid_wall(char **map, t_pos pos)
 {
     int ht;
 	int wh;
@@ -18,18 +18,7 @@ int valid_wall(char **map, t_vector pos)
 		&& map[pos.y - 1][pos.x + 1 ] == VOID
 		&& map[pos.y + 1][pos.x - 1] == VOID)
 		return (FALSE);
-	
-	//if (map[pos.y - 1][pos.x] == VOID
-	//	&& map[pos.y][pos.x - 1] == VOID
-	//	&& map[pos.y + 1][pos.x] == VOID
-	//	&& map[pos.y][pos.x + 1] == VOID
-	//	&& map[pos.y - 1][pos.x - 1] == VOID
-	//	&& map[pos.y + 1][pos.x + 1] == VOID
-	//	&& map[pos.y - 1][pos.x + 1 ] == VOID
-	//	&& map[pos.y + 1][pos.x - 1] == VOID)
-	//	return (FALSE);
-	
-	
+
 	//if (ft_strchr(" \0", map[pos.y][pos.x + 1])
     //    && (pos.x == 0 || map[pos.y][pos.x - 1] == VOID)
     //    && (pos.y == 0 || pos.x > (int)ft_strlen(map[pos.y - 1])
@@ -48,11 +37,19 @@ int valid_wall(char **map, t_vector pos)
 //since im already checking if theres a player i wont check again
 int valid_player_pos(t_data *data)
 {
-	t_vector pos;
-
+	t_pos pos;
 	pos = find_chars(data->map, PLAYER);
 	if (surroundings_out_of_map(data->map, pos.x, pos.y, VOID))
 		return (FALSE);
+	if (data->map[pos.y][pos.x] == 'N')
+		init_vector(&data->player->direction, pos.x, pos.y - 100);
+	if (data->map[pos.y][pos.x] == 'E')
+		init_vector(&data->player->direction, pos.x + 100, pos.y);
+	if (data->map[pos.y][pos.x] == 'S')
+		init_vector(&data->player->direction, pos.x, pos.y + 100);
+	if (data->map[pos.y][pos.x] == 'W')
+		init_vector(&data->player->direction, pos.x - 100, pos.y);
+	data->player->pos = pos;
 	return (TRUE);
 }
 
