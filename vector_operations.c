@@ -29,23 +29,23 @@ t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend)
 }
 
 //fp stands for fixed point
-static t_vector	calculate_camera_vector(const t_vector fp_camera, const t_vector fp_direction, int numerator)
+static t_vector	calculate_camera_vector(const t_vector camera, const t_vector direction, int numerator)
 {
-	t_vector		result;
-	long long int	x;
-	long long int	y;
-	int				rn;
+	t_vector	result;
+	double		x;
+	double		y;
+	int			rn;
 
 	if (RAY_NB <= 1)
 		rn = 1;
 	else
 		rn = RAY_NB / 2;
 
-	x = fp_camera.x * numerator / rn / POINT_SHIFTER;
-	y = fp_camera.y * numerator / rn / POINT_SHIFTER;	
+	x = camera.x * numerator / rn;
+	y = camera.y * numerator / rn;	
 
-	x += fp_direction.x / POINT_SHIFTER;
-	y += fp_direction.y / POINT_SHIFTER;	
+	x += direction.x;
+	y += direction.y;	
 	init_vector(&result, x, y);
 	return (result);
 }
@@ -59,20 +59,22 @@ void	calculate_rays(t_player	*player, const char **map)
 	numerator = (RAY_NB / 2);
 	while (x < (RAY_NB / 2))
 	{
-		player->ray[x] = calculate_camera_vector(player->fp_camera_left, player->fp_direction, numerator);
+		player->ray[x] = calculate_camera_vector(player->camera_left, player->direction, numerator);
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
-		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
+	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->ray_length[x]);
 
 		numerator--;
 		x++;
 	}
 	while (x < RAY_NB)
 	{
-		player->ray[x] = calculate_camera_vector(player->fp_camera_right, player->fp_direction, numerator);
+		player->ray[x] = calculate_camera_vector(player->camera_right, player->direction, numerator);
 		player->ray[x] = vector_multiplication(player->ray[x], 2);
-		dda_algorithm(player, &player->ray[x], map, (long int *)&player->fp_ray_length[x]);
+	//	dda_algorithm(player, &player->ray[x], map, (long int *)&player->ray_length[x]);
 
 		numerator++;
 		x++;
 	}
+	map++;
+	map--;
 }

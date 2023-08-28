@@ -30,14 +30,13 @@ void	player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr)
 	t_vector	move;
 
 	move = get_movement(player);
-	if (player->fp_direction.x < 0)
+	if (player->direction.x < 0)
 		move.x *= -1;
-	if (player->fp_direction.y < 0)
+	if (player->direction.y < 0)
 		move.y *= -1;
 
 	draw_player(player, mlx_ptr, win_ptr, BLACK);
 	player->pos = vector_addition(player->pos, move);
-	player->direction = vector_addition(player->direction, move);
 	draw_player(player, mlx_ptr, win_ptr, RED);
 }
 
@@ -46,14 +45,13 @@ void	player_move_back(t_player *player, void *mlx_ptr, void *win_ptr)
 	t_vector	move;
 
 	move = get_movement(player);
-	if (player->fp_direction.x > 0)
+	if (player->direction.x > 0)
 		move.x *= -1;
-	if (player->fp_direction.y > 0)
+	if (player->direction.y > 0)
 		move.y *= -1;
 
 	draw_player(player, mlx_ptr, win_ptr, BLACK);
 	player->pos = vector_addition(player->pos, move);
-	player->direction = vector_addition(player->direction, move);
 	draw_player(player, mlx_ptr, win_ptr, RED);
 }
 
@@ -63,9 +61,9 @@ void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr)
 	int			temp;
 
 	move = get_movement(player);
-	if (player->fp_direction.x < 0)
+	if (player->direction.x < 0)
 		move.x *= -1;
-	if (player->fp_direction.y < 0)
+	if (player->direction.y < 0)
 		move.y *= -1;
 
 	move.y *= -1;
@@ -75,7 +73,6 @@ void	player_move_right(t_player *player, void *mlx_ptr, void *win_ptr)
 
 	draw_player(player, mlx_ptr, win_ptr, BLACK);
 	player->pos = vector_addition(player->pos, move);
-	player->direction = vector_addition(player->direction, move);
 	draw_player(player, mlx_ptr, win_ptr, RED);
 }
 
@@ -85,9 +82,9 @@ void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr)
 	int			temp;
 
 	move = get_movement(player);
-	if (player->fp_direction.x < 0)
+	if (player->direction.x < 0)
 		move.x *= -1;
-	if (player->fp_direction.y < 0)
+	if (player->direction.y < 0)
 		move.y *= -1;
 
 	move.x *= -1;
@@ -97,6 +94,5 @@ void	player_move_left(t_player *player, void *mlx_ptr, void *win_ptr)
 
 	draw_player(player, mlx_ptr, win_ptr, BLACK);
 	player->pos = vector_addition(player->pos, move);
-	player->direction = vector_addition(player->direction, move);
 	draw_player(player, mlx_ptr, win_ptr, RED);
 }

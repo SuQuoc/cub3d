@@ -1,4 +1,4 @@
-
+/* 
 #include "cubed.h"
 
 int	get_fp_segment_length(int a, int b)
@@ -23,7 +23,7 @@ int	get_multiplicator(int pos)
 	return (pos);
 }
 
-void	get_y_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
+void	get_y_ray_length(t_ray *fp_ray, t_vector *pos, const char **map)
 {
 	if (fp_ray->hl == 0)
 		return ;
@@ -41,7 +41,7 @@ void	get_y_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 	fp_ray->variable_side *= UNIT;
 	fp_ray->fixed_side *= UNIT;
 	fp_ray->hl *= UNIT;
-	while (1/* fp_ray->length / POINT_SHIFTER <= MAX_RAY_LENGTH */)
+	while (1)
 	{
 		fp_ray->x += fp_ray->variable_side;
 		fp_ray->y += fp_ray->fixed_side;
@@ -59,7 +59,7 @@ void	get_y_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 	}
 }
 
-void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
+void	get_x_ray_length(t_ray *fp_ray, t_vector *pos, const char **map)
 {
 	if (fp_ray->hl == 0)
 		return ;
@@ -78,7 +78,7 @@ void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 	fp_ray->variable_side *= UNIT;
 	fp_ray->fixed_side *= UNIT;
 	fp_ray->hl *= UNIT;
-	while (1/* fp_ray->length / POINT_SHIFTER <= MAX_RAY_LENGTH */)
+	while (1)
 	{
 		fp_ray->y += fp_ray->variable_side;
 		fp_ray->x += fp_ray->fixed_side;
@@ -98,7 +98,7 @@ void	get_x_ray_length(t_fp_ray *fp_ray, t_vector *pos, const char **map)
 	}
 }
 
-void	init_fp_ray(t_fp_ray *fp_ray, long int a, long int b)
+void	init_ray(t_ray *fp_ray, long int a, long int b)
 {
 	fp_ray->fixed_side = POINT_SHIFTER;
 	fp_ray->length = 0;
@@ -132,13 +132,13 @@ void	init_fp_ray(t_fp_ray *fp_ray, long int a, long int b)
 //hl = hypotenuse_length
 void	dda_algorithm(t_player *player, t_vector *max_ray, const char **map, long int *fp_length)
 {
-	t_fp_ray	fp_x_ray;
-	t_fp_ray	fp_y_ray;
+	t_ray	fp_x_ray;
+	t_ray	fp_y_ray;
 	
 	if (!map)
 		return ;
-	init_fp_ray(&fp_x_ray, max_ray->y, max_ray->x);
-	init_fp_ray(&fp_y_ray, max_ray->x, max_ray->y);
+	init_ray(&fp_x_ray, max_ray->y, max_ray->x);
+	init_ray(&fp_y_ray, max_ray->x, max_ray->y);
 	get_x_ray_length(&fp_x_ray, &player->pos, map);
 	get_y_ray_length(&fp_y_ray, &player->pos, map);
 	if (fp_x_ray.length < fp_y_ray.length)
@@ -154,7 +154,7 @@ void	dda_algorithm(t_player *player, t_vector *max_ray, const char **map, long i
 		*fp_length = fp_y_ray.length;
 	}
 }
-
+*/
 
 
 

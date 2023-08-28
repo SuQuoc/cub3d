@@ -73,8 +73,8 @@
 
 //for raycasting
 //cos and sin are already point-shifted
-#define COS_1 65526 //0.999847695 <-cos(1)
-#define SIN_1 1144 //0.017452406 <-sin(1)
+#define COS_1 0.999847695 //<-cos(1)
+#define SIN_1 0.017452406 //<-sin(1)
 
 #define POINT_SHIFTER 65536
 
@@ -83,41 +83,34 @@
 #define MAX_RAY_LENGTH 200
 
 //hl = hypotenuse_length
-//fp = fixed point
-typedef struct s_fp_ray
+typedef struct s_ray
 {
-	long int	variable_side;
-	long int	fixed_side;
-	long int	length;
-	long int	hl;
-	long int	x;
-	long int	y;
-}	t_fp_ray;
+	double	variable_side;
+	double	fixed_side;
+	double	length;
+	double	hl;
+	double	x;
+	double	y;
+}	t_ray;
 
 typedef struct s_vector
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 }	t_vector;
 
-//fp stands for fixed point
 
-//Direction is the direction vector plus the player position (pos),
-//The rays in ray are the ray-vectors(fraction of camera) plus the direction (whithout pos)
-//The other vectors are just the respective vectors, except for the
-//fixed point ones, they are the vector * POINT_SHIFTER.
+//The rays in ray are the ray-vectors(fraction of camera) plus the direction
+//The other vectors are just the respective vectors.
 typedef struct s_player
 {
 	t_vector	pos;
 
-	t_vector	fp_camera_right;
-	t_vector	fp_camera_left;
-	t_vector	fp_direction;
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
 	t_vector	ray[RAY_NB];
-	int			fp_ray_length[RAY_NB];
+	double		ray_length[RAY_NB];
 	char		fast_axis;
 	int			fast_diff;
 	int			slow_diff;
@@ -179,16 +172,12 @@ void		fast_x_xneg_ypos(const t_data *data, t_line *line, const int color);
 void		fast_y_xneg_ypos(const t_data *data, t_line *line, const int color);
 
 // draw_line.c
-void		draw_line(const t_data *data, const t_vector *start, const t_vector *end, const int color);
+void		draw_line(const t_data *data, const t_vector start, const t_vector end, const int color);
 
 // draw_map.c
 void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
 void		draw_map_walls(t_data *data, char **map, int color);
 
-// init_structs.c
-void		init_vector(t_vector *vector, int x_position, int y_position);
-t_data		*init_data(void);
-void		init_line(t_line *line, const t_vector *start, const t_vector *end);
 
 // key_input.c
 int			key_input(int keysym, t_data *data);
@@ -212,8 +201,9 @@ int			is_txt_idf(char *str);
 int			is_color_idf(char *str);
 
 // init_structs.c
+void		init_vector(t_vector *vector, double x_position, double y_position);
 t_data		*init_data(void);
-void		init_line(t_line *line, const t_vector *start, const t_vector *end);
+void		init_line(t_line *line, const t_vector start, const t_vector end);
 
 // loop_file.c
 void		loop_file(int fd, t_data *data);
@@ -223,7 +213,7 @@ void		loop_idf(t_data *data);
 int			loop_idf_line(char *str, t_data *data);
 
 // loop_map.c
-void cut_idfs_from_map(t_data *data);
+void		cut_idfs_from_map(t_data *data);
 
 
 // render.c
@@ -248,8 +238,8 @@ void		player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
 
 // player_rotations.c
 void		calculate_move_values(t_player *player, int x, int y);
-void		rotate_vector_clockwise(t_vector *fp_vector, t_vector *vector);
-void		rotate_vector_counter_clockwise(t_vector *fp_vector, t_vector *vector);
+void		rotate_vector_clockwise(t_vector *vector);
+void		rotate_vector_counter_clockwise(t_vector *vector);
 
 // player.c
 void		draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);

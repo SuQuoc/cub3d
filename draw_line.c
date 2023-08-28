@@ -67,8 +67,8 @@ static void	fast_y_xpos_yneg(const t_data *data, t_line *line, const int color)/
 	}
 }
 
-void	draw_line(const t_data *data, const t_vector *start, \
-					const t_vector *end, const int color)
+void	draw_line(const t_data *data, const t_vector start, \
+					const t_vector end, const int color)
 {
 	t_line	line;
 

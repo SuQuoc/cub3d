@@ -25,9 +25,12 @@ void	draw_player_camera(t_data *data, t_player *player, int color)
 	t_vector	right;
 	t_vector	left;
 
-	init_vector(&left, player->camera_left.x + player->direction.x, player->camera_left.y + player->direction.y);
-	init_vector(&right, player->camera_right.x + player->direction.x, player->camera_right.y + player->direction.y);
-	draw_line(data, &left, &right, color);
+	init_vector(&left, player->camera_left.x + player->direction.x + player->pos.x, \
+						player->camera_left.y + player->direction.y + player->pos.y);
+
+	init_vector(&right, player->camera_right.x + player->direction.x + player->pos.x,\
+						player->camera_right.y + player->direction.y + player->pos.y);
+	draw_line(data, left, right, color);
 }
 
 void	draw_rays(t_data *data, t_player *player, int color)
@@ -39,7 +42,7 @@ void	draw_rays(t_data *data, t_player *player, int color)
 	while (x < RAY_NB)
 	{
 		ray = vector_addition(player->ray[x], player->pos);
-		draw_line(data, &player->pos, &ray, color);
+		draw_line(data, player->pos, ray, color);
 		x++;
 	}
 }

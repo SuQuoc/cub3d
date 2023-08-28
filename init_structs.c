@@ -1,7 +1,7 @@
 
 #include "cubed.h"
 
-void	init_vector(t_vector *vector, int x_position, int y_position)
+void	init_vector(t_vector *vector, double x_position, double y_position)
 {
 	vector->x = x_position;
 	vector->y = y_position;
@@ -39,14 +39,8 @@ static t_player	*init_player(void)
 	if (!player)
 		return (NULL);
 	init_vector(&player->pos, WINDOW_W / 2, WINDOW_H / 2);
-	init_vector(&player->fp_direction, \
-					100 * POINT_SHIFTER, 0 * POINT_SHIFTER);
-	init_vector(&player->fp_camera_right, \
-					0 * POINT_SHIFTER, 60 * POINT_SHIFTER);				
-	init_vector(&player->fp_camera_left, \
-					0 * POINT_SHIFTER, -60 * POINT_SHIFTER);
-	init_vector(&player->direction, player->pos.x + 100, player->pos.y + 0);
-	init_vector(&player->camera_right, 0, 60);
+	init_vector(&player->direction, 100, 0);
+	init_vector(&player->camera_right, 0, 60);				
 	init_vector(&player->camera_left, 0, -60);
 	player->fast_axis = 'x';
 	player->fast_diff = 100;
@@ -115,12 +109,12 @@ static void	line_calculate_values(t_line *line)
 	}
 }
 
-void	init_line(t_line *line, const t_vector *start, const t_vector *end)
+void	init_line(t_line *line, const t_vector start, const t_vector end)
 {
-	line->start_x = start->x;
-	line->start_y = start->y;
-	line->end_x = end->x;
-	line->end_y = end->y;
+	line->start_x = start.x;
+	line->start_y = start.y;
+	line->end_x = end.x;
+	line->end_y = end.y;
 	line->x_diff = (line->end_x - line->start_x);
 	line->y_diff = (line->end_y - line->start_y);
 	line_calculate_values(line);
