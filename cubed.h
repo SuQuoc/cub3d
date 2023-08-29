@@ -70,8 +70,7 @@
 #define SIN_1 0.017452406 //<-sin(1)
 
 #define UNIT 30
-#define RAY_NB 21 //needs to be uneven
-#define MAX_RAY_LENGTH 200
+#define RAY_NB 1 //needs to be uneven
 
 
 typedef struct s_pos
@@ -175,6 +174,7 @@ int 		search_floor_ceiling(char *str, t_data *data);
 // dda_algorithm_utils.c
 double		get_segment_length(double a, double b);
 int			get_multiplicator(int pos);
+int			check_map_position(const t_data *data, t_ray *ray, t_vector *pos);
 void		init_ray(t_ray *ray, double a, double b);
 
 // dda_algorithm.c

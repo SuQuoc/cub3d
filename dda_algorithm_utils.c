@@ -13,9 +13,32 @@ double	get_segment_length(double a, double b)
 
 int	get_multiplicator(int pos)
 {
+	if (pos < 0)
+		pos *= -1;
 	while (pos > UNIT)
 		pos -= UNIT;
 	return (pos);
+}
+
+int	check_map_position(const t_data *data, t_ray *ray, t_vector *pos)
+{
+	int	x;
+	int y;
+
+	y = (ray->y + pos->y) / UNIT;
+	x = (ray->x + pos->x) / UNIT;
+	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+		return (1);
+	if (ray->fixed_side < 0 && (x > 0 || y > 0))
+	{
+		y = (ray->y + pos->y - 1) / UNIT;
+		x = (ray->x + pos->x - 1) / UNIT;
+		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+			return (1);
+	}
+	if (data->map[y][x] == '1')
+		return (1);
+	return (0);
 }
 
 void	init_ray(t_ray *ray, double a, double b)
