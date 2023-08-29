@@ -36,14 +36,14 @@ static void set_orientation(t_player *player)
 {
 	t_vector tmp;
 
-	tmp.x = player->direction.x / 100;
-	tmp.y = player->direction.y / 100;
+	tmp.x = player->direction.x / DIRECTION_LENGTH;
+	tmp.y = player->direction.y / DIRECTION_LENGTH;
 	player->camera_left.x = tmp.y * -1;
 	player->camera_left.y = tmp.x;
 	player->camera_right.x = tmp.y;
 	player->camera_right.y = tmp.x * -1;
-	player->camera_left = vector_multiplication(player->camera_left, 60);
-	player->camera_right = vector_multiplication(player->camera_right, 60);
+	player->camera_left = vector_multiplication(player->camera_left, HALF_CAMERA_LENGTH);
+	player->camera_right = vector_multiplication(player->camera_right, HALF_CAMERA_LENGTH);
 }
 
 //checks if the position of the player is valid
@@ -55,13 +55,13 @@ int valid_player_pos(t_data *data)
 	if (surroundings_out_of_map(data->map, pos.x, pos.y, VOID))
 		return (FALSE);
 	if (data->map[pos.y][pos.x] == 'N')
-		init_vector(&data->player->direction, 0, -100);
+		init_vector(&data->player->direction, 0, -DIRECTION_LENGTH);
 	else if (data->map[pos.y][pos.x] == 'E')
-		init_vector(&data->player->direction, 100, 0);
+		init_vector(&data->player->direction, DIRECTION_LENGTH, 0);
 	else if (data->map[pos.y][pos.x] == 'S')
-		init_vector(&data->player->direction, 0, 100);
+		init_vector(&data->player->direction, 0, DIRECTION_LENGTH);
 	else if (data->map[pos.y][pos.x] == 'W')
-		init_vector(&data->player->direction, -100, 0);
+		init_vector(&data->player->direction, -DIRECTION_LENGTH, 0);
 	set_orientation(data->player);
 	data->player->pos.x = pos.x * UNIT + UNIT / 2;
 	data->player->pos.y = pos.y * UNIT + UNIT / 2;

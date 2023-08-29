@@ -29,10 +29,12 @@ int	check_map_position(const t_data *data, t_ray *ray, t_vector *pos)
 	x = (ray->x + pos->x) / UNIT;
 	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 		return (1);
-	if (ray->fixed_side < 0 && (x > 0 || y > 0))
+	if (ray->y < 0 || ray->x < 0/*  && (x > 0 || y > 0) */)
 	{
-		y = (ray->y + pos->y - 1) / UNIT;
-		x = (ray->x + pos->x - 1) / UNIT;
+		if (ray->y < 0)
+			y = (ray->y + pos->y - 1) / UNIT;
+		if (ray->x < 0)
+			x = (ray->x + pos->x - 1) / UNIT;
 		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 			return (1);
 	}

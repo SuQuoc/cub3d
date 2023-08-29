@@ -65,12 +65,18 @@
 #define RED 0xFF0000
 
 //for raycasting
-//cos and sin are already point-shifted
 #define COS_1 0.999847695 //<-cos(1)
 #define SIN_1 0.017452406 //<-sin(1)
+#define COS_2 0.999390827
+#define SIN_2 0.034899497
+#define COS_3 0.998629535
+#define SIN_3 0.052335956
+#define PI 3.141592654
 
 #define UNIT 30
-#define RAY_NB 181 //needs to be uneven
+#define RAY_NB 101 //needs to be uneven
+#define DIRECTION_LENGTH 100
+#define HALF_CAMERA_LENGTH 60
 
 typedef struct s_image
 {
@@ -80,6 +86,8 @@ typedef struct s_image
 	int				line_len;
 	int				endian;
 }					t_image;
+#define ROTATITON_SPEED 2
+#define MOVEMENT_SPEED 5
 
 typedef struct s_pos
 {
@@ -156,6 +164,8 @@ typedef struct s_data
 	int			floor_color;
 	int			ceil_color;
 	int			err;
+	double		cos;
+	double		sin;
 }				t_data;
 
 // 2d_array_utils.c
@@ -270,8 +280,8 @@ void		player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
 
 // player_rotations.c
 void		calculate_move_values(t_player *player, int x, int y);
-void		rotate_vector_clockwise(t_vector *vector);
-void		rotate_vector_counter_clockwise(t_vector *vector);
+void		rotate_vector_clockwise(t_vector *vector, double cos, double sin);
+void		rotate_vector_counter_clockwise(t_vector *vector, double cos, double sin);
 
 // player.c
 void		draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color);

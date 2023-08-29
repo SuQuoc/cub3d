@@ -27,15 +27,15 @@ static void	rotate_player_direction(int keysym, t_data *data)
 	draw_rays(data, data->player, BLACK);
 	if (keysym == XK_Right)
 	{
-		rotate_vector_clockwise(&data->player->direction);
-		rotate_vector_clockwise(&data->player->camera_left);
-		rotate_vector_clockwise(&data->player->camera_right);
+		rotate_vector_clockwise(&data->player->direction, data->cos, data->sin);
+		rotate_vector_clockwise(&data->player->camera_left, data->cos, data->sin);
+		rotate_vector_clockwise(&data->player->camera_right, data->cos, data->sin);
 	}
 	else if (keysym == XK_Left)
 	{
-		rotate_vector_counter_clockwise(&data->player->direction);
-		rotate_vector_counter_clockwise(&data->player->camera_left);
-		rotate_vector_counter_clockwise(&data->player->camera_right);
+		rotate_vector_counter_clockwise(&data->player->direction, data->cos, data->sin);
+		rotate_vector_counter_clockwise(&data->player->camera_left, data->cos, data->sin);
+		rotate_vector_counter_clockwise(&data->player->camera_right, data->cos, data->sin);
 	}
 	draw_player(data->player, data->mlx_ptr, data->win_ptr, RED);
 	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
