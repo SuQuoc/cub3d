@@ -23,7 +23,7 @@ void	calculate_move_values(t_player *player, int x, int y)
 	}
 }
 
-void	rotate_vector_clockwise(t_vector *vector)
+void	rotate_vector_clockwise(t_vector *vector, double cos, double sin)
 {
 	double	new_x;
 	double	new_y;
@@ -32,17 +32,13 @@ void	rotate_vector_clockwise(t_vector *vector)
 
 	old_x = vector->x;
 	old_y = vector->y;
-	new_x = ((COS_1 * old_x) - (SIN_1 * old_y));
-	new_y = ((SIN_1 * old_x) + (COS_1 * old_y));
+	new_x = ((cos * old_x) - (sin * old_y));
+	new_y = ((sin * old_x) + (cos * old_y));
 	vector->x = new_x;
 	vector->y = new_y;
-
-/* 	vector->x = ((COS_1 * vector->x) - (SIN_1 * vector->y)) / POINT_SHIFTER;
-	vector->y = ((SIN_1 * vector->x) + (COS_1 * vector->y)) / POINT_SHIFTER; */
-
 }
 
-void	rotate_vector_counter_clockwise(t_vector *vector)
+void	rotate_vector_counter_clockwise(t_vector *vector, double cos, double sin)
 {
 	double	new_x;
 	double	new_y;
@@ -51,11 +47,8 @@ void	rotate_vector_counter_clockwise(t_vector *vector)
 
 	old_x = vector->x;
 	old_y = vector->y;
-	new_x = ((COS_1 * old_x) + (SIN_1 * old_y));
-	new_y = ((-SIN_1 * old_x) + (COS_1 * old_y));
+	new_x = ((cos * old_x) + (sin * old_y));
+	new_y = ((-sin * old_x) + (cos * old_y));
 	vector->x = new_x;
 	vector->y = new_y;
-
-/* 	vector->x = ((COS_1 * vector->x) + (SIN_1 * vector->y));
-	vector->y = ((-SIN_1 * vector->x) + (COS_1 * vector->y)); */
 }

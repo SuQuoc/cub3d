@@ -6,7 +6,7 @@ static t_vector	get_movement(t_player *player)
 	t_vector	vector;
 
 	init_vector(&vector, 0, 0);
-	while (vector.x < 3 && vector.y < 3)
+	while (vector.x < MOVEMENT_SPEED && vector.y < MOVEMENT_SPEED)
 	{
 		player->fault -= player->slow_diff;
 		if (player->fault <= 0)

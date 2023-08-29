@@ -74,4 +74,6 @@ void	calculate_rays(t_data *data, t_player *player)
 		numerator++;
 		x++;
 	}
+	data++;
+	data--;
 }
