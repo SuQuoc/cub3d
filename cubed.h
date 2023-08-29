@@ -70,7 +70,9 @@
 #define SIN_1 0.017452406 //<-sin(1)
 
 #define UNIT 30
-#define RAY_NB 1 //needs to be uneven
+#define RAY_NB 21 //needs to be uneven
+#define DIRECTION_LENGTH 100
+#define HALF_CAMERA_LENGTH 60
 
 
 typedef struct s_pos
