@@ -48,57 +48,59 @@ int main(int argc, char **argv)
 	loop_file(fd, data); //3k
 	make_window(data); //10k
 	
-	data->img = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
-	int pixel_bits;
-	int line_bytes;
-	int endian;
-	int *buffer = (int *)mlx_get_data_addr(data->img, &pixel_bits, &line_bytes, &endian);
-	printf("pixel bits: %d\n", pixel_bits);
-	printf("line_bytes: %d\n", line_bytes);
-	printf("endian: %d\n", endian);
-	line_bytes /= 4;
-
-	int color = RED;
-	int y = 0;
-	int x;
-	while (y < WINDOW_H)
-	{
-		x = 0;
-		while (x < WINDOW_W)
-		{
-	    	buffer[(y * line_bytes) + x] = color;
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-
-
-	//t_image *img = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
-	//int *buffer2 = (int *)mlx_get_data_addr(img, &img->bpp, &img->line_len, &img->endian);
-	//printf("V2: pixel bits: %d\n", img->bpp);
-	//printf("V2: line_bytes: %d\n", img->line_len);
-	//printf("V2: endian: %d\n", img->endian);
-	//img->line_len /= 4;
-	//color = RED;
-	////img->bpp = 0;
-	////img->line_len = 0;
-	////img->endian = 0;
-	//y = 0;
+	//data->img = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
+	//int pixel_bits;
+	//int line_bytes;
+	//int endian;
+	//int *buffer = (int *)mlx_get_data_addr(data->img, &pixel_bits, &line_bytes, &endian);
+	//printf("pixel bits: %d\n", pixel_bits);
+	//printf("line_bytes: %d\n", line_bytes);
+	//printf("endian: %d\n", endian);
+	//line_bytes /= 4;
+//
+	//int color = RED;
+	//int y = 0;
+	//int x;
 	//while (y < WINDOW_H)
 	//{
 	//	x = 0;
 	//	while (x < WINDOW_W)
 	//	{
-	//    	buffer2[(y * line_bytes) + x] = color;
+	//    	buffer[(y * line_bytes) + x] = color;
 	//		x++;
 	//	}
 	//	y++;
 	//}
+	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
+
+
+	t_image img2;
+	img2.img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
+	int *buffer2 = (int *)mlx_get_data_addr(img2.img_ptr, &img2.bpp, &img2.line_len, &img2.endian);
+	printf("V2: pixel bits: %d\n", img2.bpp);
+	printf("V2: line_bytes: %d\n", img2.line_len);
+	printf("V2: endian: %d\n", img2.endian);
+	img2.line_len /= 4;
+	int color = BLUE;
+	//img->bpp = 0;
+	//img->line_len = 0;
+	//img->endian = 0;
+	int y = 0;
+	while (y < WINDOW_H)
+	{
+		int x = 0;
+		while (x < WINDOW_W)
+		{
+	    	buffer2[(y * img2.line_len) + x] = color;
+			x++;
+		}
+		y++;
+	}
 	//mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, 0, 0);
-
-
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img2.img_ptr, 0, 0);
+	
+	
+	
 	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
 	draw_map_walls(data, data->map, WHITE);
 	calculate_rays(data, data->player);

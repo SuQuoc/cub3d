@@ -86,6 +86,7 @@ typedef struct s_image
 	int				line_len;
 	int				endian;
 }					t_image;
+
 #define ROTATITON_SPEED 2
 #define MOVEMENT_SPEED 5
 
