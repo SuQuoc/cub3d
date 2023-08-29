@@ -70,8 +70,16 @@
 #define SIN_1 0.017452406 //<-sin(1)
 
 #define UNIT 30
-#define RAY_NB 1 //needs to be uneven
+#define RAY_NB 181 //needs to be uneven
 
+typedef struct s_image
+{
+	void			*img_ptr;
+	int				*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+}					t_image;
 
 typedef struct s_pos
 {
@@ -131,9 +139,10 @@ typedef struct s_line
 typedef struct s_data
 {
 	t_player	*player;
+	t_image		*img;
+
 	void		*mlx_ptr;
 	void		*win_ptr;
-
 	char		**map;
 	char		**map_copy;
 	int			map_width;
@@ -217,6 +226,10 @@ int			key_input(int keysym, t_data *data);
 // identifier_utils.c
 int			is_txt_idf(char *str);
 int			is_color_idf(char *str);
+
+// image.c
+void put_pixel_to_img(t_image *img, int color, int width, int height);
+
 
 // init_structs.c
 void		init_vector(t_vector *vector, double x_position, double y_position);

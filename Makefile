@@ -19,6 +19,7 @@ SRC =	2d_array_utils.c \
 		ft_strcmp.c \
 		hooks.c \
 		identifier_utils.c \
+		image.c \
 		init_structs.c \
 		key_input.c \
 		loop_file.c \

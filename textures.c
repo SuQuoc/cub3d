@@ -61,7 +61,7 @@ int search_texture(char *str, t_data *data)
     }
     else if (ft_strncmp(str, SOUTH, 3) == 0)
     {
-        data->S_texture =  set_texture(str, SOUTH, data);
+        data->S_texture = set_texture(str, SOUTH, data);
         found = TRUE;
     }
     else if (ft_strncmp(str, WEST, 3) == 0)

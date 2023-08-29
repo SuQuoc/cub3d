@@ -42,6 +42,7 @@ t_data *init_data(void)
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;
+	data->map_copy = NULL;
 	data->N_texture = NULL;
 	data->E_texture = NULL;
 	data->S_texture = NULL;

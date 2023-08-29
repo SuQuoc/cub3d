@@ -15,6 +15,23 @@ void ft_mlx_init(t_data *data)
 	if (data->mlx_ptr == NULL)
 		free_data(data);
 }
+//static void texture_test(t_data *data)
+//{
+//	int pixel_bits;
+//	int line_bytes;
+//	int endian;
+//	char *buffer = mlx_get_data_addr(data->E_texture, &pixel_bits, &line_bytes, &endian);
+//	(void)buffer;
+//	printf("pixel bits: %d\n", pixel_bits);
+//	printf("line_bytes: %d\n", line_bytes);
+//	printf("endian: %d\n", endian);
+//	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->E_texture, 100, 100);
+//
+//	usleep(10000);
+//	data->img.img_ptr = mlx_new_image(data->mlx_ptr, 100, 100);
+//	manipulate_img(data->img.img_ptr, RED);
+//	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+//}
 
 int main(int argc, char **argv)
 {
@@ -26,10 +43,61 @@ int main(int argc, char **argv)
 	fd = check_extension(argv[1]);
 	if (fd == -1)
 		return (1);
-	data = init_data();
-	ft_mlx_init(data);	
-	loop_file(fd, data);
-	make_window(data);
+	data = init_data(); 
+	ft_mlx_init(data); //100k	
+	loop_file(fd, data); //3k
+	make_window(data); //10k
+	
+	data->img = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
+	int pixel_bits;
+	int line_bytes;
+	int endian;
+	int *buffer = (int *)mlx_get_data_addr(data->img, &pixel_bits, &line_bytes, &endian);
+	printf("pixel bits: %d\n", pixel_bits);
+	printf("line_bytes: %d\n", line_bytes);
+	printf("endian: %d\n", endian);
+	line_bytes /= 4;
+
+	int color = RED;
+	int y = 0;
+	int x;
+	while (y < WINDOW_H)
+	{
+		x = 0;
+		while (x < WINDOW_W)
+		{
+	    	buffer[(y * line_bytes) + x] = color;
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
+
+
+	//t_image *img = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
+	//int *buffer2 = (int *)mlx_get_data_addr(img, &img->bpp, &img->line_len, &img->endian);
+	//printf("V2: pixel bits: %d\n", img->bpp);
+	//printf("V2: line_bytes: %d\n", img->line_len);
+	//printf("V2: endian: %d\n", img->endian);
+	//img->line_len /= 4;
+	//color = RED;
+	////img->bpp = 0;
+	////img->line_len = 0;
+	////img->endian = 0;
+	//y = 0;
+	//while (y < WINDOW_H)
+	//{
+	//	x = 0;
+	//	while (x < WINDOW_W)
+	//	{
+	//    	buffer2[(y * line_bytes) + x] = color;
+	//		x++;
+	//	}
+	//	y++;
+	//}
+	//mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, 0, 0);
+
 
 	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
 	draw_map_walls(data, data->map, WHITE);
