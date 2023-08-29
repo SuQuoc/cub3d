@@ -37,20 +37,25 @@ int main()
     //extension_tests
     char extension [][2][1000] = 
     {
-        {"cub.cub"                      , "Valid"},
-        {".cub"                         , "No hidden files or 'rel-rel-paths'\n"},
-        {"cu"                           , "Wrong file type/extension!\n"},
-        {"valid.cub"                    , "Valid"},
-        {"double_extension.cub.cub"     , "Valid"},
-        {"./double_extension.cub.cub"   , "No hidden files or 'rel-rel-paths'\n"},
-        {"doesnt_exist.cub"             , "U have to CHECK OPEN ALSO! Tomorrow\n"},
-        {"file_cub"                     , "Wrong file type/extension!\n"},
-        {"invalid_extension_cub"        , "Wrong file type/extension!\n"},
-        {"'dumb space.cub'"             , "Wrong file type/extension!\n"},
-        {"invalid_extension.cu"         , "Wrong file type/extension!\n"},
+        {"cub.cub"                          , "Valid"},
+        {".cub"                             , "Nothing hidden allowed\n"},
+        {"cu"                               , "Wrong file type/extension!\n"},
+        {"valid.cub"                        , "Valid"},
+        {"./valid.cub"                      , "Valid"},
+        {".valid.cub"                       , "Nothing hidden allowed\n"},
+        {"../extension_tests/valid.cub"     , "Valid"},
+        {".././extension_tests/valid.cub"   , "Valid"},
+        {"../.extension_tests/valid.cub"    , "Nothing hidden allowed\n"},
+        {"double_extension.cub.cub"         , "Valid"},
+        {"./double_extension.cub.cub"       , "Valid"},
+        {"doesnt_exist.cub"                 , "failed to open file\n"},
+        {"file_cub"                         , "Wrong file type/extension!\n"},
+        {"invalid_extension_cub"            , "Wrong file type/extension!\n"},
+        {"dumb space.cub"                   , "Valid"},
+        {"invalid_extension.cu"             , "Wrong file type/extension!\n"},
         {"", ""}
     };
-    test_extension("", extension);
+    test_extension("maps/extension_tests/", extension);
 
     //identifier_tests
     char identifier_tests [][2][1000] = 

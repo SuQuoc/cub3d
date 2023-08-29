@@ -23,12 +23,10 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
-	if (check_extension(argv[1]) == 1)
-		return (1);
-	data = init_data();
-	fd = open(argv[1], O_RDONLY);
+	fd = check_extension(argv[1]);
 	if (fd == -1)
 		return (1);
+	data = init_data();
 	ft_mlx_init(data);	
 	loop_file(fd, data);
 	make_window(data);
