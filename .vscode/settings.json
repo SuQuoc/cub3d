@@ -62,6 +62,7 @@
     "stat.h": "c",
     "stdlib.h": "c",
     "stdio.h": "c",
-    "mlx.h": "c"
+    "mlx.h": "c",
+    "bit": "c"
   }
 }

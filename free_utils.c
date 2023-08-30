@@ -22,13 +22,25 @@ void	free_2d_array(char **map)
 void destroy_textures(t_data *data)
 {
 	if (data->N_texture)
-		mlx_destroy_image(data->mlx_ptr, data->N_texture);
+	{
+		mlx_destroy_image(data->mlx_ptr, data->N_texture->img_ptr);
+		free(data->N_texture);
+	}
 	if (data->E_texture)
-		mlx_destroy_image(data->mlx_ptr, data->E_texture);
+	{
+		mlx_destroy_image(data->mlx_ptr, data->E_texture->img_ptr);
+		free(data->E_texture);
+	}
 	if (data->S_texture)
-		mlx_destroy_image(data->mlx_ptr, data->S_texture);
+	{
+		mlx_destroy_image(data->mlx_ptr, data->S_texture->img_ptr);
+		free(data->S_texture);
+	}
 	if (data->W_texture)
-		mlx_destroy_image(data->mlx_ptr, data->W_texture);
+	{
+		mlx_destroy_image(data->mlx_ptr, data->W_texture->img_ptr);
+		free(data->W_texture);
+	}
 }
 
 void free_data(t_data *data)
@@ -40,6 +52,11 @@ void free_data(t_data *data)
 	{
 		exit_code = 1;
 		file_error(data->err);
+	}
+	if (data->img)
+	{
+		mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
+		free(data->img);
 	}
 	if (data->mlx_ptr)
 	{

@@ -21,6 +21,20 @@ static t_player	*init_player(void)
 	return (player);
 }
 
+static t_image	*init_image(void)
+{
+	t_image	*image;
+
+	image = malloc(sizeof(t_image));
+	if (!image)
+		return (NULL);
+	image->img_ptr = NULL;
+	image->addr = NULL;
+	//image->bpp = 0;
+	//image->line_len = 0;
+	//image->endian = 0;
+	return (image);
+}
 
 t_data *init_data(void)
 {
@@ -39,14 +53,21 @@ t_data *init_data(void)
 		free(data);
 		exit(1);
 	}
+	data->img = init_image();
+	if (!data->img)
+	{
+		perror(NULL);
+		free(data);
+		exit(1);
+	}
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map = NULL;
 	data->map_copy = NULL;
-	data->N_texture = NULL;
-	data->E_texture = NULL;
-	data->S_texture = NULL;
-	data->W_texture = NULL;
+	data->N_texture = init_image();
+	data->E_texture = init_image();
+	data->S_texture = init_image();
+	data->W_texture = init_image();
 	data->err = 0;
 	data->txt_h = 50;
 	data->txt_w = 50;

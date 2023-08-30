@@ -58,7 +58,7 @@
 # define WINDOW_NAME "FORKBOMBERS"
 
 //colors
-#define WHITE 0xFFFFFF
+#define WHITE 0x10FFFFFF
 #define GREEN 0x00FF00
 #define BLACK 0x000000
 #define BLUE 0x0000FF
@@ -78,6 +78,9 @@
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
 
+#define ROTATITON_SPEED 2
+#define MOVEMENT_SPEED 5
+
 typedef struct s_image
 {
 	void			*img_ptr;
@@ -86,9 +89,6 @@ typedef struct s_image
 	int				line_len;
 	int				endian;
 }					t_image;
-
-#define ROTATITON_SPEED 2
-#define MOVEMENT_SPEED 5
 
 typedef struct s_pos
 {
@@ -156,10 +156,10 @@ typedef struct s_data
 	char		**map_copy;
 	int			map_width;
 	int			map_height;
-	void		*N_texture;
-	void		*E_texture;
-	void		*S_texture;
-	void		*W_texture;
+	t_image		*N_texture;
+	t_image		*E_texture;
+	t_image		*S_texture;
+	t_image		*W_texture;
 	int			txt_w;
 	int			txt_h;
 	int			floor_color;
@@ -239,7 +239,10 @@ int			is_txt_idf(char *str);
 int			is_color_idf(char *str);
 
 // image.c
-void put_pixel_to_img(t_image *img, int color, int width, int height);
+void color_img_all_colors(t_image *img, int width, int height);
+void color_img(t_image *img, int color, int width, int height);
+void create_img(t_image *img, t_data *data);
+void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y);
 
 
 // init_structs.c
@@ -264,7 +267,7 @@ int			print_x(t_data *data);
 
 // textures.c
 int			search_texture(char *str, t_data *data);
-void		*set_texture(char *str, char *idf, t_data *data);
+void		set_texture(char *str, char *idf, t_data *data, t_image *txt);
 void		free_data_err(t_data *data, char *error_message);
 
 // render.c
