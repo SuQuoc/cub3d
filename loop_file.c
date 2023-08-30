@@ -2,13 +2,28 @@
 #include "cubed.h"
 
 //in ft_strmerge gibts noch ne risk wenn s1 NULL ist wird gemalloced
+
+int add_and_return(int add)
+{
+	static int sum;
+	
+	if (!sum)
+		sum = 0;
+	printf("sum: %d\n", sum);
+	return (sum+=add);
+}
+static void overflow_msg(void)
+{
+	ft_putstr_fd("Error: max file size 1 mio bytes 🤓\n", 2);
+}
+
 char *read_map_into_str(int fd)
 {
 	char	*buf;
 	char 	*file;
 	char	*temp;
 	int		check;
-
+	
 	file = NULL;
 	buf = (char*)malloc(BUFFER_SIZE + 1);
 	if (!buf)
@@ -20,6 +35,8 @@ char *read_map_into_str(int fd)
 			return (free(buf), free(file), NULL);
 		if (check == 0)
 			break ;
+		if (add_and_return(check) > MAX_F_SIZE)
+			return (overflow_msg(), free(buf), free(file), NULL);
 		buf[check] = '\0';
 		temp = ft_strmerge(file, buf);
 		if (!temp)

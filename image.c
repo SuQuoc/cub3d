@@ -80,6 +80,7 @@ void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y)
 	int x;
 	//printf("txt int: %d\n", txt->addr[(2 * txt->line_len) + 2]);
 	//return ;
+	y = 0;
 	while (y < 64)
 	{
 		x = 0;

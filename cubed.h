@@ -52,7 +52,7 @@
 # define FLOOR_SUB 'o'
 # define EXTENSION ".cub"
 
-
+# define MAX_F_SIZE 1000000
 # define WINDOW_W 1000
 # define WINDOW_H 600
 # define WINDOW_NAME "FORKBOMBERS"
@@ -226,6 +226,8 @@ void		file_error(int err_code);
 // free_utils.c
 void		free_2d_array(char **map);
 void		free_data(t_data *data);
+void		free_image(t_image *img, void *mlx_ptr);
+
 
 // ft_strcmp.c
 int			ft_strcmp(char *s1, char *s2);

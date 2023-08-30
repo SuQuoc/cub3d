@@ -48,36 +48,11 @@ int main(int argc, char **argv)
 	loop_file(fd, data); //3k
 	make_window(data); //10k
 	
-	//data->img = mlx_new_image(data->mlx_ptr, WINDOW_W, WINDOW_H);
-	//int pixel_bits;
-	//int line_bytes;
-	//int endian;
-	//int *buffer = (int *)mlx_get_data_addr(data->img, &pixel_bits, &line_bytes, &endian);
-	//printf("pixel bits: %d\n", pixel_bits);
-	//printf("line_bytes: %d\n", line_bytes);
-	//printf("endian: %d\n", endian);
-	//line_bytes /= 4;
-//
-	//int color = RED;
-	//int y = 0;
-	//int x;
-	//while (y < WINDOW_H)
-	//{
-	//	x = 0;
-	//	while (x < WINDOW_W)
-	//	{
-	//    	buffer[(y * line_bytes) + x] = color;
-	//		x++;
-	//	}
-	//	y++;
-	//}
-
-
 	create_img(data->img, data);
-	put_txt_to_image(data->img, data->S_texture, 0, 0);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 100, 100);
+	color_img(data->img, BLUE, WINDOW_W, WINDOW_H);
+	put_txt_to_image(data->img, data->S_texture, 100, 100);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
 	//color_img_all_colors(data->img, WINDOW_W, WINDOW_H);
-	//colour_img(data->img, BLUE, WINDOW_W, WINDOW_H);
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
 
 	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);

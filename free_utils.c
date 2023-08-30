@@ -21,25 +21,19 @@ void	free_2d_array(char **map)
 //both lead to errors so we have to check before if they are not null
 void destroy_textures(t_data *data)
 {
-	if (data->N_texture)
+	free_image(data->N_texture, data->mlx_ptr);
+	free_image(data->E_texture, data->mlx_ptr);
+	free_image(data->S_texture, data->mlx_ptr);
+	free_image(data->W_texture, data->mlx_ptr);
+}
+
+void free_image(t_image *img, void *mlx_ptr)
+{
+	if (img)
 	{
-		mlx_destroy_image(data->mlx_ptr, data->N_texture->img_ptr);
-		free(data->N_texture);
-	}
-	if (data->E_texture)
-	{
-		mlx_destroy_image(data->mlx_ptr, data->E_texture->img_ptr);
-		free(data->E_texture);
-	}
-	if (data->S_texture)
-	{
-		mlx_destroy_image(data->mlx_ptr, data->S_texture->img_ptr);
-		free(data->S_texture);
-	}
-	if (data->W_texture)
-	{
-		mlx_destroy_image(data->mlx_ptr, data->W_texture->img_ptr);
-		free(data->W_texture);
+		if (img->img_ptr)
+			mlx_destroy_image(mlx_ptr, img->img_ptr);
+		free(img);
 	}
 }
 
@@ -53,11 +47,7 @@ void free_data(t_data *data)
 		exit_code = 1;
 		file_error(data->err);
 	}
-	if (data->img)
-	{
-		mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
-		free(data->img);
-	}
+	free_image(data->img, data->mlx_ptr);
 	if (data->mlx_ptr)
 	{
 		destroy_textures(data);
@@ -73,7 +63,8 @@ void free_data(t_data *data)
 
 //if error_message is NULL it exits with 0, else with 1
 void free_data_err(t_data *data, char *error_message)
-{
+{	
+	free_image(data->img, data->mlx_ptr);
 	if (data->mlx_ptr)
 	{
 		destroy_textures(data);
@@ -93,27 +84,4 @@ void free_data_err(t_data *data, char *error_message)
 		exit(1);
 	}
 	exit(0);
-}
-
-//WIRD wrsl nicht gebraucht!!!
-void free_data_code(t_data *data, int err_code)
-{
-	if (err_code != 0)
-	{
-		err_code = 1;
-		file_error(err_code);
-	}
-	if (data->mlx_ptr)
-	{
-		destroy_textures(data);
-		mlx_destroy_display(data->mlx_ptr);
-	}
-	free(data->player);
-	free(data->mlx_ptr);
-	free_2d_array(data->map);
-	if (data->map_copy)
-		free_2d_array(data->map_copy);
-	free(data);
-	data = NULL;
-	exit(err_code);
 }

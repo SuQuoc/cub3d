@@ -20,8 +20,6 @@ void loop_idf(t_data *data)
 
 int loop_idf_line(char *str, t_data *data)
 {
-	if (!str || !data)
-        return (1);
     if (search_texture(str, data) == TRUE)
         return (0);
 	else if (data->err != 0)

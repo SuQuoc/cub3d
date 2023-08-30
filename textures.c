@@ -40,10 +40,10 @@ void set_texture(char *str, char *idf, t_data *data, t_image *txt)
     }
     txt->addr = (int *)mlx_get_data_addr(txt->img_ptr, &txt->bpp, &txt->line_len, &txt->endian);
     txt->line_len /= 4;
-    if (!txt->img_ptr)
-        data->err = ERR_TEXTURE;
-    printf("line len: %d\n", txt->line_len);   
-    printf("txt int: %d\n", txt->addr[(2 * txt->line_len) + 2]);   
+    if (!txt->addr)
+        data->err = ERR_SYSTEM;
+    //printf("line len: %d\n", txt->line_len);   
+    //printf("txt int: %d\n", txt->addr[(2 * txt->line_len) + 2]);   
     return ;
 }
 
