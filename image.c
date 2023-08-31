@@ -22,7 +22,7 @@ void color_img_all_colors(t_image *img, int width, int height)
 
 	y = 0;
 	color = 600000;
-	color = RED;
+	color = GREEN;
 	x = 0;
 
 	while (y < height)
@@ -40,7 +40,10 @@ void color_img_all_colors(t_image *img, int width, int height)
 			x++;
 		}
 		//printf("x = %d\n", x);
-		color ++; //= 0x100000;
+		color++; //= 0x100000;
+		if (color == 0)
+			printf("x = %d\n", x);
+
 		y++;
 	}
 	//x = 0;
@@ -78,8 +81,7 @@ void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y)
 {
 	int y;
 	int x;
-	//printf("txt int: %d\n", txt->addr[(2 * txt->line_len) + 2]);
-	//return ;
+	
 	y = 0;
 	while (y < 64)
 	{
@@ -87,10 +89,37 @@ void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y)
 		while (x < 64)
 		{
 			put_pxl_to_img(img, pos_x + x, pos_y + y, txt->addr[(y * txt->line_len) + x]);
-			//printf("txt int: %d\n", txt->addr[(y * txt->line_len) + x]);
 	    	//img->addr[((pos_y + y) * img->line_len) + pos_x + x] = txt->addr[(y * txt->line_len) + x];
 			x++;
 		}
 		y++;
 	}
+}
+
+void paint_floor_ceiling(t_image *img, int f_color, int c_color)
+{
+    int x;
+    int y;
+     
+    y = 0;
+    while (y < WINDOW_H  / 2)
+    {
+        x = 0;
+        while (x < WINDOW_W)
+        {
+            img->addr[(y * img->line_len) + x] = c_color;
+            x++;
+        }
+        y++;
+    }
+    while (y < WINDOW_H)
+    {
+        x = 0;
+        while (x < WINDOW_W)
+        {
+            img->addr[(y * img->line_len) + x] = f_color;
+            x++;
+        }
+        y++;
+    }
 }

@@ -245,6 +245,7 @@ void color_img_all_colors(t_image *img, int width, int height);
 void color_img(t_image *img, int color, int width, int height);
 void create_img(t_image *img, t_data *data);
 void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y);
+void paint_floor_ceiling(t_image *img, int f_color, int c_color);
 
 
 // init_structs.c

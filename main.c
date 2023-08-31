@@ -49,10 +49,11 @@ int main(int argc, char **argv)
 	make_window(data); //10k
 	
 	create_img(data->img, data);
-	color_img(data->img, BLUE, WINDOW_W, WINDOW_H);
+	//paint_floor_ceiling(data->img, data->floor_color, data->ceil_color);
+	//color_img(data->img, GREEN, WINDOW_W, WINDOW_H);
 	put_txt_to_image(data->img, data->S_texture, 100, 100);
+	color_img_all_colors(data->img, WINDOW_W, WINDOW_H);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
-	//color_img_all_colors(data->img, WINDOW_W, WINDOW_H);
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
 
 	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
