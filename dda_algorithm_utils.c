@@ -11,7 +11,7 @@ double	get_segment_length(double a, double b)
 	return (length);
 }
 
-int	get_multiplicator(int pos)
+double	get_multiplicator(double pos)
 {
 	if (pos < 0)
 		pos *= -1;

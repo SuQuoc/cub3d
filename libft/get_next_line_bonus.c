@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:25:16 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 17:02:14 by aplank           ###   ########.fr       */
+/*   Updated: 2023/08/31 12:35:50 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ char	*ft_strmerge(char *s1, char const *s2)
 	if (!s1)
 	{
 		(s1 = (char*)malloc(1));
+		if (!s1)
+			return (NULL);
 		s1[0] = '\0';
 	}
 	x = 0;

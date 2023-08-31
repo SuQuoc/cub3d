@@ -44,14 +44,14 @@ void	get_x_initial_length(t_ray *ray, double pos)
 	if (ray->fixed_side < 0)
 		multiplicator = get_multiplicator(pos);
 	else
-		multiplicator = UNIT - get_multiplicator(pos);
+		multiplicator = (double)UNIT - get_multiplicator(pos);
 	ray->y += multiplicator * ray->variable_side;
 	ray->x += multiplicator * ray->fixed_side;
 	ray->length += multiplicator * ray->hl;
 
-	ray->variable_side *= UNIT;
-	ray->fixed_side *= UNIT;
-	ray->hl *= UNIT;
+	ray->variable_side *= (double)UNIT;
+	ray->fixed_side *= (double)UNIT;
+	ray->hl *= (double)UNIT;
 }
 
 void	get_y_initial_length(t_ray *ray, double pos)
@@ -63,14 +63,14 @@ void	get_y_initial_length(t_ray *ray, double pos)
 	if (ray->fixed_side < 0)
 		multiplicator = get_multiplicator(pos);
 	else
-		multiplicator = UNIT - get_multiplicator(pos);
+		multiplicator = (double)UNIT - get_multiplicator(pos);
 	ray->x += multiplicator * ray->variable_side;
 	ray->y += multiplicator * ray->fixed_side;
 	ray->length += multiplicator * ray->hl;
 
-	ray->variable_side *= UNIT;
-	ray->fixed_side *= UNIT;
-	ray->hl *= UNIT;
+	ray->variable_side *= (double)UNIT;
+	ray->fixed_side *= (double)UNIT;
+	ray->hl *= (double)UNIT;
 }
 
 //hl = hypotenuse_length

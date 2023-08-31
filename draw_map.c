@@ -12,6 +12,7 @@ void	draw_map_grid(void *mlx_ptr, void *win_ptr, int color)
 	{
 		while (x <= WINDOW_W)
 		{
+			//put_pxl_to_img(data->img, x, y, color);
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 			x++;
 		}
@@ -23,6 +24,7 @@ void	draw_map_grid(void *mlx_ptr, void *win_ptr, int color)
 	{
 		while (y <= WINDOW_H)
 		{
+			//put_pxl_to_img(data->img, x, y, color);
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 			y++;
 		}
@@ -42,6 +44,7 @@ static void	draw_unit_rectangle(t_data *data, int x, int y, int color)
 	{
 		while (x <= x_limiter)
 		{
+			//put_pxl_to_img(data->img, x, y, color);
 			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
 			x++;
 		}

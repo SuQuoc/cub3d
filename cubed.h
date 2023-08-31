@@ -56,6 +56,7 @@
 # define WINDOW_W 1000
 # define WINDOW_H 600
 # define WINDOW_NAME "FORKBOMBERS"
+# define TXT_SIZE 64
 
 //colors
 #define WHITE 0x10FFFFFF
@@ -74,7 +75,7 @@
 #define PI 3.141592654
 
 #define UNIT 30
-#define RAY_NB 101 //needs to be uneven
+#define RAY_NB WINDOW_W //needs to be uneven
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
 
@@ -193,7 +194,7 @@ int 		search_floor_ceiling(char *str, t_data *data);
 
 // dda_algorithm_utils.c
 double		get_segment_length(double a, double b);
-int			get_multiplicator(int pos);
+double		get_multiplicator(double pos);
 int			check_map_position(const t_data *data, t_ray *ray, t_vector *pos);
 void		init_ray(t_ray *ray, double a, double b);
 
@@ -240,13 +241,6 @@ int			key_input(int keysym, t_data *data);
 int			is_txt_idf(char *str);
 int			is_color_idf(char *str);
 
-// image.c
-void color_img_all_colors(t_image *img, int width, int height);
-void color_img(t_image *img, int color, int width, int height);
-void create_img(t_image *img, t_data *data);
-void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y);
-void paint_floor_ceiling(t_image *img, int f_color, int c_color);
-
 
 // init_structs.c
 void		init_vector(t_vector *vector, double x_position, double y_position);
@@ -265,16 +259,13 @@ int			valid_wall(char **map, t_pos pos);
 void		cut_idfs_from_map(t_data *data);
 void		loop_map(t_data *data);
 
-// render.c
-int			print_x(t_data *data);
-
 // textures.c
 int			search_texture(char *str, t_data *data);
 void		set_texture(char *str, char *idf, t_data *data, t_image *txt);
 void		free_data_err(t_data *data, char *error_message);
 
 // render.c
-int			print_x(t_data *data);
+int			print_x(t_data *data); //UNUSED?
 
 // parsing_utils.c
 int			skip_spaces(char *str, int start);
@@ -301,6 +292,18 @@ int			prelim_checks_passed(char *str, t_data *data);
 // printing_utils.c
 void		print_str_arr(char **arr);
 void		print_int_arr(int *arr, int size);
+
+// pxl_to_image.c
+void color_img_all_colors(t_image *img, int width, int height);
+void color_img(t_image *img, int color, int width, int height);
+void create_img(t_image *img, t_data *data);
+void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y);
+void paint_floor_ceiling(t_image *img, int f_color, int c_color);
+void render(t_image *img, t_data *data);
+void put_pxl_to_img(t_image *img, int x, int y, int color);
+void put_txt_ray_to_image(double *ray_len, t_data *data);
+
+
 
 // vector_operations.c
 t_vector	vector_multiplication(t_vector vector, int multiplier);

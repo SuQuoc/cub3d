@@ -12,6 +12,7 @@ void	draw_player(t_player *player, void *mlx_ptr, void *win_ptr, int color)
 	{
 		while (x <= player->pos.x + 4)
 		{
+			//put_pxl_to_img(data->img, x, y, color);
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 			x++;
 		}

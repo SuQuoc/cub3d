@@ -84,6 +84,7 @@ void loop_map(t_data *data)
 	cut_idfs_from_map(data);
 	data->map_height = get_arr_len(data->map);
 	data->map_width = get_max_row_len(data->map);
+	//fill_arr_out(data->map, ' ', data->map_width);
 	if (fill_arr_out(data->map, ' ', data->map_width) == NULL)
 		free_data_err(data, "malloc failed in filling arr out");
 	data->map_copy = copy_2d_array(data->map, 0);

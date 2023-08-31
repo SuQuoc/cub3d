@@ -15,23 +15,6 @@ void ft_mlx_init(t_data *data)
 	if (data->mlx_ptr == NULL)
 		free_data(data);
 }
-//static void texture_test(t_data *data)
-//{
-//	int pixel_bits;
-//	int line_bytes;
-//	int endian;
-//	char *buffer = mlx_get_data_addr(data->E_texture, &pixel_bits, &line_bytes, &endian);
-//	(void)buffer;
-//	printf("pixel bits: %d\n", pixel_bits);
-//	printf("line_bytes: %d\n", line_bytes);
-//	printf("endian: %d\n", endian);
-//	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->E_texture, 100, 100);
-//
-//	usleep(10000);
-//	data->img.img_ptr = mlx_new_image(data->mlx_ptr, 100, 100);
-//	manipulate_img(data->img.img_ptr, RED);
-//	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
-//}
 
 int main(int argc, char **argv)
 {
@@ -47,20 +30,19 @@ int main(int argc, char **argv)
 	ft_mlx_init(data); //100k	
 	loop_file(fd, data); //3k
 	make_window(data); //10k
-	
 	create_img(data->img, data);
-	//paint_floor_ceiling(data->img, data->floor_color, data->ceil_color);
-	//color_img(data->img, GREEN, WINDOW_W, WINDOW_H);
-	put_txt_to_image(data->img, data->S_texture, 100, 100);
-	color_img_all_colors(data->img, WINDOW_W, WINDOW_H);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
+
+	//put_txt_to_image(data->img, data->S_texture, 100, 100);
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
 
-	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
-	draw_map_walls(data, data->map, WHITE);
-	calculate_rays(data, data->player);
 
-	//mlx_loop_hook(data->mlx_ptr, &print_x, data);
+
+
+
+	//draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
+	//draw_map_walls(data, data->map, WHITE);
+	calculate_rays(data, data->player);
+	//mlx_loop_hook(data.mlx_ptr, &key_input, &data); //unsicher ob man beides loop hook und hook fuer keys braucht
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
 	mlx_hook(data->win_ptr, 17, 0, x_window, data);
 	mlx_loop(data->mlx_ptr);

@@ -5,6 +5,7 @@ void	fast_y_xneg_yneg(const t_data *data, t_line *line, const int color)//3
 {
 	while (line->start_y >= line->end_y)
 	{
+		//put_pxl_to_img(data->img, line->start_x, line->start_y, color);
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
 						line->start_y, color);
 		line->fault -= line->x_diff;
@@ -21,6 +22,7 @@ void	fast_x_xneg_yneg(const t_data *data, t_line *line, const int color)//4
 {
 	while (line->start_x >= line->end_x)
 	{
+		//put_pxl_to_img(data->img, line->start_x, line->start_y, color);
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
 						line->start_y, color);
 		line->fault -= line->y_diff;
@@ -37,6 +39,7 @@ void	fast_x_xneg_ypos(const t_data *data, t_line *line, const int color)//5
 {
 	while (line->start_x >= line->end_x)
 	{
+		//put_pxl_to_img(data->img, line->start_x, line->start_y, color);
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
 						line->start_y, color);
 		line->fault -= line->y_diff;
@@ -53,6 +56,7 @@ void	fast_y_xneg_ypos(const t_data *data, t_line *line, const int color)//6
 {
 	while (line->start_y <= line->end_y)
 	{
+		//put_pxl_to_img(data->img, line->start_x, line->start_y, color);
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line->start_x, \
 						line->start_y, color);
 		line->fault -= line->x_diff;
