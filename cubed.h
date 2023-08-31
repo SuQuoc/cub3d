@@ -74,7 +74,7 @@
 #define SIN_3 0.052335956
 #define PI 3.141592654
 
-#define UNIT 30
+#define UNIT 64
 #define RAY_NB WINDOW_W //needs to be uneven
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
@@ -213,6 +213,10 @@ void		draw_line(const t_data *data, const t_vector start, const t_vector end, co
 // draw_map.c
 void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
 void		draw_map_walls(t_data *data, char **map, int color);
+
+// draw_map_scaled.c
+void 		put_txt_ray_to_image(double *ray_len, t_data *data);
+
 
 // dfs.c
 int			flood_fill_floor(t_data *data, char floor, char replace);

@@ -14,6 +14,7 @@ SRC =	2d_array_utils.c \
 		draw_line_utils.c \
 		draw_line.c \
 		draw_map.c \
+		draw_map_scaled.c \
 		error_msg.c \
 		free_utils.c \
 		ft_strcmp.c \
