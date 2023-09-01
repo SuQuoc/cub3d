@@ -36,14 +36,14 @@ void	draw_player_camera(t_data *data, t_player *player, int color)
 
 void	draw_rays(t_data *data, t_player *player, int color)
 {
-	t_vector	ray;
+	//t_vector	ray;
 	int	x;
 
 	x = 0;
 	while (x < RAY_NB)
 	{
-		ray = vector_addition(player->ray[x].vector, player->pos);
-		draw_line(data, player->pos, ray, color);
+		//ray = vector_addition(player->ray[x].vector, player->pos);
+		draw_line(data, player->pos, player->ray[x].vector, color);
 		x++;
 	}
 }

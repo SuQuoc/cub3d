@@ -3,9 +3,9 @@
 
 static void	movement(int keysym, t_data *data)
 {
-	//draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
-	//draw_player_camera(data, data->player, BLACK);
-	//draw_rays(data, data->player, BLACK);
+//	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
+//	draw_player_camera(data, data->player, BLACK);
+//	draw_rays(data, data->player, BLACK);
 	if (keysym == XK_w || keysym == XK_W)
 		player_move_forward(data->player, data->mlx_ptr, data->win_ptr);
 	else if (keysym == XK_s || keysym == XK_S)
@@ -14,18 +14,18 @@ static void	movement(int keysym, t_data *data)
 		player_move_right(data->player, data->mlx_ptr, data->win_ptr);
 	else if (keysym == XK_a || keysym == XK_A)
 		player_move_left(data->player, data->mlx_ptr, data->win_ptr);
-	//draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
-	//draw_player_camera(data, data->player, BLUE);
+//	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
+//	draw_player_camera(data, data->player, BLUE);
 	calculate_rays(data, data->player);
 	put_txt_ray_to_image(data->player->ray, data);
-	//draw_rays(data, data->player, GREEN);
+//	draw_rays(data, data->player, GREEN);
 }
 
 static void	rotate_player_direction(int keysym, t_data *data)
 {
-	//draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
-	//draw_player_camera(data, data->player, BLACK);
-	//draw_rays(data, data->player, BLACK);
+//	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
+//	draw_player_camera(data, data->player, BLACK);
+//	draw_rays(data, data->player, BLACK);
 	if (keysym == XK_Right)
 	{
 		rotate_vector_clockwise(&data->player->direction, data->cos, data->sin);
@@ -38,11 +38,11 @@ static void	rotate_player_direction(int keysym, t_data *data)
 		rotate_vector_counter_clockwise(&data->player->camera_left, data->cos, data->sin);
 		rotate_vector_counter_clockwise(&data->player->camera_right, data->cos, data->sin);
 	}
-	//draw_player(data->player, data->mlx_ptr, data->win_ptr, RED);
-	//draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
-	//draw_player_camera(data, data->player, BLUE);
+//	draw_player(data->player, data->mlx_ptr, data->win_ptr, RED);
+//	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
+//	draw_player_camera(data, data->player, BLUE);
 	calculate_rays(data, data->player);
-	//draw_rays(data, data->player, GREEN);
+//	draw_rays(data, data->player, GREEN);
 	calculate_move_values(data->player, data->player->direction.x, data->player->direction.y);
 	put_txt_ray_to_image(data->player->ray, data);
 }

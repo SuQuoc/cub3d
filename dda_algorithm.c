@@ -37,17 +37,17 @@ void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
 
 void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset)
 {
-	double	multiplicator;
+	double	offset;
 
 	if (dda_ray->hl == 0)
 		return ;
 	if (dda_ray->fixed_side < 0)
-		multiplicator = pos_offset;
+		offset = pos_offset;
 	else
-		multiplicator = (double)UNIT - pos_offset;
-	dda_ray->y += multiplicator * dda_ray->variable_side;
-	dda_ray->x += multiplicator * dda_ray->fixed_side;
-	dda_ray->length += multiplicator * dda_ray->hl;
+		offset = (double)UNIT - pos_offset;
+	dda_ray->y += offset * dda_ray->variable_side;
+	dda_ray->x += offset * dda_ray->fixed_side;
+	dda_ray->length += offset * dda_ray->hl;
 
 	dda_ray->variable_side *= (double)UNIT;
 	dda_ray->fixed_side *= (double)UNIT;
@@ -56,17 +56,17 @@ void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset)
 
 void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset)
 {
-	double	multiplicator;
+	double	offset;
 
 	if (dda_ray->hl == 0)
 		return ;
 	if (dda_ray->fixed_side < 0)
-		multiplicator = pos_offset;
+		offset = pos_offset;
 	else
-		multiplicator = (double)UNIT - pos_offset;
-	dda_ray->x += multiplicator * dda_ray->variable_side;
-	dda_ray->y += multiplicator * dda_ray->fixed_side;
-	dda_ray->length += multiplicator * dda_ray->hl;
+		offset = (double)UNIT - pos_offset;
+	dda_ray->x += offset * dda_ray->variable_side;
+	dda_ray->y += offset * dda_ray->fixed_side;
+	dda_ray->length += offset * dda_ray->hl;
 
 	dda_ray->variable_side *= (double)UNIT;
 	dda_ray->fixed_side *= (double)UNIT;
@@ -81,7 +81,7 @@ void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
 	
 	if (!data->map)
 		return ;
-	init_dda_ray(&x_dda_ray, ray->vector.x, ray->vector.x);
+	init_dda_ray(&x_dda_ray, ray->vector.y, ray->vector.x);
 	init_dda_ray(&y_dda_ray, ray->vector.x, ray->vector.y);
 
 	get_x_initial_length(&x_dda_ray, player_pos_offset->x);
@@ -101,6 +101,7 @@ void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
 		ray->vector.y = y_dda_ray.y + data->player->pos.y;
 		ray->length = y_dda_ray.length;
 	}
+	(void)player_pos_offset;
 }
 
 

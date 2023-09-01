@@ -53,6 +53,7 @@ void free_data(t_data *data)
 		destroy_textures(data);
 		mlx_destroy_display(data->mlx_ptr);
 	}
+	free(data->player->ray);
 	free(data->player);
 	free(data->mlx_ptr);
 	free_2d_array(data->map);
@@ -70,6 +71,7 @@ void free_data_err(t_data *data, char *error_message)
 		destroy_textures(data);
 		mlx_destroy_display(data->mlx_ptr);
 	}
+	free(data->player->ray);
 	free(data->player);
 	free(data->mlx_ptr);
 	free_2d_array(data->map);

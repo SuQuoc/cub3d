@@ -14,6 +14,12 @@ static t_player	*init_player(void)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
+	player->ray = malloc(sizeof(t_ray) * RAY_NB);
+	if (!player->ray)
+	{
+		free(player);
+		return (NULL);
+	}
 	player->fast_axis = 'x';
 	player->fast_diff = 100;
 	player->slow_diff = 0;
@@ -57,6 +63,8 @@ t_data *init_data(void)
 	if (!data->img)
 	{
 		perror(NULL);
+		free(data->player->ray);
+		free(data->player);
 		free(data);
 		exit(1);
 	}

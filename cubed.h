@@ -74,7 +74,7 @@
 #define SIN_3 0.052335956
 #define PI 3.141592654
 
-#define UNIT 64
+#define UNIT 30
 #define RAY_NB WINDOW_W //needs to be uneven
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
@@ -131,7 +131,7 @@ typedef struct s_player
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
-	t_ray		ray[RAY_NB];
+	t_ray		*ray;
 	char		fast_axis;
 	int			fast_diff;
 	int			slow_diff;
