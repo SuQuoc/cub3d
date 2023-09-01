@@ -99,7 +99,7 @@ void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
 	{
 		ray->vector.x = y_dda_ray.x + data->player->pos.x;
 		ray->vector.y = y_dda_ray.y + data->player->pos.y;
-		ray->length = y_dda_ray.length;
+		ray->length = y_dda_ray.length /* * ray->angle */;
 	}
 	(void)player_pos_offset;
 }

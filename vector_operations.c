@@ -72,7 +72,6 @@ void	calculate_rays(t_data *data, t_player *player)
 	{
 		player->ray[x].vector = calculate_camera_vector(player->camera_right, player->direction, numerator);
 		player->ray[x].vector = vector_multiplication(player->ray[x].vector, 2);
-		player->ray[x].length = 20;
 		dda_algorithm(data, &player->ray[x], &player_pos_offset);
 
 		numerator++;

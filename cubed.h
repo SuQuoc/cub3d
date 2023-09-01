@@ -66,15 +66,9 @@
 #define RED 0xFF0000
 
 //for raycasting
-#define COS_1 0.999847695 //<-cos(1)
-#define SIN_1 0.017452406 //<-sin(1)
-#define COS_2 0.999390827
-#define SIN_2 0.034899497
-#define COS_3 0.998629535
-#define SIN_3 0.052335956
 #define PI 3.141592654
 
-#define UNIT 30
+#define UNIT 64
 #define RAY_NB WINDOW_W //needs to be uneven
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
@@ -199,6 +193,7 @@ int			check_extension(char const *str);
 int 		search_floor_ceiling(char *str, t_data *data);
 
 // dda_algorithm_utils.c
+void		get_ray_angles(t_player *player);
 double		get_segment_length(double a, double b);
 double		get_unit_offset(double pos);
 int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);

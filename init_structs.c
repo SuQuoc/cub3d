@@ -10,7 +10,9 @@ void	init_vector(t_vector *vector, double x_position, double y_position)
 static t_player	*init_player(void)
 {
 	t_player	*player;
+	int			x;
 
+	x = 0;
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
@@ -20,6 +22,8 @@ static t_player	*init_player(void)
 		free(player);
 		return (NULL);
 	}
+	while (x < RAY_NB)
+		player->ray[x++].angle = 1;
 	player->fast_axis = 'x';
 	player->fast_diff = 100;
 	player->slow_diff = 0;

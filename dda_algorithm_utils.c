@@ -1,6 +1,18 @@
 
 #include "cubed.h"
 
+void	get_ray_angles(t_player *player)
+{
+	int x;
+
+	x = 0;
+	while (x < RAY_NB)
+	{
+		player->ray[x].angle = DIRECTION_LENGTH / player->ray[x].length;
+		x++;
+	}
+}
+
 double	get_segment_length(double a, double b)
 {
 	double		length;
