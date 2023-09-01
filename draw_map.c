@@ -8,17 +8,17 @@ void	draw_map_grid(void *mlx_ptr, void *win_ptr, int color)
 
 	x = 0;
 	y = 0;
-	while (y <= WINDOW_H)
-	{
-		while (x <= WINDOW_W)
-		{
-			//put_pxl_to_img(data->img, x, y, color);
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-			x++;
-		}
-		y += UNIT;
-		x = 0;
-	}
+	//while (y <= WINDOW_H)
+	//{
+	//	while (x <= WINDOW_W)
+	//	{
+	//		//put_pxl_to_img(data->img, x, y, color);
+	//		mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
+	//		x++;
+	//	}
+	//	y += UNIT;
+	//	x = 0;
+	//}
 	y = 0;
 	while (x <= WINDOW_W)
 	{

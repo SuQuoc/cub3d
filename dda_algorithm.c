@@ -91,14 +91,14 @@ void	dda_algorithm(const t_data *data, t_vector *max_ray, double *length)
 
 	if (x_ray.length < y_ray.length)
 	{
-		max_ray->x = (x_ray.x);
-		max_ray->y = (x_ray.y);
+		max_ray->x = x_ray.x + data->player->pos.x;
+		max_ray->y = x_ray.y + data->player->pos.y;
 		*length = x_ray.length;
 	}
 	else
 	{
-		max_ray->x = y_ray.x;
-		max_ray->y = y_ray.y;
+		max_ray->x = y_ray.x + data->player->pos.x;
+		max_ray->y = y_ray.y + data->player->pos.y;
 		*length = y_ray.length;
 	}
 }

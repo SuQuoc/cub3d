@@ -74,7 +74,7 @@
 #define SIN_3 0.052335956
 #define PI 3.141592654
 
-#define UNIT 64
+#define UNIT 128
 #define RAY_NB WINDOW_W //needs to be uneven
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
