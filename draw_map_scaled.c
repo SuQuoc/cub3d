@@ -32,7 +32,7 @@ void draw_texture(int start, int end, int x, t_data *data)
 //POINT SAMPLING
 void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 {
-	int offset; 
+	int offset_x; 
 	int wall_h;
 	double x_ratio; 
 	double y_ratio;
@@ -44,7 +44,7 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 	//printf("ray hit y: %f\n", data->player->ray[x].vector.x);
 
 	
-	offset = lround(data->player->ray[x].vector.x) % UNIT;
+	offset_x = lround(data->player->ray[x].vector.x) % UNIT;
 	x_ratio = (double)offset / UNIT;
 	wall_h = UNIT * WINDOW_H / data->player->ray[x].length;
 
@@ -61,6 +61,53 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 		i++;
 	}
 }
+void draw_texture_scaled2(int y_start, int y_end, int x, t_data *data)
+{
+	double offset_x;
+	double offset_y; 
+	double norm_x; 
+	double norm_y;
+	double wall_h;
+	int color;
+
+	offset_x = lround(data->player->ray[x].vector.x) % UNIT;
+	norm_x = (double)offset_x / UNIT;
+	wall_h = UNIT * WINDOW_H / data->player->ray[x].length;
+	if (wall_h < WINDOW_H)
+	{
+		while (y_start < y_end)
+		{
+			norm_y = y_start / wall_h;
+			color = data->E_texture->addr[lround(norm_y * data->E_texture->height) * data->E_texture->line_len 
+					+ lround(norm_x * data->E_texture->line_len) ];
+			put_pxl_to_img(data->img, x, y_start, color);
+			y_start++;
+		}
+	}
+	else
+	{
+		offset_y = (wall_h - WINDOW_H) / 2;
+		while (y_start < y_end)
+		{
+			norm_y = offset_y / wall_h;
+			color = data->E_texture->addr[lround(norm_y * data->E_texture->height) * data->E_texture->line_len 
+					+ lround(norm_x * data->E_texture->line_len) ];
+			put_pxl_to_img(data->img, x, y_start, color);
+			y_start++;
+			offset_y += 1;
+		}
+	}
+}
+
+int put_scaled_pxl(t_data *data, double offset_y, int y)
+{
+	return 0;
+}
+
+
+
+
+
 
 void put_txt_ray_to_image(t_ray *ray, t_data *data)
 {
