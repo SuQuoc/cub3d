@@ -67,7 +67,7 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 	}
 }
 
-void put_txt_ray_to_image(double *ray_len, t_data *data)
+void put_txt_ray_to_image(t_ray *ray, t_data *data)
 {
 	double bg_diff;
 	double wall_h;
@@ -76,7 +76,7 @@ void put_txt_ray_to_image(double *ray_len, t_data *data)
 	x = 0;
 	while (x < RAY_NB)
 	{
-		wall_h = UNIT * WINDOW_H / ray_len[x];
+		wall_h = UNIT * WINDOW_H / ray[x].length;
 		if (wall_h > WINDOW_H)
 			wall_h = WINDOW_H;
 		bg_diff = (WINDOW_H - wall_h) / 2;

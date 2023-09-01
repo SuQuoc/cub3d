@@ -51,29 +51,29 @@ static t_vector	calculate_camera_vector(const t_vector camera, const t_vector di
 
 void	calculate_rays(t_data *data, t_player *player)
 {
-	int	numerator;
-	int	x;
+	t_vector	player_pos_offset;
+	int			numerator;
+	int			x;
 
 	x = 0;
 	numerator = (RAY_NB / 2);
+	init_vector(&player_pos_offset, get_unit_offset(data->player->pos.x), get_unit_offset(data->player->pos.y));
 	while (x < (RAY_NB / 2))
 	{
-		player->ray[x] = calculate_camera_vector(player->camera_left, player->direction, numerator);
-		player->ray[x] = vector_multiplication(player->ray[x], 2);
-		dda_algorithm(data, &player->ray[x], (double *)&player->ray_length[x]);
+		player->ray[x].vector = calculate_camera_vector(player->camera_left, player->direction, numerator);
+		player->ray[x].vector = vector_multiplication(player->ray[x].vector, 2);
+		dda_algorithm(data, &player->ray[x], &player_pos_offset);
 
 		numerator--;
 		x++;
 	}
 	while (x < RAY_NB)
 	{
-		player->ray[x] = calculate_camera_vector(player->camera_right, player->direction, numerator);
-		player->ray[x] = vector_multiplication(player->ray[x], 2);
-		dda_algorithm(data, &player->ray[x], (double *)&player->ray_length[x]);
+		player->ray[x].vector = calculate_camera_vector(player->camera_right, player->direction, numerator);
+		player->ray[x].vector = vector_multiplication(player->ray[x].vector, 2);
+		dda_algorithm(data, &player->ray[x], &player_pos_offset);
 
 		numerator++;
 		x++;
 	}
-	data++;
-	data--;
 }

@@ -98,7 +98,7 @@ typedef struct s_pos
 }	t_pos;
 
 //hl = hypotenuse_length
-typedef struct s_ray
+typedef struct s_dda_ray
 {
 	double	variable_side;
 	double	fixed_side;
@@ -106,7 +106,7 @@ typedef struct s_ray
 	double	hl;
 	double	x;
 	double	y;
-}	t_ray;
+}	t_dda_ray;
 
 typedef struct s_vector
 {
@@ -114,6 +114,13 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+
+typedef struct s_ray
+{
+	t_vector	vector;
+	double		length;
+	double		angle;
+}	t_ray;
 
 //The rays in ray are the ray-vectors(fraction of camera) plus the direction
 //The other vectors are just the respective vectors.
@@ -124,8 +131,7 @@ typedef struct s_player
 	t_vector	camera_right;
 	t_vector	camera_left;
 	t_vector	direction;
-	t_vector	ray[RAY_NB];
-	double		ray_length[RAY_NB];
+	t_ray		ray[RAY_NB];
 	char		fast_axis;
 	int			fast_diff;
 	int			slow_diff;
@@ -194,12 +200,12 @@ int 		search_floor_ceiling(char *str, t_data *data);
 
 // dda_algorithm_utils.c
 double		get_segment_length(double a, double b);
-double		get_multiplicator(double pos);
-int			check_map_position(const t_data *data, t_ray *ray, t_vector *pos);
-void		init_ray(t_ray *ray, double a, double b);
+double		get_unit_offset(double pos);
+int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
+void		init_dda_ray(t_dda_ray *dda_ray, double a, double b);
 
 // dda_algorithm.c
-void		dda_algorithm(const t_data *data, t_vector *max_ray, double *length);
+void		dda_algorithm(const t_data *data, t_ray *max_ray, t_vector *player_pos_offset);
 
 // draw_line_utils.c
 void		fast_y_xneg_yneg(const t_data *data, t_line *line, const int color);
@@ -215,8 +221,7 @@ void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
 void		draw_map_walls(t_data *data, char **map, int color);
 
 // draw_map_scaled.c
-void 		put_txt_ray_to_image(double *ray_len, t_data *data);
-
+void		put_txt_ray_to_image(t_ray *ray, t_data *data);
 
 // dfs.c
 int			flood_fill_floor(t_data *data, char floor, char replace);
@@ -305,9 +310,7 @@ void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y);
 void paint_floor_ceiling(t_image *img, int f_color, int c_color);
 void render(t_image *img, t_data *data);
 void put_pxl_to_img(t_image *img, int x, int y, int color);
-void put_txt_ray_to_image(double *ray_len, t_data *data);
-
-
+//void put_txt_ray_to_image(double *ray_len, t_data *data);
 
 // vector_operations.c
 t_vector	vector_multiplication(t_vector vector, int multiplier);

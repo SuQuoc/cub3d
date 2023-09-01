@@ -11,7 +11,7 @@ double	get_segment_length(double a, double b)
 	return (length);
 }
 
-double	get_multiplicator(double pos)
+double	get_unit_offset(double pos)
 {
 	if (pos < 0)
 		pos *= -1;
@@ -20,21 +20,21 @@ double	get_multiplicator(double pos)
 	return (pos);
 }
 
-int	check_map_position(const t_data *data, t_ray *ray, t_vector *pos)
+int	check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
 {
 	int	x;
 	int y;
 
-	y = (ray->y + pos->y) / UNIT;
-	x = (ray->x + pos->x) / UNIT;
+	y = (dda_ray->y + pos->y) / UNIT;
+	x = (dda_ray->x + pos->x) / UNIT;
 	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 		return (1);
-	if (ray->y < 0 || ray->x < 0/*  && (x > 0 || y > 0) */)
+	if (dda_ray->y < 0 || dda_ray->x < 0/*  && (x > 0 || y > 0) */)
 	{
-		if (ray->y < 0)
-			y = (ray->y + pos->y - 1) / UNIT;
-		if (ray->x < 0)
-			x = (ray->x + pos->x - 1) / UNIT;
+		if (dda_ray->y < 0)
+			y = (dda_ray->y + pos->y - 1) / UNIT;
+		if (dda_ray->x < 0)
+			x = (dda_ray->x + pos->x - 1) / UNIT;
 		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 			return (1);
 	}
@@ -43,33 +43,33 @@ int	check_map_position(const t_data *data, t_ray *ray, t_vector *pos)
 	return (0);
 }
 
-void	init_ray(t_ray *ray, double a, double b)
+void	init_dda_ray(t_dda_ray *dda_ray, double a, double b)
 {
-	ray->fixed_side = 1;
-	ray->length = 0;
-	ray->x = 0;
-	ray->y = 0;
+	dda_ray->fixed_side = 1;
+	dda_ray->length = 0;
+	dda_ray->x = 0;
+	dda_ray->y = 0;
 	if (a == 0)
 	{
-		ray->variable_side = 0;
-		ray->hl = 1;
+		dda_ray->variable_side = 0;
+		dda_ray->hl = 1;
 	}
 	else if (b == 0)
 	{
-		ray->variable_side = 1;
-		ray->hl = 1;
-		ray->fixed_side = 0;
+		dda_ray->variable_side = 1;
+		dda_ray->hl = 1;
+		dda_ray->fixed_side = 0;
 		if (a < 0 && b == 0)
-			ray->variable_side *= -1;
+			dda_ray->variable_side *= -1;
 	}
 	else
 	{
-		ray->variable_side = (a) / b;
-		ray->hl = get_segment_length(a, b);
+		dda_ray->variable_side = (a) / b;
+		dda_ray->hl = get_segment_length(a, b);
 	}
 	if (b < 0)
 	{
-		ray->variable_side *= -1;
-		ray->fixed_side *= -1;
+		dda_ray->variable_side *= -1;
+		dda_ray->fixed_side *= -1;
 	}
 }
