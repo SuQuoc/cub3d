@@ -19,68 +19,65 @@ void draw_vertical_floor(int start, int end, int x, t_data *data)
 	}
 }
 
-void draw_texture(int start, int end, int x, t_data *data)
-{
-	while (start < end)
+//POINT SAMPLING
+t_image *get_hitted_texture(t_vector ray_hit, t_player *player, t_data *data)
+{	
+	if (ray_hit.x != (double)(int)ray_hit.x)
 	{
-		//printf("pxl x: %d y: %d\n", x, start);
-		put_pxl_to_img(data->img, x, start, GREEN);
-		start++;
+		if (player->pos.y > ray_hit.y)
+			return (data->N_texture);
+		else
+			return (data->S_texture);
+	}
+	else
+	{
+		if (player->pos.x > ray_hit.x)
+			return (data->W_texture);
+		else
+			return (data->E_texture);
 	}
 }
 
-//POINT SAMPLING
+//or normalised width coordinate
+double get_normalised_x_coordinate(t_vector ray_hit)
+{
+	double abs_offset_x_to_map;
+	double offset_to_last_unit;
+
+	if (ray_hit.x == (double)(int)ray_hit.x)
+	{
+		abs_offset_x_to_map = ray_hit.y;
+	}
+	else
+	{
+		abs_offset_x_to_map = ray_hit.x;
+	}
+	offset_to_last_unit = lround(abs_offset_x_to_map) % UNIT;
+	return (offset_to_last_unit / UNIT);
+}
+
 void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 {
-	int offset_x; 
-	int wall_h;
-	double x_ratio; 
-	double y_ratio;
-	int x_in_txt; 
-	int color;
-	
-
-	//printf("ray hit x: %f\n", data->player->ray[x].vector.x);
-	//printf("ray hit y: %f\n", data->player->ray[x].vector.x);
-
-	
-	offset_x = lround(data->player->ray[x].vector.x) % UNIT;
-	x_ratio = (double)offset / UNIT;
-	wall_h = UNIT * WINDOW_H / data->player->ray[x].length;
-
-	int i = 0;
-	while (y_start < y_end)
-	{
-		y_ratio = (double)i / wall_h;
-		//printf("y_ratio: %f\n", y_ratio);
-		x_in_txt = lround(x_ratio * data->E_texture->line_len);
-		color = data->E_texture->addr[lround(y_ratio * data->E_texture->line_len) * data->E_texture->line_len 
-			+ x_in_txt];
-		put_pxl_to_img(data->img, x, y_start, color);
-		y_start++;
-		i++;
-	}
-}
-void draw_texture_scaled2(int y_start, int y_end, int x, t_data *data)
-{
-	double offset_x;
+	t_image *texture;
 	double offset_y; 
 	double norm_x; 
 	double norm_y;
 	double wall_h;
 	int color;
 
-	offset_x = lround(data->player->ray[x].vector.x) % UNIT;
-	norm_x = (double)offset_x / UNIT;
+	texture = get_hitted_texture(data->player->ray[x].vector, data->player, data);
+	norm_x = get_normalised_x_coordinate(data->player->ray[x].vector);
 	wall_h = UNIT * WINDOW_H / data->player->ray[x].length;
-	if (wall_h < WINDOW_H)
+	if (wall_h <= WINDOW_H)
 	{
+		offset_y = 0;
 		while (y_start < y_end)
 		{
-			norm_y = y_start / wall_h;
-			color = data->E_texture->addr[lround(norm_y * data->E_texture->height) * data->E_texture->line_len 
-					+ lround(norm_x * data->E_texture->line_len) ];
+			norm_y = offset_y / wall_h;
+			color = texture->addr[lround(norm_y * texture->height) * texture->line_len 
+					+ lround(norm_x * texture->line_len)];
 			put_pxl_to_img(data->img, x, y_start, color);
+			offset_y++;
 			y_start++;
 		}
 	}
@@ -90,24 +87,14 @@ void draw_texture_scaled2(int y_start, int y_end, int x, t_data *data)
 		while (y_start < y_end)
 		{
 			norm_y = offset_y / wall_h;
-			color = data->E_texture->addr[lround(norm_y * data->E_texture->height) * data->E_texture->line_len 
-					+ lround(norm_x * data->E_texture->line_len) ];
+			color = texture->addr[lround(norm_y * texture->height) * texture->line_len 
+					+ lround(norm_x * texture->line_len) ];
 			put_pxl_to_img(data->img, x, y_start, color);
 			y_start++;
-			offset_y += 1;
+			offset_y++;
 		}
 	}
 }
-
-int put_scaled_pxl(t_data *data, double offset_y, int y)
-{
-	return 0;
-}
-
-
-
-
-
 
 void put_txt_ray_to_image(t_ray *ray, t_data *data)
 {

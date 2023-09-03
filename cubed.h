@@ -83,6 +83,7 @@ typedef struct s_image
 	int				bpp;
 	int				line_len;
 	int				endian;
+	int 			height;
 }					t_image;
 
 typedef struct s_pos
@@ -161,8 +162,6 @@ typedef struct s_data
 	t_image		*E_texture;
 	t_image		*S_texture;
 	t_image		*W_texture;
-	int			txt_w;
-	int			txt_h;
 	int			floor_color;
 	int			ceil_color;
 	int			err;
