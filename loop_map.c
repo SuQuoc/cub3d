@@ -38,10 +38,10 @@ static void set_orientation(t_player *player)
 
 	tmp.x = player->direction.x / DIRECTION_LENGTH;
 	tmp.y = player->direction.y / DIRECTION_LENGTH;
-	player->camera_left.x = tmp.y * -1;
-	player->camera_left.y = tmp.x;
-	player->camera_right.x = tmp.y;
-	player->camera_right.y = tmp.x * -1;
+	player->camera_left.x = tmp.y;
+	player->camera_left.y = tmp.x * -1;
+	player->camera_right.x = tmp.y * -1;
+	player->camera_right.y = tmp.x;
 	player->camera_left = vector_multiplication(player->camera_left, HALF_CAMERA_LENGTH);
 	player->camera_right = vector_multiplication(player->camera_right, HALF_CAMERA_LENGTH);
 }

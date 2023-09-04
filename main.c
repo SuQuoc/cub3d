@@ -43,6 +43,7 @@ int main(int argc, char **argv)
 //	draw_map_walls(data, data->map, WHITE);
 	calculate_rays(data, data->player);
 	get_ray_angles(data->player);
+	put_txt_ray_to_image(data->player->ray, data);
 	//mlx_loop_hook(data.mlx_ptr, &key_input, &data); //unsicher ob man beides loop hook und hook fuer keys braucht
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
 	mlx_hook(data->win_ptr, 17, 0, x_window, data);
