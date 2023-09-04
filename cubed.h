@@ -59,7 +59,7 @@
 # define TXT_SIZE 64
 
 //colors
-#define WHITE 0x10FFFFFF
+#define WHITE 0xFFFFFF
 #define GREEN 0x00FF00
 #define BLACK 0x000000
 #define BLUE 0x0000FF

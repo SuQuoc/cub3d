@@ -1,6 +1,16 @@
 
 #include "cubed.h"
 
+
+void draw_vertical_wall(int start, int end, int x, t_data *data)
+{
+	while (start < end)
+	{
+		put_pxl_to_img(data->img, x, start, WHITE);
+		start++;
+	}
+}
+
 void draw_vertical_ceiling(int start, int end, int x, t_data *data)
 {
 	while (start < end)
@@ -110,6 +120,7 @@ void put_txt_ray_to_image(t_ray *ray, t_data *data)
 			wall_h = WINDOW_H;
 		bg_diff = (WINDOW_H - wall_h) / 2;
 		draw_vertical_ceiling(0, bg_diff, x, data);
+		draw_vertical_wall(bg_diff, WINDOW_H - bg_diff, x, data);
 		draw_texture_scaled(bg_diff, WINDOW_H - bg_diff, x, data);
 		draw_vertical_floor(WINDOW_H - bg_diff, WINDOW_H, x, data);
 		x++;

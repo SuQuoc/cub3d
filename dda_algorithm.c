@@ -1,20 +1,73 @@
 
 #include "cubed.h"
 
+
+int	check_x_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
+{
+	int	x;
+	int y;
+
+	y = (dda_ray->y + pos->y) / UNIT;
+	x = (dda_ray->x + pos->x) / UNIT;
+	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+		return (1);
+	if (dda_ray->y < 0 || dda_ray->x < 0/*  && (x > 0 || y > 0) */)
+	{
+		if (dda_ray->x < 0)
+			x = (dda_ray->x + pos->x - 1) / UNIT;
+		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+			return (1);
+	}
+	if (data->map[y][x] == '1')
+		return (1);
+	return (0);
+}
+
+int	check_y_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
+{
+	int	x;
+	int y;
+
+	y = (dda_ray->y + pos->y) / UNIT;
+	x = (dda_ray->x + pos->x) / UNIT;
+	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+		return (1);
+	if (dda_ray->y < 0 || dda_ray->x < 0/*  && (x > 0 || y > 0) */)
+	{
+		if (dda_ray->y < 0)
+			y = (dda_ray->y + pos->y - 1) / UNIT;
+		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+			return (1);
+	}
+	if (data->map[y][x] == '1')
+		return (1);
+	return (0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 void	get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
 {
 	if (dda_ray->hl == 0)
 		return ;
-
-	if (check_map_position(data, dda_ray, pos) == 1)
-			return ;
 	while (1)
 	{
+		if (check_y_map_position(data, dda_ray, pos) != 0)
+		{
+			return ;
+		}
 		dda_ray->x += dda_ray->variable_side;
 		dda_ray->y += dda_ray->fixed_side;
 		dda_ray->length += dda_ray->hl;
-		if (check_map_position(data, dda_ray, pos) == 1)
-			return ;
 	}
 }
 
@@ -22,16 +75,15 @@ void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
 {
 	if (dda_ray->hl == 0)
 		return ;
-
-	if (check_map_position(data, dda_ray, pos) == 1)
-			return ;
 	while (1)
 	{
+		if (check_x_map_position(data, dda_ray, pos) != 0)
+		{
+			return ;
+		}
 		dda_ray->y += dda_ray->variable_side;
 		dda_ray->x += dda_ray->fixed_side;
 		dda_ray->length += dda_ray->hl;
-		if (check_map_position(data, dda_ray, pos) == 1)
-			return ;
 	}
 }
 
@@ -93,13 +145,13 @@ void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
 	{
 		ray->vector.x = x_dda_ray.x + data->player->pos.x;
 		ray->vector.y = x_dda_ray.y + data->player->pos.y;
-		ray->length = x_dda_ray.length;
+		ray->length = x_dda_ray.length/*  * ray->angle */;
 	}
 	else
 	{
 		ray->vector.x = y_dda_ray.x + data->player->pos.x;
 		ray->vector.y = y_dda_ray.y + data->player->pos.y;
-		ray->length = y_dda_ray.length /* * ray->angle */;
+		ray->length = y_dda_ray.length/*  * ray->angle */;
 	}
 	(void)player_pos_offset;
 }
