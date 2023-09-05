@@ -87,7 +87,7 @@ void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
 	get_x_dda_ray_length(data, &x_dda_ray, &data->player->pos);
 	get_y_dda_ray_length(data, &y_dda_ray, &data->player->pos);
 
-	if (x_dda_ray.length < y_dda_ray.length && x_dda_ray.length > 0)
+	if ((x_dda_ray.length < y_dda_ray.length && x_dda_ray.length > 0) || y_dda_ray.length < 0.5)
 	{
 		ray->vector.x = x_dda_ray.x + data->player->pos.x;
 		ray->vector.y = x_dda_ray.y + data->player->pos.y;

@@ -57,7 +57,7 @@ void	init_dda_ray(t_dda_ray *dda_ray, double a, double b)
 	else if (b == 0)
 	{
 		dda_ray->variable_side = 1;
-		dda_ray->hl = 1;
+		dda_ray->hl = 0;
 		dda_ray->fixed_side = 0;
 		if (a < 0 && b == 0)
 			dda_ray->variable_side *= -1;

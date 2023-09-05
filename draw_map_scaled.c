@@ -114,10 +114,10 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 	while (y_start <= y_end)
 	{
 		set_y_pos_of_texture(offset_y, wall_h, texture->height, &y_in_txtr);
-		if (y_in_txtr + x_in_txtr == 0)
-			printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
-		if (y_in_txtr + x_in_txtr == 4095)
-			printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
+		//if (y_in_txtr + x_in_txtr == 0)
+		//	printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
+		//if (y_in_txtr + x_in_txtr == 4095)
+		//	printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
 		put_pxl_to_img(data->img, x, y_start, texture->addr[y_in_txtr + x_in_txtr]);
 		offset_y++;
 		y_start++;
