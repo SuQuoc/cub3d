@@ -27,11 +27,15 @@ int main(int argc, char **argv)
 	if (fd == -1)
 		return (1);
 	data = init_data(); 
-	ft_mlx_init(data); //100k	
+	ft_mlx_init(data); //100k
+	
+
 	loop_file(fd, data); //3k
 	make_window(data); //10k
 	create_img(data->img, data);
 
+//	calculate_rays(data, data->player);
+	get_ray_angles(data->player);
 	//put_txt_to_image(data->img, data->S_texture, 100, 100);
 	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
 
@@ -41,8 +45,6 @@ int main(int argc, char **argv)
 
 //	draw_map_grid(data->mlx_ptr, data->win_ptr, WHITE);
 //	draw_map_walls(data, data->map, WHITE);
-	calculate_rays(data, data->player);
-	get_ray_angles(data->player);
 	//mlx_loop_hook(data.mlx_ptr, &key_input, &data); //unsicher ob man beides loop hook und hook fuer keys braucht
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_input, data);
 	mlx_hook(data->win_ptr, 17, 0, x_window, data);

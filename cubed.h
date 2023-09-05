@@ -192,7 +192,6 @@ int			check_extension(char const *str);
 int 		search_floor_ceiling(char *str, t_data *data);
 
 // dda_algorithm_utils.c
-void		get_ray_angles(t_player *player);
 double		get_segment_length(double a, double b);
 double		get_unit_offset(double pos);
 int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos, char x_or_y);
@@ -311,5 +310,6 @@ t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
 void		calculate_rays(t_data *data, t_player *player);
+void		get_ray_angles(t_player *player);
 
 #endif
