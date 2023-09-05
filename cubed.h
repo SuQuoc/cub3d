@@ -195,7 +195,7 @@ int 		search_floor_ceiling(char *str, t_data *data);
 void		get_ray_angles(t_player *player);
 double		get_segment_length(double a, double b);
 double		get_unit_offset(double pos);
-int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
+int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos, char x_or_y);
 void		init_dda_ray(t_dda_ray *dda_ray, double a, double b);
 
 // dda_algorithm.c

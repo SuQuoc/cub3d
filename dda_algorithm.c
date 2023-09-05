@@ -1,67 +1,13 @@
 
 #include "cubed.h"
 
-
-int	check_x_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
-{
-	int	x;
-	int y;
-
-	y = (dda_ray->y + pos->y) / UNIT;
-	x = (dda_ray->x + pos->x) / UNIT;
-	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
-		return (1);
-	if (dda_ray->y < 0 || dda_ray->x < 0/*  && (x > 0 || y > 0) */)
-	{
-		if (dda_ray->x < 0)
-			x = (dda_ray->x + pos->x - 1) / UNIT;
-		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
-			return (1);
-	}
-	if (data->map[y][x] == '1')
-		return (1);
-	return (0);
-}
-
-int	check_y_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
-{
-	int	x;
-	int y;
-
-	y = (dda_ray->y + pos->y) / UNIT;
-	x = (dda_ray->x + pos->x) / UNIT;
-	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
-		return (1);
-	if (dda_ray->y < 0 || dda_ray->x < 0/*  && (x > 0 || y > 0) */)
-	{
-		if (dda_ray->y < 0)
-			y = (dda_ray->y + pos->y - 1) / UNIT;
-		if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
-			return (1);
-	}
-	if (data->map[y][x] == '1')
-		return (1);
-	return (0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
 void	get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
 {
 	if (dda_ray->hl == 0)
 		return ;
 	while (1)
 	{
-		if (check_y_map_position(data, dda_ray, pos) != 0)
+		if (check_map_position(data, dda_ray, pos, 'y') != 0)
 		{
 			return ;
 		}
@@ -77,7 +23,7 @@ void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
 		return ;
 	while (1)
 	{
-		if (check_x_map_position(data, dda_ray, pos) != 0)
+		if (check_map_position(data, dda_ray, pos, 'x') != 0)
 		{
 			return ;
 		}
@@ -141,7 +87,7 @@ void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
 	get_x_dda_ray_length(data, &x_dda_ray, &data->player->pos);
 	get_y_dda_ray_length(data, &y_dda_ray, &data->player->pos);
 
-	if (x_dda_ray.length < y_dda_ray.length)
+	if (x_dda_ray.length < y_dda_ray.length && x_dda_ray.length > 0)
 	{
 		ray->vector.x = x_dda_ray.x + data->player->pos.x;
 		ray->vector.y = x_dda_ray.y + data->player->pos.y;
