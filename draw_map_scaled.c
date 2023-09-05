@@ -42,12 +42,12 @@ void set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	if (data->player->pos.x < ray_hit.x)
 	{
 		(*txtr) = data->E_texture;
-		(*off_last_unit) = lround(abs_offset_to_map) % UNIT;
+		(*off_last_unit) = (int)(abs_offset_to_map) % UNIT;
 	}
 	else
 	{
 		(*txtr) = data->W_texture;
-		(*off_last_unit) = UNIT - (lround(abs_offset_to_map) % UNIT);
+		(*off_last_unit) = UNIT - 1 - ((int)(abs_offset_to_map) % UNIT);
 	}
 }
 
@@ -61,29 +61,32 @@ void set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	if (data->player->pos.y > ray_hit.y)
 	{
 		(*txtr) = data->N_texture;
-		(*off_last_unit) = lround(abs_offset_to_map) % UNIT;
+		(*off_last_unit) = (int)(abs_offset_to_map) % UNIT;
 	}
 	else
 	{
 		(*txtr) = data->S_texture;
-		(*off_last_unit) = UNIT - (lround(abs_offset_to_map) % UNIT);
+		(*off_last_unit) = UNIT - 1 - (int)(abs_offset_to_map) % UNIT;
 	}
 }
 
 //or normalised width coordinate
-void set_texture_and_x_pos(t_vector ray_hit, t_data *data, t_image **txtr, int *x_in_txtr)
+void set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr, int *x_in_txtr)
 {
 	double offset_to_last_unit;
-
-	if (ray_hit.x == (double)(int)ray_hit.x) // if teilbar durch unit
+	
+	
+	//if (ray.vector.x == (double)(int)ray.vector.x && (int)ray.vector.x % UNIT == 0) // if teilbar durch unit i need the shorter axis
+	if (ray.shorter_ray == 'x') 
 	{
-		set_offset_and_vert_wall_txtr(ray_hit, data, txtr, &offset_to_last_unit);
+		//if (ray.vector.y == (double)(int)ray.vector.y)
+		//	printf("x: %f y: %f\n", ray.vector.x, ray.vector.y);
+		set_offset_and_vert_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
 	}
 	else
-	{
-		set_offset_and_hori_wall_txtr(ray_hit, data, txtr, &offset_to_last_unit);
-	}
-	(*x_in_txtr) = offset_to_last_unit / UNIT * (*txtr)->line_len;
+		set_offset_and_hori_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
+	(*x_in_txtr) = (offset_to_last_unit / UNIT) * (*txtr)->line_len;
+	//printf("x in txtr: %d\n", (*x_in_txtr));
 }
 
 void set_y_pos_of_texture(double offset_y, double wall_h, int img_height, int *y)
@@ -91,7 +94,7 @@ void set_y_pos_of_texture(double offset_y, double wall_h, int img_height, int *y
 	double norm_y;
 
 	norm_y = offset_y / wall_h;
-	(*y) = lround(norm_y * img_height) * img_height;
+	(*y) = (int)(norm_y * img_height) * img_height;
 }
 
 void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
@@ -102,21 +105,24 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 	int x_in_txtr;
 	int y_in_txtr;
 	
-	set_texture_and_x_pos(data->player->ray[x].vector, data, &texture, &x_in_txtr);
+	set_texture_and_x_pos(data->player->ray[x], data, &texture, &x_in_txtr);
 	wall_h = UNIT * WINDOW_H / data->player->ray[x].length;
 	if (wall_h <= WINDOW_H)
 		offset_y = 0;
 	else
 		offset_y = (wall_h - WINDOW_H) / 2;
-	while (y_start < y_end)
+	while (y_start <= y_end)
 	{
 		set_y_pos_of_texture(offset_y, wall_h, texture->height, &y_in_txtr);
+		if (y_in_txtr + x_in_txtr == 0)
+			printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
+		if (y_in_txtr + x_in_txtr == 4095)
+			printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
 		put_pxl_to_img(data->img, x, y_start, texture->addr[y_in_txtr + x_in_txtr]);
 		offset_y++;
 		y_start++;
 	}
 }
-
 
 void put_txt_ray_to_image(t_ray *ray, t_data *data)
 {
@@ -132,7 +138,6 @@ void put_txt_ray_to_image(t_ray *ray, t_data *data)
 			wall_h = WINDOW_H;
 		bg_diff = (WINDOW_H - wall_h) / 2;
 		draw_vertical_ceiling(0, bg_diff, x, data);
-		draw_vertical_wall(bg_diff, WINDOW_H - bg_diff, x, data);
 		draw_texture_scaled(bg_diff, WINDOW_H - bg_diff, x, data);
 		draw_vertical_floor(WINDOW_H - bg_diff, WINDOW_H, x, data);
 		x++;

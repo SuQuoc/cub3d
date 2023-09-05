@@ -40,12 +40,14 @@ static t_image	*init_image(void)
 		return (NULL);
 	image->img_ptr = NULL;
 	image->addr = NULL;
-	//image->bpp = 0;
-	//image->line_len = 0;
-	//image->endian = 0;
+	image->bpp = 0;
+	image->line_len = 0;
+	image->line_len = 0;
+	image->endian = 0;
 	return (image);
 }
 
+//init image for txtr not protected
 t_data *init_data(void)
 {
 	t_data *data;

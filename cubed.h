@@ -115,6 +115,7 @@ typedef struct s_ray
 	t_vector	vector;
 	double		length;
 	double		angle;
+	char		shorter_ray;
 }	t_ray;
 
 //The rays in ray are the ray-vectors(fraction of camera) plus the direction
