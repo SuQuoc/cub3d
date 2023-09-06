@@ -69,7 +69,7 @@
 #define PI 3.141592654
 
 #define UNIT 64
-#define RAY_NB WINDOW_W //needs to be uneven
+#define RAY_NB WINDOW_W //needs to be uneven and smaller than WINDOW_W
 #define DIRECTION_LENGTH 100
 #define HALF_CAMERA_LENGTH 60
 

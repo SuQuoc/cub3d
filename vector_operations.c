@@ -49,6 +49,21 @@ static t_vector	calculate_camera_vector(const t_vector camera, const t_vector di
 	return (result);
 }
 
+void	shorter_ray_correction(t_ray *ray)
+{
+	int	x;
+
+	x = 1;
+	if (WINDOW_W < 3)
+		return ;
+	while (x < WINDOW_W -1)
+	{
+		if (ray[x - 1].shorter_ray != ray[x].shorter_ray && ray[x].shorter_ray != ray[x + 1].shorter_ray)
+			ray[x].shorter_ray = ray[x - 1].shorter_ray;
+		x++;
+	}
+}
+
 void	calculate_rays(t_data *data, t_player *player)
 {
 	t_vector	player_pos_offset;
@@ -77,6 +92,7 @@ void	calculate_rays(t_data *data, t_player *player)
 		numerator++;
 		x++;
 	}
+	shorter_ray_correction(player->ray);
 }
 
 static double	get_ray_length(const t_vector camera, const t_vector direction, int numerator)
