@@ -35,14 +35,14 @@ static t_image	*init_image(void)
 {
 	t_image	*image;
 
-	image = malloc(sizeof(t_image));
+	image = (t_image *)malloc(sizeof(t_image));
 	if (!image)
 		return (NULL);
 	image->img_ptr = NULL;
 	image->addr = NULL;
 	image->bpp = 0;
 	image->line_len = 0;
-	image->line_len = 0;
+	image->height = 0;
 	image->endian = 0;
 	return (image);
 }

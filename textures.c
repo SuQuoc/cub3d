@@ -32,13 +32,15 @@ void set_texture(char *str, char *idf, t_data *data, t_image *txt)
 
 	len = ft_strlen(idf);
 	i = skip_spaces(str, len);
-	printf("str: %s\n", &str[i]);
-	//txt->img_ptr = malloc(sizeof(void));
-	txt->line_len = 0;
-	txt->height = 0;
-	txt->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, &str[i], &txt->line_len, &txt->height);
-	//printf("width: %d\n", txt->line_len);   
-	//printf("height: %d\n", txt->height);
+	int fd = open(&str[i], O_RDONLY);
+	if (fd == -1)
+	{
+		data->err = ERR_SYSTEM;
+		return ;
+	}
+	else
+		close(fd);
+	txt->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr , &str[i], &txt->line_len, &txt->height);
 	if (!txt->img_ptr)
 	{
 		data->err = ERR_TEXTURE;
@@ -55,7 +57,7 @@ void set_texture(char *str, char *idf, t_data *data, t_image *txt)
 int search_texture(char *str, t_data *data)
 {
 	int found;
-
+	
 	found = FALSE;
 	if (ft_strncmp(str, NORTH, 3) == 0)
 	{

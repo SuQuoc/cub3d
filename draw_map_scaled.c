@@ -2,6 +2,17 @@
 #include "cubed.h"
 
 
+void draw_texture_test(int start, int end, int x, t_data *data)
+{
+	int i = 4106;
+	while (start < end)
+	{
+		put_pxl_to_img(data->img, x, start, data->S_texture->addr[i]);
+		//i++;
+		start++;
+	}
+}
+
 void draw_vertical_wall(int start, int end, int x, t_data *data)
 {
 	while (start < end)
@@ -79,8 +90,6 @@ void set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr, int *x_in_tx
 	//if (ray.vector.x == (double)(int)ray.vector.x && (int)ray.vector.x % UNIT == 0) // if teilbar durch unit i need the shorter axis
 	if (ray.shorter_ray == 'x') 
 	{
-		//if (ray.vector.y == (double)(int)ray.vector.y)
-		//	printf("x: %f y: %f\n", ray.vector.x, ray.vector.y);
 		set_offset_and_vert_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
 	}
 	else
@@ -92,14 +101,24 @@ void set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr, int *x_in_tx
 	//printf("x in txtr: %d\n", (*x_in_txtr));
 }
 
-void set_y_pos_of_texture(double offset_y, double wall_h, t_image *txtr, int *y)
+void set_y_pos_of_texture(double offset_y, double wall_h, t_image *txtr, int *y_in_txtr)
 {
 	double norm_y;
-
-	norm_y = offset_y / wall_h;
-	(*y) = (int)(norm_y * txtr->height) * txtr->line_len;
-	if ((*y) > 0)
-		(*y)--;
+	int y;
+	norm_y = offset_y / (int)(wall_h + 1); //rounding wall up
+	
+	y = (norm_y * txtr->height);
+	if ((y) > 0)
+		(y)-= 1;
+	//if ((y) > 62)
+	//{
+	//	printf("offset_y: %f\n", offset_y);
+	//	printf("wall_h: %f\n", wall_h);
+	//	printf("norm_y: %f\n", norm_y);
+	//	//	printf("norm_y: %f\n", norm_y);
+	//	printf("y: %d\n", y);
+	//}
+	(*y_in_txtr) = y * txtr->line_len;
 	//if ((*y) >= 0)
 	//	printf("y in textr: %d\n", (*y) / 64);
 }
@@ -115,16 +134,20 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 	set_texture_and_x_pos(data->player->ray[x], data, &texture, &x_in_txtr);
 	wall_h = UNIT * WINDOW_H / data->player->ray[x].length;
 	if (wall_h <= WINDOW_H)
-		offset_y = 0;
+		offset_y = 1;
 	else
 		offset_y = (wall_h - WINDOW_H) / 2;
-	while (y_start <= y_end)
+	while (y_start < y_end)
 	{
 		set_y_pos_of_texture(offset_y, wall_h, texture, &y_in_txtr);
 		//if (y_in_txtr + x_in_txtr == 0)
 		//	printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
-		//if (y_in_txtr + x_in_txtr == 4099)
+		//if (y_in_txtr + x_in_txtr > 4094)
+		//{
+		//	printf("window pos y: %d, x: %d\n", y_start, x);
 		//	printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
+		//	printf("y: %d, x: %d\n\n", y_in_txtr, x_in_txtr);			
+		//}
 		put_pxl_to_img(data->img, x, y_start, texture->addr[y_in_txtr + x_in_txtr]);
 		offset_y++;
 		y_start++;
@@ -145,6 +168,7 @@ void put_txt_ray_to_image(t_ray *ray, t_data *data)
 			wall_h = WINDOW_H;
 		bg_diff = (WINDOW_H - wall_h) / 2;
 		draw_vertical_ceiling(0, bg_diff, x, data);
+		//draw_texture_test(bg_diff, WINDOW_H - bg_diff, x, data);
 		draw_texture_scaled(bg_diff, WINDOW_H - bg_diff, x, data);
 		draw_vertical_floor(WINDOW_H - bg_diff, WINDOW_H, x, data);
 		x++;

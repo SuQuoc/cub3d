@@ -9,7 +9,7 @@ int add_and_return(int add)
 	
 	if (!sum)
 		sum = 0;
-	printf("sum: %d\n", sum);
+	//printf("sum: %d\n", sum);
 	return (sum+=add);
 }
 static void overflow_msg(void)
@@ -49,7 +49,7 @@ char *read_map_into_str(int fd)
 void loop_file(int fd, t_data *data)
 {
 	char *map_str;
-
+	
 	map_str = read_map_into_str(fd);
 	close(fd);
 	if (!map_str)
