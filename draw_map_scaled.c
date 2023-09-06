@@ -47,7 +47,7 @@ void set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	else
 	{
 		(*txtr) = data->W_texture;
-		(*off_last_unit) = UNIT - 1 - ((int)(abs_offset_to_map) % UNIT);
+		(*off_last_unit) = UNIT - ((int)(abs_offset_to_map) % UNIT);
 	}
 }
 
@@ -66,7 +66,7 @@ void set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	else
 	{
 		(*txtr) = data->S_texture;
-		(*off_last_unit) = UNIT - 1 - (int)(abs_offset_to_map) % UNIT;
+		(*off_last_unit) = UNIT - (int)(abs_offset_to_map) % UNIT;
 	}
 }
 
@@ -85,16 +85,23 @@ void set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr, int *x_in_tx
 	}
 	else
 		set_offset_and_hori_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
-	(*x_in_txtr) = (offset_to_last_unit / UNIT) * (*txtr)->line_len;
+	(*x_in_txtr) = (offset_to_last_unit / UNIT) * (*txtr)->line_len; //lround uber ganzes?
+	if ((*x_in_txtr) > 0)
+		(*x_in_txtr)--;
+	
 	//printf("x in txtr: %d\n", (*x_in_txtr));
 }
 
-void set_y_pos_of_texture(double offset_y, double wall_h, int img_height, int *y)
+void set_y_pos_of_texture(double offset_y, double wall_h, t_image *txtr, int *y)
 {
 	double norm_y;
 
 	norm_y = offset_y / wall_h;
-	(*y) = (int)(norm_y * img_height) * img_height;
+	(*y) = (int)(norm_y * txtr->height) * txtr->line_len;
+	if ((*y) > 0)
+		(*y)--;
+	//if ((*y) >= 0)
+	//	printf("y in textr: %d\n", (*y) / 64);
 }
 
 void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
@@ -113,10 +120,10 @@ void draw_texture_scaled(int y_start, int y_end, int x, t_data *data)
 		offset_y = (wall_h - WINDOW_H) / 2;
 	while (y_start <= y_end)
 	{
-		set_y_pos_of_texture(offset_y, wall_h, texture->height, &y_in_txtr);
+		set_y_pos_of_texture(offset_y, wall_h, texture, &y_in_txtr);
 		//if (y_in_txtr + x_in_txtr == 0)
 		//	printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
-		//if (y_in_txtr + x_in_txtr == 4095)
+		//if (y_in_txtr + x_in_txtr == 4099)
 		//	printf("index of txtr: %d\n", y_in_txtr + x_in_txtr);
 		put_pxl_to_img(data->img, x, y_start, texture->addr[y_in_txtr + x_in_txtr]);
 		offset_y++;
