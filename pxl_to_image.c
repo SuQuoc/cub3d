@@ -16,9 +16,9 @@ void create_img(t_image *img, t_data *data)
 	img->line_len /= 4;
 	//printf("len: %zu\n", ft_strlen(mlx_get_data_addr(img->img_ptr, &img->bpp, &img->line_len, &img->endian)));
 	//printf("size of int: %lu\n", sizeof(char));
-	printf("V2: pixel bits: %d\n", img->bpp);
-	printf("V2: line_bytes: %d\n", img->line_len);
-	printf("V2: endian: %d\n", img->endian);
+	//printf("V2: pixel bits: %d\n", img->bpp);
+	//printf("V2: line_bytes: %d\n", img->line_len);
+	//printf("V2: endian: %d\n", img->endian);
 }
 
 void color_img_all_colors(t_image *img, int width, int height)

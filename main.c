@@ -28,9 +28,9 @@ int main(int argc, char **argv)
 		return (1);
 	data = init_data(); 
 	ft_mlx_init(data); //100k
+	loop_file(fd, data); //3k
 	
 
-	loop_file(fd, data); //3k
 	make_window(data); //10k
 	create_img(data->img, data);
 

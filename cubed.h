@@ -82,8 +82,8 @@ typedef struct s_image
 	int				*addr;
 	int				bpp;
 	int				line_len;
-	int				endian;
 	int 			height;
+	int				endian;
 }					t_image;
 
 typedef struct s_pos

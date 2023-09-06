@@ -1,10 +1,11 @@
-NO map_textures/north_texture
-SO map_textures/fked_south_texture
-WE map_textures/west_texture
-EA map_textures/east_texture
+NO map_textures/steel_wall.xpm
+SO map_textures/steel_wall2.xpm
+WE map_textures/steel_wall3.xpm
+EA map_textures/wall.xpm
 
 C 0,0,255
 F 255,0,0
+
 
 1111111111111111111111111
 1000000000110000000000001

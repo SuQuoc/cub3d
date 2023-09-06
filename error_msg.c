@@ -5,7 +5,7 @@
 void	file_error(int err_code)
 {
 	ft_putstr_fd("Error: ", 2);
-	if (err_code == 1)
+	if (err_code == ERR_SYSTEM)
 		perror(NULL);
 	else if (err_code == ERR_IDF)
 		ft_putstr_fd("Invalid identifier!\n", 2);
