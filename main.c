@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 	create_img(data->img, data);
 
 	get_ray_angles(data->player);
-	printf("dsadss\n");
 	calculate_move_values(data->player, data->player->direction.x, data->player->direction.y);
 	calculate_rays(data, data->player);
 	put_txt_ray_to_image(data->player->ray, data);
