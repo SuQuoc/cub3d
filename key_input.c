@@ -1,6 +1,18 @@
 
 #include "cubed.h"
 
+void	hidden_wall_colition(t_data *data, t_player *player)
+{
+	if (player->pos.y < -1 * TILE_SIZE)
+		player->pos.y = -1 * TILE_SIZE;
+	if (player->pos.x < -1 * TILE_SIZE)
+		player->pos.x = -1 * TILE_SIZE;
+	if (player->pos.y > (data->map_height + 1) * TILE_SIZE)
+		player->pos.y = (data->map_height + 1) * TILE_SIZE;
+	if (player->pos.x > (data->map_width + 1) * TILE_SIZE)
+		player->pos.x = (data->map_width + 1) * TILE_SIZE;
+}
+
 static void	movement(int keysym, t_data *data)
 {
 //	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), BLACK);
@@ -16,6 +28,7 @@ static void	movement(int keysym, t_data *data)
 		player_move_left(data->player, data->mlx_ptr, data->win_ptr);
 //	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
 //	draw_player_camera(data, data->player, BLUE);
+	hidden_wall_colition(data, data->player);
 	calculate_rays(data, data->player);
 	put_txt_ray_to_image(data->player->ray, data);
 //	draw_rays(data, data->player, GREEN);
