@@ -82,7 +82,7 @@ void draw_texture_test(int start, int end, int x, t_data *data)
 	int i = 4106;
 	while (start < end)
 	{
-		put_pxl_to_img(data->img, x, start, data->S_texture->addr[i]);
+		put_pxl_to_img(data->img, x, start, data->s_texture->addr[i]);
 		//i++;
 		start++;
 	}

@@ -41,12 +41,12 @@ void	set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data,
 	abs_offset_to_map = ray_hit.y;
 	if (data->player->pos.x < ray_hit.x)
 	{
-		(*txtr) = data->E_texture;
+		(*txtr) = data->e_texture;
 		(*off_last_unit) = (int)(abs_offset_to_map) % TILE_SIZE;
 	}
 	else
 	{
-		(*txtr) = data->W_texture;
+		(*txtr) = data->w_texture;
 		(*off_last_unit) = TILE_SIZE - ((int)(abs_offset_to_map) % TILE_SIZE);
 	}
 }
@@ -61,12 +61,12 @@ void	set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data,
 	abs_offset_to_map = ray_hit.x;
 	if (data->player->pos.y > ray_hit.y)
 	{
-		(*txtr) = data->N_texture;
+		(*txtr) = data->n_texture;
 		(*off_last_unit) = (int)(abs_offset_to_map) % TILE_SIZE;
 	}
 	else
 	{
-		(*txtr) = data->S_texture;
+		(*txtr) = data->s_texture;
 		(*off_last_unit) = TILE_SIZE - (int)(abs_offset_to_map) % TILE_SIZE;
 	}
 }

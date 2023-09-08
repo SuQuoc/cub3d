@@ -21,10 +21,10 @@ void	free_2d_array(char **map)
 //both lead to errors so we have to check before if they are not null
 void destroy_textures(t_data *data)
 {
-	free_image(data->N_texture, data->mlx_ptr);
-	free_image(data->E_texture, data->mlx_ptr);
-	free_image(data->S_texture, data->mlx_ptr);
-	free_image(data->W_texture, data->mlx_ptr);
+	free_image(data->n_texture, data->mlx_ptr);
+	free_image(data->e_texture, data->mlx_ptr);
+	free_image(data->s_texture, data->mlx_ptr);
+	free_image(data->w_texture, data->mlx_ptr);
 }
 
 void free_image(t_image *img, void *mlx_ptr)

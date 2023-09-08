@@ -49,12 +49,12 @@ static t_image	*init_image(void)
 
 static void	init_txtr_images(t_data *data)
 {
-	data->N_texture = init_image();
-	data->E_texture = init_image();
-	data->S_texture = init_image();
-	data->W_texture = init_image();
-	if (!data->N_texture || !data->E_texture || !data->S_texture
-		|| !data->W_texture)
+	data->n_texture = init_image();
+	data->e_texture = init_image();
+	data->s_texture = init_image();
+	data->w_texture = init_image();
+	if (!data->n_texture || !data->e_texture || !data->s_texture
+		|| !data->w_texture)
 	{
 		perror(NULL);
 		free_data(data);

@@ -61,22 +61,22 @@ int search_texture(char *str, t_data *data)
 	found = FALSE;
 	if (ft_strncmp(str, NORTH, 3) == 0)
 	{
-		set_texture(str, NORTH, data, data->N_texture);
+		set_texture(str, NORTH, data, data->n_texture);
 		found = TRUE;
 	}    
 	else if (ft_strncmp(str, EAST, 3) == 0)
 	{
-		set_texture(str, EAST, data, data->E_texture);
+		set_texture(str, EAST, data, data->e_texture);
 		found = TRUE;
 	}
 	else if (ft_strncmp(str, SOUTH, 3) == 0)
 	{
-		set_texture(str, SOUTH, data, data->S_texture);
+		set_texture(str, SOUTH, data, data->s_texture);
 		found = TRUE;
 	}
 	else if (ft_strncmp(str, WEST, 3) == 0)
 	{
-		set_texture(str, WEST, data, data->W_texture);        
+		set_texture(str, WEST, data, data->w_texture);        
 		found = TRUE;
 	}
 	return (found);
