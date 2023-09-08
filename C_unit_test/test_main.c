@@ -73,7 +73,7 @@ int main()
         {"missing_west_texture.cub"                 , "Invalid identifier!\n"},
         {"double_identifier.cub"                    , "Each identifier only allowed once!\n"},
         {"three_floors.cub"                         , "Each identifier only allowed once!\n"},
-        {"invalid_texture.cub"                      , "Invalid texture path or no rights!\n"},
+        {"invalid_texture.cub"                      , "No such file or directory\n"},
         {"last_is_double_with_nl.cub"               , "Invalid map_content!\n"},
         {"", ""}
     };

@@ -47,11 +47,25 @@ static t_image	*init_image(void)
 	return (image);
 }
 
-//init image for txtr not protected
-t_data *init_data(void)
+static void	init_txtr_images(t_data *data)
 {
-	t_data *data;
-	
+	data->N_texture = init_image();
+	data->E_texture = init_image();
+	data->S_texture = init_image();
+	data->W_texture = init_image();
+	if (!data->N_texture || !data->E_texture || !data->S_texture
+		|| !data->W_texture)
+	{
+		perror(NULL);
+		free_data(data);
+	}
+}
+
+// init image for txtr not protected
+t_data	*init_data(void)
+{
+	t_data	*data;
+
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 	{
@@ -69,60 +83,10 @@ t_data *init_data(void)
 	if (!data->img)
 	{
 		perror(NULL);
-		free(data->player->ray);
-		free(data->player);
-		free(data);
-		exit(1);
+		free_data(data);
 	}
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-	data->map = NULL;
-	data->map_copy = NULL;
-	data->N_texture = init_image();
-	data->E_texture = init_image();
-	data->S_texture = init_image();
-	data->W_texture = init_image();
-	data->err = 0;
-	data->cos = cos(PI / 180 * ROTATITON_SPEED); //protection?
-	data->sin = sin(PI / 180 * ROTATITON_SPEED); //protection?
+	init_txtr_images(data);
+	declare_base_values(data);
 	return (data);
 }
 
-static void	line_calculate_values(t_line *line)
-{
-	if (line->x_diff < 0)
-	{
-		line->x_diff *= -1;
-		line->x_pos_or_neg = 'n';
-	}
-	else
-		line->x_pos_or_neg = 'p';
-	if (line->y_diff < 0)
-	{
-		line->y_diff *= -1;
-		line->y_pos_or_neg = 'n';
-	}
-	else
-		line->y_pos_or_neg = 'p';
-	if (line->x_diff > line->y_diff)
-	{
-		line->fault = line->x_diff / 2;
-		line->fast_axis = 'x';
-	}
-	else
-	{
-		line->fault = line->y_diff / 2;
-		line->fast_axis = 'y';
-	}
-}
-
-void	init_line(t_line *line, const t_vector start, const t_vector end)
-{
-	line->start_x = start.x;
-	line->start_y = start.y;
-	line->end_x = end.x;
-	line->end_y = end.y;
-	line->x_diff = (line->end_x - line->start_x);
-	line->y_diff = (line->end_y - line->start_y);
-	line_calculate_values(line);
-}

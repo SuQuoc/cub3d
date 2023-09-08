@@ -26,14 +26,14 @@ void	fill_str(char *str, char c, size_t len)
 	str[i] = '\0';
 }
 
-int found_left_from_pos(char *str, int pos, char search)
+int	found_left_from_pos(char *str, int pos, char search)
 {
-    pos--;
-    while (pos >= 0)
-    {
-        if (str[pos] == search)
-            return (TRUE);
-        pos--;
-    }
-    return (FALSE);
+	pos--;
+	while (pos >= 0)
+	{
+		if (str[pos] == search)
+			return (TRUE);
+		pos--;
+	}
+	return (FALSE);
 }

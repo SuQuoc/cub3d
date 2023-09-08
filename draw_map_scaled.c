@@ -1,19 +1,7 @@
 
 #include "cubed.h"
 
-
-void draw_texture_test(int start, int end, int x, t_data *data)
-{
-	int i = 4106;
-	while (start < end)
-	{
-		put_pxl_to_img(data->img, x, start, data->S_texture->addr[i]);
-		//i++;
-		start++;
-	}
-}
-
-void draw_vertical_wall(int start, int end, int x, t_data *data)
+void	draw_vertical_wall(int start, int end, int x, t_data *data)
 {
 	while (start < end)
 	{
@@ -22,7 +10,7 @@ void draw_vertical_wall(int start, int end, int x, t_data *data)
 	}
 }
 
-void draw_vertical_ceiling(int start, int end, int x, t_data *data)
+void	draw_vertical_ceiling(int start, int end, int x, t_data *data)
 {
 	while (start < end)
 	{
@@ -31,7 +19,7 @@ void draw_vertical_ceiling(int start, int end, int x, t_data *data)
 	}
 }
 
-void draw_vertical_floor(int start, int end, int x, t_data *data)
+void	draw_vertical_floor(int start, int end, int x, t_data *data)
 {
 	while (start < end)
 	{
@@ -40,17 +28,17 @@ void draw_vertical_floor(int start, int end, int x, t_data *data)
 	}
 }
 
-//POINT SAMPLING
+// POINT SAMPLING
 
 // sign = significant
-void set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data, t_image **txtr, double *off_last_unit)
+void	set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data,
+		t_image **txtr, double *off_last_unit)
 {
-	double abs_offset_to_map;
+	double	abs_offset_to_map;
 
 	if (ray_hit.y < 0)
 		ray_hit.y *= -1;
 	abs_offset_to_map = ray_hit.y;
-	//printf("ray_hit x or y coord: %f\n", abs_offset_to_map);
 	if (data->player->pos.x < ray_hit.x)
 	{
 		(*txtr) = data->E_texture;
@@ -63,14 +51,14 @@ void set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	}
 }
 
-void set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data, t_image **txtr, double *off_last_unit)
+void	set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data,
+		t_image **txtr, double *off_last_unit)
 {
-	double abs_offset_to_map;
+	double	abs_offset_to_map;
 
 	if (ray_hit.x < 0)
 		ray_hit.x *= -1;
 	abs_offset_to_map = ray_hit.x;
-	//printf("ray_hit x or y coord: %f\n", abs_offset_to_map);
 	if (data->player->pos.y > ray_hit.y)
 	{
 		(*txtr) = data->N_texture;
@@ -83,28 +71,31 @@ void set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	}
 }
 
-//or normalised width coordinate
-void set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr, int *x_in_txtr)
+// or normalised width coordinate
+void	set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr,
+		int *x_in_txtr)
 {
-	double offset_to_last_unit;
+	double	offset_to_last_unit;
 
-		
 	if (ray.shorter_ray == 'x')
 	{
-		set_offset_and_vert_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
+		set_offset_and_vert_wall_txtr(ray.vector, data, txtr,
+			&offset_to_last_unit);
 	}
 	else
-		set_offset_and_hori_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
+		set_offset_and_hori_wall_txtr(ray.vector, data, txtr,
+			&offset_to_last_unit);
 	(*x_in_txtr) = (offset_to_last_unit / TILE_SIZE) * (*txtr)->line_len;
-	
 	if ((*x_in_txtr) > 0)
 		(*x_in_txtr)--;
 }
 
-void set_y_pos_of_texture(int offset_y, int wall_h, t_image *txtr, int *y_in_txtr)
+void	set_y_pos_of_texture(int offset_y, int wall_h, t_image *txtr,
+		int *y_in_txtr)
 {
-	double norm_y;
-	int y;
+	double	norm_y;
+	int		y;
+
 	norm_y = (double)offset_y / wall_h;
 	y = norm_y * txtr->height;
 	if (y > 63)
@@ -112,35 +103,34 @@ void set_y_pos_of_texture(int offset_y, int wall_h, t_image *txtr, int *y_in_txt
 	(*y_in_txtr) = (int)y * txtr->line_len;
 }
 
-void draw_texture_scaled(int y_start, int y_end, int x, int ray_x, t_data *data)
+void	draw_texture_scaled(int y_start, int y_end, int x, int ray_x,
+		t_data *data)
 {
-	t_image *texture;
-	int offset_y; 
-	int wall_h;
-	int x_in_txtr;
-	int y_in_txtr;
-	
+	t_image	*texture;
+	int		offset_y;
+	int		wall_h;
+	int		x_in_txtr;
+	int		y_in_txtr;
+
 	set_texture_and_x_pos(data->player->ray[ray_x], data, &texture, &x_in_txtr);
 	wall_h = lround(TILE_SIZE * WINDOW_H / data->player->ray[ray_x].length);
 	if (wall_h <= WINDOW_H)
 		offset_y = 0;
 	else
 		offset_y = (wall_h - WINDOW_H) / 2;
-
 	while (y_start < y_end)
 	{
 		set_y_pos_of_texture(offset_y, wall_h, texture, &y_in_txtr);
-		put_pxl_to_img(data->img, x, y_start, texture->addr[y_in_txtr + x_in_txtr]);
+		put_pxl_to_img(data->img, x, y_start, texture->addr[y_in_txtr
+			+ x_in_txtr]);
 		offset_y++;
 		y_start++;
 	}
-
-
 }
 
 void	draw_black_image(const t_data *data)
 {
-	int image_end;
+	int	image_end;
 	int	x;
 
 	x = 0;
@@ -154,8 +144,8 @@ void	draw_black_image(const t_data *data)
 
 static int	check_if_player_in_wall(const t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = data->player->pos.y / TILE_SIZE;
 	x = data->player->pos.x / TILE_SIZE;
@@ -170,21 +160,23 @@ static int	check_if_player_in_wall(const t_data *data)
 	return (0);
 }
 
-void put_txt_ray_to_image(t_ray *ray, t_data *data)
+void	put_txt_ray_to_image(t_ray *ray, t_data *data)
 {
 	int		wall_floor;
 	int		wall_ceil;
 	int		wall_h;
-
-	double	ray_dist = (double)RAY_NB / (double)WINDOW_W;
+	double	ray_dist;
 	int		window_x;
-	double	ray_x = 0;
+	double	ray_x;
 
+	ray_dist = (double)RAY_NB / (double)WINDOW_W;
+	ray_x = 0;
 	window_x = 0;
 	if (check_if_player_in_wall(data) == 1)
 	{
 		draw_black_image(data);
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->img->img_ptr, 0, 0);
 		return ;
 	}
 	while (window_x < WINDOW_W)
@@ -202,5 +194,6 @@ void put_txt_ray_to_image(t_ray *ray, t_data *data)
 		ray_x += ray_dist;
 		window_x++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0,
+		0);
 }

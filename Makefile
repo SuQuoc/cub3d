@@ -22,6 +22,7 @@ SRC =	2d_array_utils.c \
 		identifier_utils.c \
 		pxl_to_image.c \
 		init_structs.c \
+		init_structs2.c \
 		key_input.c \
 		loop_file.c \
 		loop_idf.c \

@@ -12,16 +12,19 @@ C_SRC =	framework.c \
 		../array_utils.c \
 		../check_extension.c \
 		../colors.c \
+		../dda_algorithm_utils.c \
 		../dda_algorithm.c \
 		../dfs.c \
 		../draw_line_utils.c \
 		../draw_line.c \
 		../draw_map.c \
+		../draw_map_scaled.c \
 		../error_msg.c \
 		../free_utils.c \
 		../ft_strcmp.c \
 		../hooks.c \
 		../identifier_utils.c \
+		../pxl_to_image.c \
 		../init_structs.c \
 		../key_input.c \
 		../loop_file.c \

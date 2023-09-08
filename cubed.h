@@ -242,12 +242,17 @@ int			key_input(int keysym, t_data *data);
 // identifier_utils.c
 int			is_txt_idf(char *str);
 int			is_color_idf(char *str);
+int			rgb_to_int(int r, int g, int b);
 
 
 // init_structs.c
 void		init_vector(t_vector *vector, double x_position, double y_position);
 t_data		*init_data(void);
+
+// init_structs2.c
+void		declare_base_values(t_data *data);
 void		init_line(t_line *line, const t_vector start, const t_vector end);
+
 
 // loop_file.c
 void		loop_file(int fd, t_data *data);
@@ -265,9 +270,6 @@ void		loop_map(t_data *data);
 int			search_texture(char *str, t_data *data);
 void		set_texture(char *str, char *idf, t_data *data, t_image *txt);
 void		free_data_err(t_data *data, char *error_message);
-
-// render.c
-int			print_x(t_data *data); //UNUSED?
 
 // parsing_utils.c
 int			skip_spaces(char *str, int start);
@@ -295,9 +297,8 @@ int			prelim_checks_passed(char *str, t_data *data);
 void		print_str_arr(char **arr);
 void		print_int_arr(int *arr, int size);
 
+
 // pxl_to_image.c
-void color_img_all_colors(t_image *img, int width, int height);
-void color_img(t_image *img, int color, int width, int height);
 void create_img(t_image *img, t_data *data);
 void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y);
 void paint_floor_ceiling(t_image *img, int f_color, int c_color);
