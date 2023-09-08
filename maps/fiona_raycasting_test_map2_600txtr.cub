@@ -1,7 +1,7 @@
-NO map_textures/wall.xpm
-SO map_textures/wall.xpm
-WE map_textures/wall.xpm
-EA map_textures/wall.xpm
+NO map_textures/600x600/north_texture
+SO map_textures/600x600/south_texture
+WE map_textures/600x600/west_texture
+EA map_textures/600x600/east_texture
 
 C 0,0,255
 F 255,0,0

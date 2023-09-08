@@ -54,12 +54,14 @@ void	shorter_ray_correction(t_ray *ray)
 	int	x;
 
 	x = 1;
-	if (WINDOW_W < 3)
+	if (RAY_NB < 3)
 		return ;
-	while (x < WINDOW_W -1)
+	while (x < RAY_NB - 1)
 	{
-		if (ray[x - 1].shorter_ray != ray[x].shorter_ray && ray[x].shorter_ray != ray[x + 1].shorter_ray)
+		if (ray[x - 1].shorter_ray != ray[x].shorter_ray \
+			&& ray[x].shorter_ray != ray[x + 1].shorter_ray)
 			ray[x].shorter_ray = ray[x - 1].shorter_ray;
+		
 		x++;
 	}
 }

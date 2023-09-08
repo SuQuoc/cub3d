@@ -33,8 +33,8 @@
 # define ERR_NO_WALLS 11
 
 // Identifiers
-# define TXT_W 60
-# define TXT_H 60
+# define TXT_W 64//unused
+# define TXT_H 64//unused
 # define NORTH "NO "
 # define EAST "EA "
 # define SOUTH "SO "
@@ -56,7 +56,7 @@
 # define WINDOW_W 1000
 # define WINDOW_H 600
 # define WINDOW_NAME "FORKBOMBERS"
-# define TXT_SIZE 64
+# define TXT_SIZE 60 //macht grad gar nix
 
 //colors
 #define WHITE 0xFFFFFF

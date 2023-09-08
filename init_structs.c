@@ -85,7 +85,6 @@ t_data *init_data(void)
 	data->err = 0;
 	data->cos = cos(PI / 180 * ROTATITON_SPEED); //protection?
 	data->sin = sin(PI / 180 * ROTATITON_SPEED); //protection?
-	calculate_rays(data, data->player);
 	return (data);
 }
 
