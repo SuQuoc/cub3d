@@ -16,7 +16,7 @@ void	draw_map_grid(void *mlx_ptr, void *win_ptr, int color)
 	//		mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 	//		x++;
 	//	}
-	//	y += UNIT;
+	//	y += TILE_SIZE;
 	//	x = 0;
 	//}
 	y = 0;
@@ -28,7 +28,7 @@ void	draw_map_grid(void *mlx_ptr, void *win_ptr, int color)
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 			y++;
 		}
-		x += UNIT;
+		x += TILE_SIZE;
 		y = 0;
 	}
 }
@@ -38,8 +38,8 @@ static void	draw_unit_rectangle(t_data *data, int x, int y, int color)
 	int	x_limiter;
 	int	y_limiter;
 
-	y_limiter = y + UNIT;
-	x_limiter = x + UNIT;
+	y_limiter = y + TILE_SIZE;
+	x_limiter = x + TILE_SIZE;
 	while (y <= y_limiter)
 	{
 		while (x <= x_limiter)
@@ -48,7 +48,7 @@ static void	draw_unit_rectangle(t_data *data, int x, int y, int color)
 			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
 			x++;
 		}
-		x -= UNIT;
+		x -= TILE_SIZE;
 		y++; 
 	}
 }
@@ -68,7 +68,7 @@ void	draw_map_walls(t_data *data, char **map, int color)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-				draw_unit_rectangle(data, x * UNIT, y * UNIT, color);
+				draw_unit_rectangle(data, x * TILE_SIZE, y * TILE_SIZE, color);
 			x++;
 		}
 		y++;

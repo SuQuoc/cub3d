@@ -1,5 +1,5 @@
-# ifndef UNIT_TESTS_H
-# define UNIT_TESTS_H
+# ifndef TILE_SIZE_TESTS_H
+# define TILE_SIZE_TESTS_H
 
 #include <sys/types.h>
 #include <sys/stat.h>

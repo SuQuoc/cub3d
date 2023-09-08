@@ -53,10 +53,9 @@
 # define EXTENSION ".cub"
 
 # define MAX_F_SIZE 1000000
-# define WINDOW_W 1980
+# define WINDOW_W 1000
 # define WINDOW_H 600
 # define WINDOW_NAME "FORKBOMBERS"
-# define TXT_SIZE 60 //macht grad gar nix
 
 //colors
 #define WHITE 0xFFFFFF
@@ -68,13 +67,13 @@
 //for raycasting
 #define PI 3.141592654
 
-#define UNIT 64
-#define RAY_NB 1980 //needs to be uneven and smaller than WINDOW_W
+#define TILE_SIZE 100
+#define RAY_NB WINDOW_W //needs to be uneven and smaller than WINDOW_W
 #define DIRECTION_LENGTH 100
-#define HALF_CAMERA_LENGTH 60
+#define HALF_CAMERA_LENGTH (50 * WINDOW_W / WINDOW_H) 
 
-#define ROTATITON_SPEED 2
-#define MOVEMENT_SPEED 5
+#define ROTATITON_SPEED 2.5
+#define MOVEMENT_SPEED (TILE_SIZE / 12)
 
 typedef struct s_image
 {

@@ -71,23 +71,4 @@ void color_img(t_image *img, int color, int width, int height)
 void put_pxl_to_img(t_image *img, int x, int y, int color)
 {
 	img->addr[(y * img->line_len) + x] = color;
-}	
-
-void put_txt_to_image(t_image *img, t_image *txt, int pos_x, int pos_y)
-{
-	int y;
-	int x;
-	
-	y = 0;
-	while (y < TXT_SIZE)
-	{
-		x = 0;
-		while (x < TXT_SIZE)
-		{
-			put_pxl_to_img(img, pos_x + x, pos_y + y, txt->addr[(y * txt->line_len) + x]);
-	    	//img->addr[((pos_y + y) * img->line_len) + pos_x + x] = txt->addr[(y * txt->line_len) + x];
-			x++;
-		}
-		y++;
-	}
 }

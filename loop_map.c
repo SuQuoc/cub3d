@@ -63,8 +63,8 @@ int valid_player_pos(t_data *data)
 	else if (data->map[pos.y][pos.x] == 'W')
 		init_vector(&data->player->direction, -DIRECTION_LENGTH, 0);
 	set_orientation(data->player);
-	data->player->pos.x = pos.x * UNIT + UNIT / 2;
-	data->player->pos.y = pos.y * UNIT + UNIT / 2;
+	data->player->pos.x = pos.x * TILE_SIZE + TILE_SIZE / 2;
+	data->player->pos.y = pos.y * TILE_SIZE + TILE_SIZE / 2;
 	return (TRUE);
 }
 

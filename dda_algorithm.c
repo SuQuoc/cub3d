@@ -42,14 +42,14 @@ void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset)
 	if (dda_ray->fixed_side < 0)
 		offset = pos_offset;
 	else
-		offset = (double)UNIT - pos_offset;
+		offset = (double)TILE_SIZE - pos_offset;
 	dda_ray->y += offset * dda_ray->variable_side;
 	dda_ray->x += offset * dda_ray->fixed_side;
 	dda_ray->length += offset * dda_ray->hl;
 
-	dda_ray->variable_side *= (double)UNIT;
-	dda_ray->fixed_side *= (double)UNIT;
-	dda_ray->hl *= (double)UNIT;
+	dda_ray->variable_side *= (double)TILE_SIZE;
+	dda_ray->fixed_side *= (double)TILE_SIZE;
+	dda_ray->hl *= (double)TILE_SIZE;
 }
 
 void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset)
@@ -61,14 +61,14 @@ void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset)
 	if (dda_ray->fixed_side < 0)
 		offset = pos_offset;
 	else
-		offset = (double)UNIT - pos_offset;
+		offset = (double)TILE_SIZE - pos_offset;
 	dda_ray->x += offset * dda_ray->variable_side;
 	dda_ray->y += offset * dda_ray->fixed_side;
 	dda_ray->length += offset * dda_ray->hl;
 
-	dda_ray->variable_side *= (double)UNIT;
-	dda_ray->fixed_side *= (double)UNIT;
-	dda_ray->hl *= (double)UNIT;
+	dda_ray->variable_side *= (double)TILE_SIZE;
+	dda_ray->fixed_side *= (double)TILE_SIZE;
+	dda_ray->hl *= (double)TILE_SIZE;
 }
 
 //hl = hypotenuse_length

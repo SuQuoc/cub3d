@@ -15,8 +15,8 @@ double	get_unit_offset(double pos)
 {
 	if (pos < 0)
 		pos *= -1;
-	while (pos > UNIT)
-		pos -= UNIT;
+	while (pos > TILE_SIZE)
+		pos -= TILE_SIZE;
 	return (pos);
 }
 
@@ -25,13 +25,13 @@ int	check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos, ch
 	int	x;
 	int y;
 
-	y = (dda_ray->y + pos->y) / UNIT;
-	x = (dda_ray->x + pos->x) / UNIT;
+	y = (dda_ray->y + pos->y) / TILE_SIZE;
+	x = (dda_ray->x + pos->x) / TILE_SIZE;
 
 	if (dda_ray->y < 0 && x_or_y == 'y')
-		y = (dda_ray->y + pos->y - 1) / UNIT;
+		y = (dda_ray->y + pos->y - 1) / TILE_SIZE;
 	if (dda_ray->x < 0 && x_or_y == 'x')
-		x = (dda_ray->x + pos->x - 1) / UNIT;
+		x = (dda_ray->x + pos->x - 1) / TILE_SIZE;
 
 	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 		return (1);

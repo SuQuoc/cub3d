@@ -54,12 +54,12 @@ void set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	if (data->player->pos.x < ray_hit.x)
 	{
 		(*txtr) = data->E_texture;
-		(*off_last_unit) = (int)(abs_offset_to_map) % UNIT;
+		(*off_last_unit) = (int)(abs_offset_to_map) % TILE_SIZE;
 	}
 	else
 	{
 		(*txtr) = data->W_texture;
-		(*off_last_unit) = UNIT - ((int)(abs_offset_to_map) % UNIT);
+		(*off_last_unit) = TILE_SIZE - ((int)(abs_offset_to_map) % TILE_SIZE);
 	}
 }
 
@@ -74,12 +74,12 @@ void set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data, t_image **txt
 	if (data->player->pos.y > ray_hit.y)
 	{
 		(*txtr) = data->N_texture;
-		(*off_last_unit) = (int)(abs_offset_to_map) % UNIT;
+		(*off_last_unit) = (int)(abs_offset_to_map) % TILE_SIZE;
 	}
 	else
 	{
 		(*txtr) = data->S_texture;
-		(*off_last_unit) = UNIT - (int)(abs_offset_to_map) % UNIT;
+		(*off_last_unit) = TILE_SIZE - (int)(abs_offset_to_map) % TILE_SIZE;
 	}
 }
 
@@ -95,7 +95,7 @@ void set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr, int *x_in_tx
 	}
 	else
 		set_offset_and_hori_wall_txtr(ray.vector, data, txtr, &offset_to_last_unit);
-	(*x_in_txtr) = (offset_to_last_unit / UNIT) * (*txtr)->line_len;
+	(*x_in_txtr) = (offset_to_last_unit / TILE_SIZE) * (*txtr)->line_len;
 	
 	if ((*x_in_txtr) > 0)
 		(*x_in_txtr)--;
@@ -121,7 +121,7 @@ void draw_texture_scaled(int y_start, int y_end, int x, int ray_x, t_data *data)
 	int y_in_txtr;
 	
 	set_texture_and_x_pos(data->player->ray[ray_x], data, &texture, &x_in_txtr);
-	wall_h = lround(UNIT * WINDOW_H / data->player->ray[ray_x].length);
+	wall_h = lround(TILE_SIZE * WINDOW_H / data->player->ray[ray_x].length);
 	if (wall_h <= WINDOW_H)
 		offset_y = 0;
 	else
@@ -157,12 +157,12 @@ static int	check_if_player_in_wall(const t_data *data)
 	int x;
 	int y;
 
-	y = data->player->pos.y / UNIT;
-	x = data->player->pos.x / UNIT;
+	y = data->player->pos.y / TILE_SIZE;
+	x = data->player->pos.x / TILE_SIZE;
 	if (y <= 1)
-		y = (data->player->pos.y - 1) / UNIT;
+		y = (data->player->pos.y - 1) / TILE_SIZE;
 	if (x <= 1)
-		x = (data->player->pos.x - 1) / UNIT;
+		x = (data->player->pos.x - 1) / TILE_SIZE;
 	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 		return (1);
 	if (data->map[y][x] == '1')
@@ -189,7 +189,7 @@ void put_txt_ray_to_image(t_ray *ray, t_data *data)
 	}
 	while (window_x < WINDOW_W)
 	{
-		wall_h = lround(UNIT * WINDOW_H / ray[(int)ray_x].length);
+		wall_h = lround(TILE_SIZE * WINDOW_H / ray[(int)ray_x].length);
 		if (wall_h > WINDOW_H)
 			wall_h = WINDOW_H;
 		wall_ceil = (WINDOW_H - wall_h) / 2;
