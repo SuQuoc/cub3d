@@ -138,6 +138,38 @@ void draw_texture_scaled(int y_start, int y_end, int x, int ray_x, t_data *data)
 
 }
 
+void	draw_black_image(const t_data *data)
+{
+	int image_end;
+	int	x;
+
+	x = 0;
+	image_end = WINDOW_H * WINDOW_W;
+	while (x < image_end)
+	{
+		data->img->addr[x] = BLACK;
+		x++;
+	}
+}
+
+static int	check_if_player_in_wall(const t_data *data)
+{
+	int x;
+	int y;
+
+	y = data->player->pos.y / UNIT;
+	x = data->player->pos.x / UNIT;
+	if (y <= 1)
+		y = (data->player->pos.y - 1) / UNIT;
+	if (x <= 1)
+		x = (data->player->pos.x - 1) / UNIT;
+	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
+		return (1);
+	if (data->map[y][x] == '1')
+		return (1);
+	return (0);
+}
+
 void put_txt_ray_to_image(t_ray *ray, t_data *data)
 {
 	int		wall_floor;
@@ -149,6 +181,12 @@ void put_txt_ray_to_image(t_ray *ray, t_data *data)
 	double	ray_x = 0;
 
 	window_x = 0;
+	if (check_if_player_in_wall(data) == 1)
+	{
+		draw_black_image(data);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
+		return ;
+	}
 	while (window_x < WINDOW_W)
 	{
 		wall_h = lround(UNIT * WINDOW_H / ray[(int)ray_x].length);
