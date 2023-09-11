@@ -38,7 +38,8 @@ void	rotate_vector_clockwise(t_vector *vector, double cos, double sin)
 	vector->y = new_y;
 }
 
-void	rotate_vector_counter_clockwise(t_vector *vector, double cos, double sin)
+void	rotate_vector_counter_clockwise(t_vector *vector, double cos, \
+															double sin)
 {
 	double	new_x;
 	double	new_y;

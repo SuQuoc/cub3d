@@ -191,11 +191,16 @@ int			check_extension(char const *str);
 // colors.c
 int 		search_floor_ceiling(char *str, t_data *data);
 
+// dda_algorithm_functions.c
+void	get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
+void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
+void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset);
+void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset);
+
 // dda_algorithm_utils.c
 double		get_segment_length(double a, double b);
 double		get_unit_offset(double pos);
 int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos, char x_or_y);
-void		init_dda_ray(t_dda_ray *dda_ray, double a, double b);
 
 // dda_algorithm.c
 void		dda_algorithm(const t_data *data, t_ray *max_ray, t_vector *player_pos_offset);
@@ -278,6 +283,10 @@ void		player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
 void		player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
 void		player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
 
+// player_rays.c
+void		calculate_rays(t_data *data, t_player *player);
+void		get_ray_angles(t_player *player);
+
 // player_rotations.c
 void		calculate_move_values(t_player *player, int x, int y);
 void		rotate_vector_clockwise(t_vector *vector, double cos, double sin);
@@ -309,7 +318,5 @@ void put_pxl_to_img(t_image *img, int x, int y, int color);
 t_vector	vector_multiplication(t_vector vector, int multiplier);
 t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
-void		calculate_rays(t_data *data, t_player *player);
-void		get_ray_angles(t_player *player);
 
 #endif

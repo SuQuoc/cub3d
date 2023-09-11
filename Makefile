@@ -8,6 +8,7 @@ SRC =	2d_array_utils.c \
 		array_utils.c \
 		check_extension.c \
 		colors.c \
+		dda_algorithm_functions.c \
 		dda_algorithm_utils.c \
 		dda_algorithm.c \
 		dfs.c \
@@ -30,6 +31,7 @@ SRC =	2d_array_utils.c \
 		map_check_utils.c \
 		parsing_utils.c \
 		player_movement.c \
+		player_rays.c \
 		player_rotation.c \
 		player.c \
 		prelim_checks.c \
