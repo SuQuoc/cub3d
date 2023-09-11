@@ -14,7 +14,7 @@ void	draw_black_image(const t_data *data)
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			data->img->img_ptr, 0, 0);
+		data->img->img_ptr, 0, 0);
 }
 
 int	check_if_player_in_wall(const t_data *data)
