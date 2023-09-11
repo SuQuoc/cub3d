@@ -1,135 +1,77 @@
 
 #include "cubed.h"
 
-void	get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
+static void	init_dda_ray_edgecase(t_dda_ray *dda_ray, double a, double b)
 {
-	if (dda_ray->hl == 0)
-		return ;
-	while (1)
+	if (a == 0)
 	{
-		if (check_map_position(data, dda_ray, pos, 'y') != 0)
-		{
-			return ;
-		}
-		dda_ray->x += dda_ray->variable_side;
-		dda_ray->y += dda_ray->fixed_side;
-		dda_ray->length += dda_ray->hl;
+		dda_ray->variable_side = 0;
+		dda_ray->hl = 1;
+	}
+	if (b == 0)
+	{
+		dda_ray->variable_side = 1;
+		dda_ray->hl = 0;
+		dda_ray->fixed_side = 0;
+		if (a < 0 && b == 0)
+			dda_ray->variable_side *= -1;
 	}
 }
 
-void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos)
+static void	init_dda_ray(t_dda_ray *dda_ray, double a, double b)
 {
-	if (dda_ray->hl == 0)
-		return ;
-	while (1)
+	dda_ray->fixed_side = 1;
+	dda_ray->length = 0;
+	dda_ray->x = 0;
+	dda_ray->y = 0;
+	if (a == 0 || b == 0)
+		init_dda_ray_edgecase(dda_ray, a, b);
+	else
 	{
-		if (check_map_position(data, dda_ray, pos, 'x') != 0)
-		{
-			return ;
-		}
-		dda_ray->y += dda_ray->variable_side;
-		dda_ray->x += dda_ray->fixed_side;
-		dda_ray->length += dda_ray->hl;
+		dda_ray->variable_side = (a) / b;
+		dda_ray->hl = get_segment_length(a, b);
+	}
+	if (b < 0)
+	{
+		dda_ray->variable_side *= -1;
+		dda_ray->fixed_side *= -1;
 	}
 }
 
-void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset)
+static void	get_shorter_ray(const t_data *data, t_ray *ray, \
+								t_dda_ray *x_dda_ray, t_dda_ray *y_dda_ray)
 {
-	double	offset;
-
-	if (dda_ray->hl == 0)
-		return ;
-	if (dda_ray->fixed_side < 0)
-		offset = pos_offset;
-	else
-		offset = (double)TILE_SIZE - pos_offset;
-	dda_ray->y += offset * dda_ray->variable_side;
-	dda_ray->x += offset * dda_ray->fixed_side;
-	dda_ray->length += offset * dda_ray->hl;
-
-	dda_ray->variable_side *= (double)TILE_SIZE;
-	dda_ray->fixed_side *= (double)TILE_SIZE;
-	dda_ray->hl *= (double)TILE_SIZE;
-}
-
-void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset)
-{
-	double	offset;
-
-	if (dda_ray->hl == 0)
-		return ;
-	if (dda_ray->fixed_side < 0)
-		offset = pos_offset;
-	else
-		offset = (double)TILE_SIZE - pos_offset;
-	dda_ray->x += offset * dda_ray->variable_side;
-	dda_ray->y += offset * dda_ray->fixed_side;
-	dda_ray->length += offset * dda_ray->hl;
-
-	dda_ray->variable_side *= (double)TILE_SIZE;
-	dda_ray->fixed_side *= (double)TILE_SIZE;
-	dda_ray->hl *= (double)TILE_SIZE;
-}
-
-//hl = hypotenuse_length
-void	dda_algorithm(const t_data *data, t_ray *ray, t_vector *player_pos_offset)
-{
-	t_dda_ray	x_dda_ray;
-	t_dda_ray	y_dda_ray;
-	
-	if (!data->map)
-		return ;
-	init_dda_ray(&x_dda_ray, ray->vector.y, ray->vector.x);
-	init_dda_ray(&y_dda_ray, ray->vector.x, ray->vector.y);
-
-	get_x_initial_length(&x_dda_ray, player_pos_offset->x);
-	get_y_initial_length(&y_dda_ray, player_pos_offset->y);
-	get_x_dda_ray_length(data, &x_dda_ray, &data->player->pos);
-	get_y_dda_ray_length(data, &y_dda_ray, &data->player->pos);
-
-	if ((x_dda_ray.length < y_dda_ray.length && x_dda_ray.length > 0.5) || y_dda_ray.length < 0.5)
+	if ((x_dda_ray->length < y_dda_ray->length && x_dda_ray->length > 0.5) || \
+													y_dda_ray->length < 0.5)
 	{
-		ray->vector.x = x_dda_ray.x + data->player->pos.x;
-		ray->vector.y = x_dda_ray.y + data->player->pos.y;
-		ray->length = x_dda_ray.length * ray->angle;
+		ray->vector.x = x_dda_ray->x + data->player->pos.x;
+		ray->vector.y = x_dda_ray->y + data->player->pos.y;
+		ray->length = x_dda_ray->length * ray->angle;
 		ray->shorter_ray = 'x';
 	}
 	else
 	{
-		ray->vector.x = y_dda_ray.x + data->player->pos.x;
-		ray->vector.y = y_dda_ray.y + data->player->pos.y;
-		ray->length = y_dda_ray.length * ray->angle;
+		ray->vector.x = y_dda_ray->x + data->player->pos.x;
+		ray->vector.y = y_dda_ray->y + data->player->pos.y;
+		ray->length = y_dda_ray->length * ray->angle;
 		ray->shorter_ray = 'y';
 	}
-	(void)player_pos_offset;
 }
 
-
-
-
-
-
-
-
-
-/* int	main()
+//hl = hypotenuse_length
+void	dda_algorithm(const t_data *data, t_ray *ray, \
+									t_vector *player_pos_offset)
 {
-	int l;
-	double a;
+	t_dda_ray	x_dda_ray;
+	t_dda_ray	y_dda_ray;
 
-	l = get_segment_length(-200, 40);
-	a = l;
-	a = a;
-	printf("m: %f\n", a);
-	return (0);
-} */
-
-/* 
-int	main()
-{
-	t_player	*p;
-
-
-	p = init_player()
-	return (0);
-} */
+	if (!data->map)
+		return ;
+	init_dda_ray(&x_dda_ray, ray->vector.y, ray->vector.x);
+	init_dda_ray(&y_dda_ray, ray->vector.x, ray->vector.y);
+	get_x_initial_length(&x_dda_ray, player_pos_offset->x);
+	get_y_initial_length(&y_dda_ray, player_pos_offset->y);
+	get_x_dda_ray_length(data, &x_dda_ray, &data->player->pos);
+	get_y_dda_ray_length(data, &y_dda_ray, &data->player->pos);
+	get_shorter_ray(data, ray, &x_dda_ray, &y_dda_ray);
+}

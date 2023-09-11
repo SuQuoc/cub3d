@@ -16,15 +16,13 @@ void	hidden_wall_colition(t_data *data, t_player *player)
 static void	movement(int keysym, t_data *data)
 {
 	if (keysym == XK_w || keysym == XK_W)
-		player_move_forward(data->player, data->mlx_ptr, data->win_ptr);
+		player_move_forward(data->player);
 	else if (keysym == XK_s || keysym == XK_S)
-		player_move_back(data->player, data->mlx_ptr, data->win_ptr);
+		player_move_back(data->player);
 	else if (keysym == XK_d || keysym == XK_D)
-		player_move_right(data->player, data->mlx_ptr, data->win_ptr);
+		player_move_right(data->player);
 	else if (keysym == XK_a || keysym == XK_A)
-		player_move_left(data->player, data->mlx_ptr, data->win_ptr);
-//	draw_line(data, data->player->pos, vector_addition(data->player->direction, data->player->pos), WHITE);
-//	draw_player_camera(data, data->player, BLUE);
+		player_move_left(data->player);
 	hidden_wall_colition(data, data->player);
 	calculate_rays(data, data->player);
 	put_txt_ray_to_image(data->player->ray, data);

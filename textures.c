@@ -21,7 +21,7 @@
 // yes we know that a file can also have spaces at the beginning of the name
 // but subject says so and we dont think it should be handled
 
-static int xpm_is_openable(char *str)
+static int	xpm_is_openable(char *str)
 {
 	int	fd;
 
@@ -39,14 +39,13 @@ void	set_texture(char *str, char *idf, t_data *data, t_image *txt)
 {
 	int	i;
 	int	len;
-	
+
 	len = ft_strlen(idf);
 	i = skip_spaces(str, len);
-
 	if (xpm_is_openable(&str[i]) == FALSE)
 	{
 		data->err = ERR_SYSTEM;
-		return ; 
+		return ;
 	}
 	txt->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, &str[i], &txt->line_len,
 			&txt->height);
@@ -56,7 +55,7 @@ void	set_texture(char *str, char *idf, t_data *data, t_image *txt)
 		return ;
 	}
 	txt->addr = (int *)mlx_get_data_addr(txt->img_ptr, &txt->bpp,
-		&txt->line_len, &txt->endian);
+			&txt->line_len, &txt->endian);
 	txt->line_len /= 4;
 	if (!txt->addr)
 		data->err = ERR_SYSTEM;

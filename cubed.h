@@ -66,12 +66,10 @@
 # define PI 3.141592654
 
 # define TILE_SIZE 100
-# define RAY_NB WINDOW_W // needs to be <= WINDOW_W
+# define RAY_NB WINDOW_W
 # define DIRECTION_LENGTH 100
-# define HALF_CAMERA_LENGTH (50 * WINDOW_W / WINDOW_H)
 
 # define ROTATITON_SPEED 2.5
-# define MOVEMENT_SPEED (TILE_SIZE / 12)
 
 typedef struct s_image
 {
@@ -186,14 +184,18 @@ int				found_left_from_pos(char *str, int pos, char search);
 int				check_extension(char const *str);
 
 // colors.c
-int				search_floor_ceiling(char *str, t_data *data);
+int 		search_floor_ceiling(char *str, t_data *data);
+
+// dda_algorithm_functions.c
+void	get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
+void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
+void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset);
+void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset);
 
 // dda_algorithm_utils.c
-double			get_segment_length(double a, double b);
-double			get_unit_offset(double pos);
-int				check_map_position(const t_data *data, t_dda_ray *dda_ray,
-					t_vector *pos, char x_or_y);
-void			init_dda_ray(t_dda_ray *dda_ray, double a, double b);
+double		get_segment_length(double a, double b);
+double		get_unit_offset(double pos);
+int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos, char x_or_y);
 
 // dda_algorithm.c
 void			dda_algorithm(const t_data *data, t_ray *max_ray,
@@ -246,8 +248,8 @@ void			free_2d_array(char **map);
 void			free_data(t_data *data);
 void			free_image(t_image *img, void *mlx_ptr);
 
-// ft_strcmp.c
-int				ft_strcmp(char *s1, char *s2);
+// get_ray_angles.c
+void			get_ray_angles(t_player *player);
 
 // hooks.c
 int				x_window(t_data *data);
@@ -264,12 +266,12 @@ void			init_vector(t_vector *vector, double x_position,
 t_data			*init_data(void);
 
 // init_structs2.c
-void		declare_base_values(t_data *data);
-void		init_line(t_line *line, const t_vector start, const t_vector end);
+void			declare_base_values(t_data *data);
+void			init_line(t_line *line, const t_vector start, const t_vector end);
 
 //lazy_wall_collision.c
-void	draw_black_image(const t_data *data);
-int	check_if_player_in_wall(const t_data *data);
+void			draw_black_image(const t_data *data);
+int				check_if_player_in_wall(const t_data *data);
 
 
 // loop_file.c
@@ -293,14 +295,13 @@ void			free_data_err(t_data *data, char *error_message);
 int				skip_spaces(char *str, int start);
 
 // player_movement.c
-void			player_move_forward(t_player *player, void *mlx_ptr,
-					void *win_ptr);
-void			player_move_back(t_player *player, void *mlx_ptr,
-					void *win_ptr);
-void			player_move_right(t_player *player, void *mlx_ptr,
-					void *win_ptr);
-void			player_move_left(t_player *player, void *mlx_ptr,
-					void *win_ptr);
+void		player_move_forward(t_player *player);
+void		player_move_back(t_player *player);
+void		player_move_right(t_player *player);
+void		player_move_left(t_player *player);
+
+// player_rays.c
+void		calculate_rays(t_data *data, t_player *player);
 
 // player_rotations.c
 void			calculate_move_values(t_player *player, int x, int y);
@@ -332,10 +333,8 @@ void			put_pxl_to_img(t_image *img, int x, int y, int color);
 // void put_txt_ray_to_image(double *ray_len, t_data *data);
 
 // vector_operations.c
-t_vector		vector_multiplication(t_vector vector, int multiplier);
-t_vector		vector_addition(t_vector first_addend, t_vector second_addend);
-t_vector		vector_subtraction(t_vector minuend, t_vector subtrahend);
-void			calculate_rays(t_data *data, t_player *player);
-void			get_ray_angles(t_player *player);
+t_vector	vector_multiplication(t_vector vector, int multiplier);
+t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
+t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
 
 #endif

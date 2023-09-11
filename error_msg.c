@@ -4,7 +4,7 @@
 // malloc read open etc is covered by perror
 void	file_error(int err_code)
 {
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("Error\n", 2);
 	if (err_code == ERR_SYSTEM)
 		perror(NULL);
 	else if (err_code == ERR_IDF)
@@ -22,7 +22,7 @@ void	file_error(int err_code)
 	else if (err_code == ERR_MAP)
 		ft_putstr_fd("Invalid map_content!\n", 2);
 	else if (err_code == ERR_NL_MAP)
-		ft_putstr_fd("Consecutive nl in map! Map begins when all IDF were found!\n", 2);
+		ft_putstr_fd("Consecutive nl in map!\n", 2);
 	else if (err_code == ERR_PL_COUNT)
 		ft_putstr_fd("Invalid number of players!\n", 2);
 	else if (err_code == ERR_NO_WALLS)

@@ -16,12 +16,10 @@ static t_player	*init_player(void)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
+	player->ray = NULL;
 	player->ray = malloc(sizeof(t_ray) * RAY_NB);
 	if (!player->ray)
-	{
-		free(player);
 		return (NULL);
-	}
 	while (x < RAY_NB)
 		player->ray[x++].angle = 1;
 	player->fast_axis = 'x';
@@ -72,21 +70,13 @@ t_data	*init_data(void)
 		perror(NULL);
 		exit(1);
 	}
+	declare_base_values(data);
 	data->player = init_player();
 	if (!data->player)
-	{
-		perror(NULL);
-		free(data);
-		exit(1);
-	}
+		free_data(data);
 	data->img = init_image();
 	if (!data->img)
-	{
-		perror(NULL);
-		free_data(data);
-	}
+		free_data_err(data, "Malloc failed!");
 	init_txtr_images(data);
-	declare_base_values(data);
 	return (data);
 }
-

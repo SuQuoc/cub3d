@@ -80,7 +80,7 @@ void	free_data_err(t_data *data, char *error_message)
 	data = NULL;
 	if (error_message)
 	{
-		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd(error_message, 2);
 		ft_putstr_fd("\n", 2);
 		exit(1);
