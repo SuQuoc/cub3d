@@ -4,7 +4,7 @@
 static t_vector	get_movement(t_player *player)
 {
 	t_vector	vector;
-	int	movement_speed;
+	int			movement_speed;
 
 	movement_speed = TILE_SIZE / 12;
 	init_vector(&vector, 0, 0);

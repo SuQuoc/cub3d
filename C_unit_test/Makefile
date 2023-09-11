@@ -12,29 +12,30 @@ C_SRC =	framework.c \
 		../array_utils.c \
 		../check_extension.c \
 		../colors.c \
+		../dda_algorithm_functions.c \
 		../dda_algorithm_utils.c \
 		../dda_algorithm.c \
 		../dfs.c \
-		../draw_line_utils.c \
-		../draw_line.c \
-		../draw_map.c \
+		../draw_map_scaled_utils.c \
 		../draw_map_scaled.c \
 		../error_msg.c \
 		../free_utils.c \
-		../ft_strcmp.c \
+		../get_ray_angles.c \
 		../hooks.c \
 		../identifier_utils.c \
 		../pxl_to_image.c \
 		../init_structs.c \
+		../init_structs2.c \
 		../key_input.c \
+		../lazy_wall_collision.c \
 		../loop_file.c \
 		../loop_idf.c \
 		../loop_map.c \
 		../map_check_utils.c \
 		../parsing_utils.c \
 		../player_movement.c \
+		../player_rays.c \
 		../player_rotation.c \
-		../player.c \
 		../prelim_checks.c \
 		../printing_utils.c \
 		../textures.c \

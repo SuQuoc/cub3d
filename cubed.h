@@ -65,7 +65,7 @@
 // for raycasting
 # define PI 3.141592654
 
-# define TILE_SIZE 100
+# define TILE_SIZE 128
 # define RAY_NB WINDOW_W
 # define DIRECTION_LENGTH 100
 
@@ -184,18 +184,21 @@ int				found_left_from_pos(char *str, int pos, char search);
 int				check_extension(char const *str);
 
 // colors.c
-int 		search_floor_ceiling(char *str, t_data *data);
+int				search_floor_ceiling(char *str, t_data *data);
 
 // dda_algorithm_functions.c
-void	get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
-void	get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray, t_vector *pos);
-void	get_x_initial_length(t_dda_ray *dda_ray, double pos_offset);
-void	get_y_initial_length(t_dda_ray *dda_ray, double pos_offset);
+void			get_y_dda_ray_length(const t_data *data, t_dda_ray *dda_ray,
+					t_vector *pos);
+void			get_x_dda_ray_length(const t_data *data, t_dda_ray *dda_ray,
+					t_vector *pos);
+void			get_x_initial_length(t_dda_ray *dda_ray, double pos_offset);
+void			get_y_initial_length(t_dda_ray *dda_ray, double pos_offset);
 
 // dda_algorithm_utils.c
-double		get_segment_length(double a, double b);
-double		get_unit_offset(double pos);
-int			check_map_position(const t_data *data, t_dda_ray *dda_ray, t_vector *pos, char x_or_y);
+double			get_segment_length(double a, double b);
+double			get_unit_offset(double pos);
+int				check_map_position(const t_data *data, t_dda_ray *dda_ray,
+					t_vector *pos, char x_or_y);
 
 // dda_algorithm.c
 void			dda_algorithm(const t_data *data, t_ray *max_ray,
@@ -216,19 +219,18 @@ void			draw_line(const t_data *data, const t_vector start,
 					const t_vector end, const int color);
 
 // draw_map.c
-void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
-void		draw_map_walls(t_data *data, char **map, int color);
+void			draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
+void			draw_map_walls(t_data *data, char **map, int color);
 
 // draw_map_scaled_utils.c
-void	set_y_pos_of_texture(int offset_y, int wall_h, t_image *txtr,
-		int *y_in_txtr);
-void	set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr,
-		int *x_in_txtr);
-void	set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data,
-		t_image **txtr, double *off_last_unit);
-void	set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data,
-		t_image **txtr, double *off_last_unit);
-
+void			set_y_pos_of_texture(int offset_y, int wall_h, t_image *txtr,
+					int *y_in_txtr);
+void			set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr,
+					int *x_in_txtr);
+void			set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data,
+					t_image **txtr, double *off_last_unit);
+void			set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data,
+					t_image **txtr, double *off_last_unit);
 
 // draw_map_scaled.c
 void			put_txt_ray_to_image(t_ray *ray, t_data *data);
@@ -267,12 +269,12 @@ t_data			*init_data(void);
 
 // init_structs2.c
 void			declare_base_values(t_data *data);
-void			init_line(t_line *line, const t_vector start, const t_vector end);
+void			init_line(t_line *line, const t_vector start,
+					const t_vector end);
 
-//lazy_wall_collision.c
+// lazy_wall_collision.c
 void			draw_black_image(const t_data *data);
 int				check_if_player_in_wall(const t_data *data);
-
 
 // loop_file.c
 void			loop_file(int fd, t_data *data);
@@ -295,13 +297,13 @@ void			free_data_err(t_data *data, char *error_message);
 int				skip_spaces(char *str, int start);
 
 // player_movement.c
-void		player_move_forward(t_player *player);
-void		player_move_back(t_player *player);
-void		player_move_right(t_player *player);
-void		player_move_left(t_player *player);
+void			player_move_forward(t_player *player);
+void			player_move_back(t_player *player);
+void			player_move_right(t_player *player);
+void			player_move_left(t_player *player);
 
 // player_rays.c
-void		calculate_rays(t_data *data, t_player *player);
+void			calculate_rays(t_data *data, t_player *player);
 
 // player_rotations.c
 void			calculate_move_values(t_player *player, int x, int y);
@@ -333,8 +335,8 @@ void			put_pxl_to_img(t_image *img, int x, int y, int color);
 // void put_txt_ray_to_image(double *ray_len, t_data *data);
 
 // vector_operations.c
-t_vector	vector_multiplication(t_vector vector, int multiplier);
-t_vector	vector_addition(t_vector first_addend, t_vector second_addend);
-t_vector	vector_subtraction(t_vector minuend, t_vector subtrahend);
+t_vector		vector_multiplication(t_vector vector, int multiplier);
+t_vector		vector_addition(t_vector first_addend, t_vector second_addend);
+t_vector		vector_subtraction(t_vector minuend, t_vector subtrahend);
 
 #endif
