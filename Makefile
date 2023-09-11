@@ -16,7 +16,7 @@ SRC =	2d_array_utils.c \
 		draw_map_scaled.c \
 		error_msg.c \
 		free_utils.c \
-		ft_strcmp.c \
+		get_ray_angles.c \
 		hooks.c \
 		identifier_utils.c \
 		pxl_to_image.c \
@@ -73,7 +73,7 @@ re: fclean all
 run: $(NAME)
 	./$(NAME) maps/fiona_raycasting_test_map.cub
 
-run_val: $(NAME)
+val: $(NAME)
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \

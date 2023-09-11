@@ -250,8 +250,8 @@ void			free_2d_array(char **map);
 void			free_data(t_data *data);
 void			free_image(t_image *img, void *mlx_ptr);
 
-// ft_strcmp.c
-int				ft_strcmp(char *s1, char *s2);
+// get_ray_angles.c
+void			get_ray_angles(t_player *player);
 
 // hooks.c
 int				x_window(t_data *data);
@@ -268,12 +268,12 @@ void			init_vector(t_vector *vector, double x_position,
 t_data			*init_data(void);
 
 // init_structs2.c
-void		declare_base_values(t_data *data);
-void		init_line(t_line *line, const t_vector start, const t_vector end);
+void			declare_base_values(t_data *data);
+void			init_line(t_line *line, const t_vector start, const t_vector end);
 
 //lazy_wall_collision.c
-void	draw_black_image(const t_data *data);
-int	check_if_player_in_wall(const t_data *data);
+void			draw_black_image(const t_data *data);
+int				check_if_player_in_wall(const t_data *data);
 
 
 // loop_file.c
@@ -304,7 +304,6 @@ void		player_move_left(t_player *player);
 
 // player_rays.c
 void		calculate_rays(t_data *data, t_player *player);
-void		get_ray_angles(t_player *player);
 
 // player_rotations.c
 void			calculate_move_values(t_player *player, int x, int y);

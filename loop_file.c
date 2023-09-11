@@ -12,7 +12,7 @@ int	add_and_return(int add)
 
 static void	overflow_msg(void)
 {
-	ft_putstr_fd("Error: max file size 1 mio bytes 🤓\n", 2);
+	ft_putstr_fd("Error\nmax file size 1 mio bytes 🤓\n", 2);
 }
 
 char	*read_map_into_str(int fd)
