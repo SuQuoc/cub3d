@@ -12,8 +12,6 @@ SRC =	2d_array_utils.c \
 		dda_algorithm_utils.c \
 		dda_algorithm.c \
 		dfs.c \
-		draw_line_utils.c \
-		draw_line.c \
 		draw_map_scaled_utils.c \
 		draw_map_scaled.c \
 		error_msg.c \
@@ -35,7 +33,6 @@ SRC =	2d_array_utils.c \
 		player_movement.c \
 		player_rays.c \
 		player_rotation.c \
-		player.c \
 		prelim_checks.c \
 		printing_utils.c \
 		textures.c \

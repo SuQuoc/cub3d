@@ -297,10 +297,10 @@ void			free_data_err(t_data *data, char *error_message);
 int				skip_spaces(char *str, int start);
 
 // player_movement.c
-void		player_move_forward(t_player *player, void *mlx_ptr, void *win_ptr);
-void		player_move_back(t_player *player, void *mlx_ptr, void *win_ptr);
-void		player_move_right(t_player *player, void *mlx_ptr, void *win_ptr);
-void		player_move_left(t_player *player, void *mlx_ptr, void *win_ptr);
+void		player_move_forward(t_player *player);
+void		player_move_back(t_player *player);
+void		player_move_right(t_player *player);
+void		player_move_left(t_player *player);
 
 // player_rays.c
 void		calculate_rays(t_data *data, t_player *player);
