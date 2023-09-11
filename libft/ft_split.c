@@ -6,7 +6,7 @@
 /*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:35:31 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/28 15:38:43 by qtran            ###   ########.fr       */
+/*   Updated: 2023/09/11 19:01:55 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**ft_split(char const *s, char c)
 			y++;
 		x++;
 	}
-	arrarr = (char**)malloc((y + 1) * sizeof(char *));
+	arrarr = (char **)malloc((y + 1) * sizeof(char *));
 	if (!arrarr)
 		return (0);
 	x = 0;
@@ -114,7 +114,8 @@ static char	**seperating(const char *s, char c, char **arrarr, int x)
 			x += len;
 			len = 0;
 		}
-		if (((s[x] == c && s[x - 1] != c) || (s[x] != c && s[x + 1] == '\0') || \
+		if (((s[x] == c && s[x - 1] != c) || (s[x] != c && s[x + 1] == '\0')
+				|| \
 				s[x] == 0))
 			y++;
 		if (s[x] == 0)

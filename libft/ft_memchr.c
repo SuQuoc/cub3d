@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:25:20 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 16:59:24 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:59:31 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const char	*z;
 
-	z = (char*)s;
+	z = (char *)s;
 	if (c == 0 && n == 0)
 		return (0);
 	while (n > 0)

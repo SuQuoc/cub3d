@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hexa_itoa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:30:39 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 17:01:14 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:00:57 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_hexa_itoa(unsigned long int n)
 
 	if (n == 0)
 	{
-		zero = (char*)malloc(2 * sizeof(char));
+		zero = (char *)malloc(2 * sizeof(char));
 		if (!zero)
 			return (0);
 		zero[0] = '0';
@@ -60,10 +60,10 @@ char	*ft_hexa_itoa(unsigned long int n)
 		return (zero);
 	}
 	x = how_many_digits(n);
-	arr = (char*)malloc(x + 1 * sizeof(char));
+	arr = (char *)malloc(x + 1 * sizeof(char));
 	if (!arr)
 		return (0);
 	arr[x] = '\0';
 	x--;
-	return (ft_convert (arr, n, x));
+	return (ft_convert(arr, n, x));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 13:01:04 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 17:00:45 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:02:07 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s)
 	if (s == NULL)
 		return (NULL);
 	x = 0;
-	str = (char*)malloc(ft_strlen(s) + 1 * sizeof(char));
+	str = (char *)malloc(ft_strlen(s) + 1 * sizeof(char));
 	if (!str)
 		return (0);
 	while (s[x])
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s)
 
 /* int	main(void)
 {
-    char *str = "kfl";
+	char *str = "kfl";
 
-    printf("%s", ft_strdup(str));
+	printf("%s", ft_strdup(str));
 } */

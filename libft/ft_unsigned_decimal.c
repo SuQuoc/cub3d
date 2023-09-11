@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unsigned_decimal.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:03:55 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 17:01:24 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:03:37 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_unsigned_itoa(unsigned int n)
 
 	if (n == 0)
 	{
-		zero = (char*)malloc(2 * sizeof(char));
+		zero = (char *)malloc(2 * sizeof(char));
 		if (!zero)
 			return (0);
 		zero[0] = '0';
@@ -57,7 +57,7 @@ static char	*ft_unsigned_itoa(unsigned int n)
 		return (zero);
 	}
 	x = how_many_digits(n);
-	arr = (char*)malloc(x + 1 * sizeof(char));
+	arr = (char *)malloc(x + 1 * sizeof(char));
 	if (!arr)
 		return (0);
 	arr[x] = '\0';

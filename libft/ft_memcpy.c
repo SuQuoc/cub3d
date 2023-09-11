@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 10:40:36 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 16:59:39 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:01:30 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char		*d;
 	const char	*s;
 
-	d = (char*)dest;
-	s = (char*)src;
+	d = (char *)dest;
+	s = (char *)src;
 	x = 0;
 	if (dest == 0 && src == 0)
 	{
@@ -36,26 +36,26 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 /*
 int	main(void)
 {
-    char arr1[] = "please work";
-    char arr2[] = "aaaaaaaaaaaaaaaa";
-    char *dest = arr2;
-    char *src = arr1;
-    
-    ft_memcpy(dest, src, 7);
-    printf ("%p\n", dest);
+	char arr1[] = "please work";
+	char arr2[] = "aaaaaaaaaaaaaaaa";
+	char *dest = arr2;
+	char *src = arr1;
+
+	ft_memcpy(dest, src, 7);
+	printf ("%p\n", dest);
 }*/
 /*
 int	main(void)
 {
-    char    src[] = "Willkommen";
-    char    dest[] = "ill";
+	char    src[] = "Willkommen";
+	char    dest[] = "ill";
 
 //    char    *destptr = ft_memcpy(dest, src, strlen(src) + 1);
-    char    *destptr = memcpy(dest, src, strlen(src) + 1);
+	char    *destptr = memcpy(dest, src, strlen(src) + 1);
 
-    printf("src: %s\n", src);
-    printf("dest: %s\n", dest);
+	printf("src: %s\n", src);
+	printf("dest: %s\n", dest);
 
-    printf("destptr: %p\n", destptr);
-    printf("       : %p\n", dest);
+	printf("destptr: %p\n", destptr);
+	printf("       : %p\n", dest);
 }*/

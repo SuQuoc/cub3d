@@ -6,7 +6,7 @@
 /*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:25:16 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/31 12:35:50 by qtran            ###   ########.fr       */
+/*   Updated: 2023/09/11 19:23:54 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_subfree(char *s, unsigned int start, size_t len)
 		len = 0;
 	else if (ft_gnl_strlen(s + start) < len)
 		len = ft_gnl_strlen(s + start);
-	substr = (char*)malloc((len + 1) * sizeof(char));
+	substr = (char *)malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (0);
 	while (len > 0 && s[start])
@@ -52,7 +52,7 @@ char	*ft_subline(char *s, unsigned int start, size_t len)
 		len = 0;
 	else if (ft_gnl_strlen(s + start) < len)
 		len = ft_gnl_strlen(s + start);
-	substr = (char*)malloc((len + 1) * sizeof(char));
+	substr = (char *)malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (0);
 	while (len > 0 && s[start])
@@ -72,16 +72,17 @@ char	*ft_strmerge(char *s1, char const *s2)
 
 	if (!s1)
 	{
-		(s1 = (char*)malloc(1));
+		(s1 = (char *)malloc(1));
 		if (!s1)
 			return (NULL);
 		s1[0] = '\0';
 	}
 	x = 0;
 	y = 0;
-	str = (char*)malloc((ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1) * sizeof(char));
+	str = (char *)malloc((ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1)
+			* sizeof(char));
 	if (!str)
-		return (0);
+		return (free(s1), s1 = NULL);
 	while (s1[x])
 	{
 		str[x] = s1[x];
@@ -89,9 +90,7 @@ char	*ft_strmerge(char *s1, char const *s2)
 	}
 	while (s2[y])
 		str[x++] = s2[y++];
-	free(s1);
-	str[x] = '\0';
-	return (str);
+	return (free(s1), str[x] = '\0', str);
 }
 
 char	*read_file(int fd, char *file)
@@ -99,7 +98,7 @@ char	*read_file(int fd, char *file)
 	char	*buf;
 	int		check;
 
-	buf = (char*)malloc(BUFFER_SIZE + 1);
+	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
 	while (ft_check(file) == 0)

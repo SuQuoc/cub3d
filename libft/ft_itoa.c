@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 10:25:58 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 16:59:16 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:59:45 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_minus(long int n)
 	x = how_many_digits(n);
 	if (n < 0)
 		x++;
-	arr = (char*)malloc(x + 1 * sizeof(char));
+	arr = (char *)malloc(x + 1 * sizeof(char));
 	if (!arr)
 		return (0);
 	arr[x] = '\0';
@@ -59,7 +59,7 @@ static char	*ft_minus(long int n)
 		n *= -1;
 		arr[0] = '-';
 	}
-	return (ft_convert (arr, n, x));
+	return (ft_convert(arr, n, x));
 }
 
 char	*ft_itoa(int n)
@@ -68,7 +68,7 @@ char	*ft_itoa(int n)
 
 	if (n == 0)
 	{
-		zero = (char*)malloc(2 * sizeof(char));
+		zero = (char *)malloc(2 * sizeof(char));
 		if (!zero)
 			return (0);
 		zero[0] = '0';

@@ -59,12 +59,12 @@ char	**copy_2d_array(char **old, size_t start)
 		new[i] = ft_strdup(old[start + i]);
 		if (!new)
 		{
-			while (i <= 0)
+			while (i >= 0)
 			{
 				free(new[i]);
 				i--;
 			}
-			return (NULL);
+			return (free(new), NULL);
 		}
 		i++;
 	}

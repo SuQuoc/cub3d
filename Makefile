@@ -59,6 +59,9 @@ $(NAME): $(OBJDIR) $(OBJ)
 	@$(MAKE) -C libft
 	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 
+#malloc_test: $(OBJ_PATH) $(NAME)
+#	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJ} -L./libft/ -l:libft.a -L. -lmallocator -lmlx -lXext -lX11 -lm
+
 clean:
 	@$(MAKE) -C libft fclean
 	@rm -rf $(OBJDIR)
@@ -74,7 +77,7 @@ re: fclean all
 run: $(NAME)
 	./$(NAME) maps/fiona_raycasting_test_map.cub
 
-run_val: $(NAME)
+val: $(NAME)
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \

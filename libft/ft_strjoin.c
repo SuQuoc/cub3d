@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aplank <aplank@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qtran <qtran@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:36:35 by aplank            #+#    #+#             */
-/*   Updated: 2023/08/10 17:00:51 by aplank           ###   ########.fr       */
+/*   Updated: 2023/09/11 19:00:22 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	x = 0;
 	y = 0;
-	str = (char*)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	while (s1[x])
@@ -44,8 +44,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 /*
 int	main(void)
 {
-    char arr1[] = "";
-    char arr2[] = "under your bed";
-    
-    printf ("%s\n", strjoin(arr1, arr2));
+	char arr1[] = "";
+	char arr2[] = "under your bed";
+
+	printf ("%s\n", strjoin(arr1, arr2));
 } */
