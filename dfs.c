@@ -91,8 +91,7 @@ int	flood_fill_wall(t_data *data, char wall, char replace)
 					wall_found = TRUE;
 				}
 				else
-					free_data_err(data,
-						"Make sure theres only 1 map and no 'flying' walls!");
+					free_data_err(data, "Only 1 map and no 'flying' walls!");
 			}
 			pos.x++;
 		}
