@@ -62,6 +62,7 @@ int	set_floor_ceiling(char *str, char *idf, t_data *data)
 	data->err = ERR_RGB_RANGE;
 	return (-1);
 }
+
 // returns FALSE if IDF couldnt be set
 int	search_floor_ceiling(char *str, t_data *data)
 {

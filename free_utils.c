@@ -16,10 +16,10 @@ void	free_2d_array(char **map)
 	free(map);
 }
 
-//mlx_destroy_image(mlx, NULL)
-//mlx_destroy_image(NULL, texture)
-//both lead to errors so we have to check before if they are not null
-void destroy_textures(t_data *data)
+// mlx_destroy_image(mlx, NULL)
+// mlx_destroy_image(NULL, texture)
+// both lead to errors so we have to check before if they are not null
+void	destroy_textures(t_data *data)
 {
 	free_image(data->n_texture, data->mlx_ptr);
 	free_image(data->e_texture, data->mlx_ptr);
@@ -27,7 +27,7 @@ void destroy_textures(t_data *data)
 	free_image(data->w_texture, data->mlx_ptr);
 }
 
-void free_image(t_image *img, void *mlx_ptr)
+void	free_image(t_image *img, void *mlx_ptr)
 {
 	if (img)
 	{
@@ -37,9 +37,9 @@ void free_image(t_image *img, void *mlx_ptr)
 	}
 }
 
-void free_data(t_data *data)
+void	free_data(t_data *data)
 {
-	int exit_code;
+	int	exit_code;
 
 	exit_code = 0;
 	if (data->err != 0)
@@ -62,9 +62,9 @@ void free_data(t_data *data)
 	exit(exit_code);
 }
 
-//if error_message is NULL it exits with 0, else with 1
-void free_data_err(t_data *data, char *error_message)
-{	
+// if error_message is NULL it exits with 0, else with 1
+void	free_data_err(t_data *data, char *error_message)
+{
 	free_image(data->img, data->mlx_ptr);
 	if (data->mlx_ptr)
 	{

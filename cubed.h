@@ -214,8 +214,19 @@ void			draw_line(const t_data *data, const t_vector start,
 					const t_vector end, const int color);
 
 // draw_map.c
-void			draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
-void			draw_map_walls(t_data *data, char **map, int color);
+void		draw_map_grid(void *mlx_ptr, void *win_ptr, int color);
+void		draw_map_walls(t_data *data, char **map, int color);
+
+// draw_map_scaled_utils.c
+void	set_y_pos_of_texture(int offset_y, int wall_h, t_image *txtr,
+		int *y_in_txtr);
+void	set_texture_and_x_pos(t_ray ray, t_data *data, t_image **txtr,
+		int *x_in_txtr);
+void	set_offset_and_hori_wall_txtr(t_vector ray_hit, t_data *data,
+		t_image **txtr, double *off_last_unit);
+void	set_offset_and_vert_wall_txtr(t_vector ray_hit, t_data *data,
+		t_image **txtr, double *off_last_unit);
+
 
 // draw_map_scaled.c
 void			put_txt_ray_to_image(t_ray *ray, t_data *data);
@@ -253,9 +264,13 @@ void			init_vector(t_vector *vector, double x_position,
 t_data			*init_data(void);
 
 // init_structs2.c
-void			declare_base_values(t_data *data);
-void			init_line(t_line *line, const t_vector start,
-					const t_vector end);
+void		declare_base_values(t_data *data);
+void		init_line(t_line *line, const t_vector start, const t_vector end);
+
+//lazy_wall_collision.c
+void	draw_black_image(const t_data *data);
+int	check_if_player_in_wall(const t_data *data);
+
 
 // loop_file.c
 void			loop_file(int fd, t_data *data);
