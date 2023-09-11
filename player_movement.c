@@ -4,9 +4,11 @@
 static t_vector	get_movement(t_player *player)
 {
 	t_vector	vector;
+	int	movement_speed;
 
+	movement_speed = TILE_SIZE / 12;
 	init_vector(&vector, 0, 0);
-	while (vector.x < MOVEMENT_SPEED && vector.y < MOVEMENT_SPEED)
+	while (vector.x < movement_speed && vector.y < movement_speed)
 	{
 		player->fault -= player->slow_diff;
 		if (player->fault <= 0)

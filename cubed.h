@@ -66,12 +66,10 @@
 # define PI 3.141592654
 
 # define TILE_SIZE 100
-# define RAY_NB WINDOW_W // needs to be <= WINDOW_W
+# define RAY_NB WINDOW_W
 # define DIRECTION_LENGTH 100
-# define HALF_CAMERA_LENGTH (50 * WINDOW_W / WINDOW_H)
 
 # define ROTATITON_SPEED 2.5
-# define MOVEMENT_SPEED (TILE_SIZE / 12)
 
 typedef struct s_image
 {

@@ -33,9 +33,9 @@ static void	set_orientation(t_player *player)
 	player->camera_right.x = tmp.y * -1;
 	player->camera_right.y = tmp.x;
 	player->camera_left = vector_multiplication(player->camera_left,
-			HALF_CAMERA_LENGTH);
+			50 * WINDOW_W / WINDOW_H);
 	player->camera_right = vector_multiplication(player->camera_right,
-			HALF_CAMERA_LENGTH);
+			50 * WINDOW_W / WINDOW_H);
 }
 
 // checks if the position of the player is valid
