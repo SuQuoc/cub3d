@@ -1,8 +1,7 @@
 
 #include "cubed.h"
 
-
-//only works when arr has a consistent row len
+// only works when arr has a consistent row len
 int	axis_out_of_map(char **arr, int x, int y, char c)
 {
 	if (y <= 0 || x <= 0)
@@ -19,7 +18,8 @@ int	axis_out_of_map(char **arr, int x, int y, char c)
 		return (TRUE);
 	return (FALSE);
 }
-//only works when arr has a consistent row len
+
+// only works when arr has a consistent row len
 int	diagonals_out_of_map(char **arr, int x, int y, char c)
 {
 	if (y <= 0 || x <= 0)

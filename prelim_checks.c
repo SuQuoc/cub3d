@@ -102,12 +102,12 @@ int	prelim_checks_passed(char *str, t_data *data)
 			return (data->err = ERR_IDF_COUNT, FALSE);
 		else if (is_txt_idf(&str[i]) || is_color_idf(&str[i]))
 			set_idf_arr(&str[i], idf_arr);
-        else
-            return (data->err = ERR_IDF, FALSE);
+		else
+			return (data->err = ERR_IDF, FALSE);
 		while (str[i] && str[i] != '\n')
 			i++;
 	}
 	if (str[i] == '\0')
-        return (data->err = ERR_MAP, FALSE);
+		return (data->err = ERR_MAP, FALSE);
 	return (prelim_map_content_passed(&str[i], data));
 }

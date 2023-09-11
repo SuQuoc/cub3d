@@ -47,11 +47,25 @@ static t_image	*init_image(void)
 	return (image);
 }
 
-//init image for txtr not protected
-t_data *init_data(void)
+static void	init_txtr_images(t_data *data)
 {
-	t_data *data;
-	
+	data->n_texture = init_image();
+	data->e_texture = init_image();
+	data->s_texture = init_image();
+	data->w_texture = init_image();
+	if (!data->n_texture || !data->e_texture || !data->s_texture
+		|| !data->w_texture)
+	{
+		perror(NULL);
+		free_data(data);
+	}
+}
+
+// init image for txtr not protected
+t_data	*init_data(void)
+{
+	t_data	*data;
+
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 	{
@@ -70,21 +84,9 @@ t_data *init_data(void)
 	if (!data->img)
 	{
 		perror(NULL);
-		free(data->player->ray);
-		free(data->player);
-		free(data);
-		exit(1);
+		free_data(data);
 	}
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-	data->map = NULL;
-	data->map_copy = NULL;
-	data->N_texture = init_image();
-	data->E_texture = init_image();
-	data->S_texture = init_image();
-	data->W_texture = init_image();
-	data->err = 0;
-	data->cos = cos(PI / 180 * ROTATITON_SPEED); //protection?
-	data->sin = sin(PI / 180 * ROTATITON_SPEED); //protection?
+	init_txtr_images(data);
+	declare_base_values(data);
 	return (data);
 }

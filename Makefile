@@ -14,7 +14,7 @@ SRC =	2d_array_utils.c \
 		dfs.c \
 		draw_line_utils.c \
 		draw_line.c \
-		draw_map.c \
+		draw_map_scaled_utils.c \
 		draw_map_scaled.c \
 		error_msg.c \
 		free_utils.c \
@@ -23,7 +23,9 @@ SRC =	2d_array_utils.c \
 		identifier_utils.c \
 		pxl_to_image.c \
 		init_structs.c \
+		init_structs2.c \
 		key_input.c \
+		lazy_wall_collision.c \
 		loop_file.c \
 		loop_idf.c \
 		loop_map.c \

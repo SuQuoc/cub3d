@@ -54,7 +54,7 @@ t_pos	find_char(char **arr, char c)
 t_pos	find_chars(char **arr, char *find)
 {
 	t_pos	pos;
-	int			i;
+	int		i;
 
 	pos.y = 0;
 	while (arr[pos.y])
