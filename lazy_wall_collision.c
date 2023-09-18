@@ -30,7 +30,7 @@ int	check_if_player_in_wall(const t_data *data)
 		x = (data->player->pos.x - 1) / TILE_SIZE;
 	if (y < 0 || y > data->map_height - 1 || x < 0 || x > data->map_width - 1)
 		return (1);
-	if (data->map[y][x] == '1')
+	if (data->map[y][x] == '1' || data->map[y][x] == ' ')
 		return (1);
 	return (0);
 }

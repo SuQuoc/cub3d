@@ -74,10 +74,10 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	./$(NAME) maps/fiona_raycasting_test_map.cub
+	./$(NAME) maps/fiona_raycasting_test_map4.cub
 
 val: $(NAME)
 	valgrind \
 	--leak-check=full \
 	--show-leak-kinds=all \
-	./$(NAME) maps/fiona_raycasting_test_map.cub
+	./$(NAME) maps/fiona_raycasting_test_map4.cub
