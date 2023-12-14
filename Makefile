@@ -3,7 +3,9 @@ NAME = cub3D
 C = cc
 CFLAGS = -g -Wall -Werror -Wextra
 
-SRC =	2d_array_utils.c \
+INCLUDES = ./includes
+
+SRCS =	2d_array_utils.c \
 		2d_array_utils2.c \
 		array_utils.c \
 		check_extension.c \
@@ -38,32 +40,37 @@ SRC =	2d_array_utils.c \
 		textures.c \
 		vector_operations.c \
 
-OBJDIR = ./objects_and_dependencies/
-OBJFILES = $(SRC:.c=.o)
-OBJ = $(addprefix $(OBJDIR), $(OBJFILES))
+SRC_DIR = ./srcs/
+SRCS := $(addprefix $(SRC_DIR), $(SRCS))
 
-DEP = cubed.h
+OBJ_DIR = ./objects_and_dependencies/
+OBJFILES = $(notdir $(SRCS:.c=.o))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJFILES))
+
+DEPS := $(OBJS:.o=.d)
+
+-include $(DEPS)
 
 .PHONY: clean fclean all
 
 all: $(NAME)
 
-$(OBJDIR)%.o: ./%.c $(DEP)
-	$(C) $(CFLAGS) -MMD -MP $< -o $@ -c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	$(C) $(CFLAGS) -MMD -MP -I$(INCLUDES) $< -o $@ -c
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(OBJDIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJS)
 	@$(MAKE) -C libft
-	$(C) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
+	$(C) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
 
 #malloc_test: $(OBJ_PATH) $(NAME)
 #	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJ} -L./libft/ -l:libft.a -L. -lmallocator -lmlx -lXext -lX11 -lm
 
 clean:
 	@$(MAKE) -C libft fclean
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ_DIR)
 	@echo all .o and .d files deleted
 
 fclean: clean

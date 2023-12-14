@@ -1,8 +1,8 @@
 
-#ifndef CUBED_H
+# ifndef CUBED_H
 # define CUBED_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <errno.h>
@@ -339,4 +339,4 @@ t_vector		vector_multiplication(t_vector vector, int multiplier);
 t_vector		vector_addition(t_vector first_addend, t_vector second_addend);
 t_vector		vector_subtraction(t_vector minuend, t_vector subtrahend);
 
-#endif
+# endif
