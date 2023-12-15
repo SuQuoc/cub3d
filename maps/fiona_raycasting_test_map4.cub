@@ -3,8 +3,8 @@ SO map_textures/steel_wall2.xpm
 WE map_textures/steel_wall3.xpm
 EA map_textures/wall.xpm
 
-C 0,0,255
-F 255,0,0
+C 0,0,100
+F 50,60,70
 
 
 11111111111111111111
