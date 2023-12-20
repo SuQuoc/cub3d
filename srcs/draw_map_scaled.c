@@ -61,8 +61,8 @@ void	put_txt_ray_to_image(t_ray *ray, t_data *data)
 	int	x;
 
 	x = 0;
-	if (check_if_player_in_wall(data) == 1)
-		return (draw_black_image(data));
+	// if (check_if_player_in_wall(data) == 1) //
+		// return (draw_black_image(data)); //
 	while (x < WINDOW_W)
 	{
 		wall_h = lround(TILE_SIZE * WINDOW_H / ray[(int)((double)RAY_NB

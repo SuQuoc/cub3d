@@ -39,7 +39,7 @@ SRCS =	2d_array_utils.c \
 		printing_utils.c \
 		textures.c \
 		vector_operations.c \
-
+# NEEDS A FIX ONLY CHECKS IF objects_and_dependencies/2d_array_utils.o is up to date
 SRC_DIR = ./srcs/
 SRCS := $(addprefix $(SRC_DIR), $(SRCS))
 
@@ -49,21 +49,20 @@ OBJS = $(addprefix $(OBJ_DIR), $(OBJFILES))
 
 DEPS := $(OBJS:.o=.d)
 
--include $(DEPS)
 
 .PHONY: clean fclean all
 
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(C) $(CFLAGS) -MMD -MP -I$(INCLUDES) $< -o $@ -c
+	$(C) $(CFLAGS) -MMD -MP -I$(INCLUDES) -c $< -o $@ 
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(OBJ_DIR) $(OBJS)
+$(NAME): $(OBJS)
 	@$(MAKE) -C libft
-	$(C) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm
+	$(C) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) -lmlx -lXext -lX11 -lm $(LDFLAGS)
 
 #malloc_test: $(OBJ_PATH) $(NAME)
 #	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJ} -L./libft/ -l:libft.a -L. -lmallocator -lmlx -lXext -lX11 -lm
@@ -88,3 +87,5 @@ val: $(NAME)
 	--leak-check=full \
 	--show-leak-kinds=all \
 	./$(NAME) maps/fiona_raycasting_test_map4.cub
+
+-include $(DEPS)

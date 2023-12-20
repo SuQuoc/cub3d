@@ -14,6 +14,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+
 // BONUS IN LIBFT AUSKLAMMMERN!!!!!!!!!!!!
 
 # define TRUE 1
@@ -275,6 +276,8 @@ void			init_line(t_line *line, const t_vector start,
 // lazy_wall_collision.c
 void			draw_black_image(const t_data *data);
 int				check_if_player_in_wall(const t_data *data);
+int 			check_if_player_hitbox_in_wall(const t_data *data); //
+
 
 // loop_file.c
 void			loop_file(int fd, t_data *data);

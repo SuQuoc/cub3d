@@ -1,7 +1,7 @@
 
 #include "cubed.h"
 
-void	hidden_wall_colition(t_data *data, t_player *player)
+void	hidden_wall_colition(t_data *data, t_player *player) //depreciated
 {
 	if (player->pos.y < -1 * TILE_SIZE)
 		player->pos.y = -1 * TILE_SIZE;
@@ -15,6 +15,11 @@ void	hidden_wall_colition(t_data *data, t_player *player)
 
 static void	movement(int keysym, t_data *data)
 {
+	t_pos old_player_pos;
+
+	old_player_pos.x = data->player->pos.x;
+	old_player_pos.y = data->player->pos.y;
+
 	if (keysym == XK_w || keysym == XK_W)
 		player_move_forward(data->player);
 	else if (keysym == XK_s || keysym == XK_S)
@@ -23,7 +28,13 @@ static void	movement(int keysym, t_data *data)
 		player_move_right(data->player);
 	else if (keysym == XK_a || keysym == XK_A)
 		player_move_left(data->player);
-	hidden_wall_colition(data, data->player);
+	// hidden_wall_colition(data, data->player); //depreciated
+	if (check_if_player_hitbox_in_wall(data) == TRUE) //
+	{	
+		data->player->pos.x = old_player_pos.x;
+		data->player->pos.y = old_player_pos.y;
+		return ;
+	}
 	calculate_rays(data, data->player);
 	put_txt_ray_to_image(data->player->ray, data);
 }
