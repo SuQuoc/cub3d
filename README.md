@@ -22,16 +22,35 @@ You have the flexibility to choose any color for the floor and ceiling by adjust
 
 
 ## Instructions
-1. Clone the repository
-2. Make sure you a have:
+Make sure you a have:
     - c-compiler cc
     - X11 library
     - minilibx_linux from 42 (https://github.com/42Paris/minilibx-linux)
+
+1. Clone the repository
 4. Run the make command to compile
 5. Execute the programm: "./cubed your_map_file"
 6. Have fun and good luck
 
+Run the default map:
+```
+git clone git@github.com:SuQuoc/Philosophers.git
+cd cub3d
+make run
+```
 
+
+# Usage
+```
+./cub3d [map_file.cub]
+```
+
+__In addition to the map layout you can change:__
++ `color of the floor`
++ `color of the ceiling`
++ `texture of the walls in all cardinal directions`
+
+__by editing the map file.__
 
 ## Controls
 - W, A, S, D
