@@ -45,12 +45,26 @@ make run
 ./cub3d [map_file.cub]
 ```
 
-__In addition to the map layout you can change:__
-+ `color of the floor`
-+ `color of the ceiling`
+In addition to the map layout you can change following attributes by editing the map file:
++ `color of the floor` 
++ `color of the ceiling` 
 + `texture of the walls in all cardinal directions`
 
-__by editing the map file.__
+__Example__:  
+```
+NO map_textures/north_texture  
+WE map_textures/west_texture  
+SO map_textures/south_texture  
+EA map_textures/east_texture  
+C 0,0,255  
+F 255,0,0
+
+1111111111111111111111111
+1000000000110000000000001
+1011000001110000000000001
+1001000000000000000N00001
+1111111111111111111111111
+```
 
 ## Controls
 - W, A, S, D
