@@ -54,7 +54,7 @@ DEPS := $(OBJS:.o=.d)
 
 all: $(OBJ_DIR) $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(C) $(CFLAGS) -MMD -MP -I$(INCLUDES) -c $< -o $@ 
 
 $(OBJ_DIR):
