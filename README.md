@@ -22,9 +22,9 @@ You have the flexibility to choose any color for the floor and ceiling by adjust
 
 
 ## Instructions
-Make sure you a have:
-    - c-compiler cc
-    - X11 library
+__Make sure you a have:__  
+    - c-compiler cc  
+    - X11 library  
     - minilibx_linux from 42 (https://github.com/42Paris/minilibx-linux)
 
 1. Clone the repository
@@ -32,7 +32,7 @@ Make sure you a have:
 5. Execute the programm: "./cubed your_map_file"
 6. Have fun and good luck
 
-Run the default map:
+__Run the default map:__
 ```
 git clone git@github.com:SuQuoc/Philosophers.git
 cd cub3d
